@@ -70,8 +70,8 @@ SITENAME = "Martin's Blog"
 SITETITLE = "Martin's Blog"
 SITESUBTITLE = "Martin's Blog"
 SITEDESCRIPTION = 'Martin\'s Thoughts and Writings'
-#SITELOGO = SITEURL + '/images/profile.png'
-#FAVICON = SITEURL + '/images/favicon.ico'
+#SITELOGO = '/images/profile.png'
+#FAVICON = '/images/favicon.ico'
 BROWSER_COLOR = '#333333'
 PYGMENTS_STYLE = 'default'
 
