@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="https://xingzuoshe.cn/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/pygments/default.min.css">
+  <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="https://xingzuoshe.cn/static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="Pelican 是一个 Python 语言开发的静态网站生成工具，用 markdown 写完博客之后，发布到Github Pages，免费而且好用，不过配置过程有些复杂，下面记录一下配置的过程。" />
+<meta name="keywords" content="python, pelican">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="使用 Pelican 和 Github Pages 建立博客网站"/>
+<meta property="og:description" content="Pelican 是一个 Python 语言开发的静态网站生成工具，用 markdown 写完博客之后，发布到Github Pages，免费而且好用，不过配置过程有些复杂，下面记录一下配置的过程。"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="https://xingzuoshe.cn/pelican-github-pages-setup.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-06-09 22:20:00+08:00"/>
+<meta property="article:modified_time" content="2019-06-09 22:30:00+08:00"/>
+<meta property="article:author" content="https://xingzuoshe.cn/author/martin.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="article:tag" content="pelican"/>
+<meta property="og:image" content="">
+
+  <title>Martin's Blog &ndash; 使用 Pelican 和 Github Pages 建立博客网站</title>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://xingzuoshe.cn">
+        <img src="https://xingzuoshe.cn/theme/img/profile.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href="https://xingzuoshe.cn">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="/blog/about.html" target="_blank">about</a></li>
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle ads-aside"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://xingzuoshe.cn">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pelican-github-pages-setup">使用 Pelican 和 Github Pages 建立博客网站</h1>
+    <p>
+      Posted on 2019-06-09 22:20 in <a href="https://xingzuoshe.cn/category/python.html">Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>安装 pelican</h2>
+<p>在 Python 3.5 以上，官方已经集成了虚拟环境功能，不需要再使用 <code>virtualenv</code></p>
+<div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">pelican_env</span>
+<span class="n">cd</span> <span class="n">pelican_env</span>
+<span class="k">source</span> <span class="n">bin</span><span class="o">/</span><span class="n">active</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span> <span class="n">markdown</span> <span class="n">ghp</span><span class="o">-</span><span class="n">import</span>
+</pre></div>
+
+
+<h2>新建 pelican 项目</h2>
+<ul>
+<li>先在 github 上新建一个 repo <code>yourname.github.io</code>, 然后 clone 到本地，</li>
+<li>在项目文件夹中运行 <code>pelican-quickstart</code></li>
+</ul>
+<p>在选择的过程中注意选择 default language, time zone, Using Github Pages</p>
+<div class="highlight"><pre><span></span><span class="nv">Welcome</span> <span class="nv">to</span> <span class="nv">pelican</span><span class="o">-</span><span class="nv">quickstart</span> <span class="nv">v4</span>.<span class="mi">0</span>.<span class="mi">1</span>.
+
+<span class="nv">This</span> <span class="nv">script</span> <span class="nv">will</span> <span class="nv">help</span> <span class="nv">you</span> <span class="nv">create</span> <span class="nv">a</span> <span class="nv">new</span> <span class="nv">Pelican</span><span class="o">-</span><span class="nv">based</span> <span class="nv">website</span>.
+
+<span class="nv">Please</span> <span class="nv">answer</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">questions</span> <span class="nv">so</span> <span class="nv">this</span> <span class="nv">script</span> <span class="nv">can</span> <span class="nv">generate</span> <span class="nv">the</span> <span class="nv">files</span>
+<span class="nv">needed</span> <span class="nv">by</span> <span class="nv">Pelican</span>.
+
+
+<span class="o">&gt;</span> <span class="nv">Where</span> <span class="k">do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">create</span> <span class="nv">your</span> <span class="nv">new</span> <span class="nv">web</span> <span class="nv">site</span>? [.]
+<span class="o">&gt;</span> <span class="nv">What</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">the</span> <span class="nv">title</span> <span class="nv">of</span> <span class="nv">this</span> <span class="nv">web</span> <span class="nv">site</span>? <span class="nv">Martin</span><span class="s1">&#39;</span><span class="s">s Blog</span>
+<span class="o">&gt;</span> <span class="nv">Who</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">the</span> <span class="nv">author</span> <span class="nv">of</span> <span class="nv">this</span> <span class="nv">web</span> <span class="nv">site</span>? <span class="nv">Martin</span>
+<span class="o">&gt;</span> <span class="nv">What</span> <span class="nv">will</span> <span class="nv">be</span> <span class="nv">the</span> <span class="nv">default</span> <span class="nv">language</span> <span class="nv">of</span> <span class="nv">this</span> <span class="nv">web</span> <span class="nv">site</span>? [<span class="nv">zh</span>] <span class="nv">zh</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">specify</span> <span class="nv">a</span> <span class="nv">URL</span> <span class="nv">prefix</span>? <span class="nv">e</span>.<span class="nv">g</span>., <span class="nv">https</span>:<span class="o">//</span><span class="nv">example</span>.<span class="nv">com</span>   <span class="ss">(</span><span class="nv">Y</span><span class="o">/</span><span class="nv">n</span><span class="ss">)</span> <span class="nv">n</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">enable</span> <span class="nv">article</span> <span class="nv">pagination</span>? <span class="ss">(</span><span class="nv">Y</span><span class="o">/</span><span class="nv">n</span><span class="ss">)</span> <span class="nv">Y</span>
+<span class="o">&gt;</span> <span class="nv">How</span> <span class="nv">many</span> <span class="nv">articles</span> <span class="nv">per</span> <span class="nv">page</span> <span class="k">do</span> <span class="nv">you</span> <span class="nv">want</span>? [<span class="mi">10</span>] <span class="mi">10</span>
+<span class="o">&gt;</span> <span class="nv">What</span> <span class="nv">is</span> <span class="nv">your</span> <span class="nv">time</span> <span class="nv">zone</span>? [<span class="nv">Europe</span><span class="o">/</span><span class="nv">Paris</span>] <span class="nv">Asia</span><span class="o">/</span><span class="nv">Shanghai</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">generate</span> <span class="nv">a</span> <span class="nv">tasks</span>.<span class="nv">py</span><span class="o">/</span><span class="nv">Makefile</span> <span class="nv">to</span> <span class="nv">automate</span> <span class="nv">generation</span> <span class="nv">and</span> <span class="nv">publishing</span>? <span class="ss">(</span><span class="nv">Y</span><span class="o">/</span><span class="nv">n</span><span class="ss">)</span> <span class="nv">Y</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">upload</span> <span class="nv">your</span> <span class="nv">website</span> <span class="nv">using</span> <span class="nv">FTP</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">N</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">upload</span> <span class="nv">your</span> <span class="nv">website</span> <span class="nv">using</span> <span class="nv">SSH</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">N</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">upload</span> <span class="nv">your</span> <span class="nv">website</span> <span class="nv">using</span> <span class="nv">Dropbox</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">N</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">upload</span> <span class="nv">your</span> <span class="nv">website</span> <span class="nv">using</span> <span class="nv">S3</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">N</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">upload</span> <span class="nv">your</span> <span class="nv">website</span> <span class="nv">using</span> <span class="nv">Rackspace</span> <span class="nv">Cloud</span> <span class="nv">Files</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">N</span>
+<span class="o">&gt;</span> <span class="k">Do</span> <span class="nv">you</span> <span class="nv">want</span> <span class="nv">to</span> <span class="nv">upload</span> <span class="nv">your</span> <span class="nv">website</span> <span class="nv">using</span> <span class="nv">GitHub</span> <span class="nv">Pages</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">y</span>
+<span class="o">&gt;</span> <span class="nv">Is</span> <span class="nv">this</span> <span class="nv">your</span> <span class="nv">personal</span> <span class="nv">page</span> <span class="ss">(</span><span class="nv">username</span>.<span class="nv">github</span>.<span class="nv">io</span><span class="ss">)</span>? <span class="ss">(</span><span class="nv">y</span><span class="o">/</span><span class="nv">N</span><span class="ss">)</span> <span class="nv">y</span>
+<span class="nv">Done</span>. <span class="nv">Your</span> <span class="nv">new</span> <span class="nv">project</span> <span class="nv">is</span> <span class="nv">available</span> <span class="nv">at</span> <span class="o">/</span><span class="nv">home</span><span class="o">/</span><span class="nv">demo</span><span class="o">/</span><span class="nv">pelican_env</span><span class="o">/</span><span class="nv">yourname</span>.<span class="nv">github</span>.<span class="nv">io</span>
+</pre></div>
+
+
+<h2>pelican config</h2>
+<p>quick-start 生成的只是最简单的配置，如果想要更好看一点需要更多的自定义配置</p>
+<p>下面有一份配置的示例，使用 Flex 主题，sitemap 插件，配置了 disqus 和 Google Adsense</p>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*- #</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="n">AUTHOR</span> <span class="o">=</span> <span class="s1">&#39;Martin&#39;</span>
+<span class="c1">#SITEURL = &#39;https://xingzuoshe.cn&#39;</span>
+<span class="n">SITENAME</span> <span class="o">=</span> <span class="s2">&quot;Martin&#39;s Blog&quot;</span>
+<span class="n">SITETITLE</span> <span class="o">=</span> <span class="s2">&quot;Martin&#39;s Blog&quot;</span>
+<span class="n">SITESUBTITLE</span> <span class="o">=</span> <span class="s2">&quot;Martin&#39;s Blog&quot;</span>
+<span class="n">SITEDESCRIPTION</span> <span class="o">=</span> <span class="s1">&#39;Martin</span><span class="se">\&#39;</span><span class="s1">s Thoughts and Writings&#39;</span>
+<span class="c1">#SITELOGO = SITEURL + &#39;/images/profile.png&#39;</span>
+<span class="c1">#FAVICON = SITEURL + &#39;/images/favicon.ico&#39;</span>
+<span class="n">BROWSER_COLOR</span> <span class="o">=</span> <span class="s1">&#39;#333333&#39;</span>
+<span class="n">PYGMENTS_STYLE</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+
+<span class="n">ROBOTS</span> <span class="o">=</span> <span class="s1">&#39;index, follow&#39;</span>
+
+<span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span>
+<span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="s1">&#39;blog/&#39;</span>
+
+<span class="n">DEFAULT_DATE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M&#39;</span>
+
+<span class="n">TIMEZONE</span> <span class="o">=</span> <span class="s1">&#39;Asia/Shanghai&#39;</span>
+
+<span class="c1"># Feed generation is usually not desired when developing</span>
+<span class="n">FEED_ALL_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feeds/all.atom.xml&#39;</span>
+<span class="n">CATEGORY_FEED_ATOM</span> <span class="o">=</span> <span class="s1">&#39;feeds/{slug}.atom.xml&#39;</span>
+<span class="n">TRANSLATION_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">AUTHOR_FEED_ATOM</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="c1"># Blogroll</span>
+<span class="n">LINKS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;about&#39;</span><span class="p">,</span> <span class="s1">&#39;/blog/about.html&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;astrobook&#39;</span><span class="p">,</span> <span class="s1">&#39;https://astrobook.cn/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;astrohub&#39;</span><span class="p">,</span> <span class="s1">&#39;https://astrohub.cn&#39;</span><span class="p">),)</span>
+
+<span class="c1"># Social widget</span>
+<span class="n">SOCIAL</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;github&#39;</span><span class="p">,</span> <span class="s1">&#39;https://github.com/openmartin&#39;</span><span class="p">),</span>
+          <span class="p">(</span><span class="s1">&#39;rss&#39;</span><span class="p">,</span> <span class="s1">&#39;/blog/feeds/all.atom.xml&#39;</span><span class="p">),)</span>
+
+
+<span class="c1"># Uncomment following line if you want document-relative URLs when developing</span>
+<span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># Theme</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;/home/demo/pelican_env/pelican-themes/Flex&quot;</span>
+
+<span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/home/demo/pelican_env/pelican-plugins&quot;</span><span class="p">]</span>
+<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sitemap&#39;</span><span class="p">]</span>
+
+<span class="c1"># Sitemap</span>
+<span class="n">SITEMAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;xml&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;changefreqs&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;articles&#39;</span><span class="p">:</span> <span class="s1">&#39;daily&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pages&#39;</span><span class="p">:</span> <span class="s1">&#39;daily&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;indexes&#39;</span><span class="p">:</span> <span class="s1">&#39;daily&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Default theme language</span>
+<span class="n">I18N_TEMPLATE_LANG</span> <span class="o">=</span> <span class="s1">&#39;zh&#39;</span>
+
+<span class="n">DEFAULT_LANG</span> <span class="o">=</span> <span class="s1">&#39;zh&#39;</span>
+<span class="n">OG_LOCALE</span> <span class="o">=</span> <span class="s1">&#39;zh_CN&#39;</span>
+<span class="n">LOCALE</span> <span class="o">=</span> <span class="s1">&#39;zh_CN&#39;</span>
+
+<span class="c1"># MENU</span>
+<span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">MAIN_MENU</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">HOME_HIDE_TAGS</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">USE_FOLDER_AS_CATEGORY</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">MENUITEMS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;Archives&#39;</span><span class="p">,</span> <span class="s1">&#39;/archives.html&#39;</span><span class="p">),</span>
+             <span class="p">(</span><span class="s1">&#39;Categories&#39;</span><span class="p">,</span> <span class="s1">&#39;/categories.html&#39;</span><span class="p">),</span>
+             <span class="p">(</span><span class="s1">&#39;Tags&#39;</span><span class="p">,</span> <span class="s1">&#39;/tags.html&#39;</span><span class="p">),)</span>
+
+
+<span class="n">COPYRIGHT_YEAR</span> <span class="o">=</span> <span class="s1">&#39;2019&#39;</span>
+
+<span class="c1"># STATIC</span>
+<span class="n">STATIC_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">]</span>
+<span class="n">CUSTOM_CSS</span> <span class="o">=</span> <span class="s1">&#39;static/custom.css&#39;</span>
+
+<span class="n">USE_LESS</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># Third page service</span>
+<span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="s2">&quot;astro-2&quot;</span>
+<span class="c1">#GOOGLE_ANALYTICS = &#39;UA-1234-5678&#39;</span>
+<span class="n">GOOGLE_ADSENSE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ca_id&#39;</span><span class="p">:</span> <span class="s1">&#39;ca-pub-8640171181637141&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;page_level_ads&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s1">&#39;ads&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;aside&#39;</span><span class="p">:</span> <span class="s1">&#39;5604848266&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;main_menu&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;index_top&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;index_bottom&#39;</span><span class="p">:</span> <span class="s1">&#39;2770021113&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;article_top&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;article_bottom&#39;</span><span class="p">:</span> <span class="s1">&#39;4393383534&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2>新建一篇 markdown</h2>
+<p>在 <code>content</code> 文件夹下可以放 markdown 文件和一些图片，或者自定义的 css,js 文件</p>
+<p>和普通的 markdown 不同的是在文件头上需要写一些 metadata，参考<a href="https://docs.getpelican.com/en/stable/content.html#file-metadata">官方文档</a></p>
+<div class="highlight"><pre><span></span><span class="nv">Title</span>: <span class="nv">My</span> <span class="nv">super</span> <span class="nv">title</span>
+<span class="nv">Date</span>: <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span>:<span class="mi">20</span>
+<span class="nv">Modified</span>: <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">05</span> <span class="mi">19</span>:<span class="mi">30</span>
+<span class="nv">Category</span>: <span class="nv">Python</span>
+<span class="nv">Tags</span>: <span class="nv">pelican</span>, <span class="nv">publishing</span>
+<span class="nv">Slug</span>: <span class="nv">my</span><span class="o">-</span><span class="nv">super</span><span class="o">-</span><span class="nv">post</span>
+<span class="nv">Authors</span>: <span class="nv">Alexis</span> <span class="nv">Metaireau</span>, <span class="nv">Conan</span> <span class="nv">Doyle</span>
+<span class="nv">Summary</span>: <span class="nv">Short</span> <span class="nv">version</span> <span class="k">for</span> <span class="nv">index</span> <span class="nv">and</span> <span class="nv">feeds</span>
+</pre></div>
+
+
+<h2>Github Pages 提交</h2>
+<ul>
+<li>.gitignore 添加 output 文件夹 参考 <a href="https://github.com/getpelican/pelican-blog/blob/master/.gitignore">官方博客</a></li>
+<li>新建<code>source</code>分支，把原始的 markdown 文件和 配置文件都放到<code>source</code> 分支上</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="k">source</span>
+<span class="n">git</span> <span class="k">add</span> <span class="p">.</span>
+<span class="n">git</span> <span class="k">commit</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">m</span> <span class="ss">&quot;Initial commit&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="o">-</span><span class="n">u</span> <span class="n">origin</span> <span class="k">source</span>
+</pre></div>
+
+
+<ul>
+<li>把生成的 html 放到 master 分支上，然后 push 到 Github 上</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span> <span class="o">-</span><span class="n">r</span> <span class="n">origin</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+
+
+<ul>
+<li>这个时候就可以通过 <code>yourname.github.io</code> 来访问你的博客了</li>
+</ul>
+<h2>Github Pages CNAME 设置</h2>
+<p>参考 <a href="https://help.github.com/en/articles/about-supported-custom-domains">Github Help</a></p>
+<p>这里是设置 </p>
+<ul>
+<li>在 dns 服务商 设置域名 @泛解析 A 记录到 Github 的地址</li>
+<li>然后在 Github Pages 的设置里添加域名</li>
+</ul>
+<h2>daily workflow</h2>
+<ul>
+<li>编辑 markdown</li>
+<li>make html</li>
+<li>make github</li>
+</ul>
+<h2>Editor</h2>
+<p>推荐使用 vscode 来编辑 markdown</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://xingzuoshe.cn/tag/python.html">python</a>
+      <a href="https://xingzuoshe.cn/tag/pelican.html">pelican</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2019</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : "https://xingzuoshe.cn",
+  "image": "",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
