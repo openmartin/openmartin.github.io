@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="/" rel="alternate"></link><link href="feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2010-12-05T19:30:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>python small tips</title><link href="python-small-tips.html" rel="alternate"></link><published>2010-12-03T10:20:00+08:00</published><updated>2010-12-05T19:30:00+08:00</updated><author><name>Martin</name></author><id>tag:None,2010-12-03:python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
+&lt;h2&gt;all()&lt;/h2&gt;
+&lt;p&gt;all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;iterable&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;element&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;iterable&lt;/span&gt;:
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;element&lt;/span&gt;:
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;False&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;True&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;有一些情况需要注意，当list为空时，返回True；空字符串，None，0 的结果都是False。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;span class="k"&gt;True&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;True&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;False&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;None&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;False&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;False&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;注册表中有中文的问题&lt;/h2&gt;
+&lt;p&gt;在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;mimetypes&lt;/span&gt;.&lt;span class="nv"&gt;init&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; # &lt;span class="nv"&gt;try&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;read&lt;/span&gt; &lt;span class="nv"&gt;system&lt;/span&gt; &lt;span class="nv"&gt;mime&lt;/span&gt;.&lt;span class="nv"&gt;types&lt;/span&gt;
+&lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;C:\Python27\lib\mimetypes.py&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;358&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;init&lt;/span&gt;
+&lt;span class="nv"&gt;db&lt;/span&gt;.&lt;span class="nv"&gt;read_windows_registry&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+&lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;C:\Python27\lib\mimetypes.py&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;258&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;read_windows_registry&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;subkeyname&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;enum_types&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;hkcr&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+&lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;C:\Python27\lib\mimetypes.py&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;249&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;enum_types&lt;/span&gt;
+&lt;span class="nv"&gt;ctype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;ctype&lt;/span&gt;.&lt;span class="nv"&gt;encode&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;default_encoding&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; # &lt;span class="nv"&gt;omit&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;.&lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+&lt;span class="nv"&gt;UnicodeDecodeError&lt;/span&gt;: &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;ascii&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;codec&lt;/span&gt; &lt;span class="nv"&gt;can&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;t decode byte 0x88 in position 1: ordinal not in range(128)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这是因为python从注册表中HKEY_CLASSES_ROOT读取mimetype时，有包含中文的文件名后缀，一般都是阿里旺旺的。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;HKEY_CLASSES_ROOT&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="err"&gt;阿里旺旺接收的可疑文件&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;删除这项就不会再出现UnicodeDecodeError错误。&lt;/p&gt;
+&lt;p&gt;我的版本是Python 2.7.6，会出现这个问题，Python 2.7.7及以后的版本修复了这个问题。&lt;/p&gt;
+&lt;h2&gt;python setup.py develop&lt;/h2&gt;
+&lt;p&gt;develop模式并不会真正的install这个包，而是在site-packages文件夹中建立一个.egg-link文件，类似于操作系统的软链接。 这样你就可以随意编辑你的代码，并不需要每次测试的时候都reinstall一遍。当然你的程序要以python包的形似来组织才行。&lt;/p&gt;
+&lt;p&gt;更多信息考参考文档 &lt;a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode"&gt;http://pythonhosted.org//setuptools/setuptools.html#development-mode&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;json 格式中单引号是不合法的&lt;/h2&gt;
+&lt;p&gt;在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;json&lt;/span&gt;.&lt;span class="nv"&gt;loads&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;Traceback&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;most&lt;/span&gt; &lt;span class="nv"&gt;recent&lt;/span&gt; &lt;span class="k"&gt;call&lt;/span&gt; &lt;span class="nl"&gt;last&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+  &lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;stdin&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nv"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;D:\Python27\lib\json\__init__.py&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;338&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;loads&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;_default_decoder&lt;/span&gt;.&lt;span class="nv"&gt;decode&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+  &lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;D:\Python27\lib\json\decoder.py&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;365&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;decode&lt;/span&gt;
+    &lt;span class="nv"&gt;obj&lt;/span&gt;, &lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;raw_decode&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt;, &lt;span class="nv"&gt;idx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;_w&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;s&lt;/span&gt;, &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;
+  &lt;span class="nv"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;D:\Python27\lib\json\decoder.py&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;, &lt;span class="nv"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;383&lt;/span&gt;, &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;raw_decode&lt;/span&gt;
+    &lt;span class="nv"&gt;raise&lt;/span&gt; &lt;span class="nv"&gt;ValueError&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;No JSON object could be decoded&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+ &lt;span class="nv"&gt;ValueError&lt;/span&gt;: &lt;span class="nv"&gt;No&lt;/span&gt; &lt;span class="nv"&gt;JSON&lt;/span&gt; &lt;span class="nv"&gt;object&lt;/span&gt; &lt;span class="nv"&gt;could&lt;/span&gt; &lt;span class="nv"&gt;be&lt;/span&gt; &lt;span class="nv"&gt;decoded&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;redis.Redis 和 redis.StrictRedis zadd的参数顺序不一样的&lt;/h2&gt;
+&lt;p&gt;redis.Redis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) value在前，分数在后&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;args, 如: name1, score1, name2, score2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2&lt;/p&gt;
+&lt;p&gt;redis.StrictRedis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) 分数在前，value在后&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="python"></category></entry></feed>
