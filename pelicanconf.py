@@ -16,7 +16,6 @@ PYGMENTS_STYLE = 'default'
 ROBOTS = 'index, follow'
 
 PATH = 'content'
-OUTPUT_PATH = 'blog/'
 
 DEFAULT_DATE_FORMAT = '%Y-%m-%d %H:%M'
 
@@ -30,7 +29,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('about', '/blog/about.html'),
+LINKS = (
          ('astrobook', 'https://astrobook.cn/'),
          ('astrohub', 'https://astrohub.cn'),)
 
@@ -46,7 +45,11 @@ RELATIVE_URLS = True
 THEME = "/Users/peng/pelican_env/pelican-themes/Flex"
 
 PLUGIN_PATHS = ["/Users/peng/pelican_env/pelican-plugins"]
-PLUGINS = ['sitemap']
+PLUGINS = ['sitemap', 'i18n_subsites', 'liquid_tags.img']
+
+JINJA_ENVIRONMENT = {
+    'extensions': ['jinja2.ext.i18n'],
+}
 
 # Sitemap
 SITEMAP = {
@@ -71,6 +74,7 @@ LOCALE = 'zh_CN'
 
 # MENU 
 DEFAULT_PAGINATION = 10
+DISPLAY_PAGES_ON_MENU = False
 MAIN_MENU = True
 HOME_HIDE_TAGS = True
 USE_FOLDER_AS_CATEGORY = False
@@ -83,6 +87,7 @@ COPYRIGHT_YEAR = '2019'
 
 # STATIC
 STATIC_PATHS = ['images', 'extra']
+EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
 CUSTOM_CSS = 'static/custom.css'
 
 USE_LESS = True
