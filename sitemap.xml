@@ -5,28 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2019-06-10T00:49:47-00:00</lastmod>
+<lastmod>2019-06-10T01:06:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2019-06-10T00:49:47-00:00</lastmod>
+<lastmod>2019-06-10T01:06:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2019-06-10T00:49:47-00:00</lastmod>
+<lastmod>2019-06-10T01:06:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2019-06-10T00:49:47-00:00</lastmod>
+<lastmod>2019-06-10T01:06:41-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/pages/about.html</loc>
+<lastmod>2019-06-10T01:06:41-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -53,14 +60,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://xingzuoshe.cn/tag/pelican.html</loc>
+<loc>https://xingzuoshe.cn/tag/python.html</loc>
 <lastmod>2019-06-09T22:30:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>https://xingzuoshe.cn/tag/python.html</loc>
+<loc>https://xingzuoshe.cn/tag/pelican.html</loc>
 <lastmod>2019-06-09T22:30:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
