@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
+import os
+BASE_DIR = os.path.dirname(__file__)
+ENV_DIR = os.path.dirname(BASE_DIR)
 
 AUTHOR = 'Martin'
 #SITEURL = 'https://xingzuoshe.cn'
@@ -42,9 +45,9 @@ SOCIAL = (('github', 'https://github.com/openmartin'),
 RELATIVE_URLS = True
 
 # Theme
-THEME = "/Users/peng/pelican_env/pelican-themes/Flex"
+THEME = os.path.join(ENV_DIR, "pelican-themes", "Flex")
 
-PLUGIN_PATHS = ["/Users/peng/pelican_env/pelican-plugins"]
+PLUGIN_PATHS = [os.path.join(ENV_DIR, "pelican-plugins")]
 PLUGINS = ['sitemap', 'i18n_subsites', 'liquid_tags.img']
 
 JINJA_ENVIRONMENT = {
