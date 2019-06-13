@@ -1,6 +1,6 @@
 Title: python small tips
-Date: 2010-12-03 10:20
-Modified: 2010-12-05 19:30
+Date: 2016-04-19 20:20
+Modified: 2016-04-19 20:20
 Category: Python
 Tags: python
 Slug: python-small-tips
