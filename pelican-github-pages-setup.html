@@ -167,8 +167,13 @@
 <h2>pelican config</h2>
 <p>quick-start 生成的只是最简单的配置，如果想要更好看一点需要更多的自定义配置</p>
 <p>下面有一份配置的示例，使用 Flex 主题，sitemap 插件，配置了 disqus 和 Google Adsense</p>
-<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*- #</span>
+<p><a href='/code/../code/pelicanconf.py'>pelicanconf.py download</a></p>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*- #</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">();</span>
+<span class="n">ENV_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">BASE_DIR</span><span class="p">)</span>
 
 <span class="n">AUTHOR</span> <span class="o">=</span> <span class="s1">&#39;Martin&#39;</span>
 <span class="c1">#SITEURL = &#39;https://xingzuoshe.cn&#39;</span>
@@ -176,15 +181,14 @@
 <span class="n">SITETITLE</span> <span class="o">=</span> <span class="s2">&quot;Martin&#39;s Blog&quot;</span>
 <span class="n">SITESUBTITLE</span> <span class="o">=</span> <span class="s2">&quot;Martin&#39;s Blog&quot;</span>
 <span class="n">SITEDESCRIPTION</span> <span class="o">=</span> <span class="s1">&#39;Martin</span><span class="se">\&#39;</span><span class="s1">s Thoughts and Writings&#39;</span>
-<span class="c1">#SITELOGO = &#39;/images/profile.png&#39;</span>
-<span class="c1">#FAVICON = &#39;/images/favicon.ico&#39;</span>
+<span class="n">SITELOGO</span> <span class="o">=</span> <span class="s1">&#39;/images/default_profile_200x200.png&#39;</span>
+<span class="n">FAVICON</span> <span class="o">=</span> <span class="s1">&#39;/images/default_profile_200x200.png&#39;</span>
 <span class="n">BROWSER_COLOR</span> <span class="o">=</span> <span class="s1">&#39;#333333&#39;</span>
 <span class="n">PYGMENTS_STYLE</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
 
 <span class="n">ROBOTS</span> <span class="o">=</span> <span class="s1">&#39;index, follow&#39;</span>
 
 <span class="n">PATH</span> <span class="o">=</span> <span class="s1">&#39;content&#39;</span>
-<span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="s1">&#39;blog/&#39;</span>
 
 <span class="n">DEFAULT_DATE_FORMAT</span> <span class="o">=</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M&#39;</span>
 
@@ -198,7 +202,7 @@
 <span class="n">AUTHOR_FEED_RSS</span> <span class="o">=</span> <span class="bp">None</span>
 
 <span class="c1"># Blogroll</span>
-<span class="n">LINKS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;about&#39;</span><span class="p">,</span> <span class="s1">&#39;/blog/about.html&#39;</span><span class="p">),</span>
+<span class="n">LINKS</span> <span class="o">=</span> <span class="p">(</span>
          <span class="p">(</span><span class="s1">&#39;astrobook&#39;</span><span class="p">,</span> <span class="s1">&#39;https://astrobook.cn/&#39;</span><span class="p">),</span>
          <span class="p">(</span><span class="s1">&#39;astrohub&#39;</span><span class="p">,</span> <span class="s1">&#39;https://astrohub.cn&#39;</span><span class="p">),)</span>
 
@@ -211,10 +215,14 @@
 <span class="n">RELATIVE_URLS</span> <span class="o">=</span> <span class="bp">True</span>
 
 <span class="c1"># Theme</span>
-<span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;/home/demo/pelican_env/pelican-themes/Flex&quot;</span>
+<span class="n">THEME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ENV_DIR</span><span class="p">,</span> <span class="s2">&quot;pelican-themes&quot;</span><span class="p">,</span> <span class="s2">&quot;Flex&quot;</span><span class="p">)</span>
 
-<span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/home/demo/pelican_env/pelican-plugins&quot;</span><span class="p">]</span>
-<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sitemap&#39;</span><span class="p">]</span>
+<span class="n">PLUGIN_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ENV_DIR</span><span class="p">,</span> <span class="s2">&quot;pelican-plugins&quot;</span><span class="p">)]</span>
+<span class="n">PLUGINS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sitemap&#39;</span><span class="p">,</span> <span class="s1">&#39;i18n_subsites&#39;</span><span class="p">,</span> <span class="s1">&#39;liquid_tags.img&#39;</span><span class="p">,</span> <span class="s1">&#39;liquid_tags.include_code&#39;</span><span class="p">,</span> <span class="s1">&#39;liquid_tags.youtube&#39;</span><span class="p">]</span>
+
+<span class="n">JINJA_ENVIRONMENT</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;extensions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;jinja2.ext.i18n&#39;</span><span class="p">],</span>
+<span class="p">}</span>
 
 <span class="c1"># Sitemap</span>
 <span class="n">SITEMAP</span> <span class="o">=</span> <span class="p">{</span>
@@ -226,6 +234,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 
+
 <span class="c1"># Default theme language</span>
 <span class="n">I18N_TEMPLATE_LANG</span> <span class="o">=</span> <span class="s1">&#39;zh&#39;</span>
 
@@ -233,8 +242,12 @@
 <span class="n">OG_LOCALE</span> <span class="o">=</span> <span class="s1">&#39;zh_CN&#39;</span>
 <span class="n">LOCALE</span> <span class="o">=</span> <span class="s1">&#39;zh_CN&#39;</span>
 
-<span class="c1"># MENU</span>
+
+
+
+<span class="c1"># MENU </span>
 <span class="n">DEFAULT_PAGINATION</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">DISPLAY_PAGES_ON_MENU</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="n">MAIN_MENU</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">HOME_HIDE_TAGS</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">USE_FOLDER_AS_CATEGORY</span> <span class="o">=</span> <span class="bp">False</span>
@@ -246,10 +259,17 @@
 <span class="n">COPYRIGHT_YEAR</span> <span class="o">=</span> <span class="s1">&#39;2019&#39;</span>
 
 <span class="c1"># STATIC</span>
-<span class="n">STATIC_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">]</span>
+<span class="n">STATIC_PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="s1">&#39;extra&#39;</span><span class="p">]</span>
 <span class="n">CUSTOM_CSS</span> <span class="o">=</span> <span class="s1">&#39;static/custom.css&#39;</span>
+<span class="n">EXTRA_PATH_METADATA</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;extra/CNAME&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;CNAME&#39;</span><span class="p">},</span>
+    <span class="s1">&#39;extra/custom.css&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;static/custom.css&#39;</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">CODE_DIR</span> <span class="o">=</span> <span class="s1">&#39;code&#39;</span>
 
 <span class="n">USE_LESS</span> <span class="o">=</span> <span class="bp">True</span>
+
+
 
 <span class="c1"># Third page service</span>
 <span class="n">DISQUS_SITENAME</span> <span class="o">=</span> <span class="s2">&quot;astro-2&quot;</span>
@@ -269,6 +289,7 @@
 </pre></div>
 
 
+<p></p>
 <h2>新建一篇 markdown</h2>
 <p>在 <code>content</code> 文件夹下可以放 markdown 文件和一些图片，或者自定义的 css,js 文件</p>
 <p>和普通的 markdown 不同的是在文件头上需要写一些 metadata，参考<a href="https://docs.getpelican.com/en/stable/content.html#file-metadata">官方文档</a></p>
