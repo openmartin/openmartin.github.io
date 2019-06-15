@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2017-04-03T20:20:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在 Amazon Linux 使用 Let's encrypt 免费的SSL</title><link href="https://xingzuoshe.cn/lets-encrypt-ssl.html" rel="alternate"></link><published>2017-04-03T20:20:00+08:00</published><updated>2017-04-03T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2017-04-03:/lets-encrypt-ssl.html</id><summary type="html">&lt;p&gt;在 Amazon Linux 使用 Let's encrypt 免费的SSL&lt;/p&gt;</summary><content type="html">&lt;p&gt;如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
+Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要renew，官方还提供自动renew的工具certbot&lt;/p&gt;
+&lt;h2&gt;certbot&lt;/h2&gt;
+&lt;p&gt;certbot 是一个自动申请和续期SSL证书的工具。在&lt;a href="https://certbot.eff.org/"&gt;官网certbot.eff.org&lt;/a&gt;可以找到各种OS和Web服务器下的安装方法。常见的Ubuntu和CentOS安装起来十分方便。&lt;/p&gt;
+&lt;h2&gt;Amazon Linux&lt;/h2&gt;
+&lt;p&gt;在AWS EC2上，官方推荐的是OS是Amazon Linux，基于RHEL 6源码重新编译的，提供了Amazon自己的工具和源。certbot的安装方式类似于RHEL 6/CentOS 6&lt;/p&gt;
+&lt;h2&gt;申请SSL证书步骤&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ssh到Server&lt;/li&gt;
+&lt;li&gt;下载certbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eff&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
+&lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;执行certbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="c1"&gt;--debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;How&lt;/span&gt; &lt;span class="n"&gt;would&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;authenticate&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;ACME&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;
+&lt;span class="c1"&gt;---------------------------&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Place&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;webroot&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;webroot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Spin&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;temporary&lt;/span&gt; &lt;span class="n"&gt;webserver&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;standalone&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;---------------------------&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
+选择2certbot会启动一个web服务，占用443端口，所以需要暂停一下nginx，一般情况下选择2比较省事。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;记得在AWS EC2的安全组中放开443端口&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;证书路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Certificate&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;span class="k"&gt;Full&lt;/span&gt; &lt;span class="k"&gt;Chain&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fullchain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;span class="n"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;privkey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;nginx 启用SSL&lt;/h2&gt;
+&lt;p&gt;启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
+    &lt;span class="nv"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;server_name&lt;/span&gt;  &lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    # &lt;span class="nv"&gt;Redirect&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt; &lt;span class="nv"&gt;HTTP&lt;/span&gt; &lt;span class="nv"&gt;requests&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;HTTPS&lt;/span&gt; &lt;span class="nv"&gt;with&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="mi"&gt;301&lt;/span&gt; &lt;span class="nv"&gt;Moved&lt;/span&gt; &lt;span class="nv"&gt;Permanently&lt;/span&gt; &lt;span class="nv"&gt;response&lt;/span&gt;.
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;301&lt;/span&gt; &lt;span class="nv"&gt;https&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;$&lt;span class="nv"&gt;request_uri&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+}
+
+&lt;span class="nv"&gt;server&lt;/span&gt; {
+    &lt;span class="nv"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="nv"&gt;ssl&lt;/span&gt; &lt;span class="nv"&gt;http2&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;listen&lt;/span&gt; [::]:&lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="nv"&gt;ssl&lt;/span&gt; &lt;span class="nv"&gt;http2&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;server_name&lt;/span&gt; &lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    # &lt;span class="nv"&gt;certs&lt;/span&gt; &lt;span class="nv"&gt;sent&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;client&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;SERVER&lt;/span&gt; &lt;span class="nv"&gt;HELLO&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;concatenated&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;ssl_certificate&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_certificate&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;fullchain&lt;/span&gt;.&lt;span class="nv"&gt;pem&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_certificate_key&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;privkey&lt;/span&gt;.&lt;span class="nv"&gt;pem&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_session_timeout&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_session_cache&lt;/span&gt; &lt;span class="nv"&gt;shared&lt;/span&gt;:&lt;span class="nv"&gt;SSL&lt;/span&gt;:&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_session_tickets&lt;/span&gt; &lt;span class="nv"&gt;off&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;access_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;access&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;error_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;error&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+        &lt;span class="nv"&gt;proxy_pass&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;8003&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;Host&lt;/span&gt; $&lt;span class="nv"&gt;host&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Real&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;IP&lt;/span&gt; $&lt;span class="nv"&gt;remote_addr&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Forwarded&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;For&lt;/span&gt; $&lt;span class="nv"&gt;proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    }
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;自动更新证书&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用root用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;增加定时任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;crontab&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;增加一行，每个月1号2点30分更新&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt; &lt;span class="n"&gt;renew&lt;/span&gt; &lt;span class="c1"&gt;--pre-hook &amp;quot;service nginx stop&amp;quot; --post-hook &amp;quot;service nginx start&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;dry run&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="n"&gt;renew&lt;/span&gt; &lt;span class="c1"&gt;--dry-run&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;chrome 变绿&lt;/h2&gt;
+&lt;p&gt;在chrome下需要全站都使用https地址栏才会变绿，需要检查一下网站里面的各种URL，比如外链图片或JS文件，都需要使用https才行。&lt;/p&gt;
+&lt;p&gt;参考资料:
+- http://frontenddev.org/article/using-certbot-deployment-let-s-encrypt-free-ssl-certificate-implementation-https.html
+- https://segmentfault.com/a/1190000005797776
+- https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/
+- https://ksmx.me/letsencrypt-ssl-https/
+- https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657&lt;/p&gt;</content><category term="aws"></category><category term="linux"></category><category term="ssl"></category></entry><entry><title>Oracle Express on CentOS 7</title><link href="https://xingzuoshe.cn/oracle-express-editon-on-centos7.html" rel="alternate"></link><published>2016-09-19T20:20:00+08:00</published><updated>2016-09-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-09-19:/oracle-express-editon-on-centos7.html</id><summary type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;</summary><content type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;
+&lt;h2&gt;VirtualBox VM&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.centos.org"&gt;下载CentOS 7 DVD&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;virtualbox的网络设置中建议选择桥接，因为我们需要从宿主机连接虚拟机，默认的NAT只能从虚拟机内部访问外部。&lt;/p&gt;
+&lt;p&gt;安装过程中建议选择Server with GUI，再选择develop tools。&lt;/p&gt;
+&lt;p&gt;安装完成之后，需要同意license(比较坑)，先按1，再按2同意条款，接下来按C继续。&lt;/p&gt;
+&lt;h2&gt;Oracle Express Edition&lt;/h2&gt;
+&lt;p&gt;在Oracle 官网下载&lt;a href="http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"&gt;Oracle Database Express Edition 11g Release 2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载下来之后是一个rpm包，&lt;code&gt;oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;，上传到虚拟机当中安装，&lt;code&gt;sudo rmp -i oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;CentOS&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#使用root用户来初始化数据库，默认的实例名是XE&lt;/span&gt;
+/etc/init.d/oracle-xe configure
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;Usage: /etc/init.d/oracle-xe {start|stop|restart|force-reload|configure|status|enable|disable}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Oracle Express Edition 安装好之后会有一个oracle用户，通过root切换到oracle用户，&lt;code&gt;source /u01/app/oracle/prduct/11.2.0/xe/bin/oracle_env.sh&lt;/code&gt;设置Oracle 的环境变量，接下来就可以用一些Oracle的命令了。&lt;/p&gt;
+&lt;h3&gt;Disable Firewall&lt;/h3&gt;
+&lt;p&gt;centos 默认有一个firewall，会阻止外部的访问，所以需要停止防火墙。
+使用root用户登录&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;disable&lt;/span&gt; &lt;span class="n"&gt;firewalld&lt;/span&gt;
+&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;firewalld&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Oracle SQL Developer&lt;/h2&gt;
+&lt;p&gt;在macOS下没有PLSQL Developer这样方便的工具，Oracle官方出品的&lt;a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html"&gt;Oracle SQL Developer&lt;/a&gt;可以体验一下，一般功能都有。&lt;/p&gt;</content><category term="linux"></category><category term="oracle"></category></entry></feed>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Doc</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/doc.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2016-04-25T20:20:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>reStructuredText to Markdown</title><link href="https://xingzuoshe.cn/pandoc-trans-rst-markdown.html" rel="alternate"></link><published>2016-04-20T20:20:00+08:00</published><updated>2016-04-25T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-20:/pandoc-trans-rst-markdown.html</id><summary type="html">&lt;p&gt;pandoc 是一个haskell语言开发的文档格式转换工具，支持非常丰富的格式，覆盖了常见的所有格式。使用起来非常方便。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;pandoc&lt;/h2&gt;
+&lt;p&gt;pandoc 是一个haskell语言开发的文档格式转换工具，支持非常丰富的格式，覆盖了常见的所有格式。使用起来非常方便。&lt;/p&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mac osx&lt;/span&gt;
+brew install pandoc
+&lt;span class="c1"&gt;# ubuntu&lt;/span&gt;
+sudo apt-get install pandoc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;格式转换&lt;/h3&gt;
+&lt;p&gt;reStructuredText to markdown&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pandoc -f rst --toc small_tip.rst -t markdown_github -o small_tip.md
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多例子
+&lt;a href="http://pandoc.org/demos.html"&gt;pandoc demo&lt;/a&gt;&lt;/p&gt;</content><category term="pandoc"></category></entry></feed>

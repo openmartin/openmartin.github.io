@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="https://xingzuoshe.cn/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/pygments/default.min.css">
+  <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="https://xingzuoshe.cn/static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="使用 pyside + HTML5 开发桌面应用" />
+<meta name="keywords" content="pyside">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="如何使用 pyside + HTML5 开发桌面应用"/>
+<meta property="og:description" content="使用 pyside + HTML5 开发桌面应用"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="https://xingzuoshe.cn/pyside-html5.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-08-04 20:20:00+08:00"/>
+<meta property="article:modified_time" content="2015-08-04 20:20:00+08:00"/>
+<meta property="article:author" content="https://xingzuoshe.cn/author/martin.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="pyside"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 如何使用 pyside + HTML5 开发桌面应用</title>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://xingzuoshe.cn">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href="https://xingzuoshe.cn">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="https://xingzuoshe.cn/pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle ads-aside"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://xingzuoshe.cn">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pyside-html5">如何使用 pyside + HTML5 开发桌面应用</h1>
+    <p>
+      Posted on 2015-08-04 20:20 in <a href="https://xingzuoshe.cn/category/python.html">Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><a href="http://pyside.org">pyside</a> 是 <a href="http://www.qt.io/">Qt</a> 的Python绑定，使用没有任何限制，而且配合python丰富的类库和简洁的语法，开发起来非常方便</p>
+<h2>pip</h2>
+<p>如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中</p>
+<p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
+<h2>安装pyside</h2>
+<p>在Ubuntu 和　DeepinLinux　下安装非常方便:</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="k">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">pyside</span>
+</pre></div>
+
+
+<p>或者使用pip安装:</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pyside</span>
+</pre></div>
+
+
+<h2>创建窗口</h2>
+<p>学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:</p>
+<div class="highlight"><pre><span></span><span class="nv">class</span> <span class="nv">MainWindow</span><span class="ss">(</span><span class="nv">QtGui</span>.<span class="nv">QWidget</span><span class="ss">)</span>:
+    <span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
+        <span class="nv">QtGui</span>.<span class="nv">QWidget</span>.<span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>
+
+        #初始化<span class="nv">position</span>
+        <span class="nv">self</span>.<span class="nv">m_DragPosition</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">pos</span><span class="ss">()</span>
+
+        ＃设置窗口大小
+        <span class="nv">self</span>.<span class="nv">resize</span><span class="ss">(</span><span class="mi">1024</span>,<span class="mi">600</span><span class="ss">)</span>
+        ＃窗口特征:没有边框
+        <span class="nv">self</span>.<span class="nv">setWindowFlags</span><span class="ss">(</span><span class="nv">Qt</span>.<span class="nv">FramelessWindowHint</span> <span class="o">|</span> <span class="nv">Qt</span>.<span class="nv">WindowSystemMenuHint</span><span class="ss">)</span>
+        <span class="nv">self</span>.<span class="nv">setMouseTracking</span><span class="ss">(</span><span class="nv">True</span><span class="ss">)</span>
+        #<span class="nv">self</span>.<span class="nv">setStyleSheet</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">background-color:#f8f8f8;</span><span class="s2">&quot;</span><span class="ss">)</span>
+
+        ＃窗口居中
+        <span class="nv">desktop</span> <span class="o">=</span><span class="nv">QtGui</span>.<span class="nv">QApplication</span>.<span class="nv">desktop</span><span class="ss">()</span>
+        <span class="nv">width</span> <span class="o">=</span> <span class="nv">desktop</span>.<span class="nv">width</span><span class="ss">()</span>
+        <span class="nv">height</span> <span class="o">=</span> <span class="nv">desktop</span>.<span class="nv">height</span><span class="ss">()</span>
+        <span class="nv">self</span>.<span class="nv">move</span><span class="ss">((</span><span class="nv">width</span> <span class="o">-</span> <span class="nv">self</span>.<span class="nv">width</span><span class="ss">())</span><span class="o">/</span><span class="mi">2</span>, <span class="ss">(</span><span class="nv">height</span> <span class="o">-</span> <span class="nv">self</span>.<span class="nv">height</span><span class="ss">())</span><span class="o">/</span><span class="mi">2</span><span class="ss">)</span>
+
+        #支持窗口拖动,重写两个方法
+        <span class="nv">def</span> <span class="nv">mousePressEvent</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">event</span><span class="ss">)</span>:
+            <span class="k">if</span> <span class="nv">event</span>.<span class="nv">button</span><span class="ss">()</span><span class="o">==</span><span class="nv">Qt</span>.<span class="nv">LeftButton</span>:
+                <span class="nv">self</span>.<span class="nv">m_drag</span><span class="o">=</span><span class="nv">True</span>
+                <span class="nv">self</span>.<span class="nv">m_DragPosition</span><span class="o">=</span><span class="nv">event</span>.<span class="nv">globalPos</span><span class="ss">()</span><span class="o">-</span><span class="nv">self</span>.<span class="nv">pos</span><span class="ss">()</span>
+                <span class="nv">event</span>.<span class="nv">accept</span><span class="ss">()</span>
+
+
+        <span class="nv">def</span> <span class="nv">mouseMoveEvent</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">QMouseEvent</span><span class="ss">)</span>:
+            <span class="k">if</span> <span class="nv">QMouseEvent</span>.<span class="nv">buttons</span><span class="ss">()</span> <span class="nv">and</span> <span class="nv">Qt</span>.<span class="nv">LeftButton</span>:
+                <span class="nv">self</span>.<span class="nv">move</span><span class="ss">(</span><span class="nv">QMouseEvent</span>.<span class="nv">globalPos</span><span class="ss">()</span><span class="o">-</span><span class="nv">self</span>.<span class="nv">m_DragPosition</span><span class="ss">)</span>
+                <span class="nv">QMouseEvent</span>.<span class="nv">accept</span><span class="ss">()</span>
+
+
+        <span class="nv">def</span> <span class="nv">mouseReleaseEvent</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">QMouseEvent</span><span class="ss">)</span>:
+            <span class="nv">self</span>.<span class="nv">m_drag</span><span class="o">=</span><span class="nv">False</span>
+
+<span class="k">if</span> <span class="nv">__name__</span><span class="o">==</span><span class="s2">&quot;</span><span class="s">__main__</span><span class="s2">&quot;</span>:
+
+    <span class="nv">mapp</span><span class="o">=</span><span class="nv">QtGui</span>.<span class="nv">QApplication</span><span class="ss">(</span><span class="nv">sys</span>.<span class="nv">argv</span><span class="ss">)</span>
+    <span class="nv">mw</span><span class="o">=</span><span class="nv">MainWindow</span><span class="ss">()</span>
+    <span class="nv">mw</span>.<span class="k">show</span><span class="ss">()</span>
+    <span class="nv">sys</span>.<span class="k">exit</span><span class="ss">(</span><span class="nv">mapp</span>.<span class="nv">exec_</span><span class="ss">())</span>
+</pre></div>
+
+
+<h2>设计UI</h2>
+<p>pyside有三种设计UI的方式</p>
+<ul>
+<li>手工编码,编码layout+widget</li>
+<li>xml定义(使用Qt Designer)</li>
+<li>QtQuick/QML定义(使用Qt Creator)，在QT5下更好用,QT4还不完善</li>
+</ul>
+<h2>查找帮助</h2>
+<p>网上pyside的资料不多，我们该怎么查找资料呢？ QT Creator是QT的官方IDE，里面有官方的帮助文档，C++，不过pyside的函数名是一模一样的，功能也保持一致。</p>
+<p>pyside的API文档也是很好的参考资料　http://pyside.github.io/docs/pyside/</p>
+<h2>webkit</h2>
+<p>WebKit是一个排版引擎，主要设计是用来让网页浏览器绘制网页。WebKit目前作为Apple Safari及Google Chrome（直到版本27）等浏览器的主要引擎。</p>
+<p><a href="http://qt-project.org/wiki/QtWebKit">http://qt-project.org/wiki/QtWebKit</a></p>
+<p>Qt WebKit is the port of WebKit on top of Qt. QtWebKit relies on the public APIs of Qt and can theoretically be used on any platform supported by Qt (theoretically because WebKit also requires a recent/good compiler).</p>
+<h2>Qt Webkit Bridge</h2>
+<p>在Web环境中，web和后端的交互是通过http协议,但是在qtwebkit中怎么样才能和webkit中的网页交互。 Qt　提供了一个机制　Qt Webkit Bridge来实现这个功能。</p>
+<p>有两个特别的函数,实现这个功能</p>
+<p>让javascript调用python方法　QtWebKit.QWebView().page().mainFrame().addToJavaScriptWindowObject("pyObj", pyObj)</p>
+<p>python中调用javascript函数　QtWebKit.QWebView().page().mainFrame().evaluateJavaScript("alert('Hello World!');")</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://xingzuoshe.cn/tag/pyside.html">pyside</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2019</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : "https://xingzuoshe.cn",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

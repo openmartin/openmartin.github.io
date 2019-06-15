@@ -54,8 +54,8 @@
 &lt;span class="n"&gt;SITETITLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;SITESUBTITLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;SITEDESCRIPTION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Martin&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s1"&gt;s Thoughts and Writings&amp;#39;&lt;/span&gt;
-&lt;span class="c1"&gt;#SITELOGO = SITEURL + &amp;#39;/images/profile.png&amp;#39;&lt;/span&gt;
-&lt;span class="c1"&gt;#FAVICON = SITEURL + &amp;#39;/images/favicon.ico&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#SITELOGO = &amp;#39;/images/profile.png&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#FAVICON = &amp;#39;/images/favicon.ico&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;BROWSER_COLOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;#333333&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;PYGMENTS_STYLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;
 
@@ -198,7 +198,682 @@
 &lt;li&gt;make github&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Editor&lt;/h2&gt;
-&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="python"></category><category term="pelican"></category></entry><entry><title>python small tips</title><link href="https://xingzuoshe.cn/python-small-tips.html" rel="alternate"></link><published>2010-12-03T10:20:00+08:00</published><updated>2010-12-05T19:30:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2010-12-03:/python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
+&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="python"></category><category term="pelican"></category></entry><entry><title>在 Amazon Linux 使用 Let's encrypt 免费的SSL</title><link href="https://xingzuoshe.cn/lets-encrypt-ssl.html" rel="alternate"></link><published>2017-04-03T20:20:00+08:00</published><updated>2017-04-03T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2017-04-03:/lets-encrypt-ssl.html</id><summary type="html">&lt;p&gt;在 Amazon Linux 使用 Let's encrypt 免费的SSL&lt;/p&gt;</summary><content type="html">&lt;p&gt;如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
+Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要renew，官方还提供自动renew的工具certbot&lt;/p&gt;
+&lt;h2&gt;certbot&lt;/h2&gt;
+&lt;p&gt;certbot 是一个自动申请和续期SSL证书的工具。在&lt;a href="https://certbot.eff.org/"&gt;官网certbot.eff.org&lt;/a&gt;可以找到各种OS和Web服务器下的安装方法。常见的Ubuntu和CentOS安装起来十分方便。&lt;/p&gt;
+&lt;h2&gt;Amazon Linux&lt;/h2&gt;
+&lt;p&gt;在AWS EC2上，官方推荐的是OS是Amazon Linux，基于RHEL 6源码重新编译的，提供了Amazon自己的工具和源。certbot的安装方式类似于RHEL 6/CentOS 6&lt;/p&gt;
+&lt;h2&gt;申请SSL证书步骤&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ssh到Server&lt;/li&gt;
+&lt;li&gt;下载certbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eff&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
+&lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;执行certbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="c1"&gt;--debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;How&lt;/span&gt; &lt;span class="n"&gt;would&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;authenticate&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;ACME&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;
+&lt;span class="c1"&gt;---------------------------&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Place&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;webroot&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;webroot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Spin&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;temporary&lt;/span&gt; &lt;span class="n"&gt;webserver&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;standalone&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;---------------------------&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
+选择2certbot会启动一个web服务，占用443端口，所以需要暂停一下nginx，一般情况下选择2比较省事。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;记得在AWS EC2的安全组中放开443端口&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;证书路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Certificate&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;span class="k"&gt;Full&lt;/span&gt; &lt;span class="k"&gt;Chain&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fullchain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;span class="n"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;privkey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;nginx 启用SSL&lt;/h2&gt;
+&lt;p&gt;启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
+    &lt;span class="nv"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;server_name&lt;/span&gt;  &lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    # &lt;span class="nv"&gt;Redirect&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt; &lt;span class="nv"&gt;HTTP&lt;/span&gt; &lt;span class="nv"&gt;requests&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;HTTPS&lt;/span&gt; &lt;span class="nv"&gt;with&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="mi"&gt;301&lt;/span&gt; &lt;span class="nv"&gt;Moved&lt;/span&gt; &lt;span class="nv"&gt;Permanently&lt;/span&gt; &lt;span class="nv"&gt;response&lt;/span&gt;.
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;301&lt;/span&gt; &lt;span class="nv"&gt;https&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;$&lt;span class="nv"&gt;request_uri&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+}
+
+&lt;span class="nv"&gt;server&lt;/span&gt; {
+    &lt;span class="nv"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="nv"&gt;ssl&lt;/span&gt; &lt;span class="nv"&gt;http2&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;listen&lt;/span&gt; [::]:&lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="nv"&gt;ssl&lt;/span&gt; &lt;span class="nv"&gt;http2&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;server_name&lt;/span&gt; &lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    # &lt;span class="nv"&gt;certs&lt;/span&gt; &lt;span class="nv"&gt;sent&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;client&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;SERVER&lt;/span&gt; &lt;span class="nv"&gt;HELLO&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;concatenated&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;ssl_certificate&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_certificate&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;fullchain&lt;/span&gt;.&lt;span class="nv"&gt;pem&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_certificate_key&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;privkey&lt;/span&gt;.&lt;span class="nv"&gt;pem&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_session_timeout&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_session_cache&lt;/span&gt; &lt;span class="nv"&gt;shared&lt;/span&gt;:&lt;span class="nv"&gt;SSL&lt;/span&gt;:&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;ssl_session_tickets&lt;/span&gt; &lt;span class="nv"&gt;off&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;access_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;access&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;error_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;error&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+        &lt;span class="nv"&gt;proxy_pass&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;8003&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;Host&lt;/span&gt; $&lt;span class="nv"&gt;host&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Real&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;IP&lt;/span&gt; $&lt;span class="nv"&gt;remote_addr&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Forwarded&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;For&lt;/span&gt; $&lt;span class="nv"&gt;proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    }
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;自动更新证书&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用root用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;增加定时任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;crontab&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;增加一行，每个月1号2点30分更新&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt; &lt;span class="n"&gt;renew&lt;/span&gt; &lt;span class="c1"&gt;--pre-hook &amp;quot;service nginx stop&amp;quot; --post-hook &amp;quot;service nginx start&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;dry run&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="n"&gt;renew&lt;/span&gt; &lt;span class="c1"&gt;--dry-run&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;chrome 变绿&lt;/h2&gt;
+&lt;p&gt;在chrome下需要全站都使用https地址栏才会变绿，需要检查一下网站里面的各种URL，比如外链图片或JS文件，都需要使用https才行。&lt;/p&gt;
+&lt;p&gt;参考资料:
+- http://frontenddev.org/article/using-certbot-deployment-let-s-encrypt-free-ssl-certificate-implementation-https.html
+- https://segmentfault.com/a/1190000005797776
+- https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/
+- https://ksmx.me/letsencrypt-ssl-https/
+- https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657&lt;/p&gt;</content><category term="aws"></category><category term="linux"></category><category term="ssl"></category></entry><entry><title>django forms tips</title><link href="https://xingzuoshe.cn/django-forms-tips.html" rel="alternate"></link><published>2016-09-19T20:20:00+08:00</published><updated>2016-09-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-09-19:/django-forms-tips.html</id><summary type="html">&lt;p&gt;django forms tips&lt;/p&gt;</summary><content type="html">&lt;h2&gt;django forms&lt;/h2&gt;
+&lt;p&gt;djang forms 是django非常有用的功能之一，展示表单和接收表单数据非常方便。&lt;/p&gt;
+&lt;h3&gt;css class&lt;/h3&gt;
+&lt;p&gt;比如下面的代码:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;n_tz&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ChoiceField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;choices&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;TIMEZONE_CHOICE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;initial&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;required&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;widget&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;forms&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;Select&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;attrs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;class&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;form-control&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;n_tz&amp;#39;&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;实现了两个常用的功能
+- 指定css class 和 id
+- initial 初始值&lt;/p&gt;
+&lt;h3&gt;动态改变表单验证逻辑&lt;/h3&gt;
+&lt;p&gt;我们经常有这样的需求，field b不是必填项，field c也不是必填项，但是如果b不为空，c也需要不为空。我们可以定义一个 clean_c 的函数(&lt;em&gt;函数名为clean_&lt;fieldname&gt;&lt;/em&gt;)来实现这个功能，也可以定义clean函数。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt; &lt;span class="nv"&gt;DemoForm&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;forms&lt;/span&gt;.&lt;span class="nv"&gt;Form&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;forms&lt;/span&gt;.&lt;span class="nv"&gt;CharField&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;required&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;forms&lt;/span&gt;.&lt;span class="nv"&gt;CharField&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;required&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;False&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;forms&lt;/span&gt;.&lt;span class="nv"&gt;CharField&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;required&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;False&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;clean_c&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;cleaned_data&lt;/span&gt;[&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;]
+        &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;cleaned_data&lt;/span&gt;[&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;c&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;]
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;None&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;None&lt;/span&gt;:
+            &lt;span class="nv"&gt;raise&lt;/span&gt; &lt;span class="nv"&gt;forms&lt;/span&gt;.&lt;span class="nv"&gt;ValidationError&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;c不能为空&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;
+
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;clean&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="nv"&gt;cleaned_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;super&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;DemoForm&lt;/span&gt;, &lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="nv"&gt;clean&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;cleaned_data&lt;/span&gt;[&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;]
+        &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;cleaned_data&lt;/span&gt;[&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;c&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;]
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;None&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="nv"&gt;is&lt;/span&gt; &lt;span class="nv"&gt;None&lt;/span&gt;:
+            &lt;span class="nv"&gt;raise&lt;/span&gt; &lt;span class="nv"&gt;forms&lt;/span&gt;.&lt;span class="nv"&gt;ValidationError&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;c不能为空&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;cleaned_data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果是比较简单的逻辑，可以在valid之前直接修改form的属性&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;required&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;False&lt;/span&gt;  &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;改变&lt;/span&gt;&lt;span class="n"&gt;required&lt;/span&gt;
+&lt;span class="n"&gt;form&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;is_valid&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;form提示错误&lt;/h3&gt;
+&lt;p&gt;经常用到的一个功能是提示用户输入的有哪些错误，django的form提供了这样的功能，在template中可以用&lt;code&gt;form.fieldname.erros&lt;/code&gt;,&lt;code&gt;form.fieldname.erros.as_text&lt;/code&gt;
+表示。&lt;/p&gt;
+&lt;p&gt;最近碰到一个很奇怪问题，给一个field initial 值之后，在template中可以展示，然后POST也能接到这个值，但是再次在template中展示却取不到这个值。只能用一个土办法绕过这个问题。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;form&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;DemoForm&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;request&lt;/span&gt;.&lt;span class="nv"&gt;POST&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;form&lt;/span&gt;.&lt;span class="nv"&gt;is_valid&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;:
+    &lt;span class="nv"&gt;save&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;redirect&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;:
+    &lt;span class="nv"&gt;new_form&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;DemoForm&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;initial&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;cif&lt;/span&gt;.&lt;span class="nv"&gt;cleaned_data&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;new_form&lt;/span&gt;.&lt;span class="nv"&gt;_errors&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;form&lt;/span&gt;.&lt;span class="nv"&gt;_errors&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;render&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;demo.html&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;,  {&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;form&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;: &lt;span class="nv"&gt;new_form&lt;/span&gt;}&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;使用decrator做权限检查&lt;/h3&gt;
+&lt;p&gt;比如某几个view需要特定的权限才能查看，在每个view中写判断的逻辑有点冗余，这时候我们可以使用装饰器&lt;code&gt;@check_perm('foo')&lt;/code&gt;，代码如下，检查权限的代码需要根据具体情况修改。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;check_perm&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;perm_name&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;handle_func&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;func&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;handle_args&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;request&lt;/span&gt;, &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;, &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nv"&gt;kwargs&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="nv"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;request&lt;/span&gt;.&lt;span class="nv"&gt;siteuser&lt;/span&gt;
+            &lt;span class="nv"&gt;try&lt;/span&gt;:
+                &lt;span class="nv"&gt;uperm&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;UserPermission&lt;/span&gt;.&lt;span class="nv"&gt;objects&lt;/span&gt;.&lt;span class="nv"&gt;get&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;uperm&lt;/span&gt;.&lt;span class="nv"&gt;has_module_perms&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;perm_name&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+                    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;func&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;request&lt;/span&gt;, &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nv"&gt;args&lt;/span&gt;, &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="nv"&gt;kwargs&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt;:
+                    &lt;span class="nv"&gt;raise&lt;/span&gt; &lt;span class="nv"&gt;PermissionDenied&lt;/span&gt;
+            &lt;span class="nv"&gt;except&lt;/span&gt; &lt;span class="nv"&gt;UserPermission&lt;/span&gt;.&lt;span class="nv"&gt;DoesNotExist&lt;/span&gt;:
+                &lt;span class="nv"&gt;raise&lt;/span&gt; &lt;span class="nv"&gt;PermissionDenied&lt;/span&gt;
+
+            &lt;span class="nv"&gt;except&lt;/span&gt; &lt;span class="nv"&gt;TypeError&lt;/span&gt;:
+                &lt;span class="nv"&gt;raise&lt;/span&gt; &lt;span class="nv"&gt;PermissionDenied&lt;/span&gt;
+
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;handle_args&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nv"&gt;handle_func&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;自定义400，403，404，500页面&lt;/h3&gt;
+&lt;p&gt;如果要自定义错误页面，需要在 urls.py 中指定error handler。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;handler403&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;mysite.views.my_permission_denied&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Exception&lt;/th&gt;
+&lt;th&gt;Handler&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;SuspiciousOperationsd&lt;/td&gt;
+&lt;td&gt;handler400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PermissionDenied&lt;/td&gt;
+&lt;td&gt;handler403&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Http404&lt;/td&gt;
+&lt;td&gt;handler404&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;其他Exception&lt;/td&gt;
+&lt;td&gt;handler500&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;django middleware&lt;/h2&gt;
+&lt;h3&gt;1.9 以前的old middleware&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="django-middleware" src="../images/2016-09-19-15-50-25.jpg"&gt;
+定义一个middleware很容易，你只需要定义一个普通的python类，然后实现如下四个方法中的某一个或者某几个，添加到&lt;code&gt;setting.py MIDDLEWARE_CLASSES&lt;/code&gt; 当中:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;process_request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;process_view&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;view_func&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;view_args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;view_kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;process_template_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;process_response&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考：
+https://docs.djangoproject.com/en/1.10/ref/urls/
+http://lukejin.iteye.com/blog/599783
+https://docs.djangoproject.com/en/1.9/topics/http/middleware/&lt;/p&gt;</content><category term="django"></category></entry><entry><title>Oracle Express on CentOS 7</title><link href="https://xingzuoshe.cn/oracle-express-editon-on-centos7.html" rel="alternate"></link><published>2016-09-19T20:20:00+08:00</published><updated>2016-09-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-09-19:/oracle-express-editon-on-centos7.html</id><summary type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;</summary><content type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;
+&lt;h2&gt;VirtualBox VM&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.centos.org"&gt;下载CentOS 7 DVD&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;virtualbox的网络设置中建议选择桥接，因为我们需要从宿主机连接虚拟机，默认的NAT只能从虚拟机内部访问外部。&lt;/p&gt;
+&lt;p&gt;安装过程中建议选择Server with GUI，再选择develop tools。&lt;/p&gt;
+&lt;p&gt;安装完成之后，需要同意license(比较坑)，先按1，再按2同意条款，接下来按C继续。&lt;/p&gt;
+&lt;h2&gt;Oracle Express Edition&lt;/h2&gt;
+&lt;p&gt;在Oracle 官网下载&lt;a href="http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"&gt;Oracle Database Express Edition 11g Release 2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载下来之后是一个rpm包，&lt;code&gt;oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;，上传到虚拟机当中安装，&lt;code&gt;sudo rmp -i oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;CentOS&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#使用root用户来初始化数据库，默认的实例名是XE&lt;/span&gt;
+/etc/init.d/oracle-xe configure
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;Usage: /etc/init.d/oracle-xe {start|stop|restart|force-reload|configure|status|enable|disable}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Oracle Express Edition 安装好之后会有一个oracle用户，通过root切换到oracle用户，&lt;code&gt;source /u01/app/oracle/prduct/11.2.0/xe/bin/oracle_env.sh&lt;/code&gt;设置Oracle 的环境变量，接下来就可以用一些Oracle的命令了。&lt;/p&gt;
+&lt;h3&gt;Disable Firewall&lt;/h3&gt;
+&lt;p&gt;centos 默认有一个firewall，会阻止外部的访问，所以需要停止防火墙。
+使用root用户登录&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;disable&lt;/span&gt; &lt;span class="n"&gt;firewalld&lt;/span&gt;
+&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;firewalld&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Oracle SQL Developer&lt;/h2&gt;
+&lt;p&gt;在macOS下没有PLSQL Developer这样方便的工具，Oracle官方出品的&lt;a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html"&gt;Oracle SQL Developer&lt;/a&gt;可以体验一下，一般功能都有。&lt;/p&gt;</content><category term="linux"></category><category term="oracle"></category></entry><entry><title>技术工作中的乱象</title><link href="https://xingzuoshe.cn/unreasonale-in-tech-work.html" rel="alternate"></link><published>2016-07-18T20:20:00+08:00</published><updated>2016-07-18T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-18:/unreasonale-in-tech-work.html</id><summary type="html">&lt;p&gt;技术工作中的乱象&lt;/p&gt;</summary><content type="html">&lt;p&gt;在创业潮的推动下，互联网创业现在进行得如火如荼。不过我们却最近频繁听到某互联网公司的负面新闻，说明了互联网公司的管理方式出现了问题。管理大师德鲁克说21世纪的一个难题是知识工作者的管理，是因为很多时候工作的成果，付出的努力无法量化。对此我想说说在自己身边，技术工作中遇到的不合理的地方。&lt;/p&gt;
+&lt;h2&gt;协作的诅咒&lt;/h2&gt;
+&lt;p&gt;协作成为一种时尚，公司鼓励大家成为优秀的企业公民，无时不刻互相帮助，是因为组织存在的意义就在于人们能共同完成一个人无法单独完成的事情。和同事交流能够激发更有价值的见解。&lt;/p&gt;
+&lt;p&gt;但是很多时候我们被无穷无尽的邮件，消息，流程所打扰，消耗大量时间与人互动，无法在工作时间完成任务，只能加班加点或者把工作带回家。&lt;/p&gt;
+&lt;p&gt;协作的最大问题在于，它让“深度工作”无法展开，或者变得很困难。“深度工作”是我们完成工作的杀手锏：你只有聚精会神才能掌握一门困难的学科或者解决一个棘手的问题。&lt;/p&gt;
+&lt;p&gt;但是为什么很多人对于协作如此执着？一个原因是，协作远比“深度工作”更容易衡量：任何一个傻瓜都能记录下来有多人在slack上发帖或是在会议上发言，但是要发现一个独坐办公室的人是在取得突破还是无所事事，可能需要好几年。另一个原因是，管理者往往感到必须让别人看到自己在做管理，他们会自动地用会议和备忘录占满所有人的时间，而不是让他们继续各自的工作。&lt;/p&gt;
+&lt;p&gt;有些人对协作高度热衷，以至于被邀请参加每项议题，但过不了多久，这些很“热心”的“专家”会成为协作的瓶颈，在他们发言之前事情就无法定下来。而且他们对许多自身能力之外的议题拥有发言权。&lt;/p&gt;
+&lt;h2&gt;明星员工&lt;/h2&gt;
+&lt;p&gt;在很多公司，有一些程序员是众望所归的“明星”：程序出了什么问题，找他们可以第一个响应，而且他们可以非常投入地解决问题，哪怕加班加点也无所谓。&lt;/p&gt;
+&lt;p&gt;可是如果仔细思考，这样的程序员有不少就是麻烦的制造者，因为他们写不出高质量的程序，只能以“高度的责任心”在线上除错。而且，这样的程序员往往因为态度好、加班多，受到大量的关注和鼓励。还有一些程序员，他们或许沉默寡言，或许不爱加班，但他们总能提交高质量的程序，上线之后就不需要自己再操心。不幸的是，这样的程序员往往不会获得关注，颁发奖励的时候也论不上他们。&lt;/p&gt;
+&lt;h2&gt;量化工作&lt;/h2&gt;
+&lt;p&gt;很多领导信奉数字管理，就像互联网产品需要分析数据一样，连风投都要看数字。而且在IT技术越来越发达的今天，我们越来越容易获得数据，覆盖面更广更全面更细致。在工作中这些数据又跟绩效挂钩。&lt;/p&gt;
+&lt;p&gt;不过很多时候工作是无法量化的，commit次数最多的程序员一定是最优秀的程序员么，slack消息最多的员工一定是工作最努力的员工么。数字化的考核剥夺了工作的快乐，我们的工作越来越“碎片化”，仅仅是为了数字好看，也限制了员工创造性地发挥才能。&lt;/p&gt;
+&lt;p&gt;但是其他考核方式又受到办公室政治的影响，所以很难有一种合理公平的评判标准。&lt;/p&gt;
+&lt;p&gt;作为一名内向的程序员，尽管会遇到很多不合理的情况，但是请不要抱怨，提高自己，改变自己，我们的征途是星辰大海。&lt;/p&gt;
+&lt;p&gt;最后送大家一碗鸡汤：人生苦短，来日方长。性刚易折，性柔易屈。苦海无涯，开心就好。坚持是一种品质，放下是一种智慧。天无久雨，地无长旱。恩爱无比，嫌隙渐生。&lt;/p&gt;
+&lt;p&gt;参考：
+《协作的诅咒》-约瑟夫.熊彼特
+《我所理解的技术领导力》-余晟&lt;/p&gt;</content><category term="feeling"></category><category term="work"></category></entry><entry><title>《万历十五年》 读书笔记</title><link href="https://xingzuoshe.cn/wanli-fifteenth.html" rel="alternate"></link><published>2016-07-18T20:20:00+08:00</published><updated>2016-07-18T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-18:/wanli-fifteenth.html</id><summary type="html">&lt;p&gt;《万历十五年》 读书笔记&lt;/p&gt;</summary><content type="html">&lt;h2&gt;文官的阴阳&lt;/h2&gt;
+&lt;p&gt;他把人们口头上公认的理想称为“阳”，而把人们不能告人的私欲称为“阴”。调和阴阳是一件复杂的工作，所以他公开表示，他所期望的不外是“不肖者犹知忌惮，而贤者有所依归”&lt;/p&gt;
+&lt;p&gt;申时行没有忽略文官的双重性格：即虽称公仆，实系主人；有阳则有阴。他必须恰如其分地处理此中矛盾。&lt;/p&gt;
+&lt;p&gt;在道德的旌旗下，拘谨和雷同被视为高尚的教养，虚伪和欺诈成为官僚生活中不可分离的组成部分，无怪乎李贽要慨乎言之：“其流弊至于今日，阳为道学，阴为富贵！”&lt;/p&gt;
+&lt;p&gt;离开了权术，这些高级官员也无精明能干之可言，而权术又总是和诚信背道而驰的。&lt;/p&gt;
+&lt;p&gt;人世间很多残酷的事都用道德的名义去施行，也是中外古今一律。&lt;/p&gt;
+&lt;h2&gt;君子和小人&lt;/h2&gt;
+&lt;p&gt;(海瑞)他虽然被人仰慕，但没有人按照他的榜样办事。他的一生体现了一个有教养的读书人服务于公众而牺牲自我的精神，但这种精神的实际作用却至为微薄。&lt;/p&gt;
+&lt;p&gt;我们的先儒从来就把人类分成君子和小人，前者具有高尚的道德教养，后者则近似于禽兽。这种单纯的思想，固然可以造成许多个人生活中的悲剧，可是也使我们的传统文化增添了永久的光辉。&lt;/p&gt;
+&lt;h2&gt;道德技术法律&lt;/h2&gt;
+&lt;p&gt;《万历十五年》指出道德非万能，不能代替技术，尤不可代替法律，但是从没有说道德可以全部不要，只是说道德的观点应当远大。凡能先用法律及技术解决的问题，不要先就扯上了一个道德问题。道德是一切意义的根源，不能分割，也不便妥协，如果道德上的争执持久不能解决，双方的距离越来越远，则迟早必导致战争。&lt;/p&gt;
+&lt;p&gt;一个具有高度行政效率的政府，具备体制上技术上的周密，则不致接二连三地在紧急情况下依赖于道德观念作救命的符箓。说得严重一点，后者已不是一种好现象，而是组织机构违反时代，不能在复杂的社会中推陈出新的结果。&lt;/p&gt;
+&lt;p&gt;当一个人口众多的国家，各人行动全凭儒家简单粗浅而又无法固定的原则所限制，而法律又缺乏创造性，则其社会发展的程度，必然受到限制。即便是宗旨善良，也不能补助技术之不及。&lt;/p&gt;
+&lt;p&gt;因之我们的政事，注重体制的安定，而不计较对一人一事的绝对公允。牺牲少数人，正是维持大局的办法。&lt;/p&gt;
+&lt;h2&gt;以德治国&lt;/h2&gt;
+&lt;p&gt;管理我们这个庞大帝国的秘诀是不能依靠法律或权力去管制和惩罚，而是劝导人们，青年人要尊敬老年人，女人要服从男人，文盲要追随读书识字的人。在这些方面，官员们的表率作用就极其重要。&lt;/p&gt;
+&lt;p&gt;在道德的氛围中，社会体系无法冲破独裁主义者的大网。社会强制被作为公正的替代品，总是自上而下地施加压力。人们理所当然地认为，无论是谁，只要能背诵“四书”的词句，就一定比受自私自利所激发的人更明智……因为政府下大力气执行刑法，没有兴趣支持民法，而乡村领袖都专注于礼仪和社会地位，所以事实上老百姓得不到任何形式的法律服务。他们对自己所享有的权利也从未有过明确的概念。&lt;/p&gt;
+&lt;p&gt;血缘关系和礼仪制度促进了中国文化的统一。同样，“仁”的学说也是促进中国社会统一的力量。伴随着对血缘关系和礼仪制度的热衷，这一学说日渐成为中国社会过重的负担。几乎紧随着青铜时代而来的是早期帝国的大一统，正由于此，地方习俗和传统实践根本没有机会发展为成熟的民法。“仁”的学说长时期的发展过程必须按照这一事实来加以观察。&lt;/p&gt;
+&lt;p&gt;在王朝制度下，很难把个人玩忽职守和制度的失败分开。个人应尽最大努力，用自己的才干和自我牺牲来掩盖制度上的弱点。身居显位的文武官僚如应对国家所受的巨大灾难负责，那就很难得到赦免，至于以什么内容指控，是没有多少意义的。&lt;/p&gt;
+&lt;h2&gt;练兵&lt;/h2&gt;
+&lt;p&gt;必胜的信念有赖于能力和技术，而能力和技术又来自平时的刻苦训练。&lt;/p&gt;
+&lt;p&gt;缺少将才姑且不论，没有充分的军事训练，而这是军队本身无法解决的。&lt;/p&gt;</content><category term="history"></category></entry><entry><title>遍历S3</title><link href="https://xingzuoshe.cn/boto-scan-s3.html" rel="alternate"></link><published>2016-07-04T20:20:00+08:00</published><updated>2016-07-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-04:/boto-scan-s3.html</id><summary type="html">&lt;p&gt;使用 boto 遍历 s3&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;boto3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_key_id&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_secret_key&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_bucket&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Prefix&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_path_prefix&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Contents&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Size&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;分页默认大小是1000，可以修改PageSize，改小可以减少响应时间&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;page_iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;my-bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                   &lt;span class="n"&gt;PaginationConfig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;PageSize&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考资料：
+1. https://github.com/boto/boto3
+2. https://boto3.readthedocs.io/en/latest/reference/services/s3.html#paginators
+3. https://boto3.readthedocs.io/en/latest/guide/paginators.html&lt;/p&gt;</content><category term="python"></category><category term="aws"></category></entry><entry><title>django data migration</title><link href="https://xingzuoshe.cn/djang-data-migration.html" rel="alternate"></link><published>2016-05-13T20:20:00+08:00</published><updated>2016-06-13T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-05-13:/djang-data-migration.html</id><summary type="html">&lt;p&gt;django data migration 常见问题及应对&lt;/p&gt;</summary><content type="html">&lt;p&gt;在使用django框架开发的过程中，我们不可避免的遇到models层的变更，就涉及到数据库表的变动，django给我提供了一个migration的工具来做这些数据库表的变更。&lt;/p&gt;
+&lt;h2&gt;djang migration&lt;/h2&gt;
+&lt;p&gt;如果不加appname，那么就是指所有包含migrations 目录的app&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 基于当前的model 检测修改，创建迁移策略文件&lt;/span&gt;
+python manage.py makemigrations &amp;lt;appname&amp;gt;
+&lt;span class="c1"&gt;# 执行迁移动作&lt;/span&gt;
+python manage.py migrate
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;migrations失败&lt;/h3&gt;
+&lt;p&gt;有时候如果models改动比较大，migrations会失败，这个时候有两种选择，手工去修改migrations文件，第二种是清除所有migrations，重新migrate&lt;/p&gt;
+&lt;h4&gt;手工修改migrations文件&lt;/h4&gt;
+&lt;p&gt;通过报错信息加上SQL语句找到找到问题，然后具体问题具体分析，是修改数据库里面的数据，还是修改migrations生成的脚本。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python manage.py migrate
+
+python manage.py sqlmigrate &amp;lt;appname&amp;gt; &lt;span class="m"&gt;0001&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;当处理模型修改的时候：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果模型包含一个未曾在数据库里建立的字段，Django会报出错信息。 当你第一次用Django的数据库API请求表中不存在的字段时会导致错误。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Django不关心数据库表中是否存在未在模型中定义的列。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Django不关心数据库中是否存在未被模型表示的table。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在使用SQLite3数据库时, 因为SQLite3 不支持删除列操作，只有有限地 ALTER TABLE 支持，
+所以修改数据库列的操作被新建表然后select into newtable 代替，所以会存在更多问题&lt;/p&gt;
+&lt;p&gt;参考&lt;/p&gt;
+&lt;p&gt;http://www.tuicool.com/articles/yM3IVr&lt;/p&gt;
+&lt;h5&gt;NULL to NOT NULL&lt;/h5&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python manage.py makemigrations
+You are trying to add a non-nullable field &lt;span class="s1"&gt;&amp;#39;college&amp;#39;&lt;/span&gt; to majorproperty without a default&lt;span class="p"&gt;;&lt;/span&gt; we can&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;t &lt;span class="k"&gt;do&lt;/span&gt; that &lt;span class="o"&gt;(&lt;/span&gt;the database needs something to populate existing rows&lt;span class="o"&gt;)&lt;/span&gt;.
+Please &lt;span class="k"&gt;select&lt;/span&gt; a fix:
+ &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; Provide a one-off default now &lt;span class="o"&gt;(&lt;/span&gt;will be &lt;span class="nb"&gt;set&lt;/span&gt; on all existing rows&lt;span class="o"&gt;)&lt;/span&gt;
+ &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; Quit, and &lt;span class="nb"&gt;let&lt;/span&gt; me add a default in models.py
+Select an option: &lt;span class="m"&gt;1&lt;/span&gt;
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can &lt;span class="k"&gt;do&lt;/span&gt; e.g. timezone.now&lt;span class="o"&gt;()&lt;/span&gt;
+&amp;gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在migrate的时候提示你需要指定一个默认值，用以处理NULL的情况&lt;/p&gt;
+&lt;h4&gt;清除migrations&lt;/h4&gt;
+&lt;p&gt;清除所有app目录/migrations/下除__init__.py 文件之外的py文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -path &lt;span class="s2"&gt;&amp;quot;*migrations*&amp;quot;&lt;/span&gt; -name &lt;span class="s2"&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt; -not -path &lt;span class="s2"&gt;&amp;quot;*__init__*&amp;quot;&lt;/span&gt; -exec rm &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="se"&gt;\;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;squashmigrations&lt;/h4&gt;
+&lt;p&gt;当migrations越来越多的时候执行 makemigrations 和 migrate 就会越来越慢，可以考虑对其瘦身（减少migrations文件的数量）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python manage.py squashmigrations schools &lt;span class="m"&gt;0002&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;数据导入导出&lt;/h2&gt;
+&lt;h3&gt;数据导出&lt;/h3&gt;
+&lt;p&gt;django 项目提供了一个导出的方法 python manage.py dumpdata, 不指定 appname 时默认为导出所有的app&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python manage.py dumpdata &lt;span class="o"&gt;[&lt;/span&gt;appname&lt;span class="o"&gt;]&lt;/span&gt; &amp;gt; appname_data.json
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;数据导入&lt;/h3&gt;
+&lt;p&gt;数据导入,不需要指定 appname&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;loaddata&lt;/span&gt; &lt;span class="n"&gt;appname_data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;优点：可以兼容各种支持的数据库，也就是说，以前用的是 SQLite3，可以导出后，用这种方法导入到 MySQL, PostgreSQL等数据库，反过来也可以。&lt;/p&gt;
+&lt;p&gt;缺点：数据量大的时候，速度相对较慢，表的关系比较复杂的时候可以导入不成功。&lt;/p&gt;
+&lt;h3&gt;常见数据导入导出&lt;/h3&gt;
+&lt;p&gt;一般情况下，我们导入导出的时候需要排除一些app，contenttypes(新环境migrate的时候会重新生成，而且包含数据)，sessions(用户session相关数据),  admin(admin log)&lt;/p&gt;
+&lt;p&gt;auth 包含用户，可视情况决定是否导出&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;dumpdata&lt;/span&gt; &lt;span class="c1"&gt;--all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &amp;gt; all.json&lt;/span&gt;
+&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;loaddata&lt;/span&gt; &lt;span class="k"&gt;all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="django"></category></entry><entry><title>井底之蛙出井记</title><link href="https://xingzuoshe.cn/outlook-mind.html" rel="alternate"></link><published>2016-04-25T20:20:00+08:00</published><updated>2016-04-25T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-25:/outlook-mind.html</id><summary type="html">&lt;p&gt;井底之蛙出井记&lt;/p&gt;</summary><content type="html">&lt;h2&gt;深井&lt;/h2&gt;
+&lt;p&gt;坐在井底，以为天空只有头上的一小圈，事情总是很简单，就像写程序一样，很容易搞定。IF ELSE，逻辑清晰，可是事情实际上是很复杂，就像一堆纠缠在一起的毛线，很多头绪。有种解决的办法就是快刀斩乱麻，釜底抽薪，可以这样的时候并不常见。或者直接无视问题，逃避。&lt;/p&gt;
+&lt;h2&gt;外面的世界&lt;/h2&gt;
+&lt;p&gt;经过了很大的努力，终于跳出深井，呼吸到外面自由的空气，可是也缺少了庇护，风吹日晒雨淋，都需要自己扛。现在想起来以前的种种其实都很幼稚，男生需要经历残酷的生活才能成熟，粉碎幻想之后，需要我们用我们的双手筑起生活之舟，杨帆朝目标前行。&lt;/p&gt;
+&lt;h2&gt;未来的路&lt;/h2&gt;
+&lt;p&gt;自由空气真好，条条大路都通罗马，可是要走哪一条呢，也许需要我们经过摸爬滚打，一身疲惫之时，才会看到未来的启示录。不管怎样，每一天都要有成长，有一天回头看过来，就会发现我们已经走了很远。&lt;/p&gt;</content><category term="feeling"></category></entry><entry><title>reStructuredText to Markdown</title><link href="https://xingzuoshe.cn/pandoc-trans-rst-markdown.html" rel="alternate"></link><published>2016-04-20T20:20:00+08:00</published><updated>2016-04-25T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-20:/pandoc-trans-rst-markdown.html</id><summary type="html">&lt;p&gt;pandoc 是一个haskell语言开发的文档格式转换工具，支持非常丰富的格式，覆盖了常见的所有格式。使用起来非常方便。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;pandoc&lt;/h2&gt;
+&lt;p&gt;pandoc 是一个haskell语言开发的文档格式转换工具，支持非常丰富的格式，覆盖了常见的所有格式。使用起来非常方便。&lt;/p&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mac osx&lt;/span&gt;
+brew install pandoc
+&lt;span class="c1"&gt;# ubuntu&lt;/span&gt;
+sudo apt-get install pandoc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;格式转换&lt;/h3&gt;
+&lt;p&gt;reStructuredText to markdown&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pandoc -f rst --toc small_tip.rst -t markdown_github -o small_tip.md
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多例子
+&lt;a href="http://pandoc.org/demos.html"&gt;pandoc demo&lt;/a&gt;&lt;/p&gt;</content><category term="pandoc"></category></entry><entry><title>如何在 aws ec2 上部署 django 应用</title><link href="https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html" rel="alternate"></link><published>2016-04-19T20:20:00+08:00</published><updated>2016-04-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-19:/how-to-deploy-django-on-ec2.html</id><summary type="html">&lt;p&gt;如何在 aws ec2 上部署 django 应用&lt;/p&gt;</summary><content type="html">&lt;p&gt;很多时候我们会在环境配置上花大量的时间，这里我记录了一下我配置的过程，希望能节省大家一些的时间。&lt;/p&gt;
+&lt;p&gt;我的环境是amazon ec2，选择的操作系统是Amazon Linux AMI 2015.03 (HVM) ，选择的最常见的部署方案 nginx + gunicorn + django + mysql&lt;/p&gt;
+&lt;h2&gt;mysql&lt;/h2&gt;
+&lt;p&gt;首先安装mysql-sever:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="n"&gt;mysql&lt;/span&gt; &lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;devel&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;chown&lt;/span&gt; &lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mysql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mysql&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改配置文件/etc/my.cnf:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[mysqld]&lt;/span&gt;
+&lt;span class="na"&gt;datadir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/var/lib/mysql # 数据文件存放的位置,修改成适合的位置&lt;/span&gt;
+
+&lt;span class="na"&gt;character-set-server&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;utf8 # 设置默认编码&lt;/span&gt;
+
+&lt;span class="k"&gt;[client]&lt;/span&gt;
+&lt;span class="na"&gt;default-character-set&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;utf8 # 设置默认编码&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;启动mysql:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;mysqld&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;设置root密码，执行/usr/bin/mysql_secure_installation&lt;/p&gt;
+&lt;p&gt;如果需要通过客户端工具管理MySQL，需要添加远程连接MySQL权限:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;mysql&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+
+&lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;GRANT&lt;/span&gt; &lt;span class="n"&gt;ALL&lt;/span&gt; &lt;span class="n"&gt;PRIVILEGES&lt;/span&gt; &lt;span class="n"&gt;ON&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;TO&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="s"&gt;@&amp;quot;%&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;IDENTIFIED&lt;/span&gt; &lt;span class="n"&gt;BY&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;GRANT&lt;/span&gt; &lt;span class="n"&gt;OPTION&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;FLUSH&lt;/span&gt; &lt;span class="n"&gt;PRIVILEGES&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;一般不建议root用户连接MySQL，所以需要添加一个普通用户:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;create&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;blog&amp;#39;&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;identified&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;password&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;flush&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;privileges&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="k"&gt;grant&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;all&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;privileges&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="nv"&gt;@localhost&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;identified&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="k"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;password&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;配置python环境&lt;/h2&gt;
+&lt;p&gt;我目前的python版本是2.7.9，所以不需要安装pip&lt;/p&gt;
+&lt;h3&gt;pip&lt;/h3&gt;
+&lt;p&gt;如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中&lt;/p&gt;
+&lt;p&gt;怎么安装pip，参考这里 &lt;a href="https://pip.pypa.io/en/latest/installing.html"&gt;https://pip.pypa.io/en/latest/installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;virtualenv&lt;/h3&gt;
+&lt;p&gt;virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;创建虚拟环境&lt;/span&gt;
+&lt;span class="n"&gt;virtualenv&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;
+&lt;span class="k"&gt;source&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;activate&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;磨刀不误砍柴工，接下来开始大展身手啦。&lt;/p&gt;
+&lt;h3&gt;安装必须的python库&lt;/h3&gt;
+&lt;p&gt;如果项目中有requirements.txt文件，可直接执行，自动安装所有依赖关系，没有的话如果有可以从开发环境导出一份:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="k"&gt;freeze&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;在开发环境中执行&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们在这里列出一些经常需要的依赖包:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;gunicorn&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;gunicorn&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;gevent&lt;/span&gt;   &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;让&lt;/span&gt;&lt;span class="n"&gt;gunicorn使用gevent&lt;/span&gt; &lt;span class="n"&gt;worker&lt;/span&gt;&lt;span class="err"&gt;，提高并发性能&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;django&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;MySQL&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;如果要连接&lt;/span&gt;&lt;span class="n"&gt;mysql数据库&lt;/span&gt;&lt;span class="err"&gt;，需要安装&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Pillow&lt;/span&gt;   &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;代替&lt;/span&gt;&lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="n"&gt;Image&lt;/span&gt; &lt;span class="n"&gt;Library&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果使用gunicron部署django应用，需要小小修改settings.py一下，就是在INSTALLED_APPS最后添加上gunicorn。&lt;/p&gt;
+&lt;p&gt;gunicron 启动脚本:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;nohup&lt;/span&gt; &lt;span class="n"&gt;gunicorn&lt;/span&gt; &lt;span class="c1"&gt;--worker-class=gevent myblog.wsgi:application --bind 127.0.0.1:8001 &amp;gt;gunicorn.log 2&amp;gt;&amp;amp;1 &amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的步骤完成之后，我们的应用就可以启动了，但是我们一般在gunicorn之前使用ngnix做反向代理。有两个好处，一是静态文件交给nginx处理，可以减少响应时间，二是如果一个服务器上部署多个站点，仅仅用gunicorn无法达到目的，这时我们需要用apache或者nginx的虚拟服务器功能。&lt;/p&gt;
+&lt;h2&gt;nginx&lt;/h2&gt;
+&lt;p&gt;不同的Linux发行版上安装的方法，配置文件的位置可能不太一样，我们理解了整个配置的思路之后就可以举一反三了:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt; &lt;span class="n"&gt;nginx&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;编辑 /etc/nginx/conf.d/virtual.conf:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
+    &lt;span class="nv"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;server_name&lt;/span&gt;  &lt;span class="nv"&gt;blog&lt;/span&gt;.&lt;span class="nv"&gt;dailyastrology&lt;/span&gt;.&lt;span class="nv"&gt;info&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;access_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;blog&lt;/span&gt;.&lt;span class="nv"&gt;dailyastrology&lt;/span&gt;.&lt;span class="nv"&gt;info&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;access&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;error_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;blog&lt;/span&gt;.&lt;span class="nv"&gt;dailyastrology&lt;/span&gt;.&lt;span class="nv"&gt;info&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;error&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+        &lt;span class="nv"&gt;proxy_pass&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;8001&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;Host&lt;/span&gt; $&lt;span class="nv"&gt;host&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Real&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;IP&lt;/span&gt; $&lt;span class="nv"&gt;remote_addr&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Forwarded&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;For&lt;/span&gt; $&lt;span class="nv"&gt;proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    }
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;static&lt;/span&gt; {
+        &lt;span class="nv"&gt;root&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;ec2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;blogenv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;myblog&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    }
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果仅仅作为个人的站点，上述的配置应该就够用的，如果是需要高级的功能就需要自己去研究每个软件的配置和运维方法。&lt;/p&gt;</content><category term="django"></category><category term="aws"></category></entry><entry><title>如何使用 django-zinnia-blog 建立个人博客</title><link href="https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html" rel="alternate"></link><published>2016-04-19T20:20:00+08:00</published><updated>2016-04-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-19:/how-to-install-django-blog-zinnia.html</id><summary type="html">&lt;p&gt;使用 django-zinnia-blog 建立个人博客，一步一步&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://django-blog-zinnia.com/"&gt;django-zinnia-blog&lt;/a&gt; 顾名思义就是一套用Django开发的个人博客程序，虽然比大名鼎鼎的wordpress略显简陋，不过在以Python作为开发语言的博客系统中算是很不错的。&lt;/p&gt;
+&lt;h2&gt;pip&lt;/h2&gt;
+&lt;p&gt;如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中&lt;/p&gt;
+&lt;p&gt;怎么安装pip，参考这里 &lt;a href="https://pip.pypa.io/en/latest/installing.html"&gt;https://pip.pypa.io/en/latest/installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;virtualenv&lt;/h2&gt;
+&lt;p&gt;virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;virtualenv&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="err"&gt;创建虚拟环境&lt;/span&gt;
+&lt;span class="n"&gt;virtualenv&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;
+&lt;span class="k"&gt;source&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;activate&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;磨刀不误砍柴工，接下来开始大展身手啦。&lt;/p&gt;
+&lt;h2&gt;django-zinnia-blog&lt;/h2&gt;
+&lt;p&gt;直接使用pip安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Pillow&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;zinnia&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="err"&gt;如果数据库使用&lt;/span&gt;&lt;span class="n"&gt;MySQL&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mysql&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后按照 &lt;a href="http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html"&gt;http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html&lt;/a&gt; 建立一个django-project&lt;/p&gt;
+&lt;p&gt;Django1.7的命令和以前有些不一样，记录一下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;manage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;migrate&lt;/span&gt;
+&lt;span class="n"&gt;mamage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;createsuperuser&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;安装theme&lt;/h2&gt;
+&lt;p&gt;使用zinnia不像wordpress那样有丰富多样的主题可以选择，需要我们手动修改一番，我们可以选择zinnia-theme-bootstrap，然后在这个基础上修修改改:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;namespace&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;template&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;loader&lt;/span&gt;
+
+&lt;span class="err"&gt;下载&lt;/span&gt;&lt;span class="n"&gt;zinnia&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bootstrap&lt;/span&gt;&lt;span class="err"&gt;，解压到你的项目文件夹下&lt;/span&gt;
+&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;django&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;zinnia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;zinnia&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bootstrap&lt;/span&gt;
+
+&lt;span class="n"&gt;zinnia_bootstrap&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;templates&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;zinnia&lt;/span&gt;
+&lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;span class="n"&gt;skeleton&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面是两个最关键的模板，可以按照自己的想法修改&lt;/p&gt;
+&lt;h2&gt;使用reStructuredText写博客&lt;/h2&gt;
+&lt;p&gt;如果你喜欢用reStructuredText写文档的话，zinnia也支持，不过需要我们配置一下。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;docutils&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;zinnia&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;wysiwyg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;markitup&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="err"&gt;中需要添加一行&lt;/span&gt;
+&lt;span class="n"&gt;ZINNIA_MARKUP_LANGUAGE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;restructuredtext&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;settings.py和urls.py&lt;/h2&gt;
+&lt;p&gt;在配置文件中有很多坑，我被坑了好长时间才爬出来，希望后来人不要接着被坑了。&lt;/p&gt;
+&lt;p&gt;settings.py中需要注意的片段:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# 如果DEBUG=False 这个地方需要配置，否则会有HTTP 400的错误&lt;/span&gt;
+&lt;span class="n"&gt;ALLOWED_HOSTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Email backend&lt;/span&gt;
+&lt;span class="n"&gt;EMAIL_BACKEND&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;django.core.mail.backends.dummy.EmailBackend&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;INSTALLED_APPS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.auth&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.admin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.sites&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.sessions&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.messages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.staticfiles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.contenttypes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django_comments&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.contrib.sitemaps&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;mptt&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;tagging&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;zinnia_bootstrap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;zinnia&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;zinnia_markitup&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Template&lt;/span&gt;
+&lt;span class="c1"&gt;# List of callables that know how to import templates from various sources.&lt;/span&gt;
+&lt;span class="n"&gt;TEMPLATE_LOADERS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;app_namespace.Loader&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.template.loaders.filesystem.Loader&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.template.loaders.app_directories.Loader&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;django.template.loaders.eggs.Loader&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 语言代码是zh-hans 对应 zh_Hans&lt;/span&gt;
+&lt;span class="n"&gt;LANGUAGE_CODE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zh-hans&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# zinnia config&lt;/span&gt;
+&lt;span class="n"&gt;ZINNIA_MARKUP_LANGUAGE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;restructuredtext&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;urls.py可以按照以下来配置:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf.urls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.views.generic.base&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RedirectView&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;zinnia.sitemaps&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;TagSitemap&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;zinnia.sitemaps&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;EntrySitemap&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;zinnia.sitemaps&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;CategorySitemap&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;zinnia.sitemaps&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;AuthorSitemap&lt;/span&gt;
+
+&lt;span class="n"&gt;urlpatterns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="c1"&gt;# Examples:&lt;/span&gt;
+    &lt;span class="c1"&gt;# url(r&amp;#39;^$&amp;#39;, &amp;#39;myblog.views.home&amp;#39;, name=&amp;#39;home&amp;#39;),&lt;/span&gt;
+    &lt;span class="c1"&gt;# url(r&amp;#39;^blog/&amp;#39;, include(&amp;#39;blog.urls&amp;#39;)),&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RedirectView&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;as_view&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/weblog/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;  
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^admin/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urls&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^weblog/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;zinnia.urls&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;namespace&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;zinnia&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^comments/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;django_comments.urls&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+
+&lt;span class="n"&gt;sitemaps&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;tags&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;TagSitemap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;blog&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;EntrySitemap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;authors&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;AuthorSitemap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;categories&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;CategorySitemap&lt;/span&gt;&lt;span class="p"&gt;,}&lt;/span&gt;
+
+&lt;span class="n"&gt;urlpatterns&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;django.contrib.sitemaps.views&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^sitemap.xml$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;index&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sitemaps&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;sitemaps&lt;/span&gt;&lt;span class="p"&gt;}),&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;^sitemap-(?P&amp;lt;section&amp;gt;.+)\.xml$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sitemap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sitemaps&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;sitemaps&lt;/span&gt;&lt;span class="p"&gt;}),)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="django"></category><category term="aws"></category><category term="zinnia"></category></entry><entry><title>python small tips</title><link href="https://xingzuoshe.cn/python-small-tips.html" rel="alternate"></link><published>2016-04-19T20:20:00+08:00</published><updated>2016-04-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-19:/python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
 &lt;h2&gt;all()&lt;/h2&gt;
 &lt;p&gt;all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;iterable&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
@@ -265,4 +940,359 @@
 &lt;p&gt;redis.Redis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) value在前，分数在后&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;args, 如: name1, score1, name2, score2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2&lt;/p&gt;
 &lt;p&gt;redis.StrictRedis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) 分数在前，value在后&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="python"></category></entry></feed>
+&lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="python"></category></entry><entry><title>导入 pyspark 到 shell 和 pycharm当中</title><link href="https://xingzuoshe.cn/pyspark-pycharm.html" rel="alternate"></link><published>2016-01-19T20:20:00+08:00</published><updated>2016-01-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-01-19:/pyspark-pycharm.html</id><summary type="html">&lt;p&gt;导入pyspark 到 shell 和 pycharm当中&lt;/p&gt;</summary><content type="html">&lt;h2&gt;shell&lt;/h2&gt;
+&lt;p&gt;在.bashrc(bash shell) 或者 .zshrc(zshell) 中增加环境变量,具体路径注意自己修改:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;SPARK_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PYTHONPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后在python console 可以 import pyspark&lt;/p&gt;
+&lt;h2&gt;pycharm&lt;/h2&gt;
+&lt;p&gt;在PyCharm的menu中找到Run -- Edit Configurations&lt;/p&gt;
+&lt;p&gt;在Defaults当中找到python, 点击Environment, 增加两行环境变量:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;SPARK_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;PYTHONPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="pycharm_run_add_env" src="../images/pycharm_run_add_env.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;重启PyCharm应该就不会看到红色波浪线了.&lt;/p&gt;</content><category term="pyspark"></category><category term="pycharm"></category></entry><entry><title>YAML简介</title><link href="https://xingzuoshe.cn/introduce-to-yaml.html" rel="alternate"></link><published>2015-10-01T20:20:00+08:00</published><updated>2015-10-01T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-10-01:/introduce-to-yaml.html</id><summary type="html">&lt;p&gt;YAML简介&lt;/p&gt;</summary><content type="html">&lt;p&gt;YAML(尾音类似camel)是一个可读性高，用来表达数据序列化的语言。 在最初的时候YAML表示Yet Another Markup Language，但是现在YAML Ain’t Markup Language。&lt;/p&gt;
+&lt;p&gt;官方的定义是这样写的：YAML is a human friendly data serialization standard for all programming languages.&lt;/p&gt;
+&lt;h2&gt;可读性好&lt;/h2&gt;
+&lt;p&gt;YAML格式有很好的可读性，对比JSON格式，增加了换行和缩进，就像Python一样。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Vorlin&lt;/span&gt; &lt;span class="n"&gt;Laruknuzum&lt;/span&gt;
+&lt;span class="n"&gt;sex&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Male&lt;/span&gt;
+&lt;span class="kd"&gt;class&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Priest&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Acolyte&lt;/span&gt;
+&lt;span class="n"&gt;hp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;71&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;sp&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;423&lt;/span&gt;
+&lt;span class="n"&gt;inventory&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;Holy&lt;/span&gt; &lt;span class="n"&gt;Book&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Prayers&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Words&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Wisdom&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;Azure&lt;/span&gt; &lt;span class="n"&gt;Potion&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Cure&lt;/span&gt; &lt;span class="n"&gt;Light&lt;/span&gt; &lt;span class="n"&gt;Wounds&lt;/span&gt;
+&lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;Silver&lt;/span&gt; &lt;span class="n"&gt;Wand&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;Wonder&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;注释和文档结构&lt;/h2&gt;
+&lt;p&gt;在yaml格式中注释有两种格式单行注释以 # 开始， 多行注释跟C语言一样 /* */&lt;/p&gt;
+&lt;p&gt;yaml 可以在一个string中包含多个document， 每个文档以三个短横线开始，以三个点结束，不过结束标志并不是必须的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;gt;&amp;gt;&amp;gt; a = yaml.load_all(""" ... # Play by Play Feed ... ---... time: 20:03:20 ... player: Sammy Sosa ... action: strike (miss) ... ... ... ---... time: 20:03:47 ... player: Sammy Sosa ... action: grand slam ... """) &amp;gt;&amp;gt;&amp;gt; for i in a: ... print i ... {'action': 'strike (miss)', 'player': 'Sammy Sosa', 'time': 72200} {'action': 'grand slam', 'player': 'Sammy Sosa', 'time': 72227}&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;数据结构和数据类型&lt;/h2&gt;
+&lt;p&gt;在yaml中有三种数据结构Scalar，Sequence，Mapping（标量，序列，字典）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Scalar&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Scalar 的格式很灵活，可以不带引号, 单引号(不需要转义)，双引号（需要转义），还可以有多行的形式:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gd"&gt;--- |&lt;/span&gt;
+Hello, world!
+Have a line break
+
+&lt;span class="gd"&gt;--- &amp;gt;&lt;/span&gt;
+Hello, World!
+no line break
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多情况参考 &lt;a href="http://www.yaml.org/spec/1.2/spec.html"&gt;http://www.yaml.org/spec/1.2/spec.html&lt;/a&gt; 2.3. Scalars&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Sequence&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Sequence 有两种形式，和JSON一样的使用中括号[]， 或者是每个元素以短横线和空格("- ")开始。在最开始的例子中就可以看到两种形式。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Mapping&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;同样，Mapping也有两种形式，我们直接看例子吧:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="ss"&gt;... main:&lt;/span&gt;
+&lt;span class="ss"&gt;...     game: hearthstone&lt;/span&gt;
+&lt;span class="ss"&gt;...     role: {name: Jaina, class: magician}&lt;/span&gt;
+&lt;span class="ss"&gt;... &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;main&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;game&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;hearthstone&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;role&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Jaina&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;magician&amp;#39;&lt;/span&gt;&lt;span class="err"&gt;}}}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;python 和 yaml&lt;/h2&gt;
+&lt;p&gt;解析和生成yaml都可以用pyyaml库，用法参考上面的例子，主要使用两个函数 load 和 dump。&lt;/p&gt;
+&lt;p&gt;在实际的使用过程中，一般用yaml格式做配置文件，因为yaml格式的可读性非常好，人工编辑很方便，而且也方便程序读取。&lt;/p&gt;
+&lt;h2&gt;更多资料&lt;/h2&gt;
+&lt;p&gt;yaml格式官网 &lt;a href="http://www.yaml.org/"&gt;http://www.yaml.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;pyyaml &lt;a href="http://pyyaml.org/wiki/PyYAML"&gt;http://pyyaml.org/wiki/PyYAML&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;各种编程语言在实现yaml解析的时候可能对应到本语言的数据类型类型可能不一致， 如果需要更严格的指定数据类型需要了解yaml tags&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.yaml.org/spec/1.2/spec.html"&gt;http://www.yaml.org/spec/1.2/spec.html&lt;/a&gt; 2.4. Tags&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://yaml.org/type/index.html"&gt;http://yaml.org/type/index.html&lt;/a&gt;&lt;/p&gt;</content><category term="django"></category><category term="aws"></category><category term="zinnia"></category></entry><entry><title>s3 本地测试环境的搭建</title><link href="https://xingzuoshe.cn/s3-local-test.html" rel="alternate"></link><published>2015-09-30T20:20:00+08:00</published><updated>2015-09-30T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-09-30:/s3-local-test.html</id><summary type="html">&lt;p&gt;s3 本地测试环境的搭建&lt;/p&gt;</summary><content type="html">&lt;h2&gt;s3 ninja&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://s3ninja.net/"&gt;http://s3ninja.net/&lt;/a&gt; s3 ninja 在本地模拟S3 API, 而且自带一个管理界面, 但是需要修改代码或者增加配置,把endpoint_url指定为 &lt;a href="http://localhost:9444/s3"&gt;http://localhost:9444/s3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果我们不想修改代码,可以通过一些简单的配置把请求导向本地 s3 ninja&lt;/p&gt;
+&lt;h2&gt;s3 virtual hosted-style and path-style access&lt;/h2&gt;
+&lt;p&gt;访问s3 bucket上的文件,有两种方式:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt; &lt;span class="n"&gt;bucket名字&lt;/span&gt; &lt;span class="n"&gt;johnsmith&lt;/span&gt;  &lt;span class="err"&gt;文件&lt;/span&gt; &lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt; &lt;span class="n"&gt;Style&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Virtual&lt;/span&gt; &lt;span class="n"&gt;Hosted&lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="n"&gt;Style&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多信息参考&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro"&gt;http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro&lt;/a&gt; &lt;a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html"&gt;http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;如何配置&lt;/h2&gt;
+&lt;p&gt;我们要达到的目的如下,把原本对亚马逊的HTTP请求指向本地的S3 ninja&lt;/p&gt;
+&lt;p&gt;mybucket.s3.amazonaws.com -&amp;gt; localhost:9444:s3/mybucket&lt;/p&gt;
+&lt;h3&gt;/etc/hosts&lt;/h3&gt;
+&lt;p&gt;添加一行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;mybucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样可以把亚马逊的域名指向本地，但是端口和访问路径Path的修改需要nginx来实现&lt;/p&gt;
+&lt;h3&gt;nginx&lt;/h3&gt;
+&lt;p&gt;nginx 把127.0.0.1:80 的请求转向 127.0.0.1:9444&lt;/p&gt;
+&lt;p&gt;配置文件如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
+&lt;span class="nv"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;server_name&lt;/span&gt;  &lt;span class="nv"&gt;localhost&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+    &lt;span class="nv"&gt;proxy_pass&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;9444&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;rewrite&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;$ &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;s3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;mybucket&lt;/span&gt;&lt;span class="mh"&gt;$1&lt;/span&gt; &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="c1"&gt;; #例如 /homepage.html =&amp;gt; /s3/mybucket/homepage.html&lt;/span&gt;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;配置多个bucket&lt;/h2&gt;
+&lt;p&gt;上面的配置只说了一个bucket的情况，如果有多个bucket需要测试，我们使用nginx virtualhost的功能就可以做到，把server_name 改成 bucket的域名就行&lt;/p&gt;
+&lt;h2&gt;推荐工具&lt;/h2&gt;
+&lt;p&gt;在 Mac 上 gas mask 可以很方便的切换和编辑hosts文件 &lt;a href="http://clockwise.ee/"&gt;http://clockwise.ee/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在 Mac 上 安装 nginx，可以使用brew install nginx &lt;a href="http://brew.sh/"&gt;http://brew.sh/&lt;/a&gt; 启动命令 sudo nginx， sudo nginx -s reload&lt;/p&gt;</content><category term="s3"></category><category term="aws"></category></entry><entry><title>使用 Python 操作亚马逊 DynamoDB</title><link href="https://xingzuoshe.cn/python-operate-dynamodb.html" rel="alternate"></link><published>2015-08-20T20:20:00+08:00</published><updated>2015-08-21T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-20:/python-operate-dynamodb.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 DynamoDB&lt;/p&gt;</summary><content type="html">&lt;p&gt;DynamoDB 是亚马逊AWS提供的一种完全托管的NoSQL数据库，省去部署/监控/维护数据库环节，给开发者节约了大量时间。 而且亚马逊提供了一个本地模拟环境用于测试和开发，我们可以使用本地的DynamoDB.local来学习和熟悉DynamoDB的API。&lt;/p&gt;
+&lt;h2&gt;下载DynamoDB.local&lt;/h2&gt;
+&lt;p&gt;从亚马逊的官方文档可以找到&lt;a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html"&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压之后:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dynamodb_local_2015&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;07&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="n"&gt;_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Djava&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;DynamoDBLocal_lib&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="n"&gt;DynamoDBLocal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sharedDb&lt;/span&gt;
+&lt;span class="n"&gt;Initializing&lt;/span&gt; &lt;span class="n"&gt;DynamoDB&lt;/span&gt; &lt;span class="k"&gt;Local&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="mi"&gt;8000&lt;/span&gt;
+&lt;span class="n"&gt;InMemory&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;DbPath&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt;
+&lt;span class="n"&gt;SharedDb&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;shouldDelayTransientStatuses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;CorsParams&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在浏览器中打开http://localhost:8000/shell/，你会看到DynamoDB javascript shell，在网页上你可以试试javascript API的用法。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="DynamoDB_JavaScript_Shell" src="../images/DynamoDB_JavaScript_Shell.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Boto3&lt;/h2&gt;
+&lt;p&gt;在试用之后javascript API之后，你是不是很想念我们简洁的Python呢，接下来我们就来介绍Python的用法。&lt;/p&gt;
+&lt;p&gt;官方推荐的Pyhton SDK为Boto3，我们直接进入正题:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 指定本地的endpoint就可以使用DynamoDB.local&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dynamodb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endpoint_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:8000&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;dynamodb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dynamodb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endpoint_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:8000&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 创建表&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dynamodb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;TableName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;KeySchema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;KeyType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;HASH&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;KeyType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RANGE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}],&lt;/span&gt;
+    &lt;span class="n"&gt;AttributeDefinitions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;AttributeType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;AttributeType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},],&lt;/span&gt;
+    &lt;span class="n"&gt;ProvisionedThroughput&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;ReadCapacityUnits&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;WriteCapacityUnits&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 使用已经存在的表&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dynamodb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 增加一条记录&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;first_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Jane&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="c1"&gt;# 通过Key查询&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Item&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# update 一条记录&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 删除一条记录&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delete_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# query&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.dynamodb.conditions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Attr&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KeyConditionExpression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;# scan&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FilterExpression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;# query和scan的区别就是，query的查询条件必须要有Key的条件，scan不用。&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 列出有哪些表&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list_tables&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们有两种操作Dynamodb的方法，一种是使用Resource，另一种是使用client。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Resources: a high level, object oriented interface&lt;/li&gt;
+&lt;li&gt;Clients: low level service connections&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用Resource更加方便一些，给出的代码中就是Resource的用法。&lt;/p&gt;
+&lt;h2&gt;其他资源&lt;/h2&gt;
+&lt;p&gt;boto3 &lt;a href="https://boto3.readthedocs.org/en/latest/index.html"&gt;https://boto3.readthedocs.org/en/latest/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;DynamoDB &lt;a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"&gt;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&lt;/a&gt;&lt;/p&gt;</content><category term="dynamodb"></category><category term="aws"></category></entry><entry><title>Python 中 class 的 JSON 序列化</title><link href="https://xingzuoshe.cn/python-obj-to-json.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-obj-to-json.html</id><summary type="html">&lt;p&gt;Python 中 class 的 JSON 序列化&lt;/p&gt;</summary><content type="html">&lt;p&gt;在Java中如果定义一个class，是十分方便JSON序列化的，比如说使用 jackson lib。&lt;/p&gt;
+&lt;p&gt;但是在Python中如果使用json.dumps(a)，a如果不是一个简单类型的就会报错:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;__main__&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="k"&gt;at&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="n"&gt;x109d553b0&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;JSON&lt;/span&gt; &lt;span class="k"&gt;serializable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其实Python的class也十分方便JSON序列化,需要一小段代码就可以:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONEncoder&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;memberlist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="n"&gt;_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;memberlist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;callable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_dic&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONEncoder&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在使用json.dumps的时候指定ClsEncoder就能够达到目的&lt;/p&gt;</content><category term="json"></category></entry><entry><title>使用 Python 操作亚马逊 S3</title><link href="https://xingzuoshe.cn/python-operate-s3.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-operate-s3.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 S3&lt;/p&gt;</summary><content type="html">&lt;p&gt;亚马逊S3(Amazon Simple Storage Service) 为开发人员和IT团队提供安全、耐久且扩展性高的对象存储。 可以理解为一个在线的网盘，而且这个网盘可以通过程序上传，下载，获取外链。亚马逊按照存储空间和请求次数收费。&lt;/p&gt;
+&lt;p&gt;对小公司来说是一个稳定的在线存储,可以减少维护成本。&lt;/p&gt;
+&lt;h2&gt;boto3 Python SDK&lt;/h2&gt;
+&lt;p&gt;目前官方推荐的Python SDK 是boto3 &lt;a href="https://github.com/boto/boto3"&gt;https://github.com/boto/boto3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;接下来进入正题,直接看代码把。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+    &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+    &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#上传&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;~/beakup.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;file_obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mybucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;breakup.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Body&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#获取URL&lt;/span&gt;
+&lt;span class="n"&gt;presigned_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_presigned_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;get_object&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bucket_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="n"&gt;ExpiresIn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3600&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;简单说明一下代码，S3&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;create() 创建Bucket&lt;/li&gt;
+&lt;li&gt;delete() 删除Bucket&lt;/li&gt;
+&lt;li&gt;put_object() 上传文件,Key是文件名,Body是文件内容&lt;/li&gt;
+&lt;li&gt;delete_object() 删除文件,Key是文件名&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;如何创建文件夹&lt;/h2&gt;
+&lt;p&gt;对于对象存储而言，没有文件夹的概念，所有的文件以及文件夹都看成是一个object，但是object前面可以有字符“/”来表示文件夹意义的标示符， 因而本身s3是没有提供直接建文件夹的API的，但是利用前面的概念可以建一个结尾带有“/”的key，这个key的content为空，来象征性的标示文件夹， 后续所谓的往这个文件夹里面继续存放东西就是在所有需要上传文件的文件名前面加上这个文件夹的key作为文件的key将文件上传，就是先所谓的文件夹的概念。&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;p&gt;如果需要使用客户端操作s3，推荐小黄鸭cyberduck。&lt;/p&gt;</content><category term="s3"></category><category term="aws"></category></entry><entry><title>如何使用 pyside + HTML5 开发桌面应用</title><link href="https://xingzuoshe.cn/pyside-html5.html" rel="alternate"></link><published>2015-08-04T20:20:00+08:00</published><updated>2015-08-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-04:/pyside-html5.html</id><summary type="html">&lt;p&gt;使用 pyside + HTML5 开发桌面应用&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://pyside.org"&gt;pyside&lt;/a&gt; 是 &lt;a href="http://www.qt.io/"&gt;Qt&lt;/a&gt; 的Python绑定，使用没有任何限制，而且配合python丰富的类库和简洁的语法，开发起来非常方便&lt;/p&gt;
+&lt;h2&gt;pip&lt;/h2&gt;
+&lt;p&gt;如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中&lt;/p&gt;
+&lt;p&gt;怎么安装pip，参考这里 &lt;a href="https://pip.pypa.io/en/latest/installing.html"&gt;https://pip.pypa.io/en/latest/installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;安装pyside&lt;/h2&gt;
+&lt;p&gt;在Ubuntu 和　DeepinLinux　下安装非常方便:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pyside&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者使用pip安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pyside&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;创建窗口&lt;/h2&gt;
+&lt;p&gt;学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt; &lt;span class="nv"&gt;MainWindow&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QWidget&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;__init__&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QWidget&lt;/span&gt;.&lt;span class="nv"&gt;__init__&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        #初始化&lt;span class="nv"&gt;position&lt;/span&gt;
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;pos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+        ＃设置窗口大小
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;resize&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;,&lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        ＃窗口特征:没有边框
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;setWindowFlags&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;FramelessWindowHint&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;WindowSystemMenuHint&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;setMouseTracking&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        #&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;setStyleSheet&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;background-color:#f8f8f8;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        ＃窗口居中
+        &lt;span class="nv"&gt;desktop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QApplication&lt;/span&gt;.&lt;span class="nv"&gt;desktop&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;desktop&lt;/span&gt;.&lt;span class="nv"&gt;width&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;height&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;desktop&lt;/span&gt;.&lt;span class="nv"&gt;height&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;move&lt;/span&gt;&lt;span class="ss"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;width&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;width&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;, &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;height&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;height&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        #支持窗口拖动,重写两个方法
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;mousePressEvent&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;, &lt;span class="nv"&gt;event&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;event&lt;/span&gt;.&lt;span class="nv"&gt;button&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;LeftButton&lt;/span&gt;:
+                &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_drag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;
+                &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;event&lt;/span&gt;.&lt;span class="nv"&gt;globalPos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;pos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+                &lt;span class="nv"&gt;event&lt;/span&gt;.&lt;span class="nv"&gt;accept&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;mouseMoveEvent&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;, &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;.&lt;span class="nv"&gt;buttons&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;LeftButton&lt;/span&gt;:
+                &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;move&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;.&lt;span class="nv"&gt;globalPos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_DragPosition&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+                &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;.&lt;span class="nv"&gt;accept&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;mouseReleaseEvent&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;, &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_drag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;False&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;__main__&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;:
+
+    &lt;span class="nv"&gt;mapp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QApplication&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;sys&lt;/span&gt;.&lt;span class="nv"&gt;argv&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;mw&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;MainWindow&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+    &lt;span class="nv"&gt;mw&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+    &lt;span class="nv"&gt;sys&lt;/span&gt;.&lt;span class="k"&gt;exit&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;mapp&lt;/span&gt;.&lt;span class="nv"&gt;exec_&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;设计UI&lt;/h2&gt;
+&lt;p&gt;pyside有三种设计UI的方式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;手工编码,编码layout+widget&lt;/li&gt;
+&lt;li&gt;xml定义(使用Qt Designer)&lt;/li&gt;
+&lt;li&gt;QtQuick/QML定义(使用Qt Creator)，在QT5下更好用,QT4还不完善&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;查找帮助&lt;/h2&gt;
+&lt;p&gt;网上pyside的资料不多，我们该怎么查找资料呢？ QT Creator是QT的官方IDE，里面有官方的帮助文档，C++，不过pyside的函数名是一模一样的，功能也保持一致。&lt;/p&gt;
+&lt;p&gt;pyside的API文档也是很好的参考资料　http://pyside.github.io/docs/pyside/&lt;/p&gt;
+&lt;h2&gt;webkit&lt;/h2&gt;
+&lt;p&gt;WebKit是一个排版引擎，主要设计是用来让网页浏览器绘制网页。WebKit目前作为Apple Safari及Google Chrome（直到版本27）等浏览器的主要引擎。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://qt-project.org/wiki/QtWebKit"&gt;http://qt-project.org/wiki/QtWebKit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Qt WebKit is the port of WebKit on top of Qt. QtWebKit relies on the public APIs of Qt and can theoretically be used on any platform supported by Qt (theoretically because WebKit also requires a recent/good compiler).&lt;/p&gt;
+&lt;h2&gt;Qt Webkit Bridge&lt;/h2&gt;
+&lt;p&gt;在Web环境中，web和后端的交互是通过http协议,但是在qtwebkit中怎么样才能和webkit中的网页交互。 Qt　提供了一个机制　Qt Webkit Bridge来实现这个功能。&lt;/p&gt;
+&lt;p&gt;有两个特别的函数,实现这个功能&lt;/p&gt;
+&lt;p&gt;让javascript调用python方法　QtWebKit.QWebView().page().mainFrame().addToJavaScriptWindowObject("pyObj", pyObj)&lt;/p&gt;
+&lt;p&gt;python中调用javascript函数　QtWebKit.QWebView().page().mainFrame().evaluateJavaScript("alert('Hello World!');")&lt;/p&gt;</content><category term="pyside"></category></entry></feed>

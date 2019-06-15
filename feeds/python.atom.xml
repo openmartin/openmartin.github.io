@@ -54,8 +54,8 @@
 &lt;span class="n"&gt;SITETITLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;SITESUBTITLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;SITEDESCRIPTION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Martin&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s1"&gt;s Thoughts and Writings&amp;#39;&lt;/span&gt;
-&lt;span class="c1"&gt;#SITELOGO = SITEURL + &amp;#39;/images/profile.png&amp;#39;&lt;/span&gt;
-&lt;span class="c1"&gt;#FAVICON = SITEURL + &amp;#39;/images/favicon.ico&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#SITELOGO = &amp;#39;/images/profile.png&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#FAVICON = &amp;#39;/images/favicon.ico&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;BROWSER_COLOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;#333333&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;PYGMENTS_STYLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;
 
@@ -198,7 +198,31 @@
 &lt;li&gt;make github&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Editor&lt;/h2&gt;
-&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="python"></category><category term="pelican"></category></entry><entry><title>python small tips</title><link href="https://xingzuoshe.cn/python-small-tips.html" rel="alternate"></link><published>2010-12-03T10:20:00+08:00</published><updated>2010-12-05T19:30:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2010-12-03:/python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
+&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="python"></category><category term="pelican"></category></entry><entry><title>遍历S3</title><link href="https://xingzuoshe.cn/boto-scan-s3.html" rel="alternate"></link><published>2016-07-04T20:20:00+08:00</published><updated>2016-07-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-04:/boto-scan-s3.html</id><summary type="html">&lt;p&gt;使用 boto 遍历 s3&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;boto3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_key_id&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_secret_key&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_bucket&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Prefix&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_path_prefix&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Contents&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Size&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;分页默认大小是1000，可以修改PageSize，改小可以减少响应时间&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;page_iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;my-bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                   &lt;span class="n"&gt;PaginationConfig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;PageSize&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考资料：
+1. https://github.com/boto/boto3
+2. https://boto3.readthedocs.io/en/latest/reference/services/s3.html#paginators
+3. https://boto3.readthedocs.io/en/latest/guide/paginators.html&lt;/p&gt;</content><category term="python"></category><category term="aws"></category></entry><entry><title>python small tips</title><link href="https://xingzuoshe.cn/python-small-tips.html" rel="alternate"></link><published>2016-04-19T20:20:00+08:00</published><updated>2016-04-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-19:/python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
 &lt;h2&gt;all()&lt;/h2&gt;
 &lt;p&gt;all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;iterable&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
@@ -265,4 +289,293 @@
 &lt;p&gt;redis.Redis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) value在前，分数在后&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;args, 如: name1, score1, name2, score2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2&lt;/p&gt;
 &lt;p&gt;redis.StrictRedis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) 分数在前，value在后&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="python"></category></entry></feed>
+&lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="python"></category></entry><entry><title>导入 pyspark 到 shell 和 pycharm当中</title><link href="https://xingzuoshe.cn/pyspark-pycharm.html" rel="alternate"></link><published>2016-01-19T20:20:00+08:00</published><updated>2016-01-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-01-19:/pyspark-pycharm.html</id><summary type="html">&lt;p&gt;导入pyspark 到 shell 和 pycharm当中&lt;/p&gt;</summary><content type="html">&lt;h2&gt;shell&lt;/h2&gt;
+&lt;p&gt;在.bashrc(bash shell) 或者 .zshrc(zshell) 中增加环境变量,具体路径注意自己修改:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;SPARK_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PYTHONPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后在python console 可以 import pyspark&lt;/p&gt;
+&lt;h2&gt;pycharm&lt;/h2&gt;
+&lt;p&gt;在PyCharm的menu中找到Run -- Edit Configurations&lt;/p&gt;
+&lt;p&gt;在Defaults当中找到python, 点击Environment, 增加两行环境变量:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;SPARK_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;PYTHONPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="pycharm_run_add_env" src="../images/pycharm_run_add_env.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;重启PyCharm应该就不会看到红色波浪线了.&lt;/p&gt;</content><category term="pyspark"></category><category term="pycharm"></category></entry><entry><title>s3 本地测试环境的搭建</title><link href="https://xingzuoshe.cn/s3-local-test.html" rel="alternate"></link><published>2015-09-30T20:20:00+08:00</published><updated>2015-09-30T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-09-30:/s3-local-test.html</id><summary type="html">&lt;p&gt;s3 本地测试环境的搭建&lt;/p&gt;</summary><content type="html">&lt;h2&gt;s3 ninja&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://s3ninja.net/"&gt;http://s3ninja.net/&lt;/a&gt; s3 ninja 在本地模拟S3 API, 而且自带一个管理界面, 但是需要修改代码或者增加配置,把endpoint_url指定为 &lt;a href="http://localhost:9444/s3"&gt;http://localhost:9444/s3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果我们不想修改代码,可以通过一些简单的配置把请求导向本地 s3 ninja&lt;/p&gt;
+&lt;h2&gt;s3 virtual hosted-style and path-style access&lt;/h2&gt;
+&lt;p&gt;访问s3 bucket上的文件,有两种方式:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt; &lt;span class="n"&gt;bucket名字&lt;/span&gt; &lt;span class="n"&gt;johnsmith&lt;/span&gt;  &lt;span class="err"&gt;文件&lt;/span&gt; &lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt; &lt;span class="n"&gt;Style&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Virtual&lt;/span&gt; &lt;span class="n"&gt;Hosted&lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="n"&gt;Style&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多信息参考&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro"&gt;http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro&lt;/a&gt; &lt;a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html"&gt;http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;如何配置&lt;/h2&gt;
+&lt;p&gt;我们要达到的目的如下,把原本对亚马逊的HTTP请求指向本地的S3 ninja&lt;/p&gt;
+&lt;p&gt;mybucket.s3.amazonaws.com -&amp;gt; localhost:9444:s3/mybucket&lt;/p&gt;
+&lt;h3&gt;/etc/hosts&lt;/h3&gt;
+&lt;p&gt;添加一行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;mybucket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样可以把亚马逊的域名指向本地，但是端口和访问路径Path的修改需要nginx来实现&lt;/p&gt;
+&lt;h3&gt;nginx&lt;/h3&gt;
+&lt;p&gt;nginx 把127.0.0.1:80 的请求转向 127.0.0.1:9444&lt;/p&gt;
+&lt;p&gt;配置文件如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
+&lt;span class="nv"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;server_name&lt;/span&gt;  &lt;span class="nv"&gt;localhost&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
+    &lt;span class="nv"&gt;proxy_pass&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;9444&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;rewrite&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;.&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;$ &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;s3&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;mybucket&lt;/span&gt;&lt;span class="mh"&gt;$1&lt;/span&gt; &lt;span class="k"&gt;break&lt;/span&gt;&lt;span class="c1"&gt;; #例如 /homepage.html =&amp;gt; /s3/mybucket/homepage.html&lt;/span&gt;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;配置多个bucket&lt;/h2&gt;
+&lt;p&gt;上面的配置只说了一个bucket的情况，如果有多个bucket需要测试，我们使用nginx virtualhost的功能就可以做到，把server_name 改成 bucket的域名就行&lt;/p&gt;
+&lt;h2&gt;推荐工具&lt;/h2&gt;
+&lt;p&gt;在 Mac 上 gas mask 可以很方便的切换和编辑hosts文件 &lt;a href="http://clockwise.ee/"&gt;http://clockwise.ee/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在 Mac 上 安装 nginx，可以使用brew install nginx &lt;a href="http://brew.sh/"&gt;http://brew.sh/&lt;/a&gt; 启动命令 sudo nginx， sudo nginx -s reload&lt;/p&gt;</content><category term="s3"></category><category term="aws"></category></entry><entry><title>使用 Python 操作亚马逊 DynamoDB</title><link href="https://xingzuoshe.cn/python-operate-dynamodb.html" rel="alternate"></link><published>2015-08-20T20:20:00+08:00</published><updated>2015-08-21T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-20:/python-operate-dynamodb.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 DynamoDB&lt;/p&gt;</summary><content type="html">&lt;p&gt;DynamoDB 是亚马逊AWS提供的一种完全托管的NoSQL数据库，省去部署/监控/维护数据库环节，给开发者节约了大量时间。 而且亚马逊提供了一个本地模拟环境用于测试和开发，我们可以使用本地的DynamoDB.local来学习和熟悉DynamoDB的API。&lt;/p&gt;
+&lt;h2&gt;下载DynamoDB.local&lt;/h2&gt;
+&lt;p&gt;从亚马逊的官方文档可以找到&lt;a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html"&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压之后:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dynamodb_local_2015&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;07&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="n"&gt;_1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;java&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Djava&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;library&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;DynamoDBLocal_lib&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="n"&gt;DynamoDBLocal&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sharedDb&lt;/span&gt;
+&lt;span class="n"&gt;Initializing&lt;/span&gt; &lt;span class="n"&gt;DynamoDB&lt;/span&gt; &lt;span class="k"&gt;Local&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;following&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Port&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="mi"&gt;8000&lt;/span&gt;
+&lt;span class="n"&gt;InMemory&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;DbPath&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt;
+&lt;span class="n"&gt;SharedDb&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;shouldDelayTransientStatuses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;CorsParams&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在浏览器中打开http://localhost:8000/shell/，你会看到DynamoDB javascript shell，在网页上你可以试试javascript API的用法。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="DynamoDB_JavaScript_Shell" src="../images/DynamoDB_JavaScript_Shell.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Boto3&lt;/h2&gt;
+&lt;p&gt;在试用之后javascript API之后，你是不是很想念我们简洁的Python呢，接下来我们就来介绍Python的用法。&lt;/p&gt;
+&lt;p&gt;官方推荐的Pyhton SDK为Boto3，我们直接进入正题:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 指定本地的endpoint就可以使用DynamoDB.local&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dynamodb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endpoint_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:8000&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;dynamodb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dynamodb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endpoint_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:8000&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 创建表&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dynamodb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;TableName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;KeySchema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;KeyType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;HASH&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;KeyType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RANGE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}],&lt;/span&gt;
+    &lt;span class="n"&gt;AttributeDefinitions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;AttributeType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;AttributeType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},],&lt;/span&gt;
+    &lt;span class="n"&gt;ProvisionedThroughput&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;ReadCapacityUnits&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;WriteCapacityUnits&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 使用已经存在的表&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dynamodb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 增加一条记录&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;first_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Jane&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="c1"&gt;# 通过Key查询&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Item&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# update 一条记录&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 删除一条记录&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delete_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# query&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.dynamodb.conditions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Attr&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KeyConditionExpression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;# scan&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FilterExpression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;# query和scan的区别就是，query的查询条件必须要有Key的条件，scan不用。&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 列出有哪些表&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list_tables&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们有两种操作Dynamodb的方法，一种是使用Resource，另一种是使用client。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Resources: a high level, object oriented interface&lt;/li&gt;
+&lt;li&gt;Clients: low level service connections&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用Resource更加方便一些，给出的代码中就是Resource的用法。&lt;/p&gt;
+&lt;h2&gt;其他资源&lt;/h2&gt;
+&lt;p&gt;boto3 &lt;a href="https://boto3.readthedocs.org/en/latest/index.html"&gt;https://boto3.readthedocs.org/en/latest/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;DynamoDB &lt;a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"&gt;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&lt;/a&gt;&lt;/p&gt;</content><category term="dynamodb"></category><category term="aws"></category></entry><entry><title>Python 中 class 的 JSON 序列化</title><link href="https://xingzuoshe.cn/python-obj-to-json.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-obj-to-json.html</id><summary type="html">&lt;p&gt;Python 中 class 的 JSON 序列化&lt;/p&gt;</summary><content type="html">&lt;p&gt;在Java中如果定义一个class，是十分方便JSON序列化的，比如说使用 jackson lib。&lt;/p&gt;
+&lt;p&gt;但是在Python中如果使用json.dumps(a)，a如果不是一个简单类型的就会报错:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;__main__&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="k"&gt;at&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="n"&gt;x109d553b0&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;JSON&lt;/span&gt; &lt;span class="k"&gt;serializable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其实Python的class也十分方便JSON序列化,需要一小段代码就可以:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONEncoder&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;memberlist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="n"&gt;_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;memberlist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;callable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_dic&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONEncoder&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在使用json.dumps的时候指定ClsEncoder就能够达到目的&lt;/p&gt;</content><category term="json"></category></entry><entry><title>使用 Python 操作亚马逊 S3</title><link href="https://xingzuoshe.cn/python-operate-s3.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-operate-s3.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 S3&lt;/p&gt;</summary><content type="html">&lt;p&gt;亚马逊S3(Amazon Simple Storage Service) 为开发人员和IT团队提供安全、耐久且扩展性高的对象存储。 可以理解为一个在线的网盘，而且这个网盘可以通过程序上传，下载，获取外链。亚马逊按照存储空间和请求次数收费。&lt;/p&gt;
+&lt;p&gt;对小公司来说是一个稳定的在线存储,可以减少维护成本。&lt;/p&gt;
+&lt;h2&gt;boto3 Python SDK&lt;/h2&gt;
+&lt;p&gt;目前官方推荐的Python SDK 是boto3 &lt;a href="https://github.com/boto/boto3"&gt;https://github.com/boto/boto3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;接下来进入正题,直接看代码把。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+    &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+    &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#上传&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;~/beakup.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;file_obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mybucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;breakup.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Body&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#获取URL&lt;/span&gt;
+&lt;span class="n"&gt;presigned_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_presigned_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;get_object&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bucket_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="n"&gt;ExpiresIn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3600&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;简单说明一下代码，S3&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;create() 创建Bucket&lt;/li&gt;
+&lt;li&gt;delete() 删除Bucket&lt;/li&gt;
+&lt;li&gt;put_object() 上传文件,Key是文件名,Body是文件内容&lt;/li&gt;
+&lt;li&gt;delete_object() 删除文件,Key是文件名&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;如何创建文件夹&lt;/h2&gt;
+&lt;p&gt;对于对象存储而言，没有文件夹的概念，所有的文件以及文件夹都看成是一个object，但是object前面可以有字符“/”来表示文件夹意义的标示符， 因而本身s3是没有提供直接建文件夹的API的，但是利用前面的概念可以建一个结尾带有“/”的key，这个key的content为空，来象征性的标示文件夹， 后续所谓的往这个文件夹里面继续存放东西就是在所有需要上传文件的文件名前面加上这个文件夹的key作为文件的key将文件上传，就是先所谓的文件夹的概念。&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;p&gt;如果需要使用客户端操作s3，推荐小黄鸭cyberduck。&lt;/p&gt;</content><category term="s3"></category><category term="aws"></category></entry><entry><title>如何使用 pyside + HTML5 开发桌面应用</title><link href="https://xingzuoshe.cn/pyside-html5.html" rel="alternate"></link><published>2015-08-04T20:20:00+08:00</published><updated>2015-08-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-04:/pyside-html5.html</id><summary type="html">&lt;p&gt;使用 pyside + HTML5 开发桌面应用&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://pyside.org"&gt;pyside&lt;/a&gt; 是 &lt;a href="http://www.qt.io/"&gt;Qt&lt;/a&gt; 的Python绑定，使用没有任何限制，而且配合python丰富的类库和简洁的语法，开发起来非常方便&lt;/p&gt;
+&lt;h2&gt;pip&lt;/h2&gt;
+&lt;p&gt;如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中&lt;/p&gt;
+&lt;p&gt;怎么安装pip，参考这里 &lt;a href="https://pip.pypa.io/en/latest/installing.html"&gt;https://pip.pypa.io/en/latest/installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;安装pyside&lt;/h2&gt;
+&lt;p&gt;在Ubuntu 和　DeepinLinux　下安装非常方便:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pyside&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者使用pip安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pyside&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;创建窗口&lt;/h2&gt;
+&lt;p&gt;学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;class&lt;/span&gt; &lt;span class="nv"&gt;MainWindow&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QWidget&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+    &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;__init__&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+        &lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QWidget&lt;/span&gt;.&lt;span class="nv"&gt;__init__&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        #初始化&lt;span class="nv"&gt;position&lt;/span&gt;
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;pos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+        ＃设置窗口大小
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;resize&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;,&lt;span class="mi"&gt;600&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        ＃窗口特征:没有边框
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;setWindowFlags&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;FramelessWindowHint&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;WindowSystemMenuHint&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;setMouseTracking&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+        #&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;setStyleSheet&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;background-color:#f8f8f8;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        ＃窗口居中
+        &lt;span class="nv"&gt;desktop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QApplication&lt;/span&gt;.&lt;span class="nv"&gt;desktop&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;desktop&lt;/span&gt;.&lt;span class="nv"&gt;width&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;height&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;desktop&lt;/span&gt;.&lt;span class="nv"&gt;height&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+        &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;move&lt;/span&gt;&lt;span class="ss"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;width&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;width&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;, &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;height&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;height&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+
+        #支持窗口拖动,重写两个方法
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;mousePressEvent&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;, &lt;span class="nv"&gt;event&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;event&lt;/span&gt;.&lt;span class="nv"&gt;button&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;LeftButton&lt;/span&gt;:
+                &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_drag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;True&lt;/span&gt;
+                &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;event&lt;/span&gt;.&lt;span class="nv"&gt;globalPos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;pos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+                &lt;span class="nv"&gt;event&lt;/span&gt;.&lt;span class="nv"&gt;accept&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;mouseMoveEvent&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;, &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;.&lt;span class="nv"&gt;buttons&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt; &lt;span class="nv"&gt;and&lt;/span&gt; &lt;span class="nv"&gt;Qt&lt;/span&gt;.&lt;span class="nv"&gt;LeftButton&lt;/span&gt;:
+                &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;move&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;.&lt;span class="nv"&gt;globalPos&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_DragPosition&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+                &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;.&lt;span class="nv"&gt;accept&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+
+
+        &lt;span class="nv"&gt;def&lt;/span&gt; &lt;span class="nv"&gt;mouseReleaseEvent&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;self&lt;/span&gt;, &lt;span class="nv"&gt;QMouseEvent&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;:
+            &lt;span class="nv"&gt;self&lt;/span&gt;.&lt;span class="nv"&gt;m_drag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;False&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;__main__&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;:
+
+    &lt;span class="nv"&gt;mapp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;QtGui&lt;/span&gt;.&lt;span class="nv"&gt;QApplication&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;sys&lt;/span&gt;.&lt;span class="nv"&gt;argv&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;mw&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;MainWindow&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+    &lt;span class="nv"&gt;mw&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;&lt;span class="ss"&gt;()&lt;/span&gt;
+    &lt;span class="nv"&gt;sys&lt;/span&gt;.&lt;span class="k"&gt;exit&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;mapp&lt;/span&gt;.&lt;span class="nv"&gt;exec_&lt;/span&gt;&lt;span class="ss"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;设计UI&lt;/h2&gt;
+&lt;p&gt;pyside有三种设计UI的方式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;手工编码,编码layout+widget&lt;/li&gt;
+&lt;li&gt;xml定义(使用Qt Designer)&lt;/li&gt;
+&lt;li&gt;QtQuick/QML定义(使用Qt Creator)，在QT5下更好用,QT4还不完善&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;查找帮助&lt;/h2&gt;
+&lt;p&gt;网上pyside的资料不多，我们该怎么查找资料呢？ QT Creator是QT的官方IDE，里面有官方的帮助文档，C++，不过pyside的函数名是一模一样的，功能也保持一致。&lt;/p&gt;
+&lt;p&gt;pyside的API文档也是很好的参考资料　http://pyside.github.io/docs/pyside/&lt;/p&gt;
+&lt;h2&gt;webkit&lt;/h2&gt;
+&lt;p&gt;WebKit是一个排版引擎，主要设计是用来让网页浏览器绘制网页。WebKit目前作为Apple Safari及Google Chrome（直到版本27）等浏览器的主要引擎。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://qt-project.org/wiki/QtWebKit"&gt;http://qt-project.org/wiki/QtWebKit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Qt WebKit is the port of WebKit on top of Qt. QtWebKit relies on the public APIs of Qt and can theoretically be used on any platform supported by Qt (theoretically because WebKit also requires a recent/good compiler).&lt;/p&gt;
+&lt;h2&gt;Qt Webkit Bridge&lt;/h2&gt;
+&lt;p&gt;在Web环境中，web和后端的交互是通过http协议,但是在qtwebkit中怎么样才能和webkit中的网页交互。 Qt　提供了一个机制　Qt Webkit Bridge来实现这个功能。&lt;/p&gt;
+&lt;p&gt;有两个特别的函数,实现这个功能&lt;/p&gt;
+&lt;p&gt;让javascript调用python方法　QtWebKit.QWebView().page().mainFrame().addToJavaScriptWindowObject("pyObj", pyObj)&lt;/p&gt;
+&lt;p&gt;python中调用javascript函数　QtWebKit.QWebView().page().mainFrame().evaluateJavaScript("alert('Hello World!');")&lt;/p&gt;</content><category term="pyside"></category></entry></feed>
