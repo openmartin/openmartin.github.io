@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 import os
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.getcwd();
 ENV_DIR = os.path.dirname(BASE_DIR)
 
 AUTHOR = 'Martin'
@@ -90,8 +90,11 @@ COPYRIGHT_YEAR = '2019'
 
 # STATIC
 STATIC_PATHS = ['images', 'extra']
-EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
 CUSTOM_CSS = 'static/custom.css'
+EXTRA_PATH_METADATA = {
+    'extra/CNAME': {'path': 'CNAME'},
+    'extra/custom.css': {'path': 'static/custom.css'},
+}
 
 USE_LESS = True
 

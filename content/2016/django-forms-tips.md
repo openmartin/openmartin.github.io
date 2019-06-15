@@ -113,7 +113,7 @@ Http404 | handler404
 
 ### 1.9 以前的old middleware 
 
-![](./_image/2016-09-19-15-50-25.jpg)
+![django-middleware](../images/2016-09-19-15-50-25.jpg)
 定义一个middleware很容易，你只需要定义一个普通的python类，然后实现如下四个方法中的某一个或者某几个，添加到`setting.py MIDDLEWARE_CLASSES` 当中:
 ```
 process_request(request)
