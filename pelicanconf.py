@@ -94,6 +94,7 @@ CUSTOM_CSS = 'static/custom.css'
 EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
     'extra/custom.css': {'path': 'static/custom.css'},
+    'extra/ads.txt': {'path': 'ads.txt'},
 }
 
 USE_LESS = True
