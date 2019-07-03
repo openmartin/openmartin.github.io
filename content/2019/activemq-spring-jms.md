@@ -2,8 +2,8 @@ Title: ActiveMQ Artemis 的安装和使用
 Date: 2019-07-02 16:14
 Modified: 2019-07-02 16:14
 Category: Java
-Tags: java, activemq, spring, jms
-Slug: pelican-github-pages-setup
+Tags: java, activemq, artemis, spring, jms
+Slug: activemq-artemis-install
 Authors: Martin
 Summary: ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等
 
