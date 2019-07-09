@@ -213,3 +213,40 @@ public class SampleListener implements MessageListener {
     }
 }
 ```
+
+
+## JMS 中设置持久化订阅
+
+持久化订阅需要设置 ClientID 和 SubscriptionName 来唯一标识一个 Consumer，也就说如果有两个 Connection 这两项一致，ActiveMQ 就认为这两个 Consumer 是同一个
+
+```xml
+    <!-- 这里用 ActiveMQ Classic 的例子 -->
+    <bean id="consumerAmqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <constructor-arg index="0" value="tcp://10.80.28.27:61616" />
+        <property name="clientID" value="HOST-Consumer"/>
+    </bean>
+
+    <!-- ConnectionFactory Definition -->
+    <bean id="consumerConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <constructor-arg ref="consumerAmqConnectionFactory" />
+    </bean>
+
+    <bean id="consumerExampleTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg index="0" value="exampleTopic"/>
+    </bean>
+
+
+    <bean id="messageListener" class="com.example.SampleListener">
+    </bean>
+
+
+    <!-- durable subscription need set  SubscriptionName and ClientID  to identify unique Consumer -->
+    <!-- 持久化订阅 需要设置 SubscriptionName 和 ClientID 来唯一标识一个 Consumer -->
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="consumerConnectionFactory"/>
+        <property name="destination" ref="consumerExampleTopic"/>
+        <property name="messageListener" ref="messageListener"/>
+        <property name="subscriptionDurable" value="true"/>
+        <property name="durableSubscriptionName" value="Subscriber-B"/>
+    </bean>
+```
