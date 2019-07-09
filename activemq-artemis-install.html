@@ -316,6 +316,40 @@ Or you can run the broker in the background using:
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
+
+
+<h2>JMS 中设置持久化订阅</h2>
+<p>持久化订阅需要设置 ClientID 和 SubscriptionName 来唯一标识一个 Consumer，也就说如果有两个 Connection 这两项一致，ActiveMQ 就认为这两个 Consumer 是同一个</p>
+<div class="highlight"><pre><span></span>    <span class="c">&lt;!-- 这里用 ActiveMQ Classic 的例子 --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;consumerAmqConnectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">value=</span><span class="s">&quot;tcp://10.80.28.27:61616&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;clientID&quot;</span> <span class="na">value=</span><span class="s">&quot;HOST-Consumer&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+    <span class="c">&lt;!-- ConnectionFactory Definition --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;consumerConnectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.jms.connection.SingleConnectionFactory&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg</span> <span class="na">ref=</span><span class="s">&quot;consumerAmqConnectionFactory&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;consumerExampleTopic&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.activemq.command.ActiveMQTopic&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">value=</span><span class="s">&quot;exampleTopic&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;messageListener&quot;</span> <span class="na">class=</span><span class="s">&quot;com.example.SampleListener&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+
+
+    <span class="c">&lt;!-- durable subscription need set  SubscriptionName and ClientID  to identify unique Consumer --&gt;</span>
+    <span class="c">&lt;!-- 持久化订阅 需要设置 SubscriptionName 和 ClientID 来唯一标识一个 Consumer --&gt;</span>
+    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;jmsContainer&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.jms.listener.DefaultMessageListenerContainer&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;connectionFactory&quot;</span> <span class="na">ref=</span><span class="s">&quot;consumerConnectionFactory&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;destination&quot;</span> <span class="na">ref=</span><span class="s">&quot;consumerExampleTopic&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;messageListener&quot;</span> <span class="na">ref=</span><span class="s">&quot;messageListener&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;subscriptionDurable&quot;</span> <span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;durableSubscriptionName&quot;</span> <span class="na">value=</span><span class="s">&quot;Subscriber-B&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/bean&gt;</span>
+</pre></div>
   </div>
   <div class="tag-cloud">
     <p>
