@@ -134,7 +134,7 @@ curl -X POST "localhost:9200/_reindex?pretty" -H 'Content-Type: application/json
 
 可以查看重建索引目前的进度
 
-```
+```sh
 curl -X GET "localhost:9200/_tasks?detailed=true&actions=*reindex&pretty"
 ```
 
@@ -180,7 +180,7 @@ curl -XGET "http://localhost:9200/report-doc-cn/_search?pretty" -H 'Content-Type
 
 ### 测试 analyzer
 
-```
+```sh
 curl -XPOST 'http://localhost:9200/_analyze?pretty' -H 'Content-Type: application/json' -d'
 {
   "analyzer": "hanlp_index",
