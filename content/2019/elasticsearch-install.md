@@ -1,11 +1,11 @@
-Title: ELK 全家桶安装
+Title: Elasticsearch 安装
 Date: 2019-07-30 14:06
 Modified: 2019-07-30 14:06
 Category: Java
-Tags: java, elasticsearch, kibana
-Slug: elk-stack-install
+Tags: elasticsearch, kibana
+Slug: elasticsearch-install
 Authors: Martin
-Summary: ELK 全家桶安装
+Summary: Elasticsearch 安装，Kibana 安装，
 
 
 ## ElasticSearch 安装
@@ -14,7 +14,7 @@ Summary: ELK 全家桶安装
 
 CentOS 7.2
 
-ElasticSearch 7.2.0
+ElasticSearch 7.3.0
 
 ### install
 
@@ -46,12 +46,31 @@ node.name: master  # 该节点名称
 cluster.initial_master_nodes: ["master"] 
 ```
 
+### rpm 安装 ElasticSearch 之后的目录结构
+
+```
+/usr/share/elasticsearch  # ES_HOME
+/var/log/elasticsearch    # log 目录
+/etc/elasticsearch        # config 目录
+/var/lib/elasticsearch    # data 目录
+```
 
 ### plugin elasticsearch-analysis-hanlp
 
 https://github.com/KennFalcon/elasticsearch-analysis-hanlp
 
-建议使用方式二，然后把 Hanlp 的 model 文件复制到 /usr/share/elasticsearch/plugins/analysis-hanlp/data/model
+建议使用 Elasticsearch 命令行安装插件
+
+```
+./elasticsearch-plugin install file:///home/demo/elasticsearch-analysis-hanlp-7.3.0.zip
+```
+
+插件 在 `/usr/share/elasticsearch/plugins/anlysis-hanlp` 目录下
+配置文件在 `/etc/elasticsearch/analysis-hanlp` 目录下
+
+修改 hanlp.properties, root 修改为绝对路径 `root=/usr/share/elasticsearch/plugins/analysis-hanlp/`
+
+然后把 hanlp 的 数据文件复制到 /usr/share/elasticsearch/plugins/analysis-hanlp/data
 
 ```
 chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins/
@@ -81,42 +100,7 @@ server.host: "0.0.0.0"
 ```
 
 
-## Java REST Client
 
-
-```xml
-<dependency>
-    <groupId>org.elasticsearch.client</groupId>
-    <artifactId>elasticsearch-rest-high-level-client</artifactId>
-    <version>7.2.0</version>
-</dependency>
-```
-
-
-## Elasticsearch SQL
-
-添加 repository
-
-```xml
-<repository>
-    <id>elastic.co</id>
-    <name>Elastic Repository</name>
-    <url>https://artifacts.elastic.co/maven</url>
-</repository>
-```
-
-dependency
-
-```xml
-<dependency>
-    <groupId>org.elasticsearch.plugin</groupId>
-    <artifactId>x-pack-sql-jdbc</artifactId>
-    <version>${es.version}</version>
-</dependency>
-```
-
-
-Elasticsearch SQL 可以和 mybatis, spring 结合起来，和关系型数据库一样的开发模式
 
 
 
