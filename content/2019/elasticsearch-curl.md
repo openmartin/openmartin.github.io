@@ -3,7 +3,7 @@ Date: 2019-08-22 11:11
 Modified: 2019-08-22 11:11
 Category: Java
 Tags: java, elasticsearch
-Slug: elasticsearch-java-client
+Slug: elasticsearch-curl
 Authors: Martin
 Summary: 虽然可以通过各种语言的 client 来操作 Elasticsearch，但是 curl 还是最方便和最常用的。
 
