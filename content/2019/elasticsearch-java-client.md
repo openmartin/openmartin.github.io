@@ -102,5 +102,5 @@ dependency
 
 Elasticsearch SQL 可以和 mybatis, spring 结合起来，和关系型数据库一样的开发模式
 
-因为 SQL 和 Elasticsearch DSL 不能完全对，适合比较简单的场景
+因为 SQL 和 Elasticsearch DSL 不能完全对应，适合比较简单的场景
 
