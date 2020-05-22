@@ -22,9 +22,10 @@ a.btn:hover {
 }
 
 .tag-cloud a {
-  background-color: #0366d6;;
+  background-color: #0366d6;
 }
 
 .tag-cloud a:hover {
-  background-color: #0366d6;;
+  background-color: #0366d6;
+  color: #ffffff;
 }
