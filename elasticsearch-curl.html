@@ -13,7 +13,7 @@
     <link rel="stylesheet/less" type="text/css" href="https://xingzuoshe.cn/theme/stylesheet/style.less">
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
 
-  <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/pygments/default.min.css">
+  <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/pygments/friendly.min.css">
   <link rel="stylesheet" type="text/css" href="https://xingzuoshe.cn/theme/font-awesome/css/font-awesome.min.css">
 
     <link href="https://xingzuoshe.cn/static/custom.css" rel="stylesheet">
@@ -233,7 +233,7 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 
 <h3>查看 Elasticsearch 后台任务</h3>
 <p>可以查看重建索引目前的进度</p>
-<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="k">GET</span> <span class="ss">&quot;localhost:9200/_tasks?detailed=true&amp;actions=*reindex&amp;pretty&quot;</span>
+<div class="highlight"><pre><span></span>curl -X GET <span class="s2">&quot;localhost:9200/_tasks?detailed=true&amp;actions=*reindex&amp;pretty&quot;</span>
 </pre></div>
 
 
@@ -271,7 +271,7 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 
 
 <h3>测试 analyzer</h3>
-<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">XPOST</span> <span class="s1">&#39;http://localhost:9200/_analyze?pretty&#39;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span>curl -XPOST <span class="s1">&#39;http://localhost:9200/_analyze?pretty&#39;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;analyzer&quot;: &quot;hanlp_index&quot;,</span>
 <span class="s1">  &quot;text&quot;: &quot;5G是未来重要的趋势&quot;</span>
@@ -313,7 +313,7 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 </article>
 
     <footer>
-<p>&copy;  2019</p>
+<p>&copy;  2020</p>
 <p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
   </main>
 

@@ -111,7 +111,7 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   &lt;span class="m
 
 &lt;h3&gt;查看 Elasticsearch 后台任务&lt;/h3&gt;
 &lt;p&gt;可以查看重建索引目前的进度&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="k"&gt;GET&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/_tasks?detailed=true&amp;amp;actions=*reindex&amp;amp;pretty&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -X GET &lt;span class="s2"&gt;&amp;quot;localhost:9200/_tasks?detailed=true&amp;amp;actions=*reindex&amp;amp;pretty&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -149,12 +149,12 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   &lt;span class="m
 
 
 &lt;h3&gt;测试 analyzer&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;XPOST&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;http://localhost:9200/_analyze?pretty&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -XPOST &lt;span class="s1"&gt;&amp;#39;http://localhost:9200/_analyze?pretty&amp;#39;&lt;/span&gt; -H &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; -d&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
 &lt;span class="s1"&gt;{&lt;/span&gt;
 &lt;span class="s1"&gt;  &amp;quot;analyzer&amp;quot;: &amp;quot;hanlp_index&amp;quot;,&lt;/span&gt;
 &lt;span class="s1"&gt;  &amp;quot;text&amp;quot;: &amp;quot;5G是未来重要的趋势&amp;quot;&lt;/span&gt;
 &lt;span class="s1"&gt;}&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>Elasticsearch Java Client</title><link href="https://xingzuoshe.cn/elasticsearch-java-client.html" rel="alternate"></link><published>2019-08-22T10:57:00+08:00</published><updated>2019-08-22T10:57:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-08-22:/elasticsearch-java-client.html</id><summary type="html">&lt;p&gt;Elasticsearch Java Client 配置和使用&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Java REST Client&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>Elasticsearch Java Client</title><link href="https://xingzuoshe.cn/elasticsearch-java-client.html" rel="alternate"></link><published>2019-08-22T10:57:00+08:00</published><updated>2019-08-22T10:57:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-08-22:/elasticsearch-java-client.html</id><summary type="html">&lt;p&gt;Elasticsearch Java Client 配置和使用&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Java REST Client&lt;/h2&gt;
 &lt;h3&gt;maven 配置&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.elasticsearch.client&lt;span class="nt"&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
@@ -238,7 +238,7 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   &lt;span class="m
 
 &lt;h3&gt;Elasticsearch SQL + mybatis + spring&lt;/h3&gt;
 &lt;p&gt;Elasticsearch SQL 可以和 mybatis, spring 结合起来，和关系型数据库一样的开发模式&lt;/p&gt;
-&lt;p&gt;因为 SQL 和 Elasticsearch DSL 不能完全对，适合比较简单的场景&lt;/p&gt;</content><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>Elasticsearch 安装</title><link href="https://xingzuoshe.cn/elasticsearch-install.html" rel="alternate"></link><published>2019-07-30T14:06:00+08:00</published><updated>2019-07-30T14:06:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-07-30:/elasticsearch-install.html</id><summary type="html">&lt;p&gt;Elasticsearch 安装，Kibana 安装，&lt;/p&gt;</summary><content type="html">&lt;h2&gt;ElasticSearch 安装&lt;/h2&gt;
+&lt;p&gt;因为 SQL 和 Elasticsearch DSL 不能完全对应，适合比较简单的场景&lt;/p&gt;</content><category term="Java"></category><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>Elasticsearch 安装</title><link href="https://xingzuoshe.cn/elasticsearch-install.html" rel="alternate"></link><published>2019-07-30T14:06:00+08:00</published><updated>2019-07-30T14:06:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-07-30:/elasticsearch-install.html</id><summary type="html">&lt;p&gt;Elasticsearch 安装，Kibana 安装，&lt;/p&gt;</summary><content type="html">&lt;h2&gt;ElasticSearch 安装&lt;/h2&gt;
 &lt;h3&gt;environment&lt;/h3&gt;
 &lt;p&gt;CentOS 7.2&lt;/p&gt;
 &lt;p&gt;ElasticSearch 7.3.0&lt;/p&gt;
@@ -304,7 +304,7 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   &lt;span class="m
 
 &lt;p&gt;/etc/kibana/kibana.yml&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;host&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;0.0.0.0&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="elasticsearch"></category><category term="kibana"></category></entry><entry><title>使用 Jenkins 来自动化部署 Maven 项目</title><link href="https://xingzuoshe.cn/jenkins-maven-deploy.html" rel="alternate"></link><published>2019-07-08T15:06:00+08:00</published><updated>2019-07-08T15:06:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-07-08:/jenkins-maven-deploy.html</id><summary type="html">&lt;p&gt;使用 Jenkins 来自动化部署 Maven 项目，把一个 WebApp 项目部署到 tomcat&lt;/p&gt;</summary><content type="html">&lt;h2&gt;安装 Jenkins&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="elasticsearch"></category><category term="kibana"></category></entry><entry><title>使用 Jenkins 来自动化部署 Maven 项目</title><link href="https://xingzuoshe.cn/jenkins-maven-deploy.html" rel="alternate"></link><published>2019-07-08T15:06:00+08:00</published><updated>2019-07-08T15:06:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-07-08:/jenkins-maven-deploy.html</id><summary type="html">&lt;p&gt;使用 Jenkins 来自动化部署 Maven 项目，把一个 WebApp 项目部署到 tomcat&lt;/p&gt;</summary><content type="html">&lt;h2&gt;安装 Jenkins&lt;/h2&gt;
 &lt;p&gt;下载 &lt;a href="https://jenkins.io/zh/download/"&gt;jenkin.war&lt;/a&gt;, 可以当作一个独立的 jar 文件运行。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;nohup&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="n"&gt;jenkins&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;war&lt;/span&gt; &lt;span class="c1"&gt;--httpPort=8080 &amp;amp;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -436,7 +436,7 @@ curl -s -u jenkins:jenkins -T target/rms.war &lt;span class="s2"&gt;&amp;quot;ht
 &lt;li&gt;在 GitLab 中添加 ssh key，在 Jenkins 运行的用户下可以免密码 clone&lt;/li&gt;
 &lt;li&gt;Jenkins Job 的构建触发器 选择 Build when a change is pushed to GitLab. GitLab webhook URL: http://10.80.28.27:8080/project/deploy-test，在高级选项中可以设置 Allowed branches -&amp;gt; master&lt;/li&gt;
 &lt;li&gt;在 GitLab 项目 Settings -&amp;gt; Integrations -&amp;gt; Webhooks 配置上面的 URL，下面有测试的按钮，如果是 200 OK 就正常&lt;/li&gt;
-&lt;/ol&gt;</content><category term="java"></category><category term="jenkins"></category><category term="maven"></category><category term="tomcat"></category></entry><entry><title>ActiveMQ Artemis 的安装和使用</title><link href="https://xingzuoshe.cn/activemq-artemis-install.html" rel="alternate"></link><published>2019-07-02T16:14:00+08:00</published><updated>2019-07-02T16:14:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-07-02:/activemq-artemis-install.html</id><summary type="html">&lt;p&gt;ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等&lt;/p&gt;</summary><content type="html">&lt;h2&gt;ActiveMQ Artemis 的安装&lt;/h2&gt;
+&lt;/ol&gt;</content><category term="Java"></category><category term="java"></category><category term="jenkins"></category><category term="maven"></category><category term="tomcat"></category></entry><entry><title>ActiveMQ Artemis 的安装和使用</title><link href="https://xingzuoshe.cn/activemq-artemis-install.html" rel="alternate"></link><published>2019-07-02T16:14:00+08:00</published><updated>2019-07-02T16:14:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-07-02:/activemq-artemis-install.html</id><summary type="html">&lt;p&gt;ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等&lt;/p&gt;</summary><content type="html">&lt;h2&gt;ActiveMQ Artemis 的安装&lt;/h2&gt;
 &lt;p&gt;下载 &lt;a href="http://activemq.apache.org/components/artemis/download/"&gt;安装包&lt;/a&gt; ，然后解压&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;ARTEMIS_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/apache-artemis-2.9.0
 &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ARTEMIS_HOME&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/bin/artemis create eventbroker --http-host &lt;span class="m"&gt;10&lt;/span&gt;.80.28.27
@@ -661,4 +661,4 @@ Or you can run the broker in the background using:
         &lt;span class="nt"&gt;&amp;lt;property&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;subscriptionDurable&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
         &lt;span class="nt"&gt;&amp;lt;property&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;durableSubscriptionName&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Subscriber-B&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
     &lt;span class="nt"&gt;&amp;lt;/bean&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="java"></category><category term="activemq"></category><category term="artemis"></category><category term="spring"></category><category term="jms"></category></entry></feed>
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="java"></category><category term="activemq"></category><category term="artemis"></category><category term="spring"></category><category term="jms"></category></entry></feed>

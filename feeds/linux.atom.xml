@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2017-04-03T20:20:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在 Amazon Linux 使用 Let's encrypt 免费的SSL</title><link href="https://xingzuoshe.cn/lets-encrypt-ssl.html" rel="alternate"></link><published>2017-04-03T20:20:00+08:00</published><updated>2017-04-03T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2017-04-03:/lets-encrypt-ssl.html</id><summary type="html">&lt;p&gt;在 Amazon Linux 使用 Let's encrypt 免费的SSL&lt;/p&gt;</summary><content type="html">&lt;p&gt;如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-05-22T17:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在 centos 7 上安装 redis 6</title><link href="https://xingzuoshe.cn/redis-6-on-centos-7-setup.html" rel="alternate"></link><published>2020-05-22T17:00:00+08:00</published><updated>2020-05-22T17:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-22:/redis-6-on-centos-7-setup.html</id><summary type="html">&lt;p&gt;在 centos 7 上安装 最新的 redis 6 的步骤&lt;/p&gt;</summary><content type="html">&lt;h2&gt;遇到的问题&lt;/h2&gt;
+&lt;p&gt;在 centos  7 的 yum 源中 redis 的版本为 3.2.12-2.el7，想要安装最新版的 redis 6，只能通过源代码安装，但是默认的环境会遇到编译问题，如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;In&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;included&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;server&lt;/span&gt;.&lt;span class="nv"&gt;c&lt;/span&gt;:&lt;span class="mi"&gt;30&lt;/span&gt;:&lt;span class="mi"&gt;0&lt;/span&gt;:
+&lt;span class="nv"&gt;server&lt;/span&gt;.&lt;span class="nv"&gt;h&lt;/span&gt;:&lt;span class="mi"&gt;1022&lt;/span&gt;:&lt;span class="mi"&gt;5&lt;/span&gt;: &lt;span class="nv"&gt;error&lt;/span&gt;: &lt;span class="nv"&gt;expected&lt;/span&gt; &lt;span class="nv"&gt;specifier&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;qualifier&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;list&lt;/span&gt; &lt;span class="nv"&gt;before&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;_Atomic&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+     &lt;span class="nv"&gt;_Atomic&lt;/span&gt; &lt;span class="nv"&gt;unsigned&lt;/span&gt; &lt;span class="nv"&gt;int&lt;/span&gt; &lt;span class="nv"&gt;lruclock&lt;/span&gt;&lt;span class="c1"&gt;; /* Clock for LRU eviction */&lt;/span&gt;
+     &lt;span class="o"&gt;^&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;是因为默认的 gcc 版本(gcc version 4.8.5)太低导致，不支持新特性&lt;/p&gt;
+&lt;h2&gt;解决办法&lt;/h2&gt;
+&lt;p&gt;解决办法就是升级 gcc 版本&lt;/p&gt;
+&lt;p&gt;升级到 gcc 7.3&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;centos&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;scl&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;binutils&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;scl&lt;/span&gt; &lt;span class="n"&gt;enable&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;还可以选择升级到其他版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gcc&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gcc&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;升级完成之后并不会覆盖系统默认的gcc，需要使用脚本来切换，x为要启用的版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scl &lt;span class="nb"&gt;enable&lt;/span&gt; devtoolset-x bash 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;安装和配置&lt;/h2&gt;
+&lt;p&gt;后续就可以按照常规安装步骤来执行，就不再赘述了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
+$ tar xzf redis-6.0.3.tar.gz
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; redis-6.0.3
+$ make
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; 
+&lt;span class="n"&gt;daemonize&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;span class="n"&gt;appendonly&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;打开 appendonly yes 后，会启用 RDB-AOF 混合持久化&lt;/p&gt;</content><category term="Linux"></category><category term="centos"></category><category term="redis"></category></entry><entry><title>在 Amazon Linux 使用 Let's encrypt 免费的SSL</title><link href="https://xingzuoshe.cn/lets-encrypt-ssl.html" rel="alternate"></link><published>2017-04-03T20:20:00+08:00</published><updated>2017-04-03T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2017-04-03:/lets-encrypt-ssl.html</id><summary type="html">&lt;p&gt;在 Amazon Linux 使用 Let's encrypt 免费的SSL&lt;/p&gt;</summary><content type="html">&lt;p&gt;如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
 Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要renew，官方还提供自动renew的工具certbot&lt;/p&gt;
 &lt;h2&gt;certbot&lt;/h2&gt;
 &lt;p&gt;certbot 是一个自动申请和续期SSL证书的工具。在&lt;a href="https://certbot.eff.org/"&gt;官网certbot.eff.org&lt;/a&gt;可以找到各种OS和Web服务器下的安装方法。常见的Ubuntu和CentOS安装起来十分方便。&lt;/p&gt;
@@ -115,7 +161,7 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 - https://segmentfault.com/a/1190000005797776
 - https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/
 - https://ksmx.me/letsencrypt-ssl-https/
-- https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657&lt;/p&gt;</content><category term="aws"></category><category term="linux"></category><category term="ssl"></category></entry><entry><title>Oracle Express on CentOS 7</title><link href="https://xingzuoshe.cn/oracle-express-editon-on-centos7.html" rel="alternate"></link><published>2016-09-19T20:20:00+08:00</published><updated>2016-09-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-09-19:/oracle-express-editon-on-centos7.html</id><summary type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;</summary><content type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;
+- https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657&lt;/p&gt;</content><category term="Linux"></category><category term="aws"></category><category term="linux"></category><category term="ssl"></category></entry><entry><title>Oracle Express on CentOS 7</title><link href="https://xingzuoshe.cn/oracle-express-editon-on-centos7.html" rel="alternate"></link><published>2016-09-19T20:20:00+08:00</published><updated>2016-09-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-09-19:/oracle-express-editon-on-centos7.html</id><summary type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;</summary><content type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;
 &lt;h2&gt;VirtualBox VM&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://www.centos.org"&gt;下载CentOS 7 DVD&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;virtualbox的网络设置中建议选择桥接，因为我们需要从宿主机连接虚拟机，默认的NAT只能从虚拟机内部访问外部。&lt;/p&gt;
@@ -141,4 +187,4 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 
 
 &lt;h2&gt;Oracle SQL Developer&lt;/h2&gt;
-&lt;p&gt;在macOS下没有PLSQL Developer这样方便的工具，Oracle官方出品的&lt;a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html"&gt;Oracle SQL Developer&lt;/a&gt;可以体验一下，一般功能都有。&lt;/p&gt;</content><category term="linux"></category><category term="oracle"></category></entry></feed>
+&lt;p&gt;在macOS下没有PLSQL Developer这样方便的工具，Oracle官方出品的&lt;a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html"&gt;Oracle SQL Developer&lt;/a&gt;可以体验一下，一般功能都有。&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="oracle"></category></entry></feed>

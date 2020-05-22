@@ -36,23 +36,24 @@
     <meta name="msapplication-TileColor" content="#333333">
 
 <meta name="author" content="Martin" />
-<meta name="description" content="Python 中 class 的 JSON 序列化" />
-<meta name="keywords" content="json">
+<meta name="description" content="零基础小白高分过CPA会计经验" />
+<meta name="keywords" content="cpa, accounting">
 
 <meta property="og:site_name" content="Martin's Blog"/>
-<meta property="og:title" content="Python 中 class 的 JSON 序列化"/>
-<meta property="og:description" content="Python 中 class 的 JSON 序列化"/>
+<meta property="og:title" content="Elasticsearch Java Client"/>
+<meta property="og:description" content="零基础小白高分过CPA会计经验"/>
 <meta property="og:locale" content="zh_CN"/>
-<meta property="og:url" content="https://xingzuoshe.cn/python-obj-to-json.html"/>
+<meta property="og:url" content="https://xingzuoshe.cn/cpa-accounting-prepare.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2015-08-17 20:20:00+08:00"/>
-<meta property="article:modified_time" content="2015-08-17 20:20:00+08:00"/>
+<meta property="article:published_time" content="2019-11-08 11:00:00+08:00"/>
+<meta property="article:modified_time" content="2019-11-08 11:00:00+08:00"/>
 <meta property="article:author" content="https://xingzuoshe.cn/author/martin.html">
-<meta property="article:section" content="Python"/>
-<meta property="article:tag" content="json"/>
+<meta property="article:section" content="CPA"/>
+<meta property="article:tag" content="cpa"/>
+<meta property="article:tag" content="accounting"/>
 <meta property="og:image" content="/images/default_profile_200x200.png">
 
-  <title>Martin's Blog &ndash; Python 中 class 的 JSON 序列化</title>
+  <title>Martin's Blog &ndash; Elasticsearch Java Client</title>
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
@@ -111,48 +112,29 @@
 <article class="single">
   <header>
       
-    <h1 id="python-obj-to-json">Python 中 class 的 JSON 序列化</h1>
+    <h1 id="cpa-accounting-prepare">Elasticsearch Java Client</h1>
     <p>
-      Posted on 2015-08-17 20:20 in <a href="https://xingzuoshe.cn/category/python.html">Python</a>
+      Posted on 2019-11-08 11:00 in <a href="https://xingzuoshe.cn/category/cpa.html">CPA</a>
 
     </p>
   </header>
 
 
   <div>
-    <p>在Java中如果定义一个class，是十分方便JSON序列化的，比如说使用 jackson lib。</p>
-<p>但是在Python中如果使用json.dumps(a)，a如果不是一个简单类型的就会报错:</p>
-<div class="highlight"><pre><span></span><span class="n">TypeError</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">__main__</span><span class="p">.</span><span class="n">A</span> <span class="n">instance</span> <span class="k">at</span> <span class="mi">0</span><span class="n">x109d553b0</span><span class="o">&gt;</span> <span class="k">is</span> <span class="k">not</span> <span class="n">JSON</span> <span class="k">serializable</span>
-</pre></div>
-
-
-<p>其实Python的class也十分方便JSON序列化,需要一小段代码就可以:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONEncoder</span>
-
-<span class="k">def</span> <span class="nf">obj2dict</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="n">memberlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">)]</span>
-    <span class="n">_dict</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">memberlist</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;_&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-            <span class="n">_dict</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">_dic</span>
-
-<span class="k">class</span> <span class="nc">ClsEncoder</span><span class="p">(</span><span class="n">JSONEncoder</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">obj2dict</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
-
-
-<span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">ClsEncoder</span><span class="p">)</span>
-</pre></div>
-
-
-<p>在使用json.dumps的时候指定ClsEncoder就能够达到目的</p>
+    <h2>为什么要学会计</h2>
+<p>我觉得会计也是理解整个社会经济过程的重要方面，所以想学学会计，而且也是读懂上市公司财务报表必须要的基础。</p>
+<h2>CPA 会计考试</h2>
+<p>CPA 是注册会计师的简称，这个证书的还是有一些含金量的。为什么选择考CPA，主要的原因是因为考试费用很便宜，60块一科。</p>
+<p>CPA 因为考试费用很便宜，所以每年的考试人数很多，</p>
+<h2>学习路径</h2>
+<p>我是一个纯小白，零基础，理工科的，以前完全没有接触过会计。学习会计的过程应该是理解大于记忆，重点在于理解记账过程，以及为什么这么处理。</p>
+<h2>信心</h2>
+<p>在考试的时候，会计考3个小时，我旁边坐了一个妹子，敲键盘的声音特别大，而且很急促，感觉是个王者，但是一个小时之后，到了做主观题的时刻，我看都空着，而且在瞄我的答案，我以为我一个外行来考CPA，觉得自己比较挫，然而还有比我更挫的。这下子信心大增，主观题直接平蹚，而且我在考试前一天，刚好看过类似的题。</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="https://xingzuoshe.cn/tag/json.html">json</a>
+      <a href="https://xingzuoshe.cn/tag/cpa.html">cpa</a>
+      <a href="https://xingzuoshe.cn/tag/accounting.html">accounting</a>
     </p>
   </div>
 
