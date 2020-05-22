@@ -1,11 +1,12 @@
-Title: Elasticsearch Java Client
+Title: CPA Accounting prepare
+Status: draft
 Date: 2019-11-08 11:00
 Modified: 2019-11-08 11:00
 Category: CPA
 Tags: cpa, accounting
 Slug: cpa-accounting-prepare
 Authors: Martin
-Summary: 零基础小白高分过CPA会计经验
+Summary: 零基础小白过CPA会计经验
 
 
 ## 为什么要学会计
