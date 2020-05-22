@@ -44,6 +44,9 @@ SOCIAL = (('github', 'https://github.com/openmartin'),
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
 
+# Set pygments style
+PYGMENTS_STYLE = 'friendly'
+
 # Theme
 THEME = os.path.join(ENV_DIR, "pelican-themes", "Flex")
 
@@ -86,7 +89,7 @@ MENUITEMS = (('Archives', '/archives.html'),
              ('Tags', '/tags.html'),)
 
 
-COPYRIGHT_YEAR = '2019'
+COPYRIGHT_YEAR = '2020'
 
 # STATIC
 STATIC_PATHS = ['images', 'extra']

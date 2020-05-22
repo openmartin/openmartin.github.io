@@ -1,3 +1,29 @@
 aside {
   overflow-y: hidden;
 }
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0366d6;;
+}
+
+
+a.btn {
+  background-color: #6c757d;
+}
+
+a.btn:hover {
+  background-color: #545b62;
+}
+
+.tag-cloud a {
+  background-color: #0366d6;;
+}
+
+.tag-cloud a:hover {
+  background-color: #0366d6;;
+}
