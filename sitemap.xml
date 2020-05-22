@@ -5,35 +5,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2020-05-22T18:32:21-00:00</lastmod>
+<lastmod>2020-05-22T18:42:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2020-05-22T18:32:21-00:00</lastmod>
+<lastmod>2020-05-22T18:42:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2020-05-22T18:32:21-00:00</lastmod>
+<lastmod>2020-05-22T18:42:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2020-05-22T18:32:21-00:00</lastmod>
+<lastmod>2020-05-22T18:42:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2020-05-22T18:32:21-00:00</lastmod>
+<lastmod>2020-05-22T18:42:38-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -41,13 +41,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/redis-6-on-centos-7-setup.html</loc>
 <lastmod>2020-05-22T17:00:00+08:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/cpa-accounting-prepare.html</loc>
-<lastmod>2019-11-08T11:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -235,13 +228,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://xingzuoshe.cn/category/cpa.html</loc>
-<lastmod>2019-11-08T11:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://xingzuoshe.cn/category/django.html</loc>
 <lastmod>2016-09-19T20:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -293,20 +279,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/tag/redis.html</loc>
 <lastmod>2020-05-22T17:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/cpa.html</loc>
-<lastmod>2019-11-08T11:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/accounting.html</loc>
-<lastmod>2019-11-08T11:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
