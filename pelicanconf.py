@@ -14,7 +14,7 @@ SITEDESCRIPTION = 'Martin\'s Thoughts and Writings'
 SITELOGO = '/images/default_profile_200x200.png'
 FAVICON = '/images/default_profile_200x200.png'
 BROWSER_COLOR = '#333333'
-PYGMENTS_STYLE = 'default'
+PYGMENTS_STYLE = 'friendly'
 
 ROBOTS = 'index, follow'
 
@@ -43,9 +43,6 @@ SOCIAL = (('github', 'https://github.com/openmartin'),
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
-
-# Set pygments style
-PYGMENTS_STYLE = 'friendly'
 
 # Theme
 THEME = os.path.join(ENV_DIR, "pelican-themes", "Flex")
