@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 import os
-BASE_DIR = os.getcwd();
+BASE_DIR = os.getcwd()
 ENV_DIR = os.path.dirname(BASE_DIR)
 
 AUTHOR = 'Martin'
@@ -110,9 +110,9 @@ DISQUS_SITENAME = "astro-2"
 #GOOGLE_ANALYTICS = 'UA-1234-5678'
 GOOGLE_ADSENSE = {
     'ca_id': 'ca-pub-8640171181637141',
-    'page_level_ads': True,
+    'page_level_ads': False,
     'ads': {
-        'aside': '5604848266',
+        'aside': '',
         'main_menu': '',
         'index_top': '',
         'index_bottom': '2770021113',
