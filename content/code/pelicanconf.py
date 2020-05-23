@@ -66,9 +66,9 @@ SITEMAP = {
 
 
 # Default theme language
-I18N_TEMPLATE_LANG = 'zh'
+I18N_TEMPLATE_LANG = 'zh_CN'
 
-DEFAULT_LANG = 'zh'
+DEFAULT_LANG = 'zh_CN'
 OG_LOCALE = 'zh_CN'
 LOCALE = 'zh_CN'
 
@@ -103,16 +103,16 @@ USE_LESS = True
 
 # Third page service
 DISQUS_SITENAME = "astro-2"
-#GOOGLE_ANALYTICS = 'UA-1234-5678'
-GOOGLE_ADSENSE = {
-    'ca_id': 'ca-pub-8640171181637141',
-    'page_level_ads': True,
-    'ads': {
-        'aside': '5604848266',
-        'main_menu': '',
-        'index_top': '',
-        'index_bottom': '2770021113',
-        'article_top': '',
-        'article_bottom': '4393383534',
-    }
-}
+# GOOGLE_ANALYTICS = 'UA-1234-5678'
+# GOOGLE_ADSENSE = {
+#     'ca_id': 'ca-pub-8640171181637141',
+#     'page_level_ads': True,
+#     'ads': {
+#         'aside': '5604848266',
+#         'main_menu': '',
+#         'index_top': '',
+#         'index_bottom': '2770021113',
+#         'article_top': '',
+#         'article_bottom': '4393383534',
+#     }
+# }
