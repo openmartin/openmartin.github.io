@@ -6,7 +6,7 @@ BASE_DIR = os.getcwd()
 ENV_DIR = os.path.dirname(BASE_DIR)
 
 AUTHOR = 'Martin'
-#SITEURL = 'https://xingzuoshe.cn'
+SITEURL = 'https://xingzuoshe.cn'
 SITENAME = "Martin's Blog"
 SITETITLE = "Martin's Blog"
 SITESUBTITLE = "Martin's Blog"
@@ -69,9 +69,9 @@ SITEMAP = {
 
 
 # Default theme language
-I18N_TEMPLATE_LANG = 'zh'
+I18N_TEMPLATE_LANG = 'zh_CN'
 
-DEFAULT_LANG = 'zh'
+DEFAULT_LANG = 'zh_CN'
 OG_LOCALE = 'zh_CN'
 LOCALE = 'zh_CN'
 
