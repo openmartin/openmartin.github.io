@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 import os
-BASE_DIR = os.getcwd();
+BASE_DIR = os.getcwd()
 ENV_DIR = os.path.dirname(BASE_DIR)
 
 AUTHOR = 'Martin'
@@ -86,7 +86,7 @@ MENUITEMS = (('Archives', '/archives.html'),
              ('Tags', '/tags.html'),)
 
 
-COPYRIGHT_YEAR = '2019'
+COPYRIGHT_YEAR = '2020'
 
 # STATIC
 STATIC_PATHS = ['images', 'code', 'extra']
@@ -104,15 +104,15 @@ USE_LESS = True
 # Third page service
 DISQUS_SITENAME = "astro-2"
 # GOOGLE_ANALYTICS = 'UA-1234-5678'
-# GOOGLE_ADSENSE = {
-#     'ca_id': 'ca-pub-8640171181637141',
-#     'page_level_ads': True,
-#     'ads': {
-#         'aside': '5604848266',
-#         'main_menu': '',
-#         'index_top': '',
-#         'index_bottom': '2770021113',
-#         'article_top': '',
-#         'article_bottom': '4393383534',
-#     }
-# }
+GOOGLE_ADSENSE = {
+    'ca_id': 'ca-pub-8640171181637141',
+    'page_level_ads': False,
+    'ads': {
+        'aside': '',
+        'main_menu': '',
+        'index_top': '',
+        'index_bottom': '2770021113',
+        'article_top': '',
+        'article_bottom': '4393383534',
+    }
+}
