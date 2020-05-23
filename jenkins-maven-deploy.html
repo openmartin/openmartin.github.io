@@ -125,7 +125,7 @@
   <div>
     <h2>安装 Jenkins</h2>
 <p>下载 <a href="https://jenkins.io/zh/download/">jenkin.war</a>, 可以当作一个独立的 jar 文件运行。</p>
-<div class="highlight"><pre><span></span><span class="n">nohup</span> <span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">jenkins</span><span class="p">.</span><span class="n">war</span> <span class="c1">--httpPort=8080 &amp;</span>
+<div class="highlight"><pre><span></span><span class="err">nohup java -jar jenkins.war --httpPort=8080 &amp;</span>
 </pre></div>
 
 
@@ -187,20 +187,20 @@
 <p>很多例子中都是用了 docker 来准备环境，其实不是用 docker 也可以，前提条件是系统中配置了所需要的工具，比如 maven，java</p>
 <p>如果是通过 <code>java -jar jenkins.war --httpPort=8080</code> 运行的，则可以使用的命令和当前用户一样</p>
 <p>如果是通过 yum，apt 之类的工具安装的 Jenkins service，则使用的是 jenkins 用户，需要配置 jenkins 用户的 shell 环境。</p>
-<div class="highlight"><pre><span></span><span class="n">pipeline</span> <span class="err">{</span>
-    <span class="n">agent</span> <span class="k">any</span>
-    <span class="n">stages</span> <span class="err">{</span>
-        <span class="n">stage</span><span class="p">(</span><span class="s1">&#39;Build&#39;</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">steps</span> <span class="err">{</span>
-                <span class="n">sh</span> <span class="s1">&#39;mvn -B -DskipTests clean package&#39;</span>
-            <span class="err">}</span>
-        <span class="err">}</span>
-        <span class="n">stage</span><span class="p">(</span><span class="s1">&#39;Deploy&#39;</span><span class="p">)</span> <span class="err">{</span>
-            <span class="n">steps</span> <span class="err">{</span>
-                <span class="n">sh</span> <span class="s1">&#39;./doc/deploy-test.sh&#39;</span>
-            <span class="err">}</span>
-        <span class="err">}</span>
-    <span class="err">}</span>
+<div class="highlight"><pre><span></span><span class="err">pipeline {</span>
+<span class="err">    agent any</span>
+<span class="err">    stages {</span>
+<span class="err">        stage(&#39;Build&#39;) {</span>
+<span class="err">            steps {</span>
+<span class="err">                sh &#39;mvn -B -DskipTests clean package&#39;</span>
+<span class="err">            }</span>
+<span class="err">        }</span>
+<span class="err">        stage(&#39;Deploy&#39;) {</span>
+<span class="err">            steps {</span>
+<span class="err">                sh &#39;./doc/deploy-test.sh&#39;</span>
+<span class="err">            }</span>
+<span class="err">        }</span>
+<span class="err">    }</span>
 <span class="err">}</span>
 </pre></div>
 
