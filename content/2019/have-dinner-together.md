@@ -4,7 +4,7 @@ Date: 2019-11-08 11:00
 Modified: 2019-11-08 11:00
 Category: CPA
 Tags: cpa, accounting
-Slug: cpa-accounting-prepare
+Slug: date-with-dinner
 Authors: Martin
 Summary: 零基础小白过CPA会计经验
 
