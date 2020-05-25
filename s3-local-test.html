@@ -129,7 +129,7 @@
 <p>mybucket.s3.amazonaws.com -&gt; localhost:9444:s3/mybucket</p>
 <h3>/etc/hosts</h3>
 <p>添加一行:</p>
-<div class="highlight"><pre><span></span><span class="err">127.0.0.1 mybucket.s3.amazonaws.com</span>
+<div class="highlight"><pre><span></span><span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="n">mybucket</span><span class="p">.</span><span class="n">s3</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span>
 </pre></div>
 
 
@@ -137,13 +137,13 @@
 <h3>nginx</h3>
 <p>nginx 把127.0.0.1:80 的请求转向 127.0.0.1:9444</p>
 <p>配置文件如下:</p>
-<div class="highlight"><pre><span></span><span class="err">server {</span>
-<span class="err">listen       80;</span>
-<span class="err">server_name  localhost;</span>
-<span class="err">location / {</span>
-<span class="err">    proxy_pass http://127.0.0.1:9444;</span>
-<span class="err">    rewrite ^(.*)$ /s3/mybucket$1 break; #例如 /homepage.html =&gt; /s3/mybucket/homepage.html</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span></span><span class="nv">server</span> {
+<span class="nv">listen</span>       <span class="mi">80</span><span class="c1">;</span>
+<span class="nv">server_name</span>  <span class="nv">localhost</span><span class="c1">;</span>
+<span class="nv">location</span> <span class="o">/</span> {
+    <span class="nv">proxy_pass</span> <span class="nv">http</span>:<span class="o">//</span><span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">9444</span><span class="c1">;</span>
+    <span class="nv">rewrite</span> <span class="o">^</span><span class="ss">(</span>.<span class="o">*</span><span class="ss">)</span>$ <span class="o">/</span><span class="nv">s3</span><span class="o">/</span><span class="nv">mybucket</span><span class="mh">$1</span> <span class="k">break</span><span class="c1">; #例如 /homepage.html =&gt; /s3/mybucket/homepage.html</span>
+}
 </pre></div>
 
 

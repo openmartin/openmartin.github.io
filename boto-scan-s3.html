@@ -117,7 +117,7 @@
     <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">paginator</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=&lt;</span><span class="n">s3_bucket</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">Prefix</span><span class="o">=&lt;</span><span class="n">s3_path_prefix</span><span class="o">&gt;</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Contents&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Size&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Key&#39;</span><span class="p">)</span>
+                <span class="k">print</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Key&#39;</span><span class="p">)</span>
 </pre></div>
 
 
