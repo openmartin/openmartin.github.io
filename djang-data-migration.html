@@ -177,7 +177,7 @@ The datetime and django.utils.timezone modules are available, so you can <span c
 
 <h3>数据导入</h3>
 <p>数据导入,不需要指定 appname</p>
-<div class="highlight"><pre><span></span><span class="err">python manage.py loaddata appname_data.json</span>
+<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">appname_data</span><span class="p">.</span><span class="n">json</span>
 </pre></div>
 
 
@@ -186,8 +186,8 @@ The datetime and django.utils.timezone modules are available, so you can <span c
 <h3>常见数据导入导出</h3>
 <p>一般情况下，我们导入导出的时候需要排除一些app，contenttypes(新环境migrate的时候会重新生成，而且包含数据)，sessions(用户session相关数据),  admin(admin log)</p>
 <p>auth 包含用户，可视情况决定是否导出</p>
-<div class="highlight"><pre><span></span><span class="err">python manage.py dumpdata --all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &gt; all.json</span>
-<span class="err">python manage.py loaddata all.json</span>
+<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="c1">--all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &gt; all.json</span>
+<span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="k">all</span><span class="p">.</span><span class="n">json</span>
 </pre></div>
   </div>
   <div class="tag-cloud">
