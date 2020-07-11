@@ -111,71 +111,71 @@
     <h2>testcase of controller</h2>
 <p>一般情况下我们都是写 service 层的 testcase，一是因为写起来比较方便，二是因为 controller 层中的逻辑比较少</p>
 <p>如果需要写 controller 的 testcase，spring-test 也是支持的</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.test.context.ContextConfiguration</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.test.context.junit4.SpringJUnit4ClassRunner</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.test.context.web.WebAppConfiguration</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.setup.MockMvcBuilders</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.web.context.WebApplicationContext</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Before</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.ActiveProfiles</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.ContextConfiguration</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.junit4.SpringJUnit4ClassRunner</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.web.WebAppConfiguration</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.setup.MockMvcBuilders</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.context.WebApplicationContext</span><span class="p">;</span>
 
-<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.result.MockMvcResultHandlers.print</span><span class="o">;</span>
-<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><span class="o">;</span>
+<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.result.MockMvcResultHandlers.print</span><span class="p">;</span>
+<span class="kn">import static</span> <span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><span class="p">;</span>
 
-<span class="nd">@RunWith</span><span class="o">(</span><span class="n">SpringJUnit4ClassRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-<span class="nd">@ContextConfiguration</span><span class="o">({</span><span class="s">&quot;classpath:applicationContext.xml&quot;</span><span class="o">,</span> <span class="s">&quot;classpath:spring-mvc.xml&quot;</span><span class="o">})</span>
-<span class="nd">@ActiveProfiles</span><span class="o">(</span><span class="s">&quot;test&quot;</span><span class="o">)</span>
+<span class="nd">@RunWith</span><span class="p">(</span><span class="n">SpringJUnit4ClassRunner</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+<span class="nd">@ContextConfiguration</span><span class="p">({</span><span class="s">&quot;classpath:applicationContext.xml&quot;</span><span class="p">,</span> <span class="s">&quot;classpath:spring-mvc.xml&quot;</span><span class="p">})</span>
+<span class="nd">@ActiveProfiles</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 <span class="nd">@WebAppConfiguration</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoControllerTest</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoControllerTest</span> <span class="p">{</span>
 
-    <span class="kd">private</span> <span class="n">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">MockMvc</span> <span class="n">mockMvc</span><span class="p">;</span>
 
-    <span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
+    <span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="p">();</span>
 
     <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="n">WebApplicationContext</span> <span class="n">webApplicationContext</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">WebApplicationContext</span> <span class="n">webApplicationContext</span><span class="p">;</span>
 
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">mockMvc</span> <span class="o">=</span> <span class="n">MockMvcBuilders</span><span class="o">.</span><span class="na">webAppContextSetup</span><span class="o">(</span><span class="n">webApplicationContext</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">mockMvc</span> <span class="o">=</span> <span class="n">MockMvcBuilders</span><span class="p">.</span><span class="na">webAppContextSetup</span><span class="p">(</span><span class="n">webApplicationContext</span><span class="p">).</span><span class="na">build</span><span class="p">();</span>
+    <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetUserById</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">respString</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">get</span><span class="o">(</span><span class="s">&quot;/demo/user&quot;</span><span class="o">).</span><span class="na">param</span><span class="o">(</span><span class="s">&quot;userId&quot;</span><span class="o">,</span> <span class="s">&quot;ABC&quot;</span><span class="o">))</span>
-                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isOk</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">print</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">andReturn</span><span class="o">().</span><span class="na">getResponse</span><span class="o">().</span><span class="na">getContentAsString</span><span class="o">();</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;return json: &quot;</span> <span class="o">+</span> <span class="n">respString</span><span class="o">);</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGetUserById</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+        <span class="n">String</span> <span class="n">respString</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/demo/user&quot;</span><span class="p">).</span><span class="na">param</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">,</span> <span class="s">&quot;ABC&quot;</span><span class="p">))</span>
+                <span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">print</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">andReturn</span><span class="p">().</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;return json: &quot;</span> <span class="o">+</span> <span class="n">respString</span><span class="p">);</span>
+    <span class="p">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAddUser</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="o">();</span>
-        <span class="n">user</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">&quot;Hello&quot;</span><span class="o">);</span>
-        <span class="n">user</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="s">&quot;World&quot;</span><span class="o">);</span>
-        <span class="n">user</span><span class="o">.</span><span class="na">setAge</span><span class="o">(</span><span class="mi">18</span><span class="o">);</span>
-        <span class="n">String</span> <span class="n">requestJsonString</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-        <span class="n">String</span> <span class="n">respString</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">post</span><span class="o">(</span><span class="s">&quot;/demo/user/add&quot;</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="n">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">content</span><span class="o">(</span><span class="n">requestJsonString</span><span class="o">))</span>
-                <span class="o">.</span><span class="na">andExpect</span><span class="o">(</span><span class="n">status</span><span class="o">().</span><span class="na">isOk</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">andDo</span><span class="o">(</span><span class="n">print</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">andReturn</span><span class="o">().</span><span class="na">getResponse</span><span class="o">().</span><span class="na">getContentAsString</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testAddUser</span><span class="p">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+        <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="p">();</span>
+        <span class="n">user</span><span class="p">.</span><span class="na">setFirstName</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+        <span class="n">user</span><span class="p">.</span><span class="na">setLastName</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">);</span>
+        <span class="n">user</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">requestJsonString</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">respString</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="s">&quot;/demo/user/add&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">content</span><span class="p">(</span><span class="n">requestJsonString</span><span class="p">))</span>
+                <span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">andDo</span><span class="p">(</span><span class="n">print</span><span class="p">())</span>
+                <span class="p">.</span><span class="na">andReturn</span><span class="p">().</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">();</span>
 
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;return json: &quot;</span> <span class="o">+</span> <span class="n">respString</span><span class="o">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;return json: &quot;</span> <span class="o">+</span> <span class="n">respString</span><span class="p">);</span>
 
-    <span class="o">}</span>
+    <span class="p">}</span>
 </pre></div>
 
 

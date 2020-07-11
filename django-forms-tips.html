@@ -110,7 +110,7 @@
 <p>djang forms 是django非常有用的功能之一，展示表单和接收表单数据非常方便。</p>
 <h3>css class</h3>
 <p>比如下面的代码:</p>
-<div class="highlight"><pre><span></span><span class="n">n_tz</span> <span class="o">=</span> <span class="n">forms</span><span class="p">.</span><span class="n">ChoiceField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">TIMEZONE_CHOICE</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="k">True</span><span class="p">,</span> <span class="n">widget</span><span class="o">=</span><span class="n">forms</span><span class="p">.</span><span class="k">Select</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;class&quot;</span><span class="p">:</span> <span class="ss">&quot;form-control&quot;</span><span class="p">,</span> <span class="ss">&quot;id&quot;</span><span class="p">:</span> <span class="s1">&#39;n_tz&#39;</span><span class="err">}</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="err">n_tz = forms.ChoiceField(choices=TIMEZONE_CHOICE, initial=8, required=True, widget=forms.Select(attrs={&quot;class&quot;: &quot;form-control&quot;, &quot;id&quot;: &#39;n_tz&#39;}))</span>
 </pre></div>
 
 
@@ -119,32 +119,32 @@
 - initial 初始值</p>
 <h3>动态改变表单验证逻辑</h3>
 <p>我们经常有这样的需求，field b不是必填项，field c也不是必填项，但是如果b不为空，c也需要不为空。我们可以定义一个 clean_c 的函数(<em>函数名为clean_<fieldname></em>)来实现这个功能，也可以定义clean函数。</p>
-<div class="highlight"><pre><span></span><span class="nv">class</span> <span class="nv">DemoForm</span><span class="ss">(</span><span class="nv">forms</span>.<span class="nv">Form</span><span class="ss">)</span>:
-    <span class="nv">a</span> <span class="o">=</span> <span class="nv">forms</span>.<span class="nv">CharField</span><span class="ss">(</span><span class="nv">required</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
-    <span class="nv">b</span> <span class="o">=</span> <span class="nv">forms</span>.<span class="nv">CharField</span><span class="ss">(</span><span class="nv">required</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>
-    <span class="nv">c</span> <span class="o">=</span> <span class="nv">forms</span>.<span class="nv">CharField</span><span class="ss">(</span><span class="nv">required</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="n">DemoForm</span>(<span class="n">forms</span>.<span class="n">Form</span>):
+    <span class="n">a</span> = <span class="n">forms</span>.<span class="n">CharField</span>(<span class="k">required</span>=<span class="nb">True</span>)
+    <span class="n">b</span> = <span class="n">forms</span>.<span class="n">CharField</span>(<span class="k">required</span>=<span class="nb">False</span>)
+    <span class="n">c</span> = <span class="n">forms</span>.<span class="n">CharField</span>(<span class="k">required</span>=<span class="nb">False</span>)
 
-    <span class="nv">def</span> <span class="nv">clean_c</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-        <span class="nv">b</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">cleaned_data</span>[<span class="s1">&#39;</span><span class="s">b</span><span class="s1">&#39;</span>]
-        <span class="nv">c</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">cleaned_data</span>[<span class="s1">&#39;</span><span class="s">c</span><span class="s1">&#39;</span>]
-        <span class="k">if</span> <span class="nv">b</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">None</span> <span class="nv">and</span> <span class="nv">c</span> <span class="nv">is</span> <span class="nv">None</span>:
-            <span class="nv">raise</span> <span class="nv">forms</span>.<span class="nv">ValidationError</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">c不能为空</span><span class="s2">&quot;</span><span class="ss">)</span>
+    <span class="n">def</span> <span class="n">clean_c</span>(<span class="nb">self</span>):
+        <span class="n">b</span> = <span class="nb">self</span>.<span class="n">cleaned_data</span>[<span class="s">&#39;b&#39;</span>]
+        <span class="n">c</span> = <span class="nb">self</span>.<span class="n">cleaned_data</span>[<span class="s">&#39;c&#39;</span>]
+        <span class="k">if</span> <span class="n">b</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None</span> <span class="o">and</span> <span class="n">c</span> <span class="k">is</span> <span class="n">None:</span>
+            <span class="n">raise</span> <span class="n">forms</span>.<span class="n">ValidationError</span>(<span class="s">&quot;c不能为空&quot;</span>)
 
-        <span class="k">return</span> <span class="nv">c</span>
+        <span class="k">return</span> <span class="n">c</span>
 
-    <span class="nv">def</span> <span class="nv">clean</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-        <span class="nv">cleaned_data</span> <span class="o">=</span> <span class="nv">super</span><span class="ss">(</span><span class="nv">DemoForm</span>, <span class="nv">self</span><span class="ss">)</span>.<span class="nv">clean</span><span class="ss">()</span>
-        <span class="nv">b</span> <span class="o">=</span> <span class="nv">cleaned_data</span>[<span class="s1">&#39;</span><span class="s">b</span><span class="s1">&#39;</span>]
-        <span class="nv">c</span> <span class="o">=</span> <span class="nv">cleaned_data</span>[<span class="s1">&#39;</span><span class="s">c</span><span class="s1">&#39;</span>]
-        <span class="k">if</span> <span class="nv">b</span> <span class="nv">is</span> <span class="nv">not</span> <span class="nv">None</span> <span class="nv">and</span> <span class="nv">c</span> <span class="nv">is</span> <span class="nv">None</span>:
-            <span class="nv">raise</span> <span class="nv">forms</span>.<span class="nv">ValidationError</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">c不能为空</span><span class="s2">&quot;</span><span class="ss">)</span>
-        <span class="k">return</span> <span class="nv">cleaned_data</span>
+    <span class="n">def</span> <span class="n">clean</span>(<span class="nb">self</span>):
+        <span class="n">cleaned_data</span> = <span class="n">super</span>(<span class="n">DemoForm</span>, <span class="nb">self</span>).<span class="n">clean</span>()
+        <span class="n">b</span> = <span class="n">cleaned_data</span>[<span class="s">&#39;b&#39;</span>]
+        <span class="n">c</span> = <span class="n">cleaned_data</span>[<span class="s">&#39;c&#39;</span>]
+        <span class="k">if</span> <span class="n">b</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None</span> <span class="o">and</span> <span class="n">c</span> <span class="k">is</span> <span class="n">None:</span>
+            <span class="n">raise</span> <span class="n">forms</span>.<span class="n">ValidationError</span>(<span class="s">&quot;c不能为空&quot;</span>)
+        <span class="k">return</span> <span class="n">cleaned_data</span>
 </pre></div>
 
 
 <p>如果是比较简单的逻辑，可以在valid之前直接修改form的属性</p>
-<div class="highlight"><pre><span></span><span class="n">form</span><span class="p">.</span><span class="n">fields</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">].</span><span class="n">required</span> <span class="o">=</span> <span class="k">False</span>  <span class="o">#</span> <span class="err">改变</span><span class="n">required</span>
-<span class="n">form</span><span class="p">.</span><span class="n">is_valid</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><span class="err">form.fields[&#39;a&#39;].required = False  # 改变required</span>
+<span class="err">form.is_valid()</span>
 </pre></div>
 
 
@@ -152,43 +152,43 @@
 <p>经常用到的一个功能是提示用户输入的有哪些错误，django的form提供了这样的功能，在template中可以用<code>form.fieldname.erros</code>,<code>form.fieldname.erros.as_text</code>
 表示。</p>
 <p>最近碰到一个很奇怪问题，给一个field initial 值之后，在template中可以展示，然后POST也能接到这个值，但是再次在template中展示却取不到这个值。只能用一个土办法绕过这个问题。</p>
-<div class="highlight"><pre><span></span><span class="nv">form</span> <span class="o">=</span> <span class="nv">DemoForm</span><span class="ss">(</span><span class="nv">request</span>.<span class="nv">POST</span><span class="ss">)</span>
-<span class="k">if</span> <span class="nv">form</span>.<span class="nv">is_valid</span><span class="ss">()</span>:
-    <span class="nv">save</span><span class="ss">()</span>
-    <span class="k">return</span> <span class="nv">redirect</span>
-<span class="k">else</span>:
-    <span class="nv">new_form</span> <span class="o">=</span> <span class="nv">DemoForm</span><span class="ss">(</span><span class="nv">initial</span><span class="o">=</span><span class="nv">cif</span>.<span class="nv">cleaned_data</span><span class="ss">)</span>
-    <span class="nv">new_form</span>.<span class="nv">_errors</span> <span class="o">=</span> <span class="nv">form</span>.<span class="nv">_errors</span>
-    <span class="k">return</span> <span class="nv">render</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">demo.html</span><span class="s1">&#39;</span>,  {<span class="s2">&quot;</span><span class="s">form</span><span class="s2">&quot;</span>: <span class="nv">new_form</span>}<span class="ss">)</span>
+<div class="highlight"><pre><span></span><span class="err">form = DemoForm(request.POST)</span>
+<span class="err">if form.is_valid():</span>
+<span class="err">    save()</span>
+<span class="err">    return redirect</span>
+<span class="c">else:</span>
+<span class="c">    new_form = DemoForm(initial=cif.cleaned_data)</span>
+<span class="c">    new_form._errors = form._errors</span>
+<span class="c">    return render(&#39;demo.html&#39;,  {&quot;form&quot;: new_form})</span>
 </pre></div>
 
 
 <h3>使用decrator做权限检查</h3>
 <p>比如某几个view需要特定的权限才能查看，在每个view中写判断的逻辑有点冗余，这时候我们可以使用装饰器<code>@check_perm('foo')</code>，代码如下，检查权限的代码需要根据具体情况修改。</p>
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">check_perm</span><span class="ss">(</span><span class="nv">perm_name</span><span class="ss">)</span>:
-    <span class="nv">def</span> <span class="nv">handle_func</span><span class="ss">(</span><span class="nv">func</span><span class="ss">)</span>:
-        <span class="nv">def</span> <span class="nv">handle_args</span><span class="ss">(</span><span class="nv">request</span>, <span class="o">*</span><span class="nv">args</span>, <span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
-            <span class="nv">user</span> <span class="o">=</span> <span class="nv">request</span>.<span class="nv">siteuser</span>
-            <span class="nv">try</span>:
-                <span class="nv">uperm</span> <span class="o">=</span> <span class="nv">UserPermission</span>.<span class="nv">objects</span>.<span class="nv">get</span><span class="ss">(</span><span class="nv">user</span><span class="o">=</span><span class="nv">user</span><span class="ss">)</span>
-                <span class="k">if</span> <span class="nv">uperm</span>.<span class="nv">has_module_perms</span><span class="ss">(</span><span class="nv">perm_name</span><span class="ss">)</span>:
-                    <span class="k">return</span> <span class="nv">func</span><span class="ss">(</span><span class="nv">request</span>, <span class="o">*</span><span class="nv">args</span>, <span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
-                <span class="k">else</span>:
-                    <span class="nv">raise</span> <span class="nv">PermissionDenied</span>
-            <span class="nv">except</span> <span class="nv">UserPermission</span>.<span class="nv">DoesNotExist</span>:
-                <span class="nv">raise</span> <span class="nv">PermissionDenied</span>
+<div class="highlight"><pre><span></span><span class="n">def</span> <span class="n">check_perm</span><span class="p">(</span><span class="n">perm_name</span><span class="p">):</span>
+    <span class="n">def</span> <span class="n">handle_func</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="n">def</span> <span class="n">handle_args</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">siteuser</span>
+            <span class="n">try</span><span class="p">:</span>
+                <span class="n">uperm</span> <span class="o">=</span> <span class="n">UserPermission</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">user</span><span class="o">=</span><span class="k">user</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">uperm</span><span class="p">.</span><span class="n">has_module_perms</span><span class="p">(</span><span class="n">perm_name</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">raise</span> <span class="n">PermissionDenied</span>
+            <span class="k">except</span> <span class="n">UserPermission</span><span class="p">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+                <span class="n">raise</span> <span class="n">PermissionDenied</span>
 
-            <span class="nv">except</span> <span class="nv">TypeError</span>:
-                <span class="nv">raise</span> <span class="nv">PermissionDenied</span>
+            <span class="k">except</span> <span class="n">TypeError</span><span class="p">:</span>
+                <span class="n">raise</span> <span class="n">PermissionDenied</span>
 
-        <span class="k">return</span> <span class="nv">handle_args</span>
-    <span class="k">return</span> <span class="nv">handle_func</span>
+        <span class="k">return</span> <span class="n">handle_args</span>
+    <span class="k">return</span> <span class="n">handle_func</span>
 </pre></div>
 
 
 <h3>自定义400，403，404，500页面</h3>
 <p>如果要自定义错误页面，需要在 urls.py 中指定error handler。</p>
-<div class="highlight"><pre><span></span><span class="n">handler403</span> <span class="o">=</span> <span class="s1">&#39;mysite.views.my_permission_denied&#39;</span>
+<div class="highlight"><pre><span></span><span class="err">handler403 = &#39;mysite.views.my_permission_denied&#39;</span>
 </pre></div>
 
 
@@ -222,10 +222,10 @@
 <h3>1.9 以前的old middleware</h3>
 <p><img alt="django-middleware" src="../images/2016-09-19-15-50-25.jpg">
 定义一个middleware很容易，你只需要定义一个普通的python类，然后实现如下四个方法中的某一个或者某几个，添加到<code>setting.py MIDDLEWARE_CLASSES</code> 当中:</p>
-<div class="highlight"><pre><span></span><span class="n">process_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
-<span class="n">process_view</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">view_func</span><span class="p">,</span> <span class="n">view_args</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="p">)</span>
-<span class="n">process_template_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
-<span class="n">process_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="k">proc</span><span class="nb">es</span><span class="nv">s_request</span><span class="p">(</span><span class="nv">request</span><span class="p">)</span>
+<span class="k">proc</span><span class="nb">es</span><span class="nv">s_view</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span> <span class="nv">view_func</span><span class="p">,</span> <span class="nv">view_args</span><span class="p">,</span> <span class="nv">view_kwargs</span><span class="p">)</span>
+<span class="k">proc</span><span class="nb">es</span><span class="nv">s_template_response</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span> <span class="nv">response</span><span class="p">)</span>
+<span class="k">proc</span><span class="nb">es</span><span class="nv">s_response</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span> <span class="nv">response</span><span class="p">)</span>
 </pre></div>
 
 
