@@ -13,7 +13,7 @@
 &lt;li&gt;西部数据(Western Digital)蓝盘 2TB * 2      价格359 * 2&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;软件安装&lt;/h2&gt;
-&lt;p&gt;推荐安装 openmediavault 开源的 nas 系统，基于 debian，基于 web 管理，非常方便&lt;/p&gt;
+&lt;p&gt;推荐安装 openmediavault 开源的 nas 系统，基于 debian，通过 web 管理，非常方便&lt;/p&gt;
 &lt;h3&gt;安装 Raspberry Pi OS&lt;/h3&gt;
 &lt;p&gt;从官网下载 SD 卡工具 https://www.raspberrypi.org/downloads/&lt;/p&gt;
 &lt;p&gt;选择不需要桌面环境的 Raspberry Pi OS (32-bit) Lite (Minimal image based on Debian Buster&lt;/p&gt;
