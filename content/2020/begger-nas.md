@@ -27,7 +27,7 @@ Summary: 用树莓派3b做一个乞丐版 NAS
 
 ## 软件安装
 
-推荐安装 openmediavault 开源的 nas 系统，基于 debian，基于 web 管理，非常方便
+推荐安装 openmediavault 开源的 nas 系统，基于 debian，通过 web 管理，非常方便
 
 ### 安装 Raspberry Pi OS
 
