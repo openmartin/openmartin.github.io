@@ -119,31 +119,31 @@
 <h2>Java 代码</h2>
 <p>jdk 8 包含的 java.time 包含很多日期和时间的功能</p>
 <div class="highlight"><pre><span></span><span class="c1">// 2020 年第一周的开始时间和结束时间</span>
-<span class="kt">int</span> <span class="n">year</span> <span class="o">=</span> <span class="mi">2020</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">week</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="n">WeekFields</span> <span class="n">weekFields</span> <span class="o">=</span> <span class="n">WeekFields</span><span class="p">.</span><span class="na">ISO</span><span class="p">;</span> <span class="c1">// 或者 SUNDAY_START 一周从星期天开始</span>
+<span class="kt">int</span> <span class="n">year</span> <span class="o">=</span> <span class="mi">2020</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">week</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="n">WeekFields</span> <span class="n">weekFields</span> <span class="o">=</span> <span class="n">WeekFields</span><span class="o">.</span><span class="na">ISO</span><span class="o">;</span> <span class="c1">// 或者 SUNDAY_START 一周从星期天开始</span>
 
-<span class="n">LocalDate</span> <span class="n">start</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">()</span>
-        <span class="p">.</span><span class="na">withYear</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
-    <span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">weekFields</span><span class="p">.</span><span class="na">weekOfYear</span><span class="p">(),</span> <span class="n">week</span><span class="p">)</span>
-    <span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">weekFields</span><span class="p">.</span><span class="na">dayOfWeek</span><span class="p">(),</span> <span class="mi">1L</span><span class="p">);</span>
+<span class="n">LocalDate</span> <span class="n">start</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">withYear</span><span class="o">(</span><span class="n">year</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">weekFields</span><span class="o">.</span><span class="na">weekOfYear</span><span class="o">(),</span> <span class="n">week</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">weekFields</span><span class="o">.</span><span class="na">dayOfWeek</span><span class="o">(),</span> <span class="mi">1L</span><span class="o">);</span>
 
-<span class="n">LocalDate</span> <span class="n">end</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">()</span>
-        <span class="p">.</span><span class="na">withYear</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
-        <span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">weekFields</span><span class="p">.</span><span class="na">weekOfYear</span><span class="p">(),</span> <span class="n">week</span><span class="p">)</span>
-        <span class="p">.</span><span class="na">with</span><span class="p">(</span><span class="n">weekFields</span><span class="p">.</span><span class="na">dayOfWeek</span><span class="p">(),</span> <span class="mi">7L</span><span class="p">);</span>
+<span class="n">LocalDate</span> <span class="n">end</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">withYear</span><span class="o">(</span><span class="n">year</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">weekFields</span><span class="o">.</span><span class="na">weekOfYear</span><span class="o">(),</span> <span class="n">week</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">with</span><span class="o">(</span><span class="n">weekFields</span><span class="o">.</span><span class="na">dayOfWeek</span><span class="o">(),</span> <span class="mi">7L</span><span class="o">);</span>
 
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>  <span class="c1">// 2019-12-29</span>
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>    <span class="c1">// 2020-01-04</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">start</span><span class="o">);</span>  <span class="c1">// 2019-12-29</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">end</span><span class="o">);</span>    <span class="c1">// 2020-01-04</span>
 </pre></div>
 
 
 <div class="highlight"><pre><span></span><span class="c1">// 当前时间是今年的第几周</span>
-<span class="n">LocalDate</span> <span class="n">today</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
-<span class="kt">int</span> <span class="n">week</span> <span class="o">=</span> <span class="n">today</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">IsoFields</span><span class="p">.</span><span class="na">WEEK_OF_WEEK_BASED_YEAR</span><span class="p">);</span>
-<span class="kt">int</span> <span class="n">weekYear</span> <span class="o">=</span> <span class="n">today</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">IsoFields</span><span class="p">.</span><span class="na">WEEK_BASED_YEAR</span><span class="p">);</span>
+<span class="n">LocalDate</span> <span class="n">today</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">week</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">IsoFields</span><span class="o">.</span><span class="na">WEEK_OF_WEEK_BASED_YEAR</span><span class="o">);</span>
+<span class="kt">int</span> <span class="n">weekYear</span> <span class="o">=</span> <span class="n">today</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">IsoFields</span><span class="o">.</span><span class="na">WEEK_BASED_YEAR</span><span class="o">);</span>
 
-<span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;now: %s is %d week of weekYear %d&quot;</span><span class="p">,</span> <span class="n">today</span><span class="p">,</span> <span class="n">week</span><span class="p">,</span> <span class="n">weekYear</span><span class="p">);</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">&quot;now: %s is %d week of weekYear %d&quot;</span><span class="o">,</span> <span class="n">today</span><span class="o">,</span> <span class="n">week</span><span class="o">,</span> <span class="n">weekYear</span><span class="o">);</span>
 </pre></div>
   </div>
   <div class="tag-cloud">
