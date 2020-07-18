@@ -109,8 +109,8 @@
   <div>
     <h2>shell</h2>
 <p>在.bashrc(bash shell) 或者 .zshrc(zshell) 中增加环境变量,具体路径注意自己修改:</p>
-<div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">SPARK_HOME</span><span class="o">=</span><span class="ss">&quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&quot;</span>
-<span class="n">export</span> <span class="n">PYTHONPATH</span><span class="o">=</span><span class="ss">&quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&quot;</span>
+<div class="highlight"><pre><span></span><span class="err">export SPARK_HOME=&quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&quot;</span>
+<span class="err">export PYTHONPATH=&quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&quot;</span>
 </pre></div>
 
 
@@ -118,8 +118,8 @@
 <h2>pycharm</h2>
 <p>在PyCharm的menu中找到Run -- Edit Configurations</p>
 <p>在Defaults当中找到python, 点击Environment, 增加两行环境变量:</p>
-<div class="highlight"><pre><span></span><span class="n">SPARK_HOME</span><span class="o">=</span><span class="ss">&quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&quot;</span>
-<span class="n">PYTHONPATH</span><span class="o">=</span><span class="ss">&quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&quot;</span>
+<div class="highlight"><pre><span></span><span class="err">SPARK_HOME=&quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&quot;</span>
+<span class="err">PYTHONPATH=&quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&quot;</span>
 </pre></div>
 
 

@@ -109,10 +109,10 @@
   <div>
     <h2>遇到的问题</h2>
 <p>在 centos  7 的 yum 源中 redis 的版本为 3.2.12-2.el7，想要安装最新版的 redis 6，只能通过源代码安装，但是默认的环境会遇到编译问题，如下：</p>
-<div class="highlight"><pre><span></span><span class="nv">In</span> <span class="nv">file</span> <span class="nv">included</span> <span class="nv">from</span> <span class="nv">server</span>.<span class="nv">c</span>:<span class="mi">30</span>:<span class="mi">0</span>:
-<span class="nv">server</span>.<span class="nv">h</span>:<span class="mi">1022</span>:<span class="mi">5</span>: <span class="nv">error</span>: <span class="nv">expected</span> <span class="nv">specifier</span><span class="o">-</span><span class="nv">qualifier</span><span class="o">-</span><span class="nv">list</span> <span class="nv">before</span> <span class="s1">&#39;</span><span class="s">_Atomic</span><span class="s1">&#39;</span>
-     <span class="nv">_Atomic</span> <span class="nv">unsigned</span> <span class="nv">int</span> <span class="nv">lruclock</span><span class="c1">; /* Clock for LRU eviction */</span>
-     <span class="o">^</span>
+<div class="highlight"><pre><span></span><span class="err">In file included from server.c:30:0:</span>
+<span class="err">server.h:1022:5: error: expected specifier-qualifier-list before &#39;_Atomic&#39;</span>
+<span class="err">     _Atomic unsigned int lruclock; /* Clock for LRU eviction */</span>
+<span class="err">     ^</span>
 </pre></div>
 
 
@@ -120,15 +120,15 @@
 <h2>解决办法</h2>
 <p>解决办法就是升级 gcc 版本</p>
 <p>升级到 gcc 7.3</p>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">centos</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="n">scl</span>
-<span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">gcc</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="k">c</span><span class="o">++</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">binutils</span>
-<span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span> <span class="n">bash</span>
+<div class="highlight"><pre><span></span><span class="err">sudo yum -y install centos-release-scl</span>
+<span class="err">sudo yum -y install devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils</span>
+<span class="err">sudo scl enable devtoolset-7 bash</span>
 </pre></div>
 
 
 <p>还可以选择升级到其他版本</p>
-<div class="highlight"><pre><span></span><span class="n">devtoolset</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span> <span class="n">gcc</span> <span class="mi">8</span><span class="p">.</span><span class="mi">3</span>
-<span class="n">devtoolset</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span> <span class="n">gcc</span> <span class="mi">9</span><span class="p">.</span><span class="mi">1</span>
+<div class="highlight"><pre><span></span><span class="c">devtoolset-8: gcc 8.3</span>
+<span class="c">devtoolset-9: gcc 9.1</span>
 </pre></div>
 
 
@@ -147,9 +147,9 @@ $ make
 
 
 <p>修改配置文件</p>
-<div class="highlight"><pre><span></span><span class="n">bind</span> <span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">100</span> <span class="mi">127</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">1</span> <span class="p">::</span><span class="mi">1</span> 
-<span class="n">daemonize</span> <span class="n">yes</span>
-<span class="n">appendonly</span> <span class="n">yes</span>
+<div class="highlight"><pre><span></span><span class="err">bind 192.168.1.100 127.0.0.1 ::1 </span>
+<span class="err">daemonize yes</span>
+<span class="err">appendonly yes</span>
 </pre></div>
 
 

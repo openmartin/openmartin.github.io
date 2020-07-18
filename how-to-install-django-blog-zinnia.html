@@ -114,28 +114,28 @@
 <p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
 <h2>virtualenv</h2>
 <p>virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">virtualenv</span>
-<span class="o">#</span> <span class="err">创建虚拟环境</span>
-<span class="n">virtualenv</span> <span class="n">ENV</span>
-<span class="n">cd</span> <span class="n">ENV</span>
-<span class="k">source</span> <span class="p">.</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">activate</span>
+<div class="highlight"><pre><span></span><span class="err">pip install virtualenv</span>
+<span class="err"># 创建虚拟环境</span>
+<span class="err">virtualenv ENV</span>
+<span class="err">cd ENV</span>
+<span class="err">source ./bin/activate</span>
 </pre></div>
 
 
 <p>磨刀不误砍柴工，接下来开始大展身手啦。</p>
 <h2>django-zinnia-blog</h2>
 <p>直接使用pip安装:</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Pillow</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="n">zinnia</span><span class="o">-</span><span class="n">blog</span>
-<span class="o">#</span><span class="err">如果数据库使用</span><span class="n">MySQL</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">mysql</span>
+<div class="highlight"><pre><span></span><span class="err">pip install Pillow</span>
+<span class="err">pip install django-zinnia-blog</span>
+<span class="err">#如果数据库使用MySQL</span>
+<span class="err">pip install python-mysql</span>
 </pre></div>
 
 
 <p>然后按照 <a href="http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html">http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html</a> 建立一个django-project</p>
 <p>Django1.7的命令和以前有些不一样，记录一下:</p>
-<div class="highlight"><pre><span></span><span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">migrate</span>
-<span class="n">mamage</span><span class="p">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+<div class="highlight"><pre><span></span><span class="err">manage.py migrate</span>
+<span class="err">mamage.py createsuperuser</span>
 </pre></div>
 
 
