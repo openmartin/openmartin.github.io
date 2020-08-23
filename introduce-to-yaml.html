@@ -112,7 +112,7 @@
 <p>官方的定义是这样写的：YAML is a human friendly data serialization standard for all programming languages.</p>
 <h2>可读性好</h2>
 <p>YAML格式有很好的可读性，对比JSON格式，增加了换行和缩进，就像Python一样。:</p>
-<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span> <span class="n">Vorlin</span> <span class="n">Laruknuzum</span>
+<div class="highlight"><pre><span></span><span class="n">name</span><span class="o">:</span> <span class="n">Vorlin</span> <span class="n">Laruknuzum</span>
 <span class="n">sex</span><span class="o">:</span> <span class="n">Male</span>
 <span class="kd">class</span><span class="o">:</span> <span class="n">Priest</span>
 <span class="n">title</span><span class="o">:</span> <span class="n">Acolyte</span>
@@ -123,7 +123,7 @@
 <span class="o">-</span> <span class="n">a</span> <span class="n">Holy</span> <span class="n">Book</span> <span class="n">of</span> <span class="n">Prayers</span> <span class="o">(</span><span class="n">Words</span> <span class="n">of</span> <span class="n">Wisdom</span><span class="o">)</span>
 <span class="o">-</span> <span class="n">an</span> <span class="n">Azure</span> <span class="n">Potion</span> <span class="n">of</span> <span class="n">Cure</span> <span class="n">Light</span> <span class="n">Wounds</span>
 <span class="o">-</span> <span class="n">a</span> <span class="n">Silver</span> <span class="n">Wand</span> <span class="n">of</span> <span class="n">Wonder</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>注释和文档结构</h2>
@@ -138,14 +138,14 @@
 <li>Scalar</li>
 </ol>
 <p>Scalar 的格式很灵活，可以不带引号, 单引号(不需要转义)，双引号（需要转义），还可以有多行的形式:</p>
-<div class="highlight"><pre><span></span><code><span class="gd">--- |</span>
+<div class="highlight"><pre><span></span><span class="gd">--- |</span>
 Hello, world!
 Have a line break
 
 <span class="gd">--- &gt;</span>
 Hello, World!
 no line break
-</code></pre></div>
+</pre></div>
 
 
 <p>更多情况参考 <a href="http://www.yaml.org/spec/1.2/spec.html">http://www.yaml.org/spec/1.2/spec.html</a> 2.3. Scalars</p>
@@ -157,13 +157,13 @@ no line break
 <li>Mapping</li>
 </ol>
 <p>同样，Mapping也有两种形式，我们直接看例子吧:</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt;&gt;&gt; yaml.load(&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><span class="err">&gt;&gt;&gt; yaml.load(&quot;&quot;&quot;</span>
 <span class="err">... main:</span>
 <span class="err">...     game: hearthstone</span>
 <span class="err">...     role: {name: Jaina, class: magician}</span>
 <span class="err">... &quot;&quot;&quot;)</span>
 <span class="err">{&#39;main&#39;: {&#39;game&#39;: &#39;hearthstone&#39;, &#39;role&#39;: {&#39;name&#39;: &#39;Jaina&#39;, &#39;class&#39;: &#39;magician&#39;}}}</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>python 和 yaml</h2>

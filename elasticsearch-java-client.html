@@ -109,16 +109,16 @@
   <div>
     <h2>Java REST Client</h2>
 <h3>maven 配置</h3>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.client<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>elasticsearch-rest-high-level-client<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>7.2.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>spring 构建 RestHighLevelClient 对象</h3>
-<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- config elasticsearch RestHighLevelClient --&gt;</span>
+<div class="highlight"><pre><span></span><span class="c">&lt;!-- config elasticsearch RestHighLevelClient --&gt;</span>
 <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;httpHost&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.http.HttpHost&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">value=</span><span class="s">&quot;${elasticsearch.host}&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;1&quot;</span> <span class="na">value=</span><span class="s">&quot;${elasticsearch.port}&quot;</span><span class="nt">/&gt;</span>
@@ -137,12 +137,12 @@
 <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;restHighLevelClient&quot;</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestHighLevelClient&quot;</span> <span class="na">destroy-method=</span><span class="s">&quot;close&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">ref=</span><span class="s">&quot;restClientBuilder&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/bean&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>使用 Demo</h3>
 <p>API 使用方法 https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html</p>
-<div class="highlight"><pre><span></span><code><span class="n">SearchRequest</span> <span class="n">searchRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchRequest</span><span class="p">(</span><span class="s">&quot;web-log-2019-01&quot;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="n">SearchRequest</span> <span class="n">searchRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchRequest</span><span class="p">(</span><span class="s">&quot;web-log-2019-01&quot;</span><span class="p">);</span>
 <span class="n">SearchSourceBuilder</span> <span class="n">searchSourceBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchSourceBuilder</span><span class="p">();</span>
 
 <span class="c1">// 设置分页</span>
@@ -166,27 +166,27 @@
     <span class="c1">// do something with the SearchHit</span>
     <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="na">getSourceAsString</span><span class="p">());</span>
 <span class="p">}</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>Elasticsearch SQL</h2>
 <h3>maven 配置</h3>
 <p>添加 repository</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;repository&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;repository&gt;</span>
     <span class="nt">&lt;id&gt;</span>elastic.co<span class="nt">&lt;/id&gt;</span>
     <span class="nt">&lt;name&gt;</span>Elastic Repository<span class="nt">&lt;/name&gt;</span>
     <span class="nt">&lt;url&gt;</span>https://artifacts.elastic.co/maven<span class="nt">&lt;/url&gt;</span>
 <span class="nt">&lt;/repository&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>dependency</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.plugin<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>x-pack-sql-jdbc<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>${es.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>Elasticsearch SQL + mybatis + spring</h3>

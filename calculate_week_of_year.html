@@ -110,15 +110,15 @@
 <p>计算每年的周数有两个个很明显的问题，就是第一周从什么时候开始？还有每周的第一天按星期一算还是星期天算？</p>
 <h2>国际标准</h2>
 <p>ISO 8601 或者 GB/T 7408-2005《数据元和交换格式信息交换日期和时间表示法》 中有一个计算每年第一周的国际标准，一般都会采用这个标准</p>
-<div class="highlight"><pre><span></span><code><span class="err">即一年中的第一个日历星期包括该年的第一个星期四，并且日历年的最后一个日历星期就是在下一个日历年的第一个日历星期之前的那个星期，日历星期数是其在该年中的顺序。</span>
+<div class="highlight"><pre><span></span><span class="err">即一年中的第一个日历星期包括该年的第一个星期四，并且日历年的最后一个日历星期就是在下一个日历年的第一个日历星期之前的那个星期，日历星期数是其在该年中的顺序。</span>
 
 <span class="err">确定第</span><span class="mi">1</span><span class="err">个日历星期的规则与规则“第一个日历星期是包含</span><span class="mi">1</span><span class="err">月</span><span class="mi">4</span><span class="err">日的星期”是等同的。</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>Java 代码</h2>
 <p>jdk 8 包含的 java.time 包含很多日期和时间的功能</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// 2020 年第一周的开始时间和结束时间</span>
+<div class="highlight"><pre><span></span><span class="c1">// 2020 年第一周的开始时间和结束时间</span>
 <span class="kt">int</span> <span class="n">year</span> <span class="o">=</span> <span class="mi">2020</span><span class="p">;</span>
 <span class="kt">int</span> <span class="n">week</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="n">WeekFields</span> <span class="n">weekFields</span> <span class="o">=</span> <span class="n">WeekFields</span><span class="p">.</span><span class="na">ISO</span><span class="p">;</span> <span class="c1">// 或者 SUNDAY_START 一周从星期天开始</span>
@@ -135,16 +135,16 @@
 
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">start</span><span class="p">);</span>  <span class="c1">// 2019-12-29</span>
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">end</span><span class="p">);</span>    <span class="c1">// 2020-01-04</span>
-</code></pre></div>
+</pre></div>
 
 
-<div class="highlight"><pre><span></span><code><span class="c1">// 当前时间是今年的第几周</span>
+<div class="highlight"><pre><span></span><span class="c1">// 当前时间是今年的第几周</span>
 <span class="n">LocalDate</span> <span class="n">today</span> <span class="o">=</span> <span class="n">LocalDate</span><span class="p">.</span><span class="na">now</span><span class="p">();</span>
 <span class="kt">int</span> <span class="n">week</span> <span class="o">=</span> <span class="n">today</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">IsoFields</span><span class="p">.</span><span class="na">WEEK_OF_WEEK_BASED_YEAR</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">weekYear</span> <span class="o">=</span> <span class="n">today</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">IsoFields</span><span class="p">.</span><span class="na">WEEK_BASED_YEAR</span><span class="p">);</span>
 
 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;now: %s is %d week of weekYear %d&quot;</span><span class="p">,</span> <span class="n">today</span><span class="p">,</span> <span class="n">week</span><span class="p">,</span> <span class="n">weekYear</span><span class="p">);</span>
-</code></pre></div>
+</pre></div>
   </div>
   <div class="tag-cloud">
     <p>

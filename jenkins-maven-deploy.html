@@ -111,8 +111,8 @@
   <div>
     <h2>安装 Jenkins</h2>
 <p>下载 <a href="https://jenkins.io/zh/download/">jenkin.war</a>, 可以当作一个独立的 jar 文件运行。</p>
-<div class="highlight"><pre><span></span><code><span class="err">nohup java -jar jenkins.war --httpPort=8080 &amp;</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">nohup java -jar jenkins.war --httpPort=8080 &amp;</span>
+</pre></div>
 
 
 <h3>安装后设置向导</h3>
@@ -128,7 +128,7 @@
 </ul>
 <h2>配置 Maven</h2>
 <p>编辑<code>$HOME/.m2/settings.xml</code>， 如果是在内网中，需要设置代理，如果网速不够快，可以设置 aliyun 镜像</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
   <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
   <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0</span>
 <span class="s">  https://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
@@ -165,7 +165,7 @@
   <span class="nt">&lt;/mirrors&gt;</span>
 
 <span class="nt">&lt;/settings&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>配置 Jenkins 流水线</h2>
@@ -173,7 +173,7 @@
 <p>很多例子中都是用了 docker 来准备环境，其实不是用 docker 也可以，前提条件是系统中配置了所需要的工具，比如 maven，java</p>
 <p>如果是通过 <code>java -jar jenkins.war --httpPort=8080</code> 运行的，则可以使用的命令和当前用户一样</p>
 <p>如果是通过 yum，apt 之类的工具安装的 Jenkins service，则使用的是 jenkins 用户，需要配置 jenkins 用户的 shell 环境。</p>
-<div class="highlight"><pre><span></span><code><span class="err">pipeline {</span>
+<div class="highlight"><pre><span></span><span class="err">pipeline {</span>
 <span class="err">    agent any</span>
 <span class="err">    stages {</span>
 <span class="err">        stage(&#39;Build&#39;) {</span>
@@ -188,7 +188,7 @@
 <span class="err">        }</span>
 <span class="err">    }</span>
 <span class="err">}</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>使用 curl 通过 tomcat manager 部署 war</h2>
@@ -196,30 +196,30 @@
 <ol>
 <li>配置 webapps\manager\META-INF\context.xml，允许远程登录</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;Context</span> <span class="na">antiResourceLocking=</span><span class="s">&quot;false&quot;</span> <span class="na">privileged=</span><span class="s">&quot;true&quot;</span> <span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;Context</span> <span class="na">antiResourceLocking=</span><span class="s">&quot;false&quot;</span> <span class="na">privileged=</span><span class="s">&quot;true&quot;</span> <span class="nt">&gt;</span>
   <span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">&quot;org.apache.catalina.valves.RemoteAddrValve&quot;</span>
          <span class="na">allow=</span><span class="s">&quot;127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|192\.168\.\d+\.\d+\.|10\.\d+\.\d+\.\d+&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;Manager</span> <span class="na">sessionAttributeValueClassNameFilter=</span><span class="s">&quot;java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/Context&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <ol>
 <li>配置 conf\tomcat-user.xml</li>
 </ol>
-<div class="highlight"><pre><span></span><code>  <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span>  <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-script&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-status&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;tomcat&quot;</span> <span class="na">password=</span><span class="s">&quot;tomcat&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;jenkins&quot;</span> <span class="na">password=</span><span class="s">&quot;jenkins&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager-script, manager-status&quot;</span><span class="nt">/&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <ol>
 <li>curl </li>
 </ol>
 <p>在 tomcat 配置完之后，就可以使用 curl 来 undeploy 和 deploy war 文件， 所有可以使用的命令参考 <a href="http://192.168.142.239:8080/docs/manager-howto.html#Supported_Manager_Commands">tomcat manager</a></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># !/bin/bash</span>
+<div class="highlight"><pre><span></span><span class="c1"># !/bin/bash</span>
 <span class="nb">unset</span> http_proxy
 <span class="nb">unset</span> https_proxy
 
@@ -232,7 +232,7 @@ curl -s -u jenkins:jenkins <span class="s2">&quot;http://192.168.142.239:8080/ma
 <span class="nb">set</span> -x
 curl -s -u jenkins:jenkins -T target/rms.war <span class="s2">&quot;http://192.168.142.239:8080/manager/text/deploy?path=/rms&quot;</span>
 <span class="nb">set</span> +x
-</code></pre></div>
+</pre></div>
 
 
 <h2>Gitlab 触发 Jenkins pipline</h2>

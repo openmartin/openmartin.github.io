@@ -130,34 +130,34 @@
 <h3>修改源</h3>
 <p>修改下面的文件，连接国内的镜像源速度更快</p>
 <p>/etc/apt/sources.list</p>
-<div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
+<div class="highlight"><pre><span></span><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
 <span class="k">deb-src</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>/etc/apt/sources.list.d/raspi.list</p>
-<div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">ui</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">ui</span>
+</pre></div>
 
 
 <p>更新系统</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get update</span>
+<div class="highlight"><pre><span></span><span class="err">sudo apt-get update</span>
 <span class="err">sudo apt-get upgrade</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>安装 openmediavault</h3>
 <p>openmediavault 官方有一个 <a href="https://forum.openmediavault.org/index.php?thread/28789-installing-omv5-on-raspberry-pi-s-armbian-sbc-s-i386-32-bit-platforms/">guide</a> </p>
 <p>按照官方的步骤就可以了</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get update</span>
+<div class="highlight"><pre><span></span><span class="err">sudo apt-get update</span>
 <span class="err">sudo apt-get upgrade -y</span>
 <span class="err">sudo rm -f /etc/systemd/network/99-default.link ## 一点要记得删除，否则后续网络会有问题</span>
 <span class="err">sudo reboot</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>在国内访问 github 会有点问题，导致下载安装脚本失败。通过修改host文件可以解决这个问题, 从这个repo https://github.com/googlehosts/hosts 找到 github 的部分。 在 <code>/etc/hosts</code> 中增加：</p>
-<div class="highlight"><pre><span></span><code><span class="err"># GitHub Start</span>
+<div class="highlight"><pre><span></span><span class="err"># GitHub Start</span>
 <span class="err">192.30.255.112  gist.github.com</span>
 <span class="err">192.30.255.112  github.com</span>
 <span class="err">192.30.255.112  www.github.com</span>
@@ -178,19 +178,19 @@
 <span class="err">151.101.56.133  repository-images.githubusercontent.com</span>
 <span class="err">151.101.56.133  user-images.githubusercontent.com</span>
 <span class="err"># GitHub End</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>执行安装脚本，然后等着就可以了，时间会有点长。</p>
-<div class="highlight"><pre><span></span><code><span class="err">wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash</span>
+</pre></div>
 
 
 <h3>硬盘底座的设备配置</h3>
 <p>使用硬盘底座，硬盘的序列号显示不正确，需要修改配置， 见 https://openmediavault.readthedocs.io/en/5.x/troubleshooting.html</p>
-<div class="highlight"><pre><span></span><code><span class="err"># JMicron drive fix</span>
+<div class="highlight"><pre><span></span><span class="err"># JMicron drive fix</span>
 <span class="err">KERNEL==&quot;sd*&quot;, ENV{ID_VENDOR}==&quot;JMicron&quot;, SUBSYSTEMS==&quot;usb&quot;, PROGRAM=&quot;/root/serial.sh %k&quot;, ENV{ID_SERIAL}=&quot;USB-%c&quot;, ENV{ID_SERIAL_SHORT}=&quot;%c&quot;</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>配置 samba</h3>

@@ -112,18 +112,18 @@
 <p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
 <h2>安装pyside</h2>
 <p>在Ubuntu 和　DeepinLinux　下安装非常方便:</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get install python-pyside</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">sudo apt-get install python-pyside</span>
+</pre></div>
 
 
 <p>或者使用pip安装:</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo pip install pyside</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span><span class="err">sudo pip install pyside</span>
+</pre></div>
 
 
 <h2>创建窗口</h2>
 <p>学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">class</span> <span class="nt">MainWindow</span><span class="o">(</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="o">):</span>
+<div class="highlight"><pre><span></span><span class="nt">class</span> <span class="nt">MainWindow</span><span class="o">(</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="o">):</span>
     <span class="nt">def</span> <span class="nt">__init__</span><span class="o">(</span><span class="nt">self</span><span class="o">):</span>
         <span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="p">.</span><span class="nc">__init__</span><span class="o">(</span><span class="nt">self</span><span class="o">)</span>
 
@@ -166,7 +166,7 @@
     <span class="nt">mw</span><span class="o">=</span><span class="nt">MainWindow</span><span class="o">()</span>
     <span class="nt">mw</span><span class="p">.</span><span class="nc">show</span><span class="o">()</span>
     <span class="nt">sys</span><span class="p">.</span><span class="nc">exit</span><span class="o">(</span><span class="nt">mapp</span><span class="p">.</span><span class="nc">exec_</span><span class="o">())</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>设计UI</h2>

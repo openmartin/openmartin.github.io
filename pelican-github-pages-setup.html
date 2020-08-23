@@ -109,11 +109,11 @@
   <div>
     <h2>安装 pelican</h2>
 <p>在 Python 3.5 以上，官方已经集成了虚拟环境功能，不需要再使用 <code>virtualenv</code></p>
-<div class="highlight"><pre><span></span><code><span class="err">python3 -m venv pelican_env</span>
+<div class="highlight"><pre><span></span><span class="err">python3 -m venv pelican_env</span>
 <span class="err">cd pelican_env</span>
 <span class="err">source bin/active</span>
 <span class="err">pip install pelican markdown ghp-import</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>新建 pelican 项目</h2>
@@ -122,7 +122,7 @@
 <li>在项目文件夹中运行 <code>pelican-quickstart</code></li>
 </ul>
 <p>在选择的过程中注意选择 default language, time zone, Using Github Pages</p>
-<div class="highlight"><pre><span></span><code><span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span><span class="w"> </span><span class="n">v4</span><span class="mf">.0.1</span><span class="p">.</span><span class="w"></span>
+<div class="highlight"><pre><span></span><span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span><span class="w"> </span><span class="n">v4</span><span class="mf">.0.1</span><span class="p">.</span><span class="w"></span>
 
 <span class="n">This</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pelican</span><span class="o">-</span><span class="n">based</span><span class="w"> </span><span class="n">website</span><span class="p">.</span><span class="w"></span>
 
@@ -147,7 +147,7 @@
 <span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">Pages</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
 <span class="o">&gt;</span><span class="w"> </span><span class="k">Is</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">)</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
 <span class="n">Done</span><span class="p">.</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">demo</span><span class="o">/</span><span class="n">pelican_env</span><span class="o">/</span><span class="n">yourname</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="w"></span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>pelican config</h2>
@@ -156,7 +156,7 @@
 <figure class='code'>
 <figcaption><span class="liquid-tags-code-filename">pelicanconf.py</span><a href='/code/../code/pelicanconf.py'>download</a></figcaption>
 
-<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*- #</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -274,7 +274,7 @@
         <span class="s1">&#39;article_bottom&#39;</span><span class="p">:</span> <span class="s1">&#39;4393383534&#39;</span><span class="p">,</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</pre></div>
 
 
 </figure>
@@ -282,7 +282,7 @@
 <h2>新建一篇 markdown</h2>
 <p>在 <code>content</code> 文件夹下可以放 markdown 文件和一些图片，或者自定义的 css,js 文件</p>
 <p>和普通的 markdown 不同的是在文件头上需要写一些 metadata，参考<a href="https://docs.getpelican.com/en/stable/content.html#file-metadata">官方文档</a></p>
-<div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">My</span> <span class="kd">super</span> <span class="n">title</span>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">My</span> <span class="kd">super</span> <span class="n">title</span>
 <span class="n">Date</span><span class="o">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span><span class="o">:</span><span class="mi">20</span>
 <span class="n">Modified</span><span class="o">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">05</span> <span class="mi">19</span><span class="o">:</span><span class="mi">30</span>
 <span class="n">Category</span><span class="o">:</span> <span class="n">Python</span>
@@ -290,7 +290,7 @@
 <span class="n">Slug</span><span class="o">:</span> <span class="n">my</span><span class="o">-</span><span class="kd">super</span><span class="o">-</span><span class="n">post</span>
 <span class="n">Authors</span><span class="o">:</span> <span class="n">Alexis</span> <span class="n">Metaireau</span><span class="o">,</span> <span class="n">Conan</span> <span class="n">Doyle</span>
 <span class="n">Summary</span><span class="o">:</span> <span class="n">Short</span> <span class="n">version</span> <span class="k">for</span> <span class="n">index</span> <span class="n">and</span> <span class="n">feeds</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>Github Pages 提交</h2>
@@ -298,19 +298,19 @@
 <li>.gitignore 添加 output 文件夹 参考 <a href="https://github.com/getpelican/pelican-blog/blob/master/.gitignore">官方博客</a></li>
 <li>新建<code>source</code>分支，把原始的 markdown 文件和 配置文件都放到<code>source</code> 分支上</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">git checkout -b source</span>
+<div class="highlight"><pre><span></span><span class="err">git checkout -b source</span>
 <span class="err">git add .</span>
 <span class="err">git commit -a -m &quot;Initial commit&quot;</span>
 <span class="err">git push -u origin source</span>
-</code></pre></div>
+</pre></div>
 
 
 <ul>
 <li>把生成的 html 放到 master 分支上，然后 push 到 Github 上</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span> <span class="o">-</span><span class="n">r</span> <span class="n">origin</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span>
+<div class="highlight"><pre><span></span><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span> <span class="o">-</span><span class="n">r</span> <span class="n">origin</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span>
 <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>
-</code></pre></div>
+</pre></div>
 
 
 <ul>

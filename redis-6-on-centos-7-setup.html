@@ -109,48 +109,48 @@
   <div>
     <h2>遇到的问题</h2>
 <p>在 centos  7 的 yum 源中 redis 的版本为 3.2.12-2.el7，想要安装最新版的 redis 6，只能通过源代码安装，但是默认的环境会遇到编译问题，如下：</p>
-<div class="highlight"><pre><span></span><code><span class="err">In file included from server.c:30:0:</span>
+<div class="highlight"><pre><span></span><span class="err">In file included from server.c:30:0:</span>
 <span class="err">server.h:1022:5: error: expected specifier-qualifier-list before &#39;_Atomic&#39;</span>
 <span class="err">     _Atomic unsigned int lruclock; /* Clock for LRU eviction */</span>
 <span class="err">     ^</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>是因为默认的 gcc 版本(gcc version 4.8.5)太低导致，不支持新特性</p>
 <h2>解决办法</h2>
 <p>解决办法就是升级 gcc 版本</p>
 <p>升级到 gcc 7.3</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo yum -y install centos-release-scl</span>
+<div class="highlight"><pre><span></span><span class="err">sudo yum -y install centos-release-scl</span>
 <span class="err">sudo yum -y install devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils</span>
 <span class="err">sudo scl enable devtoolset-7 bash</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>还可以选择升级到其他版本</p>
-<div class="highlight"><pre><span></span><code><span class="c">devtoolset-8: gcc 8.3</span>
+<div class="highlight"><pre><span></span><span class="c">devtoolset-8: gcc 8.3</span>
 <span class="c">devtoolset-9: gcc 9.1</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>升级完成之后并不会覆盖系统默认的gcc，需要使用脚本来切换，x为要启用的版本</p>
-<div class="highlight"><pre><span></span><code>scl <span class="nb">enable</span> devtoolset-x bash 
-</code></pre></div>
+<div class="highlight"><pre><span></span>scl <span class="nb">enable</span> devtoolset-x bash 
+</pre></div>
 
 
 <h2>安装和配置</h2>
 <p>后续就可以按照常规安装步骤来执行，就不再赘述了</p>
-<div class="highlight"><pre><span></span><code>$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
+<div class="highlight"><pre><span></span>$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
 $ tar xzf redis-6.0.3.tar.gz
 $ <span class="nb">cd</span> redis-6.0.3
 $ make
-</code></pre></div>
+</pre></div>
 
 
 <p>修改配置文件</p>
-<div class="highlight"><pre><span></span><code><span class="err">bind 192.168.1.100 127.0.0.1 ::1 </span>
+<div class="highlight"><pre><span></span><span class="err">bind 192.168.1.100 127.0.0.1 ::1 </span>
 <span class="err">daemonize yes</span>
 <span class="err">appendonly yes</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>打开 appendonly yes 后，会启用 RDB-AOF 混合持久化</p>

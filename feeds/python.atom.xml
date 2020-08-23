@@ -2,29 +2,29 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Python</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/python.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-05-25T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>修复 virtualenv 环境</title><link href="https://xingzuoshe.cn/fix-python-virtualenv.html" rel="alternate"></link><published>2020-05-25T12:00:00+08:00</published><updated>2020-05-25T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/fix-python-virtualenv.html</id><summary type="html">&lt;p&gt;很多时候升级 python 之后，virtualenv 中的软链接会失效，这时候就需要修复了&lt;/p&gt;</summary><content type="html">&lt;h2&gt;问题&lt;/h2&gt;
 &lt;p&gt;升级 python 之后，很多时候就会发现 virtualenv 失效了，因为 virtualenv 使用软链接链接到系统的 python, 系统的 python path 变化导致 virtualenv 失效&lt;/p&gt;
 &lt;h3&gt;简单的修复&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;find . -type l -delete&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;find . -type l -delete&lt;/span&gt;
 &lt;span class="err"&gt;cd ..&lt;/span&gt;
 &lt;span class="err"&gt;virtualenv -p python3 v_env&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;已经安装的 package 不需要重新安装&lt;/p&gt;
 &lt;h3&gt;复杂的修复&lt;/h3&gt;
 &lt;p&gt;有时候如果 python 版本有比较大的变动，系统的 site-packages 有很多更新，这个时候需要重新生成 virtualenv&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# 保存已经安装的 package&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;# 保存已经安装的 package&lt;/span&gt;
 &lt;span class="err"&gt;pip freeze &amp;gt; requirements.txt&lt;/span&gt;
 &lt;span class="err"&gt;# 根据需要看看 package 是否需要更新版本&lt;/span&gt;
 &lt;span class="err"&gt;# 重新生成 virtualenv&lt;/span&gt;
 &lt;span class="err"&gt;virtualenv -p python3 new_env&lt;/span&gt;
 &lt;span class="err"&gt;# 安装 package&lt;/span&gt;
 &lt;span class="err"&gt;pip install -r requirements.txt&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="virtualenv"></category></entry><entry><title>使用 Pelican 和 Github Pages 建立博客网站</title><link href="https://xingzuoshe.cn/pelican-github-pages-setup.html" rel="alternate"></link><published>2019-06-09T22:20:00+08:00</published><updated>2019-06-09T22:30:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-06-09:/pelican-github-pages-setup.html</id><summary type="html">&lt;p&gt;Pelican 是一个 Python 语言开发的静态网站生成工具，用 markdown 写完博客之后，发布到Github Pages，免费而且好用，不过配置过程有些复杂，下面记录一下配置的过程。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;安装 pelican&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="virtualenv"></category></entry><entry><title>使用 Pelican 和 Github Pages 建立博客网站</title><link href="https://xingzuoshe.cn/pelican-github-pages-setup.html" rel="alternate"></link><published>2019-06-09T22:20:00+08:00</published><updated>2019-06-09T22:30:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-06-09:/pelican-github-pages-setup.html</id><summary type="html">&lt;p&gt;Pelican 是一个 Python 语言开发的静态网站生成工具，用 markdown 写完博客之后，发布到Github Pages，免费而且好用，不过配置过程有些复杂，下面记录一下配置的过程。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;安装 pelican&lt;/h2&gt;
 &lt;p&gt;在 Python 3.5 以上，官方已经集成了虚拟环境功能，不需要再使用 &lt;code&gt;virtualenv&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;python3 -m venv pelican_env&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;python3 -m venv pelican_env&lt;/span&gt;
 &lt;span class="err"&gt;cd pelican_env&lt;/span&gt;
 &lt;span class="err"&gt;source bin/active&lt;/span&gt;
 &lt;span class="err"&gt;pip install pelican markdown ghp-import&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;新建 pelican 项目&lt;/h2&gt;
@@ -33,7 +33,7 @@
 &lt;li&gt;在项目文件夹中运行 &lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;在选择的过程中注意选择 default language, time zone, Using Github Pages&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Welcome&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;v4&lt;/span&gt;&lt;span class="mf"&gt;.0.1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Welcome&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;v4&lt;/span&gt;&lt;span class="mf"&gt;.0.1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
 &lt;span class="n"&gt;This&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;create&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;based&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 
@@ -58,7 +58,7 @@
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;GitHub&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Pages&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;personal&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;span class="n"&gt;Done&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;available&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;at&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican_env&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yourname&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;pelican config&lt;/h2&gt;
@@ -67,7 +67,7 @@
 &lt;figure class='code'&gt;
 &lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;pelicanconf.py&lt;/span&gt;&lt;a href='/code/../code/pelicanconf.py'&gt;download&lt;/a&gt;&lt;/figcaption&gt;
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
 &lt;span class="c1"&gt;# -*- coding: utf-8 -*- #&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
@@ -185,7 +185,7 @@
         &lt;span class="s1"&gt;&amp;#39;article_bottom&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;4393383534&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;/figure&gt;
@@ -193,7 +193,7 @@
 &lt;h2&gt;新建一篇 markdown&lt;/h2&gt;
 &lt;p&gt;在 &lt;code&gt;content&lt;/code&gt; 文件夹下可以放 markdown 文件和一些图片，或者自定义的 css,js 文件&lt;/p&gt;
 &lt;p&gt;和普通的 markdown 不同的是在文件头上需要写一些 metadata，参考&lt;a href="https://docs.getpelican.com/en/stable/content.html#file-metadata"&gt;官方文档&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;My&lt;/span&gt; &lt;span class="kd"&gt;super&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;My&lt;/span&gt; &lt;span class="kd"&gt;super&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;
 &lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2010&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;03&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;
 &lt;span class="n"&gt;Modified&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2010&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;05&lt;/span&gt; &lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
 &lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt;
@@ -201,7 +201,7 @@
 &lt;span class="n"&gt;Slug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kd"&gt;super&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;
 &lt;span class="n"&gt;Authors&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Alexis&lt;/span&gt; &lt;span class="n"&gt;Metaireau&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Conan&lt;/span&gt; &lt;span class="n"&gt;Doyle&lt;/span&gt;
 &lt;span class="n"&gt;Summary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Short&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;feeds&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Github Pages 提交&lt;/h2&gt;
@@ -209,19 +209,19 @@
 &lt;li&gt;.gitignore 添加 output 文件夹 参考 &lt;a href="https://github.com/getpelican/pelican-blog/blob/master/.gitignore"&gt;官方博客&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;新建&lt;code&gt;source&lt;/code&gt;分支，把原始的 markdown 文件和 配置文件都放到&lt;code&gt;source&lt;/code&gt; 分支上&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;git checkout -b source&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;git checkout -b source&lt;/span&gt;
 &lt;span class="err"&gt;git add .&lt;/span&gt;
 &lt;span class="err"&gt;git commit -a -m &amp;quot;Initial commit&amp;quot;&lt;/span&gt;
 &lt;span class="err"&gt;git push -u origin source&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;把生成的 html 放到 master 分支上，然后 push 到 Github 上&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ghp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;output&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ghp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;output&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
 &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
@@ -242,7 +242,7 @@
 &lt;/ul&gt;
 &lt;h2&gt;Editor&lt;/h2&gt;
 &lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="pelican"></category></entry><entry><title>遍历S3</title><link href="https://xingzuoshe.cn/boto-scan-s3.html" rel="alternate"></link><published>2016-07-04T20:20:00+08:00</published><updated>2016-07-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-04:/boto-scan-s3.html</id><summary type="html">&lt;p&gt;使用 boto 遍历 s3&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;boto3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_key_id&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;boto3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_key_id&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                             &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_secret_key&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                             &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -252,14 +252,14 @@
         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Contents&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Size&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
                 &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;分页默认大小是1000，可以修改PageSize，改小可以减少响应时间&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;page_iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;my-bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                                    &lt;span class="n"&gt;PaginationConfig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;PageSize&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;参考资料：
@@ -268,16 +268,16 @@
 3. https://boto3.readthedocs.io/en/latest/guide/paginators.html&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="aws"></category></entry><entry><title>python small tips</title><link href="https://xingzuoshe.cn/python-small-tips.html" rel="alternate"></link><published>2016-04-19T20:20:00+08:00</published><updated>2016-04-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-19:/python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
 &lt;h2&gt;all()&lt;/h2&gt;
 &lt;p&gt;all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def all(iterable):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;def all(iterable):&lt;/span&gt;
 &lt;span class="err"&gt;    for element in iterable:&lt;/span&gt;
 &lt;span class="err"&gt;        if not element:&lt;/span&gt;
 &lt;span class="err"&gt;            return False&lt;/span&gt;
 &lt;span class="err"&gt;    return True&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;有一些情况需要注意，当list为空时，返回True；空字符串，None，0 的结果都是False。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([])&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([])&lt;/span&gt;
 &lt;span class="err"&gt;True&lt;/span&gt;
 &lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;])&lt;/span&gt;
 &lt;span class="err"&gt;True&lt;/span&gt;
@@ -287,12 +287,12 @@
 &lt;span class="err"&gt;False&lt;/span&gt;
 &lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, 0])&lt;/span&gt;
 &lt;span class="err"&gt;False&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;注册表中有中文的问题&lt;/h2&gt;
 &lt;p&gt;在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;mimetypes.init() # try to read system mime.types&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;mimetypes.init() # try to read system mime.types&lt;/span&gt;
 &lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 358, in init&lt;/span&gt;
 &lt;span class="err"&gt;db.read_windows_registry()&lt;/span&gt;
 &lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 258, in read_windows_registry&lt;/span&gt;
@@ -300,12 +300,12 @@
 &lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 249, in enum_types&lt;/span&gt;
 &lt;span class="err"&gt;ctype = ctype.encode(default_encoding) # omit in 3.x!&lt;/span&gt;
 &lt;span class="c"&gt;UnicodeDecodeError: &amp;#39;ascii&amp;#39; codec can&amp;#39;t decode byte 0x88 in position 1: ordinal not in range(128)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;这是因为python从注册表中HKEY_CLASSES_ROOT读取mimetype时，有包含中文的文件名后缀，一般都是阿里旺旺的。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;删除这项就不会再出现UnicodeDecodeError错误。&lt;/p&gt;
@@ -315,7 +315,7 @@
 &lt;p&gt;更多信息考参考文档 &lt;a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode"&gt;http://pythonhosted.org//setuptools/setuptools.html#development-mode&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;json 格式中单引号是不合法的&lt;/h2&gt;
 &lt;p&gt;在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; json.loads(&amp;quot;[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]&amp;quot;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; json.loads(&amp;quot;[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]&amp;quot;)&lt;/span&gt;
 &lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
 &lt;span class="err"&gt;  File &amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;, line 1, in &amp;lt;module&amp;gt;&lt;/span&gt;
 &lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\__init__.py&amp;quot;, line 338, in loads&lt;/span&gt;
@@ -325,7 +325,7 @@
 &lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;, line 383, in raw_decode&lt;/span&gt;
 &lt;span class="err"&gt;    raise ValueError(&amp;quot;No JSON object could be decoded&amp;quot;)&lt;/span&gt;
 &lt;span class="err"&gt; ValueError: No JSON object could be decoded&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;redis.Redis 和 redis.StrictRedis zadd的参数顺序不一样的&lt;/h2&gt;
@@ -334,18 +334,18 @@
 &lt;p&gt;redis.StrictRedis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) 分数在前，value在后&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>导入 pyspark 到 shell 和 pycharm当中</title><link href="https://xingzuoshe.cn/pyspark-pycharm.html" rel="alternate"></link><published>2016-01-19T20:20:00+08:00</published><updated>2016-01-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-01-19:/pyspark-pycharm.html</id><summary type="html">&lt;p&gt;导入pyspark 到 shell 和 pycharm当中&lt;/p&gt;</summary><content type="html">&lt;h2&gt;shell&lt;/h2&gt;
 &lt;p&gt;在.bashrc(bash shell) 或者 .zshrc(zshell) 中增加环境变量,具体路径注意自己修改:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;export SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;export SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
 &lt;span class="err"&gt;export PYTHONPATH=&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;然后在python console 可以 import pyspark&lt;/p&gt;
 &lt;h2&gt;pycharm&lt;/h2&gt;
 &lt;p&gt;在PyCharm的menu中找到Run -- Edit Configurations&lt;/p&gt;
 &lt;p&gt;在Defaults当中找到python, 点击Environment, 增加两行环境变量:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
 &lt;span class="err"&gt;PYTHONPATH=&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;img alt="pycharm_run_add_env" src="../images/pycharm_run_add_env.jpg"&gt;&lt;/p&gt;
@@ -354,14 +354,14 @@
 &lt;p&gt;如果我们不想修改代码,可以通过一些简单的配置把请求导向本地 s3 ninja&lt;/p&gt;
 &lt;h2&gt;s3 virtual hosted-style and path-style access&lt;/h2&gt;
 &lt;p&gt;访问s3 bucket上的文件,有两种方式:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt; &lt;span class="n"&gt;bucket名字&lt;/span&gt; &lt;span class="n"&gt;johnsmith&lt;/span&gt;  &lt;span class="err"&gt;文件&lt;/span&gt; &lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt; &lt;span class="n"&gt;bucket名字&lt;/span&gt; &lt;span class="n"&gt;johnsmith&lt;/span&gt;  &lt;span class="err"&gt;文件&lt;/span&gt; &lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
 
 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt; &lt;span class="n"&gt;Style&lt;/span&gt;
 &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
 
 &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Virtual&lt;/span&gt; &lt;span class="n"&gt;Hosted&lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="n"&gt;Style&lt;/span&gt;
 &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;更多信息参考&lt;/p&gt;
@@ -371,22 +371,22 @@
 &lt;p&gt;mybucket.s3.amazonaws.com -&amp;gt; localhost:9444:s3/mybucket&lt;/p&gt;
 &lt;h3&gt;/etc/hosts&lt;/h3&gt;
 &lt;p&gt;添加一行:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;127.0.0.1 mybucket.s3.amazonaws.com&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;127.0.0.1 mybucket.s3.amazonaws.com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;这样可以把亚马逊的域名指向本地，但是端口和访问路径Path的修改需要nginx来实现&lt;/p&gt;
 &lt;h3&gt;nginx&lt;/h3&gt;
 &lt;p&gt;nginx 把127.0.0.1:80 的请求转向 127.0.0.1:9444&lt;/p&gt;
 &lt;p&gt;配置文件如下:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;server {&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;server {&lt;/span&gt;
 &lt;span class="err"&gt;listen       80;&lt;/span&gt;
 &lt;span class="err"&gt;server_name  localhost;&lt;/span&gt;
 &lt;span class="err"&gt;location / {&lt;/span&gt;
 &lt;span class="err"&gt;    proxy_pass http://127.0.0.1:9444;&lt;/span&gt;
 &lt;span class="err"&gt;    rewrite ^(.*)$ /s3/mybucket$1 break; #例如 /homepage.html =&amp;gt; /s3/mybucket/homepage.html&lt;/span&gt;
 &lt;span class="err"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;配置多个bucket&lt;/h2&gt;
@@ -397,7 +397,7 @@
 &lt;h2&gt;下载DynamoDB.local&lt;/h2&gt;
 &lt;p&gt;从亚马逊的官方文档可以找到&lt;a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html"&gt;下载地址&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;解压之后:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;dynamodb_local_2015-07-16_1.0$java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;dynamodb_local_2015-07-16_1.0$java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb&lt;/span&gt;
 &lt;span class="err"&gt;Initializing DynamoDB Local with the following configuration:&lt;/span&gt;
 &lt;span class="c"&gt;Port:   8000&lt;/span&gt;
 &lt;span class="c"&gt;InMemory:   false&lt;/span&gt;
@@ -405,7 +405,7 @@
 &lt;span class="c"&gt;SharedDb:   true&lt;/span&gt;
 &lt;span class="c"&gt;shouldDelayTransientStatuses:   false&lt;/span&gt;
 &lt;span class="c"&gt;CorsParams: *&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;在浏览器中打开http://localhost:8000/shell/，你会看到DynamoDB javascript shell，在网页上你可以试试javascript API的用法。&lt;/p&gt;
@@ -413,7 +413,7 @@
 &lt;h2&gt;Boto3&lt;/h2&gt;
 &lt;p&gt;在试用之后javascript API之后，你是不是很想念我们简洁的Python呢，接下来我们就来介绍Python的用法。&lt;/p&gt;
 &lt;p&gt;官方推荐的Pyhton SDK为Boto3，我们直接进入正题:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
 
 &lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                   &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -465,7 +465,7 @@
 
 &lt;span class="c1"&gt;# 列出有哪些表&lt;/span&gt;
 &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list_tables&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;我们有两种操作Dynamodb的方法，一种是使用Resource，另一种是使用client。&lt;/p&gt;
@@ -478,12 +478,12 @@
 &lt;p&gt;boto3 &lt;a href="https://boto3.readthedocs.org/en/latest/index.html"&gt;https://boto3.readthedocs.org/en/latest/index.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;DynamoDB &lt;a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"&gt;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&lt;/a&gt;&lt;/p&gt;</content><category term="Python"></category><category term="dynamodb"></category><category term="aws"></category></entry><entry><title>Python 中 class 的 JSON 序列化</title><link href="https://xingzuoshe.cn/python-obj-to-json.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-obj-to-json.html</id><summary type="html">&lt;p&gt;Python 中 class 的 JSON 序列化&lt;/p&gt;</summary><content type="html">&lt;p&gt;在Java中如果定义一个class，是十分方便JSON序列化的，比如说使用 jackson lib。&lt;/p&gt;
 &lt;p&gt;但是在Python中如果使用json.dumps(a)，a如果不是一个简单类型的就会报错:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;TypeError: &amp;lt;__main__.A instance at 0x109d553b0&amp;gt; is not JSON serializable&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;TypeError: &amp;lt;__main__.A instance at 0x109d553b0&amp;gt; is not JSON serializable&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;其实Python的class也十分方便JSON序列化,需要一小段代码就可以:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONEncoder&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -501,7 +501,7 @@
 
 
 &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;在使用json.dumps的时候指定ClsEncoder就能够达到目的&lt;/p&gt;</content><category term="Python"></category><category term="json"></category></entry><entry><title>使用 Python 操作亚马逊 S3</title><link href="https://xingzuoshe.cn/python-operate-s3.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-operate-s3.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 S3&lt;/p&gt;</summary><content type="html">&lt;p&gt;亚马逊S3(Amazon Simple Storage Service) 为开发人员和IT团队提供安全、耐久且扩展性高的对象存储。 可以理解为一个在线的网盘，而且这个网盘可以通过程序上传，下载，获取外链。亚马逊按照存储空间和请求次数收费。&lt;/p&gt;
@@ -509,7 +509,7 @@
 &lt;h2&gt;boto3 Python SDK&lt;/h2&gt;
 &lt;p&gt;目前官方推荐的Python SDK 是boto3 &lt;a href="https://github.com/boto/boto3"&gt;https://github.com/boto/boto3&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;接下来进入正题,直接看代码把。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
 
 &lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
     &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
@@ -527,7 +527,7 @@
     &lt;span class="s1"&gt;&amp;#39;get_object&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bucket_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
     &lt;span class="n"&gt;ExpiresIn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3600&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;简单说明一下代码，S3&lt;/p&gt;
@@ -546,18 +546,18 @@
 &lt;p&gt;怎么安装pip，参考这里 &lt;a href="https://pip.pypa.io/en/latest/installing.html"&gt;https://pip.pypa.io/en/latest/installing.html&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;安装pyside&lt;/h2&gt;
 &lt;p&gt;在Ubuntu 和　DeepinLinux　下安装非常方便:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get install python-pyside&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;sudo apt-get install python-pyside&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;或者使用pip安装:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo pip install pyside&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;sudo pip install pyside&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;创建窗口&lt;/h2&gt;
 &lt;p&gt;学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;class&lt;/span&gt; &lt;span class="nt"&gt;MainWindow&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QWidget&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;class&lt;/span&gt; &lt;span class="nt"&gt;MainWindow&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QWidget&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
     &lt;span class="nt"&gt;def&lt;/span&gt; &lt;span class="nt"&gt;__init__&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
         &lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QWidget&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;__init__&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 
@@ -600,7 +600,7 @@
     &lt;span class="nt"&gt;mw&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;MainWindow&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
     &lt;span class="nt"&gt;mw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;show&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
     &lt;span class="nt"&gt;sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;mapp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;exec_&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;设计UI&lt;/h2&gt;

@@ -117,7 +117,7 @@
 <li>加载 definition 的时候修改来实现不同的站点不同的 definition</li>
 </ol>
 <h3>SiteFilter</h3>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SiteFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SiteFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="p">{</span>
 
     <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">SITE_FILTER_ATTRIBUTE</span> <span class="o">=</span> <span class="s">&quot;SITE_FILTER_ATTRIBUTE&quot;</span><span class="p">;</span>
 
@@ -165,23 +165,23 @@
 
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>SiteTilesView</h3>
 <p>把默认的 <code>org.springframework.web.servlet.view.tiles3.TilesView</code> 替换为自己写的 <code>SiteTilesView</code></p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;viewResolver&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.web.servlet.view.UrlBasedViewResolver&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;viewResolver&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.web.servlet.view.UrlBasedViewResolver&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;viewClass&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;value&gt;</span>
             com.example.web.tiles.SiteTilesView
         <span class="nt">&lt;/value&gt;</span>
     <span class="nt">&lt;/property&gt;</span>
 <span class="nt">&lt;/bean&gt;</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>在 TilesView 上修改，根据 filter 中设置的 SITE_FILTER_ATTRIBUTE，使用不同的 Tiles Container 来 render。</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SiteTilesView</span> <span class="kd">extends</span> <span class="n">AbstractUrlBasedView</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SiteTilesView</span> <span class="kd">extends</span> <span class="n">AbstractUrlBasedView</span> <span class="p">{</span>
 
     <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Renderer</span><span class="o">&gt;</span> <span class="n">siteRendererMap</span><span class="p">;</span>
 
@@ -295,12 +295,12 @@
         <span class="p">};</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</pre></div>
 
 
 <h3>SiteSpringTilesConfigurer</h3>
 <p>系统默认的 <code>org.springframework.web.servlet.view.tiles3.TilesConfigurer</code> 只能初始化一个 default 的 container，新建一个 <code>SiteSpringTilesConfigurer</code></p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SiteSpringTilesConfigurer</span> <span class="kd">implements</span> <span class="n">ServletContextAware</span><span class="p">,</span> <span class="n">InitializingBean</span><span class="p">,</span> <span class="n">DisposableBean</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SiteSpringTilesConfigurer</span> <span class="kd">implements</span> <span class="n">ServletContextAware</span><span class="p">,</span> <span class="n">InitializingBean</span><span class="p">,</span> <span class="n">DisposableBean</span> <span class="p">{</span>
 
     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">boolean</span> <span class="n">tilesElPresent</span> <span class="o">=</span>
             <span class="n">ClassUtils</span><span class="p">.</span><span class="na">isPresent</span><span class="p">(</span><span class="s">&quot;org.apache.tiles.el.ELAttributeEvaluator&quot;</span><span class="p">,</span> <span class="n">SiteSpringTilesConfigurer</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getClassLoader</span><span class="p">());</span>
@@ -572,11 +572,11 @@
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>ModifyDefinitionDAO 中修改 tiles.xml 定义，也可以 load 一个新的xml 来覆盖 tiles.xml 中的定义</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ModifyDefinitionDAO</span> <span class="kd">extends</span> <span class="n">ResolvingLocaleUrlDefinitionDAO</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ModifyDefinitionDAO</span> <span class="kd">extends</span> <span class="n">ResolvingLocaleUrlDefinitionDAO</span> <span class="p">{</span>
 
     <span class="kd">public</span> <span class="nf">ModifyDefinitionDAO</span><span class="p">(</span><span class="n">ApplicationContext</span> <span class="n">applicationContext</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">super</span><span class="p">(</span><span class="n">applicationContext</span><span class="p">);</span>
@@ -605,7 +605,7 @@
     <span class="p">}</span>
 
 <span class="p">}</span>
-</code></pre></div>
+</pre></div>
 
 
 <h2>结论</h2>
