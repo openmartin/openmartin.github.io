@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-08-08T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>ryzentosh 从零开始的黑苹果</title><link href="https://xingzuoshe.cn/ryzentosh.html" rel="alternate"></link><published>2020-08-08T22:00:00+08:00</published><updated>2020-08-08T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-08-08:/ryzentosh.html</id><summary type="html">&lt;p&gt;AMD, Yes! 从零开始组装一台 AMD 黑苹果&lt;/p&gt;</summary><content type="html">&lt;h2&gt;硬件的选择&lt;/h2&gt;
 &lt;p&gt;理论上其实 Intel 平台的黑苹果更接近白苹果，后续的一些问题会更容易解决，不过既然是 AMD, Yes! 那么我们就来挑战一下 ryzentosh，也有很多成功的案例，难度在逐渐降低。&lt;/p&gt;
-&lt;p&gt;因为最新的 opencore ~~不支持 AMD B550 平台~~(目前已经支持)，而且后续也比较难支持，所有目前还是选择 B450。PCIe 5.0 的标准明年(2021)就出了，以后 PCIe 5.0 + DDR 5 估计是标配了，所以选择为了 PCIe 4.0 选择 B550 或者 X570，意义不大，只是一个短时的过渡。&lt;/p&gt;
+&lt;p&gt;因为最新的 opencore &lt;del&gt;不支持 AMD B550 平台&lt;/del&gt;(目前已经支持)，而且后续也比较难支持，所有目前还是选择 B450。PCIe 5.0 的标准明年(2021)就出了，以后 PCIe 5.0 + DDR 5 估计是标配了，所以选择为了 PCIe 4.0 选择 B550 或者 X570，意义不大，只是一个短时的过渡。&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -70,8 +70,8 @@
 &lt;p&gt;由于已经有了一台 MacBook Pro，所以跟其他教程不一样，我们在 macOS 下制作安装U盘&lt;/p&gt;
 &lt;h3&gt;简单的方法&lt;/h3&gt;
 &lt;p&gt;直接去下载黑果小兵做好的镜像文件，写入U盘，然后直接复制同类的 EFI 文件，参考 &lt;a href="https://blog.daliansky.net/MacOS-installation-tutorial-XiaoMi-Pro-installation-process-records.html"&gt;macOS安装教程兼小米Pro安装过程记录&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这样如果没有问题，那很方便，~~但是如果有什么地方有问题就不知道怎么办了，黑苹果很考验动手能力，还是建议用复杂的办法，一步一步来，理解原理。~~&lt;/p&gt;
-&lt;h3&gt;~~复杂的方法~~&lt;/h3&gt;
+&lt;p&gt;这样如果没有问题，那很方便，&lt;del&gt;但是如果有什么地方有问题就不知道怎么办了，黑苹果很考验动手能力，还是建议用复杂的办法，一步一步来，理解原理。&lt;/del&gt;&lt;/p&gt;
+&lt;h3&gt;&lt;del&gt;复杂的方法&lt;/del&gt;&lt;/h3&gt;
 &lt;p&gt;黑苹果的教程十分混杂，最好去看英文原版的文档&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;AMD OS X Vanilla Guide - https://vanilla.amd-osx.com/&lt;/li&gt;
@@ -80,7 +80,7 @@
 &lt;/ul&gt;
 &lt;p&gt;中文文档仅限参考 1.&lt;a href="https://juejin.im/post/6844904135368654856"&gt;保姆级黑苹果教程：让你的Ryzen+A卡用上最新版本的MacOS&lt;/a&gt; 
 2.&lt;a href="http://zhongce.sina.com.cn/article/view/53765/"&gt;黑苹果开荒记系统篇:超详细纯净MacOS安装流程&lt;/a&gt;&lt;/p&gt;
-&lt;h3&gt;~~配置 OpenCore~~&lt;/h3&gt;
+&lt;h3&gt;&lt;del&gt;配置 OpenCore&lt;/del&gt;&lt;/h3&gt;
 &lt;p&gt;假设已经做好了安装U盘，最重要的工作是 OpenCore 的配置，和寻找合适的驱动&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/acidanthera/OpenCorePkg/releases"&gt;OpenCorePkg&lt;/a&gt;&lt;/li&gt;
