@@ -40,7 +40,9 @@ Summary: AMD, Yes! 从零开始组装一台 AMD 黑苹果
 
 ### 简单的方法
 
-直接去下载黑果小兵做好的镜像文件，写入U盘，然后直接复制同类的 EFI 文件，参考 [macOS安装教程兼小米Pro安装过程记录](https://blog.daliansky.net/MacOS-installation-tutorial-XiaoMi-Pro-installation-process-records.html)
+直接去下载黑果小兵做好的镜像文件，写入U盘，然后直接复制同类的 EFI 文件到 OC 分区，参考 [macOS安装教程兼小米Pro安装过程记录](https://blog.daliansky.net/MacOS-installation-tutorial-XiaoMi-Pro-installation-process-records.html)
+
+用黑果小兵的镜像文件做好的U盘有3个分区，第一个是 clover，第二个是 opencore，第三个是 winpe，微星主版启动的时候按住 F11 选择启动菜单，选择U盘的第二个分区
 
 这样如果没有问题，那很方便，<del>但是如果有什么地方有问题就不知道怎么办了，黑苹果很考验动手能力，还是建议用复杂的办法，一步一步来，理解原理。</del>
 
@@ -82,7 +84,3 @@ https://www.reddit.com/r/hackintosh/comments/f0cc4t/internal_drives_shown_as_ext
 ### 总结
 
 如果要吃黑苹果，最好在买硬件的阶段就计划好，直接复制大佬的配置和EFI是最简单也是最稳的。
-
-
-
-
