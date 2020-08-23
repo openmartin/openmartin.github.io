@@ -114,66 +114,66 @@
 <h3>install</h3>
 <p>通过 rpm 安装，参考 https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html</p>
 <h3>启动和优化</h3>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">elasticsearch</span><span class="p">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="k">start</span> <span class="n">elasticsearch</span><span class="p">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">elasticsearch</span><span class="p">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kibana</span><span class="p">.</span><span class="n">service</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">sudo /bin/systemctl daemon-reload</span>
+<span class="err">sudo /bin/systemctl enable elasticsearch.service</span>
+<span class="err">sudo systemctl start elasticsearch.service</span>
+<span class="err">sudo systemctl stop elasticsearch.service</span>
+<span class="err">sudo systemctl status kibana.service</span>
+</code></pre></div>
 
 
 <p>/etc/elasticsearch/jvm.options</p>
-<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">Xms32g</span>
-<span class="o">-</span><span class="n">Xms32g</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">-Xms32g</span>
+<span class="err">-Xms32g</span>
+</code></pre></div>
 
 
 <p>/etc/elasticsearch/elasticsearch.yml 单机只有一个节点</p>
-<div class="highlight"><pre><span></span><span class="n">network</span><span class="p">.</span><span class="k">host</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">0</span>
-<span class="k">cluster</span><span class="p">.</span><span class="n">name</span><span class="p">:</span> <span class="n">my</span><span class="o">-</span><span class="n">application</span>  <span class="o">#</span> <span class="err">集群中的名称</span>
-<span class="n">node</span><span class="p">.</span><span class="n">name</span><span class="p">:</span> <span class="n">master</span>  <span class="o">#</span> <span class="err">该节点名称</span>
-<span class="k">cluster</span><span class="p">.</span><span class="n">initial_master_nodes</span><span class="p">:</span> <span class="p">[</span><span class="ss">&quot;master&quot;</span><span class="p">]</span> 
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">network.host: 0.0.0.0</span>
+<span class="err">cluster.name: my-application  # 集群中的名称</span>
+<span class="err">node.name: master  # 该节点名称</span>
+<span class="err">cluster.initial_master_nodes: [&quot;master&quot;] </span>
+</code></pre></div>
 
 
 <h3>rpm 安装 ElasticSearch 之后的目录结构</h3>
-<div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">elasticsearch</span>  <span class="o">#</span> <span class="n">ES_HOME</span>
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">elasticsearch</span>    <span class="o">#</span> <span class="n">log</span> <span class="err">目录</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">elasticsearch</span>        <span class="o">#</span> <span class="n">config</span> <span class="err">目录</span>
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">elasticsearch</span>    <span class="o">#</span> <span class="k">data</span> <span class="err">目录</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">/usr/share/elasticsearch  # ES_HOME</span>
+<span class="err">/var/log/elasticsearch    # log 目录</span>
+<span class="err">/etc/elasticsearch        # config 目录</span>
+<span class="err">/var/lib/elasticsearch    # data 目录</span>
+</code></pre></div>
 
 
 <h3>plugin elasticsearch-analysis-hanlp</h3>
 <p>https://github.com/KennFalcon/elasticsearch-analysis-hanlp</p>
 <p>建议使用 Elasticsearch 命令行安装插件</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">-</span><span class="n">plugin</span> <span class="n">install</span> <span class="n">file</span><span class="p">:</span><span class="o">///</span><span class="n">home</span><span class="o">/</span><span class="n">demo</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">-</span><span class="n">analysis</span><span class="o">-</span><span class="n">hanlp</span><span class="o">-</span><span class="mi">7</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="n">zip</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">./elasticsearch-plugin install file:///home/demo/elasticsearch-analysis-hanlp-7.3.0.zip</span>
+</code></pre></div>
 
 
 <p>插件 在 <code>/usr/share/elasticsearch/plugins/anlysis-hanlp</code> 目录下
 配置文件在 <code>/etc/elasticsearch/analysis-hanlp</code> 目录下</p>
 <p>修改 hanlp.properties, root 修改为绝对路径 <code>root=/usr/share/elasticsearch/plugins/analysis-hanlp/</code></p>
 <p>然后把 hanlp 的 数据文件复制到 /usr/share/elasticsearch/plugins/analysis-hanlp/data</p>
-<div class="highlight"><pre><span></span><span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">elasticsearch</span><span class="p">:</span><span class="n">elasticsearch</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">elasticsearch</span><span class="o">/</span><span class="n">plugins</span><span class="o">/</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins/</span>
+</code></pre></div>
 
 
 <h2>Kibana 安装</h2>
 <h3>install</h3>
 <p>通过 rpm 安装，参考 https://www.elastic.co/guide/en/kibana/current/rpm.html</p>
 <h3>启动和配置</h3>
-<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">kibana</span><span class="p">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="k">start</span> <span class="n">kibana</span><span class="p">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">kibana</span><span class="p">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kibana</span><span class="p">.</span><span class="n">service</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">sudo /bin/systemctl daemon-reload</span>
+<span class="err">sudo /bin/systemctl enable kibana.service</span>
+<span class="err">sudo systemctl start kibana.service</span>
+<span class="err">sudo systemctl stop kibana.service</span>
+<span class="err">sudo systemctl status kibana.service</span>
+</code></pre></div>
 
 
 <p>/etc/kibana/kibana.yml</p>
-<div class="highlight"><pre><span></span><span class="n">server</span><span class="p">.</span><span class="k">host</span><span class="p">:</span> <span class="ss">&quot;0.0.0.0&quot;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">server.host: &quot;0.0.0.0&quot;</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

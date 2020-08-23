@@ -3,7 +3,7 @@
 &lt;p&gt;先说一下组织形式，8男8女，领队是女的，总共17个人。地点选在南京大牌档的一个包间，报名费60，餐费另外AA。领队负责安排活动。给大家安利一下，活动做得其实不错，适龄男女可以去参加，拓展一下交际圈，开阔一下思维方式。&lt;/p&gt;
 &lt;h2&gt;自我介绍&lt;/h2&gt;
 &lt;p&gt;第一个环节是自我介绍，16个人分别介绍自己的基本情况&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;微信昵称和头像（有一个微信群，介绍昵称和头像方便大家对应到真人）&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;微信昵称和头像（有一个微信群，介绍昵称和头像方便大家对应到真人）&lt;/span&gt;
 &lt;span class="err"&gt;户口&lt;/span&gt;
 &lt;span class="err"&gt;出生年&lt;/span&gt;
 &lt;span class="err"&gt;星座&lt;/span&gt;
@@ -17,10 +17,10 @@
 &lt;span class="err"&gt;工作所在区&lt;/span&gt;
 &lt;span class="err"&gt;居住所在区&lt;/span&gt;
 &lt;span class="err"&gt;兴趣爱好&lt;/span&gt;
-&lt;span class="err"&gt;是否有京户&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;房&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="err"&gt;车&lt;/span&gt;
+&lt;span class="err"&gt;是否有京户/房/车&lt;/span&gt;
 &lt;span class="err"&gt;恋爱经历&lt;/span&gt;
 &lt;span class="err"&gt;给自己贴一个标签，方便大家记住你&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;女生都挺好看的，条件都不错，身高都比较高，有户口的比例不少，男生比如我很屌丝。
