@@ -1,7 +1,7 @@
 Title: java xss 防护
 Status: published
 Date: 2020-08-25 18:00
-Modified: 2020-08-25 22:00
+Modified: 2020-09-17 15:00
 Category: Java
 Tags: java, xss
 Slug: java-xxs-protection
@@ -172,7 +172,7 @@ public class JsonUtils {
 import org.springframework.web.util.HtmlUtils;
 public class StringUtils {
 	  
-		public static boolean isHtml(String str) {
+	public static boolean isHtml(String str) {
         boolean isHtml = false;
         if (str != null) {
             if (!str.equals(HtmlUtils.htmlEscape(str))) {
@@ -180,6 +180,61 @@ public class StringUtils {
             }
         }
         return isHtml;
+    }
+}
+```
+
+## 更新
+
+上面的方法存在一个问题，owasp-java-html-sanitizer 会导致很多符号被转义，以后使用 jsoup
+
+```xml
+<dependency>
+    <!-- jsoup HTML parser library @ https://jsoup.org/ -->
+    <groupId>org.jsoup</groupId>
+    <artifactId>jsoup</artifactId>
+    <version>1.13.1</version>
+</dependency>
+```
+
+
+判断是否是字符串是否是 html
+
+```java
+import org.springframework.web.util.HtmlUtils;
+public class StringUtils {
+	  
+    private static Pattern htmlPattern = Pattern.compile(".*\\<[^>]+>.*", Pattern.DOTALL);
+    public static boolean isHtml(String str) {
+        boolean isHtml = false;
+        if (str != null) {
+            return htmlPattern.matcher(str).matches();
+        }
+        return isHtml;
+    }
+}
+```
+
+```java
+public class JsoupUtils {
+
+    private static final Whitelist whitelist = Whitelist.relaxed();
+    /*
+     * 配置过滤化参数,不对代码进行格式化
+     */
+    private static final Document.OutputSettings outputSettings = new Document.OutputSettings().prettyPrint(false);
+    static {
+        /*
+         * 富文本编辑时一些样式是使用style来进行实现的 比如红色字体 style="color:red;" 所以需要给所有标签添加style属性
+         */
+        whitelist.addAttributes(":all", "style");
+        whitelist.addAttributes(":all", "class");
+        whitelist.addAttributes(":all", "lang");
+        whitelist.removeTags("img");
+    }
+
+    public static String clean(String content) {
+        return Jsoup.clean(content, "", whitelist, outputSettings);
     }
 }
 ```
