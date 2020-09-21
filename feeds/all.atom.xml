@@ -1,5 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-08-25T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>java xss 防护</title><link href="https://xingzuoshe.cn/java-xxs-protection.html" rel="alternate"></link><published>2020-08-25T18:00:00+08:00</published><updated>2020-08-25T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-08-25:/java-xxs-protection.html</id><summary type="html">&lt;p&gt;java xss 防护&lt;/p&gt;</summary><content type="html">&lt;h2&gt;XSS 的类型&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-09-17T15:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>Elasticsearch join 关联查询</title><link href="https://xingzuoshe.cn/elasticsearch-join.html" rel="alternate"></link><published>2020-09-08T11:00:00+08:00</published><updated>2020-09-08T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-09-08:/elasticsearch-join.html</id><summary type="html">&lt;p&gt;Elasticsearch join 关联查询&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Elasticsearch join 关联查询&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面都是基于 Elasticsearch 7.3，有些语句低版本可能不支持&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下面以 question answer 一对多举例&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="n"&gt;PUT&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/question-answer&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;{&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;mappings&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;properties&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;      &amp;quot;question_id&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;long&amp;quot;},&lt;/span&gt;
+&lt;span class="s1"&gt;      &amp;quot;content&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;text&amp;quot;},&lt;/span&gt;
+&lt;span class="s1"&gt;      &amp;quot;answer_id&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;long&amp;quot;},&lt;/span&gt;
+&lt;span class="s1"&gt;      &amp;quot;qaRelation&amp;quot;:{&amp;quot;type&amp;quot;: &amp;quot;join&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;         &amp;quot;relations&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;          &amp;quot;question&amp;quot;: &amp;quot;answer&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;           }&lt;/span&gt;
+&lt;span class="s1"&gt;         },&lt;/span&gt;
+&lt;span class="s1"&gt;      &amp;quot;dataType&amp;quot;: {&amp;quot;type&amp;quot;: &amp;quot;keyword&amp;quot;}&lt;/span&gt;
+&lt;span class="s1"&gt;    }&lt;/span&gt;
+&lt;span class="s1"&gt;  }&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="n"&gt;PUT&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/question-answer/_doc/1?refresh&amp;amp;pretty&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;{&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;question_id&amp;quot;: &amp;quot;1&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;content&amp;quot;: &amp;quot;This is a question&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;qaRelation&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;name&amp;quot;: &amp;quot;question&amp;quot; &lt;/span&gt;
+&lt;span class="s1"&gt;  },&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;dataType&amp;quot;: &amp;quot;question&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="n"&gt;PUT&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/question-answer/_doc/2?refresh&amp;amp;pretty&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;{&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;question_id&amp;quot;: &amp;quot;2&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;content&amp;quot;: &amp;quot;This is another question&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;qaRelation&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;name&amp;quot;: &amp;quot;question&amp;quot; &lt;/span&gt;
+&lt;span class="s1"&gt;  },&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;dataType&amp;quot;: &amp;quot;question&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="n"&gt;PUT&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/question-answer/_doc/3?routing=1&amp;amp;refresh&amp;amp;pretty&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;{&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;answer_id&amp;quot;: &amp;quot;3&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;content&amp;quot;: &amp;quot;This is an answer&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;qaRelation&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;name&amp;quot;: &amp;quot;answer&amp;quot;, &lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;parent&amp;quot;: &amp;quot;1&amp;quot; &lt;/span&gt;
+&lt;span class="s1"&gt;  },&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;dataType&amp;quot;: &amp;quot;answer&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="n"&gt;PUT&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/question-answer/_doc/4?routing=1&amp;amp;refresh&amp;amp;pretty&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;{&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;answer_id&amp;quot;: &amp;quot;4&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;content&amp;quot;: &amp;quot;This is another answer&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;qaRelation&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;name&amp;quot;: &amp;quot;answer&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;parent&amp;quot;: &amp;quot;1&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;  },&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;dataType&amp;quot;: &amp;quot;answer&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;curl&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt; &lt;span class="n"&gt;PUT&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;localhost:9200/question-answer/_doc/4?routing=2&amp;amp;refresh&amp;amp;pretty&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;H&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Content-Type: application/json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;{&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;answer_id&amp;quot;: &amp;quot;4&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;content&amp;quot;: &amp;quot;This is a special answer&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;qaRelation&amp;quot;: {&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;name&amp;quot;: &amp;quot;answer&amp;quot;,&lt;/span&gt;
+&lt;span class="s1"&gt;    &amp;quot;parent&amp;quot;: &amp;quot;2&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;  },&lt;/span&gt;
+&lt;span class="s1"&gt;  &amp;quot;dataType&amp;quot;: &amp;quot;answer&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;has_child&lt;/h3&gt;
+&lt;p&gt;找出 answer 中内容有 another 的 question&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;GET&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;_search&lt;/span&gt;
+&lt;span class="err"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;&amp;quot;has_child&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;answer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;match&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+          &lt;span class="ss"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;another&amp;quot;&lt;/span&gt;
+        &lt;span class="err"&gt;}&lt;/span&gt;
+      &lt;span class="err"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt;
+  &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;has_parent&lt;/h3&gt;
+&lt;p&gt;找出 question 中内容有 another 的 answer&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;GET&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;_search&lt;/span&gt;
+&lt;span class="err"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;&amp;quot;has_parent&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;parent_type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;question&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="ss"&gt;&amp;quot;match&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+          &lt;span class="ss"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;another&amp;quot;&lt;/span&gt;
+        &lt;span class="err"&gt;}&lt;/span&gt;
+      &lt;span class="err"&gt;}&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt;
+  &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;parent_id&lt;/h3&gt;
+&lt;p&gt;根据 parent_id 找出 所有 answer&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;GET&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;_search&lt;/span&gt;
+&lt;span class="err"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;&amp;quot;parent_id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;answer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;1&amp;quot;&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt;
+  &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;组合查询&lt;/h3&gt;
+&lt;p&gt;question 或者 answer 中包含 another 的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;GET&lt;/span&gt; &lt;span class="n"&gt;question&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;_search&lt;/span&gt;
+&lt;span class="err"&gt;{&lt;/span&gt;
+  &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+    &lt;span class="ss"&gt;&amp;quot;bool&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;should&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="err"&gt;{&lt;/span&gt;
+          &lt;span class="ss"&gt;&amp;quot;has_child&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+            &lt;span class="ss"&gt;&amp;quot;type&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;answer&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="ss"&gt;&amp;quot;query&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+              &lt;span class="ss"&gt;&amp;quot;match&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+                &lt;span class="ss"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;another&amp;quot;&lt;/span&gt;
+              &lt;span class="err"&gt;}&lt;/span&gt;
+            &lt;span class="err"&gt;}&lt;/span&gt;
+          &lt;span class="err"&gt;}&lt;/span&gt;
+        &lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="err"&gt;{&lt;/span&gt;
+          &lt;span class="ss"&gt;&amp;quot;bool&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+            &lt;span class="ss"&gt;&amp;quot;must&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+              &lt;span class="err"&gt;{&lt;/span&gt;
+                &lt;span class="ss"&gt;&amp;quot;match&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+                  &lt;span class="ss"&gt;&amp;quot;content&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;another&amp;quot;&lt;/span&gt;
+                &lt;span class="err"&gt;}&lt;/span&gt;
+              &lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+              &lt;span class="err"&gt;{&lt;/span&gt;
+                &lt;span class="ss"&gt;&amp;quot;term&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+                  &lt;span class="ss"&gt;&amp;quot;dataType&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+                    &lt;span class="ss"&gt;&amp;quot;value&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;question&amp;quot;&lt;/span&gt;
+                  &lt;span class="err"&gt;}&lt;/span&gt;
+                &lt;span class="err"&gt;}&lt;/span&gt;
+              &lt;span class="err"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;]&lt;/span&gt;
+          &lt;span class="err"&gt;}&lt;/span&gt;
+        &lt;span class="err"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;],&lt;/span&gt;
+      &lt;span class="ss"&gt;&amp;quot;minimum_should_match&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="err"&gt;}&lt;/span&gt;
+  &lt;span class="err"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Java 代码&lt;/h3&gt;
+&lt;p&gt;用 RestHighLevelClient，有 DSL 对应的&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;BoolQueryBuilder&lt;/span&gt; &lt;span class="n"&gt;hasChildBoolQueryBuilder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;QueryBuilders&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;boolQuery&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>Elasticsearch upgrade</title><link href="https://xingzuoshe.cn/elasticsearch-upgrade.html" rel="alternate"></link><published>2020-09-08T11:00:00+08:00</published><updated>2020-09-08T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-09-08:/elasticsearch-upgrade.html</id><summary type="html">&lt;p&gt;Elasticsearch upgrade&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Elasticsearch Upgrade&lt;/h2&gt;
+&lt;p&gt;elasticseach 版本升级 (rpm 安装)&lt;/p&gt;
+&lt;h3&gt;rpm&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;
+&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;kibana&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;kibana&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt; &lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;
+&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt; &lt;span class="n"&gt;kibana&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;service&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;elasticsearch-analysis-hanlp&lt;/h2&gt;
+&lt;p&gt;ES_HOME=/usr/share/elasticsearch
+ES_DATA=/var/lib/elasticsearch&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;KennFalcon&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;analysis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hanlp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;releases&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;download&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;v7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;analysis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hanlp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zip&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;plugin&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;///&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;es&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hanlp&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;analysis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hanlp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zip&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cp&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zip&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elasticsearch&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;plugins&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;analysis&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hanlp&lt;/span&gt;
+&lt;span class="n"&gt;unzip&lt;/span&gt; &lt;span class="k"&gt;data&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;zip&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>Elasticsearch 多语言搜索</title><link href="https://xingzuoshe.cn/elasticsearch-multi-lang.html" rel="alternate"></link><published>2020-09-07T11:00:00+08:00</published><updated>2020-09-07T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-09-07:/elasticsearch-multi-lang.html</id><summary type="html">&lt;p&gt;Elasticsearch 多语言搜索&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Elasticsearch 多语言搜索&lt;/h2&gt;
+&lt;p&gt;如果需要同时搜索多个语言，Elasticsearch 应该如何优化&lt;/p&gt;
+&lt;p&gt;方案1 是在分词层面做，比如让&lt;a href="https://blog.csdn.net/hereiskxm/article/details/47441911"&gt;中文分词器可以处理中英文混合文档&lt;/a&gt;
+方案2 把资料切分成不同的语言，根据用户的主语言自动选择不同的 index 或者 field &lt;a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/one-lang-docs.html"&gt;每份文档一种语言&lt;/a&gt; &lt;a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/language-pitfalls.html"&gt;混合语言的陷阱&lt;/a&gt;
+方案3 把资料切分成不同的语言，搜索的时候同时搜索&lt;/p&gt;
+&lt;h3&gt;实践&lt;/h3&gt;
+&lt;p&gt;根据目前的实际情况，采用方案3&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根据原始数据分了两个 index (cn-index, en-index)&lt;/li&gt;
+&lt;li&gt;中文搜索采用 matchPhraseQuery 需要完全匹配关键词，但是英文因为词形的变化，会自动转换成词根，所以用 matchPhrase&lt;/li&gt;
+&lt;li&gt;优先显示中文， matchPhraseQuery 的 boost 调高&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Java"></category><category term="java"></category><category term="elasticsearch"></category></entry><entry><title>java xss 防护</title><link href="https://xingzuoshe.cn/java-xxs-protection.html" rel="alternate"></link><published>2020-08-25T18:00:00+08:00</published><updated>2020-09-17T15:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-08-25:/java-xxs-protection.html</id><summary type="html">&lt;p&gt;java xss 防护&lt;/p&gt;</summary><content type="html">&lt;h2&gt;XSS 的类型&lt;/h2&gt;
 &lt;h3&gt;存储型 XSS&lt;/h3&gt;
 &lt;p&gt;数据库中存有的存在XSS攻击的数据，返回给客户端。若数据未经过任何转义，被浏览器渲染，就可能导致XSS攻击。&lt;/p&gt;
 &lt;h3&gt;反射型 XSS&lt;/h3&gt;
@@ -150,7 +363,7 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.springframework.web.util.HtmlUtils&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;StringUtils&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
 
-        &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;isHtml&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;isHtml&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
         &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="n"&gt;isHtml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
             &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(!&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;equals&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HtmlUtils&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;htmlEscape&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;)))&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
@@ -158,6 +371,57 @@
             &lt;span class="o"&gt;}&lt;/span&gt;
         &lt;span class="o"&gt;}&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;isHtml&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;更新&lt;/h2&gt;
+&lt;p&gt;上面的方法存在一个问题，owasp-java-html-sanitizer 会导致很多符号被转义，以后使用 jsoup&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span class="c"&gt;&amp;lt;!-- jsoup HTML parser library @ https://jsoup.org/ --&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.jsoup&lt;span class="nt"&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;jsoup&lt;span class="nt"&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.13.1&lt;span class="nt"&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;判断是否是字符串是否是 html&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.springframework.web.util.HtmlUtils&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;StringUtils&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;Pattern&lt;/span&gt; &lt;span class="n"&gt;htmlPattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Pattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;compile&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.*\\&amp;lt;[^&amp;gt;]+&amp;gt;.*&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Pattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;DOTALL&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;isHtml&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="n"&gt;isHtml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;htmlPattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;matcher&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;).&lt;/span&gt;&lt;span class="na"&gt;matches&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;isHtml&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;JsoupUtils&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+
+    &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="n"&gt;Whitelist&lt;/span&gt; &lt;span class="n"&gt;whitelist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Whitelist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;relaxed&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;     * 配置过滤化参数,不对代码进行格式化&lt;/span&gt;
+&lt;span class="cm"&gt;     */&lt;/span&gt;
+    &lt;span class="kd"&gt;private&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="kd"&gt;final&lt;/span&gt; &lt;span class="n"&gt;Document&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OutputSettings&lt;/span&gt; &lt;span class="n"&gt;outputSettings&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;Document&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OutputSettings&lt;/span&gt;&lt;span class="o"&gt;().&lt;/span&gt;&lt;span class="na"&gt;prettyPrint&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;         * 富文本编辑时一些样式是使用style来进行实现的 比如红色字体 style=&amp;quot;color:red;&amp;quot; 所以需要给所有标签添加style属性&lt;/span&gt;
+&lt;span class="cm"&gt;         */&lt;/span&gt;
+        &lt;span class="n"&gt;whitelist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;addAttributes&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:all&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;style&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;whitelist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;addAttributes&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:all&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;class&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;whitelist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;addAttributes&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;:all&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;lang&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;whitelist&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;removeTags&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;img&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;static&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="nf"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;Jsoup&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;clean&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;whitelist&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;outputSettings&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
     &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;span class="o"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="java"></category><category term="xss"></category></entry><entry><title>ryzentosh 从零开始的黑苹果</title><link href="https://xingzuoshe.cn/ryzentosh.html" rel="alternate"></link><published>2020-08-08T22:00:00+08:00</published><updated>2020-08-08T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-08-08:/ryzentosh.html</id><summary type="html">&lt;p&gt;AMD, Yes! 从零开始组装一台 AMD 黑苹果&lt;/p&gt;</summary><content type="html">&lt;h2&gt;硬件的选择&lt;/h2&gt;
