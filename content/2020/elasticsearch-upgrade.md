@@ -1,6 +1,6 @@
 Title: Elasticsearch upgrade
-Date: 2020-09-08 11:00
-Modified: 2020-09-08 12:00
+Date: 2020-09-17 10:00
+Modified: 2020-09-17 12:00
 Category: Java
 Tags: java, elasticsearch
 Slug: elasticsearch-upgrade
