@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-10-27T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>workflow 推荐</title><link href="https://xingzuoshe.cn/workflow-recommend.html" rel="alternate"></link><published>2020-10-27T11:00:00+08:00</published><updated>2020-10-27T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-10-27:/workflow-recommend.html</id><summary type="html">&lt;p&gt;workflow 推荐&lt;/p&gt;</summary><content type="html">&lt;h2&gt;workflow&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-11-24T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>如何从命令行运行 TestCase</title><link href="https://xingzuoshe.cn/junit-cmd.html" rel="alternate"></link><published>2020-11-24T11:00:00+08:00</published><updated>2020-11-24T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-11-24:/junit-cmd.html</id><summary type="html">&lt;p&gt;如何从命令行运行 TestCase&lt;/p&gt;</summary><content type="html">&lt;h2&gt;如何从命令行运行 TestCase&lt;/h2&gt;
+&lt;h3&gt;junit&lt;/h3&gt;
+&lt;p&gt;把依赖 和 junit 放到 lib 目录下， 下面是 JUnit 4.x 的例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;JAVA_HOME&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;C:\Program Files\Java\jdk1.8.0_171&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;%JAVA_HOME%&lt;/span&gt;\bin\java -classpath &lt;span class="s2"&gt;&amp;quot;lib/*;.\classes;.\test-classes&amp;quot;&lt;/span&gt; org.junit.runner.JUnitCore com.example.util.TestJSON
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;注意：junit 依赖 hamcrest-core，也一并放到 lib 目录下&lt;/p&gt;
+&lt;p&gt;参考：https://stackoverflow.com/questions/2235276/how-to-run-junit-test-cases-from-the-command-line&lt;/p&gt;
+&lt;h3&gt;maven&lt;/h3&gt;
+&lt;p&gt;也可以使用 maven 运行 TestCase&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mvn&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
+&lt;span class="n"&gt;mvn&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Dtest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TestClassName&lt;/span&gt;
+&lt;span class="n"&gt;mvn&lt;/span&gt; &lt;span class="n"&gt;clean&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Dtest&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;package&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TestClassName&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="n"&gt;particularMethod&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;gradle&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;gradle&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;
+&lt;span class="n"&gt;gradle&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;--tests your.package.TestClassName&lt;/span&gt;
+&lt;span class="n"&gt;gradle&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;--tests your.package.TestClassName.particularMethod&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java, Test"></category><category term="junit"></category><category term="testcase"></category></entry><entry><title>Apache JMeter stress test</title><link href="https://xingzuoshe.cn/jmeter-stress-test.html" rel="alternate"></link><published>2020-11-05T11:00:00+08:00</published><updated>2020-11-05T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-11-05:/jmeter-stress-test.html</id><summary type="html">&lt;p&gt;Apache JMeter 压力测试&lt;/p&gt;</summary><content type="html">&lt;h2&gt;压力测试&lt;/h2&gt;
+&lt;p&gt;压力测试是对系统不断施加压力，来获得系统最大服务能力的测试。参考&lt;a href="https://testerhome.com/articles/20911"&gt;压力测试&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;比如可以用 50/100/200 并发之下服务器的响应时间和是否能发生异常，来判断系统正常可以处理多少并发。&lt;/p&gt;
+&lt;p&gt;目的：
+1. 当负载逐渐增加时，观察系统各项性能指标的变化情况是否有异常 
+2. 发现系统的性能短板，进行针对性的性能优化
+（如：使用mysql存储的系统，高并发情况下，数据库读写速度慢，可以考虑增加数据库中间件，加缓存等；使用redis存储的系统，通常存储不会制约性能，但在高并发情况下，Redis的吞吐量非常大，这时候就需要考虑增加网络带宽来提高性能。） 
+3. 系统在高并发情况下是否会报错，进程是否会挂掉 
+4. 测试在系统某个方面达到瓶颈时，系统可以支持的最大负载&lt;/p&gt;
+&lt;p&gt;https://www.cnblogs.com/stulzq/p/8971531.html&lt;/p&gt;
+&lt;h3&gt;下载 Apache JMeter&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://jmeter.apache.org/download_jmeter.cgi"&gt;Apache JMeter 下载&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压 apache-jmeter-5.3.zip, 进入 bin 目录， 使用 jmeterw.cmd 打开配置的 GUI 界面&lt;/p&gt;
+&lt;p&gt;如果要运行压力测试，需要通过命令行启动 &lt;code&gt;jmeter.bat&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Apache JMeter 配置&lt;/h3&gt;
+&lt;p&gt;下面配置一个从CSV文件中读取测试数据，拼URL，然后压测的例子。&lt;/p&gt;
+&lt;p&gt;很多情况下系统是有缓存的，如果重复访问同一URL，第二次就会从缓存中取数据，导致压力测试的数据不准，每次访问不同的URL更能模拟真实的情况。&lt;/p&gt;
+&lt;p&gt;官方提供了简体中文，通过 Options -&amp;gt; Choose Language 可选择简体中文。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="choose-language" src="../images/jmeter/choose-language.png"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加线程组&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="add-thread-group" src="../images/jmeter/add-thread-group.png"&gt;&lt;/p&gt;
+&lt;p&gt;设置线程数, 循环次数, Same user on each iteration&lt;/p&gt;
+&lt;p&gt;&lt;img alt="set-thread-group" src="../images/jmeter/set-thread-group.png"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加配置元件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;配置元件 -&amp;gt; CSV Data Set Config&lt;/p&gt;
+&lt;p&gt;&lt;img alt="csv-data-set-config" src="../images/jmeter/csv-data-set-config.png"&gt;&lt;/p&gt;
+&lt;p&gt;最重要的是“设置变量名称”， 可以在后面的配置里直接引用这个变量&lt;/p&gt;
+&lt;p&gt;配置元件 -&amp;gt; HTTP请求默认值&lt;/p&gt;
+&lt;p&gt;&lt;img alt="http-default-settings" src="../images/jmeter/http-default-settings.png"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加取样器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;取样器 -&amp;gt; HTTP 请求&lt;/p&gt;
+&lt;p&gt;&lt;img alt="http-request" src="../images/jmeter/http-request.png"&gt;&lt;/p&gt;
+&lt;p&gt;如果有复杂的逻辑，比如先去一个页面查询，需要带上这个页面里的一些数据再去第二次请求，这个时候可以用&lt;code&gt;正则表达式提取器&lt;/code&gt;。在这个‘HTTP 请求’上右键，添加 后置处理器 -&amp;gt; 正则表达式提取器&lt;/p&gt;
+&lt;p&gt;&lt;img alt="regex-extractor" src="../images/jmeter/regex-extractor.png"&gt;&lt;/p&gt;
+&lt;p&gt;引用名称：后面用到的变量名&lt;/p&gt;
+&lt;p&gt;正则表达式：正则表达式需要用到 group&lt;/p&gt;
+&lt;p&gt;模板：$i$ 表示取第i个group&lt;/p&gt;
+&lt;p&gt;匹配数字(0表示随机)：表示取第几次匹配的结果&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加断言&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;断言 -&amp;gt; 响应断言&lt;/p&gt;
+&lt;p&gt;&lt;img alt="http-assert" src="../images/jmeter/http-assert.png"&gt;&lt;/p&gt;
+&lt;p&gt;检查 http status code 是否等于 200&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;添加结果汇总&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;监听器 -&amp;gt; 察看结果树&lt;/p&gt;
+&lt;p&gt;&lt;img alt="result-tree" src="../images/jmeter/result-tree.png"&gt;&lt;/p&gt;
+&lt;p&gt;监听器 -&amp;gt; 汇总报告&lt;/p&gt;
+&lt;p&gt;&lt;img alt="summary-report" src="../images/jmeter/result-tree.png"&gt;&lt;/p&gt;
+&lt;h3&gt;运行&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jmeter&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;testplan&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;httpPress&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;jmx&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="n"&gt;testplan&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;result&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;testplan&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;webreport&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;查看结果&lt;/h3&gt;
+&lt;p&gt;result.txt 是每条 request 的日志，webreport 下的网页展示了汇总的统计数据。常用的指标都有 Response Time, Transactions Per Second，Bytes Throughput&lt;/p&gt;</content><category term="Java, Test"></category><category term="jmeter"></category><category term="testcase"></category></entry><entry><title>workflow 推荐</title><link href="https://xingzuoshe.cn/workflow-recommend.html" rel="alternate"></link><published>2020-10-27T11:00:00+08:00</published><updated>2020-10-27T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-10-27:/workflow-recommend.html</id><summary type="html">&lt;p&gt;workflow 推荐&lt;/p&gt;</summary><content type="html">&lt;h2&gt;workflow&lt;/h2&gt;
 &lt;p&gt;这里的 workflow 工作流 仅仅指针对企业的业务流程的工作流，任务调度之类的不包含在内&lt;/p&gt;
 &lt;p&gt;从最初的 jBPM， 工作流在不停的分支，目前主流的是 Flowable 和 Camunda&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jBPM4&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;jBPM6&lt;/span&gt;
