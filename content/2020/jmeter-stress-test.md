@@ -1,4 +1,4 @@
-Title: Apache JMeter stress test
+Title: Apache JMeter 压力测试
 Status: published
 Date: 2020-11-05 11:00
 Modified: 2020-11-05 12:00
@@ -100,7 +100,7 @@ https://www.cnblogs.com/stulzq/p/8971531.html
 
 监听器 -> 汇总报告
 
-![summary-report](../images/jmeter/result-tree.png)
+![summary-report](../images/jmeter/summary-report.png)
 
 
 ### 运行
