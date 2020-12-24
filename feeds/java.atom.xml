@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Java</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/java.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-10-27T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>workflow 推荐</title><link href="https://xingzuoshe.cn/workflow-recommend.html" rel="alternate"></link><published>2020-10-27T11:00:00+08:00</published><updated>2020-10-27T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-10-27:/workflow-recommend.html</id><summary type="html">&lt;p&gt;workflow 推荐&lt;/p&gt;</summary><content type="html">&lt;h2&gt;workflow&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Java</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/java.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-12-21T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>log4j2 配置日志清理</title><link href="https://xingzuoshe.cn/log4j2-config-delete.html" rel="alternate"></link><published>2020-12-21T22:00:00+08:00</published><updated>2020-12-21T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-12-21:/log4j2-config-delete.html</id><summary type="html">&lt;p&gt;log4j2 配置日志清理&lt;/p&gt;</summary><content type="html">&lt;h2&gt;log4j2 delete&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://logging.apache.org/log4j/2.x/manual/appenders.html#CustomDeleteOnRollover"&gt;官方文档 Delete on Rollover&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Configuration&lt;/span&gt; &lt;span class="na"&gt;status=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;warn&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;MyApp&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;packages=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;Properties&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;Property&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;baseDir&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;logs&lt;span class="nt"&gt;&amp;lt;/Property&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/Properties&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;Appenders&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;RollingFile&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;RollingFile&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;fileName=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;${baseDir}/app.log&amp;quot;&lt;/span&gt;
+          &lt;span class="na"&gt;filePattern=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;${baseDir}/$${date:yyyy-MM}/app-%d{yyyy-MM-dd}.log.gz&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;PatternLayout&lt;/span&gt; &lt;span class="na"&gt;pattern=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%d %p %c{1.} [%t] %m%n&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;CronTriggeringPolicy&lt;/span&gt; &lt;span class="na"&gt;schedule=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;0 0 0 * * ?&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;DefaultRolloverStrategy&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;Delete&lt;/span&gt; &lt;span class="na"&gt;basePath=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;${baseDir}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;maxDepth=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class="nt"&gt;&amp;lt;IfFileName&lt;/span&gt; &lt;span class="na"&gt;glob=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;*/app-*.log.gz&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+          &lt;span class="nt"&gt;&amp;lt;IfLastModified&lt;/span&gt; &lt;span class="na"&gt;age=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;60d&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/Delete&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/DefaultRolloverStrategy&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/RollingFile&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/Appenders&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;Loggers&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;Root&lt;/span&gt; &lt;span class="na"&gt;level=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;error&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;AppenderRef&lt;/span&gt; &lt;span class="na"&gt;ref=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;RollingFile&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/Root&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/Loggers&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Configuration&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;可以按照文件名，最后修改时间，文件数量，文件大小，第一个条件必须是 IfFileName，后面的条件如果有多个可以用 IfAll IfAny IfNot 后者本身来嵌套组合&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;IfFileName&lt;/span&gt; &lt;span class="n"&gt;glob&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;*/app-*.log.gz&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;IfLastModified&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;60d&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;IfAccumulatedFileCount&lt;/span&gt; &lt;span class="n"&gt;exceeds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;180&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;IfAccumulatedFileSize&lt;/span&gt; &lt;span class="n"&gt;exceeds&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;10 GB&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;Delete&lt;/span&gt; &lt;span class="na"&gt;basePath=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;baseDir&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;maxDepth=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;IfFileName&lt;/span&gt; &lt;span class="na"&gt;glob=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;*/app-*.log.gz&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;IfLastModified&lt;/span&gt; &lt;span class="na"&gt;age=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;30d&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;IfAny&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;IfAccumulatedFileSize&lt;/span&gt; &lt;span class="na"&gt;exceeds=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;100 GB&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;IfAccumulatedFileCount&lt;/span&gt; &lt;span class="na"&gt;exceeds=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;10&amp;quot;&lt;/span&gt; &lt;span class="nt"&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;/IfAny&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/IfLastModified&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/IfFileName&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Delete&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="java"></category><category term="log4j2"></category></entry><entry><title>workflow 推荐</title><link href="https://xingzuoshe.cn/workflow-recommend.html" rel="alternate"></link><published>2020-10-27T11:00:00+08:00</published><updated>2020-10-27T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-10-27:/workflow-recommend.html</id><summary type="html">&lt;p&gt;workflow 推荐&lt;/p&gt;</summary><content type="html">&lt;h2&gt;workflow&lt;/h2&gt;
 &lt;p&gt;这里的 workflow 工作流 仅仅指针对企业的业务流程的工作流，任务调度之类的不包含在内&lt;/p&gt;
 &lt;p&gt;从最初的 jBPM， 工作流在不停的分支，目前主流的是 Flowable 和 Camunda&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jBPM4&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;jBPM6&lt;/span&gt;
