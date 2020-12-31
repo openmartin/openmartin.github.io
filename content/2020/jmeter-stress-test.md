@@ -2,7 +2,7 @@ Title: Apache JMeter 压力测试
 Status: published
 Date: 2020-11-05 11:00
 Modified: 2020-11-05 12:00
-Category: Java, Test
+Category: Java
 Tags: jmeter, testcase
 Slug: jmeter-stress-test
 Authors: Martin

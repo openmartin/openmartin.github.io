@@ -2,7 +2,7 @@ Title: Elasticsearch Logstash
 Status: published
 Date: 2020-11-27 11:00
 Modified: 2020-11-27 12:00
-Category: Java, Elasticsearch
+Category: Java
 Tags: elasticsearch, logstash
 Slug: elasticsearch-logstash
 Authors: Martin

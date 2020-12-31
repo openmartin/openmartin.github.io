@@ -2,7 +2,7 @@ Title: Logstash Plugin -- logstash-filter-geoip
 Status: published
 Date: 2020-12-11 11:00
 Modified: 2020-12-11 12:00
-Category: Java, Elasticsearch
+Category: Java
 Tags: elasticsearch, logstash, geoip
 Slug: logstash-filter-geoip
 Authors: Martin
