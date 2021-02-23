@@ -109,7 +109,7 @@
   <div>
     <h2>log4j2 delete</h2>
 <p><a href="https://logging.apache.org/log4j/2.x/manual/appenders.html#CustomDeleteOnRollover">官方文档 Delete on Rollover</a></p>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;Configuration</span> <span class="na">status=</span><span class="s">&quot;warn&quot;</span> <span class="na">name=</span><span class="s">&quot;MyApp&quot;</span> <span class="na">packages=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;Properties&gt;</span>
     <span class="nt">&lt;Property</span> <span class="na">name=</span><span class="s">&quot;baseDir&quot;</span><span class="nt">&gt;</span>logs<span class="nt">&lt;/Property&gt;</span>
@@ -133,18 +133,18 @@
     <span class="nt">&lt;/Root&gt;</span>
   <span class="nt">&lt;/Loggers&gt;</span>
 <span class="nt">&lt;/Configuration&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>可以按照文件名，最后修改时间，文件数量，文件大小，第一个条件必须是 IfFileName，后面的条件如果有多个可以用 IfAll IfAny IfNot 后者本身来嵌套组合</p>
-<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">IfFileName</span> <span class="n">glob</span><span class="o">=</span><span class="ss">&quot;*/app-*.log.gz&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">IfLastModified</span> <span class="n">age</span><span class="o">=</span><span class="ss">&quot;60d&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">IfAccumulatedFileCount</span> <span class="n">exceeds</span><span class="o">=</span><span class="ss">&quot;180&quot;</span> <span class="o">/&gt;</span>
-<span class="o">&lt;</span><span class="n">IfAccumulatedFileSize</span> <span class="n">exceeds</span><span class="o">=</span><span class="ss">&quot;10 GB&quot;</span> <span class="o">/&gt;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">&lt;IfFileName glob=&quot;*/app-*.log.gz&quot; /&gt;</span>
+<span class="err">&lt;IfLastModified age=&quot;60d&quot; /&gt;</span>
+<span class="err">&lt;IfAccumulatedFileCount exceeds=&quot;180&quot; /&gt;</span>
+<span class="err">&lt;IfAccumulatedFileSize exceeds=&quot;10 GB&quot; /&gt;</span>
+</code></pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="nt">&lt;Delete</span> <span class="na">basePath=</span><span class="s">&quot;</span><span class="cp">${</span><span class="n">baseDir</span><span class="cp">}</span><span class="s">&quot;</span> <span class="na">maxDepth=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Delete</span> <span class="na">basePath=</span><span class="s">&quot;</span><span class="cp">${</span><span class="n">baseDir</span><span class="cp">}</span><span class="s">&quot;</span> <span class="na">maxDepth=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;IfFileName</span> <span class="na">glob=</span><span class="s">&quot;*/app-*.log.gz&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;IfLastModified</span> <span class="na">age=</span><span class="s">&quot;30d&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;IfAny&gt;</span>
@@ -154,7 +154,7 @@
     <span class="nt">&lt;/IfLastModified&gt;</span>
   <span class="nt">&lt;/IfFileName&gt;</span>
 <span class="nt">&lt;/Delete&gt;</span>
-</pre></div>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

@@ -110,26 +110,26 @@
     <h2>如何从命令行运行 TestCase</h2>
 <h3>junit</h3>
 <p>把依赖 和 junit 放到 lib 目录下， 下面是 JUnit 4.x 的例子</p>
-<div class="highlight"><pre><span></span><span class="k">set</span> <span class="nv">JAVA_HOME</span><span class="p">=</span><span class="s2">&quot;C:\Program Files\Java\jdk1.8.0_171&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="k">set</span> <span class="nv">JAVA_HOME</span><span class="p">=</span><span class="s2">&quot;C:\Program Files\Java\jdk1.8.0_171&quot;</span>
 <span class="nv">%JAVA_HOME%</span>\bin\java -classpath <span class="s2">&quot;lib/*;.\classes;.\test-classes&quot;</span> org.junit.runner.JUnitCore com.example.util.TestJSON
-</pre></div>
+</code></pre></div>
 
 
 <p>注意：junit 依赖 hamcrest-core，也一并放到 lib 目录下</p>
 <p>参考：https://stackoverflow.com/questions/2235276/how-to-run-junit-test-cases-from-the-command-line</p>
 <h3>maven</h3>
 <p>也可以使用 maven 运行 TestCase</p>
-<div class="highlight"><pre><span></span><span class="n">mvn</span> <span class="n">clean</span> <span class="n">test</span>
-<span class="n">mvn</span> <span class="n">clean</span> <span class="n">test</span> <span class="o">-</span><span class="n">Dtest</span><span class="o">=</span><span class="n">your</span><span class="p">.</span><span class="n">package</span><span class="p">.</span><span class="n">TestClassName</span>
-<span class="n">mvn</span> <span class="n">clean</span> <span class="n">test</span> <span class="o">-</span><span class="n">Dtest</span><span class="o">=</span><span class="n">your</span><span class="p">.</span><span class="n">package</span><span class="p">.</span><span class="n">TestClassName</span><span class="o">#</span><span class="n">particularMethod</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">mvn clean test</span>
+<span class="err">mvn clean test -Dtest=your.package.TestClassName</span>
+<span class="err">mvn clean test -Dtest=your.package.TestClassName#particularMethod</span>
+</code></pre></div>
 
 
 <h3>gradle</h3>
-<div class="highlight"><pre><span></span><span class="n">gradle</span> <span class="n">test</span>
-<span class="n">gradle</span> <span class="n">test</span> <span class="c1">--tests your.package.TestClassName</span>
-<span class="n">gradle</span> <span class="n">test</span> <span class="c1">--tests your.package.TestClassName.particularMethod</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">gradle test</span>
+<span class="err">gradle test --tests your.package.TestClassName</span>
+<span class="err">gradle test --tests your.package.TestClassName.particularMethod</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

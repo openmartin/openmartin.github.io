@@ -108,7 +108,7 @@
 
   <div>
     <p>首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历</p>
-<div class="highlight"><pre><span></span><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=&lt;</span><span class="n">s3_aws_key_id</span><span class="o">&gt;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="n">session</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=&lt;</span><span class="n">s3_aws_key_id</span><span class="o">&gt;</span><span class="p">,</span>
                             <span class="n">aws_secret_access_key</span><span class="o">=&lt;</span><span class="n">s3_aws_secret_key</span><span class="o">&gt;</span><span class="p">,</span>
                             <span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">)</span>
     <span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
@@ -117,15 +117,15 @@
     <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">paginator</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=&lt;</span><span class="n">s3_bucket</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">Prefix</span><span class="o">=&lt;</span><span class="n">s3_path_prefix</span><span class="o">&gt;</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Contents&#39;</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Size&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">print</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Key&#39;</span><span class="p">)</span>
-</pre></div>
+                <span class="nb">print</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Key&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 
 <p>分页默认大小是1000，可以修改PageSize，改小可以减少响应时间</p>
-<div class="highlight"><pre><span></span><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_objects&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">paginator</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_paginator</span><span class="p">(</span><span class="s1">&#39;list_objects&#39;</span><span class="p">)</span>
 <span class="n">page_iterator</span> <span class="o">=</span> <span class="n">paginator</span><span class="o">.</span><span class="n">paginate</span><span class="p">(</span><span class="n">Bucket</span><span class="o">=</span><span class="s1">&#39;my-bucket&#39;</span><span class="p">,</span>
                                    <span class="n">PaginationConfig</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;PageSize&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>参考资料：

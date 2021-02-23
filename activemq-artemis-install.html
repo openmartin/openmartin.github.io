@@ -112,13 +112,13 @@
   <div>
     <h2>ActiveMQ Artemis 的安装</h2>
 <p>下载 <a href="http://activemq.apache.org/components/artemis/download/">安装包</a> ，然后解压</p>
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">ARTEMIS_HOME</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/apache-artemis-2.9.0
+<div class="highlight"><pre><span></span><code><span class="nb">export</span> <span class="nv">ARTEMIS_HOME</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/apache-artemis-2.9.0
 <span class="si">${</span><span class="nv">ARTEMIS_HOME</span><span class="si">}</span>/bin/artemis create eventbroker --http-host <span class="m">10</span>.80.28.27
-</pre></div>
+</code></pre></div>
 
 
 <p>创建 Broker Instance</p>
-<div class="highlight"><pre><span></span>[demo@localhost ~]$ <span class="cp">${</span><span class="n">ARTEMIS_HOME</span><span class="cp">}</span>/bin/artemis create eventbroker --http-host 10.80.28.27
+<div class="highlight"><pre><span></span><code>[demo@localhost ~]$ <span class="cp">${</span><span class="n">ARTEMIS_HOME</span><span class="cp">}</span>/bin/artemis create eventbroker --http-host 10.80.28.27
 Creating ActiveMQ Artemis instance at: /home/demo/eventbroker
 
 --user: is a mandatory property!
@@ -143,27 +143,27 @@ You can now start the broker by executing:
 Or you can run the broker in the background using:
 
    &quot;/home/demo/eventbroker/bin/artemis-service&quot; start
-</pre></div>
+</code></pre></div>
 
 
 <h2>启动和停止</h2>
 <p>ActiveMQ Artemis 只支持 Java 7 及以上</p>
-<div class="highlight"><pre><span></span><span class="c1"># service</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># service</span>
 <span class="s2">&quot;/home/demo/eventbroker/bin/artemis-service&quot;</span> start
 <span class="s2">&quot;/home/demo/eventbroker/bin/artemis-service&quot;</span> stop
 
 <span class="c1"># run in shell</span>
 <span class="s2">&quot;/home/demo/eventbroker/bin/artemis&quot;</span> run
-</pre></div>
+</code></pre></div>
 
 
 <h2>修改 JVM 参数</h2>
 <p>在<code>/home/demo/eventbroker/bin/artemis</code>文件的最后有 Java 启动的时候的参数，如果需要修改 JVM 参数可以在这里修改</p>
-<div class="highlight"><pre><span></span>    <span class="o">-</span><span class="n">Xms2048M</span> <span class="err">\</span>
-    <span class="o">-</span><span class="n">Xmx2048M</span> <span class="err">\</span>
-    <span class="o">-</span><span class="n">XX</span><span class="p">:</span><span class="n">MaxMetaspaceSize</span><span class="o">=</span><span class="mi">512</span><span class="n">M</span> <span class="err">\</span>
-    <span class="o">-</span><span class="n">XX</span><span class="p">:</span><span class="n">MetaspaceSize</span><span class="o">=</span><span class="mi">512</span><span class="n">M</span> <span class="err">\</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">    -Xms2048M \</span>
+<span class="err">    -Xmx2048M \</span>
+<span class="err">    -XX:MaxMetaspaceSize=512M \</span>
+<span class="err">    -XX:MetaspaceSize=512M \</span>
+</code></pre></div>
 
 
 <h2>Web Console</h2>
@@ -174,30 +174,30 @@ Or you can run the broker in the background using:
 <ol>
 <li>禁用掉自动创建 address</li>
 </ol>
-<div class="highlight"><pre><span></span>            <span class="c">&lt;!-- 在 address-setting 部分 --&gt;</span>
+<div class="highlight"><pre><span></span><code>            <span class="c">&lt;!-- 在 address-setting 部分 --&gt;</span>
             <span class="nt">&lt;auto-create-queues&gt;</span>false<span class="nt">&lt;/auto-create-queues&gt;</span>
             <span class="nt">&lt;auto-create-addresses&gt;</span>true<span class="nt">&lt;/auto-create-addresses&gt;</span>
             <span class="c">&lt;!-- &lt;auto-create-jms-queues&gt;true&lt;/auto-create-jms-queues&gt; --&gt;</span>
             <span class="c">&lt;!-- &lt;auto-create-jms-topics&gt;true&lt;/auto-create-jms-topics&gt; --&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
 <ol>
 <li>配置 topic</li>
 </ol>
 <p>自动创建的 queue 默认是 durable 的</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;addresses&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;addresses&gt;</span>
    <span class="nt">&lt;address</span> <span class="na">name=</span><span class="s">&quot;pubsub.foo&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;multicast&gt;</span>
       <span class="nt">&lt;/multicast&gt;</span>
    <span class="nt">&lt;/address&gt;</span>
 <span class="nt">&lt;/addresses&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2>Spring JMS 的设置</h2>
 <p>Spring 的 JMS 配置和其他的一样，并没有什么不同</p>
-<div class="highlight"><pre><span></span>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;connectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.activemq.artemis.jms.client.ActiveMQJMSConnectionFactory&quot;</span><span class="nt">&gt;</span>
+<div class="highlight"><pre><span></span><code>    <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;connectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.activemq.artemis.jms.client.ActiveMQJMSConnectionFactory&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;constructor-arg</span> <span class="na">value=</span><span class="s">&quot;tcp://10.80.28.27:61616&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/bean&gt;</span>
 
@@ -227,86 +227,86 @@ Or you can run the broker in the background using:
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;destination&quot;</span> <span class="na">ref=</span><span class="s">&quot;exampleTopic&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;messageListener&quot;</span> <span class="na">ref=</span><span class="s">&quot;messageListener&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/bean&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">org.springframework.jms.core.JmsTemplate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.jms.core.JmsTemplate</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">javax.jms.Queue</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.jms.Topic</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.jms.Queue</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.jms.Topic</span><span class="p">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleJmsMessageSender</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleJmsMessageSender</span> <span class="p">{</span>
 
-    <span class="kd">private</span> <span class="n">JmsTemplate</span> <span class="n">jmsTemplate</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Queue</span> <span class="n">queue</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">Topic</span> <span class="n">topic</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">JmsTemplate</span> <span class="n">jmsTemplate</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="n">Queue</span> <span class="n">queue</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="n">Topic</span> <span class="n">topic</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">simpleQueueSend</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">jmsTemplate</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">queue</span><span class="o">,</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">createTextMessage</span><span class="o">(</span><span class="s">&quot;hello queue world&quot;</span><span class="o">));</span>
-    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">simpleQueueSend</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">jmsTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="na">createTextMessage</span><span class="p">(</span><span class="s">&quot;hello queue world&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">simpleTopicSend</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">jmsTemplate</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">topic</span><span class="o">,</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">createTextMessage</span><span class="o">(</span><span class="s">&quot;hello topic world&quot;</span><span class="o">));</span>
-    <span class="o">}</span>
-
-
-    <span class="kd">public</span> <span class="n">JmsTemplate</span> <span class="nf">getJmsTemplate</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">jmsTemplate</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setJmsTemplate</span><span class="o">(</span><span class="n">JmsTemplate</span> <span class="n">jmsTemplate</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">jmsTemplate</span> <span class="o">=</span> <span class="n">jmsTemplate</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">Queue</span> <span class="nf">getQueue</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">queue</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setQueue</span><span class="o">(</span><span class="n">Queue</span> <span class="n">queue</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="n">Topic</span> <span class="nf">getTopic</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">topic</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTopic</span><span class="o">(</span><span class="n">Topic</span> <span class="n">topic</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">topic</span> <span class="o">=</span> <span class="n">topic</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">simpleTopicSend</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">jmsTemplate</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="p">.</span><span class="na">createTextMessage</span><span class="p">(</span><span class="s">&quot;hello topic world&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
 
 
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">com.example</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">JmsTemplate</span> <span class="nf">getJmsTemplate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">jmsTemplate</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<span class="kn">import</span> <span class="nn">javax.jms.JMSException</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.jms.Message</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.jms.MessageListener</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.jms.TextMessage</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setJmsTemplate</span><span class="p">(</span><span class="n">JmsTemplate</span> <span class="n">jmsTemplate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">jmsTemplate</span> <span class="o">=</span> <span class="n">jmsTemplate</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleListener</span> <span class="kd">implements</span> <span class="n">MessageListener</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Queue</span> <span class="nf">getQueue</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">queue</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setQueue</span><span class="p">(</span><span class="n">Queue</span> <span class="n">queue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">queue</span> <span class="o">=</span> <span class="n">queue</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="n">Topic</span> <span class="nf">getTopic</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">topic</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTopic</span><span class="p">(</span><span class="n">Topic</span> <span class="n">topic</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">topic</span> <span class="o">=</span> <span class="n">topic</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<div class="highlight"><pre><span></span><code><span class="kn">package</span> <span class="nn">com.example</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.jms.JMSException</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.jms.Message</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.jms.MessageListener</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">javax.jms.TextMessage</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleListener</span> <span class="kd">implements</span> <span class="n">MessageListener</span> <span class="p">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">Message</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">message</span> <span class="k">instanceof</span> <span class="n">TextMessage</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="o">((</span><span class="n">TextMessage</span><span class="o">)</span> <span class="n">message</span><span class="o">).</span><span class="na">getText</span><span class="o">();</span>
-                <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Message has been consumed : &quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="o">);</span>
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JMSException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="o">(</span><span class="n">ex</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">(</span><span class="s">&quot;Message Error&quot;</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="p">(</span><span class="n">Message</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="k">instanceof</span> <span class="n">TextMessage</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">((</span><span class="n">TextMessage</span><span class="p">)</span> <span class="n">message</span><span class="p">).</span><span class="na">getText</span><span class="p">();</span>
+                <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Message has been consumed : &quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">JMSException</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&quot;Message Error&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 <h2>JMS 中设置持久化订阅</h2>
 <p>持久化订阅需要设置 ClientID 和 SubscriptionName 来唯一标识一个 Consumer，也就说如果有两个 Connection 这两项一致，ActiveMQ 就认为这两个 Consumer 是同一个</p>
-<div class="highlight"><pre><span></span>    <span class="c">&lt;!-- 这里用 ActiveMQ Classic 的例子 --&gt;</span>
+<div class="highlight"><pre><span></span><code>    <span class="c">&lt;!-- 这里用 ActiveMQ Classic 的例子 --&gt;</span>
     <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;consumerAmqConnectionFactory&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">value=</span><span class="s">&quot;tcp://10.80.28.27:61616&quot;</span> <span class="nt">/&gt;</span>
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;clientID&quot;</span> <span class="na">value=</span><span class="s">&quot;HOST-Consumer&quot;</span><span class="nt">/&gt;</span>
@@ -335,7 +335,7 @@ Or you can run the broker in the background using:
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;subscriptionDurable&quot;</span> <span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;durableSubscriptionName&quot;</span> <span class="na">value=</span><span class="s">&quot;Subscriber-B&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/bean&gt;</span>
-</pre></div>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

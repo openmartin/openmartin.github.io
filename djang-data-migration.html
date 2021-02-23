@@ -109,21 +109,21 @@
     <p>在使用django框架开发的过程中，我们不可避免的遇到models层的变更，就涉及到数据库表的变动，django给我提供了一个migration的工具来做这些数据库表的变更。</p>
 <h2>djang migration</h2>
 <p>如果不加appname，那么就是指所有包含migrations 目录的app</p>
-<div class="highlight"><pre><span></span><span class="c1"># 基于当前的model 检测修改，创建迁移策略文件</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 基于当前的model 检测修改，创建迁移策略文件</span>
 python manage.py makemigrations &lt;appname&gt;
 <span class="c1"># 执行迁移动作</span>
 python manage.py migrate
-</pre></div>
+</code></pre></div>
 
 
 <h3>migrations失败</h3>
 <p>有时候如果models改动比较大，migrations会失败，这个时候有两种选择，手工去修改migrations文件，第二种是清除所有migrations，重新migrate</p>
 <h4>手工修改migrations文件</h4>
 <p>通过报错信息加上SQL语句找到找到问题，然后具体问题具体分析，是修改数据库里面的数据，还是修改migrations生成的脚本。</p>
-<div class="highlight"><pre><span></span>python manage.py migrate
+<div class="highlight"><pre><span></span><code>python manage.py migrate
 
 python manage.py sqlmigrate &lt;appname&gt; <span class="m">0001</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>当处理模型修改的时候：</p>
@@ -143,7 +143,7 @@ python manage.py sqlmigrate &lt;appname&gt; <span class="m">0001</span>
 <p>参考</p>
 <p>http://www.tuicool.com/articles/yM3IVr</p>
 <h5>NULL to NOT NULL</h5>
-<div class="highlight"><pre><span></span>python manage.py makemigrations
+<div class="highlight"><pre><span></span><code>python manage.py makemigrations
 You are trying to add a non-nullable field <span class="s1">&#39;college&#39;</span> to majorproperty without a default<span class="p">;</span> we can<span class="err">&#39;</span>t <span class="k">do</span> that <span class="o">(</span>the database needs something to populate existing rows<span class="o">)</span>.
 Please <span class="k">select</span> a fix:
  <span class="m">1</span><span class="o">)</span> Provide a one-off default now <span class="o">(</span>will be <span class="nb">set</span> on all existing rows<span class="o">)</span>
@@ -152,33 +152,33 @@ Select an option: <span class="m">1</span>
 Please enter the default value now, as valid Python
 The datetime and django.utils.timezone modules are available, so you can <span class="k">do</span> e.g. timezone.now<span class="o">()</span>
 &gt;&gt;&gt; <span class="m">1</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>在migrate的时候提示你需要指定一个默认值，用以处理NULL的情况</p>
 <h4>清除migrations</h4>
 <p>清除所有app目录/migrations/下除__init__.py 文件之外的py文件</p>
-<div class="highlight"><pre><span></span>find . -path <span class="s2">&quot;*migrations*&quot;</span> -name <span class="s2">&quot;*.py&quot;</span> -not -path <span class="s2">&quot;*__init__*&quot;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>find . -path <span class="s2">&quot;*migrations*&quot;</span> -name <span class="s2">&quot;*.py&quot;</span> -not -path <span class="s2">&quot;*__init__*&quot;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div>
 
 
 <h4>squashmigrations</h4>
 <p>当migrations越来越多的时候执行 makemigrations 和 migrate 就会越来越慢，可以考虑对其瘦身（减少migrations文件的数量）</p>
-<div class="highlight"><pre><span></span>python manage.py squashmigrations schools <span class="m">0002</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code>python manage.py squashmigrations schools <span class="m">0002</span>
+</code></pre></div>
 
 
 <h2>数据导入导出</h2>
 <h3>数据导出</h3>
 <p>django 项目提供了一个导出的方法 python manage.py dumpdata, 不指定 appname 时默认为导出所有的app</p>
-<div class="highlight"><pre><span></span>python manage.py dumpdata <span class="o">[</span>appname<span class="o">]</span> &gt; appname_data.json
-</pre></div>
+<div class="highlight"><pre><span></span><code>python manage.py dumpdata <span class="o">[</span>appname<span class="o">]</span> &gt; appname_data.json
+</code></pre></div>
 
 
 <h3>数据导入</h3>
 <p>数据导入,不需要指定 appname</p>
-<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">appname_data</span><span class="p">.</span><span class="n">json</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">python manage.py loaddata appname_data.json</span>
+</code></pre></div>
 
 
 <p>优点：可以兼容各种支持的数据库，也就是说，以前用的是 SQLite3，可以导出后，用这种方法导入到 MySQL, PostgreSQL等数据库，反过来也可以。</p>
@@ -186,9 +186,9 @@ The datetime and django.utils.timezone modules are available, so you can <span c
 <h3>常见数据导入导出</h3>
 <p>一般情况下，我们导入导出的时候需要排除一些app，contenttypes(新环境migrate的时候会重新生成，而且包含数据)，sessions(用户session相关数据),  admin(admin log)</p>
 <p>auth 包含用户，可视情况决定是否导出</p>
-<div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="c1">--all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &gt; all.json</span>
-<span class="n">python</span> <span class="n">manage</span><span class="p">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="k">all</span><span class="p">.</span><span class="n">json</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">python manage.py dumpdata --all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &gt; all.json</span>
+<span class="err">python manage.py loaddata all.json</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

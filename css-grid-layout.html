@@ -113,26 +113,26 @@
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout">MDN CSS 网格布局</a></p>
 <h2>常见用法</h2>
 <p>单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用auto-fill关键字表示自动填充。</p>
-<div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
   <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
   <span class="k">grid-template-columns</span><span class="p">:</span> <span class="nf">repeat</span><span class="p">(</span><span class="kc">auto</span><span class="o">-</span><span class="kc">fill</span><span class="p">,</span> <span class="mi">100</span><span class="kt">px</span><span class="p">);</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>行和列的间距</p>
-<div class="highlight"><pre><span></span><span class="nt">grid-row-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">grid-row-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
 <span class="nt">grid-column-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
 <span class="nt">grid-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
-</pre></div>
+</code></pre></div>
 
 
 <h2>CSS trick</h2>
 <p>紧挨着的下一个邻节点, 加号表示</p>
-<div class="highlight"><pre><span></span><span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">focus</span> <span class="o">+</span><span class="nt">div</span><span class="o">,</span> <span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">hover</span> <span class="o">+</span><span class="nt">div</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">focus</span> <span class="o">+</span><span class="nt">div</span><span class="o">,</span> <span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">hover</span> <span class="o">+</span><span class="nt">div</span> <span class="p">{</span>
     <span class="k">color</span><span class="p">:</span> <span class="mh">#ff7c08</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

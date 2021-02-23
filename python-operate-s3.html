@@ -112,7 +112,7 @@
 <h2>boto3 Python SDK</h2>
 <p>目前官方推荐的Python SDK 是boto3 <a href="https://github.com/boto/boto3">https://github.com/boto/boto3</a></p>
 <p>接下来进入正题,直接看代码把。:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
 
 <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;&lt;key&gt;&#39;</span><span class="p">,</span> \
     <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;&lt;key&gt;&#39;</span><span class="p">,</span> \
@@ -130,7 +130,7 @@
     <span class="s1">&#39;get_object&#39;</span><span class="p">,</span> <span class="n">Params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Bucket&#39;</span><span class="p">:</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span> <span class="s1">&#39;Key&#39;</span><span class="p">:</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">key</span><span class="p">},</span>
     <span class="n">ExpiresIn</span><span class="o">=</span> <span class="mi">3600</span><span class="o">*</span><span class="mi">30</span><span class="o">*</span><span class="mi">12</span>
 <span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>简单说明一下代码，S3</p>

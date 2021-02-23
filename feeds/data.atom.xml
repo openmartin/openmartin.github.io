@@ -14,8 +14,12 @@
 &lt;p&gt;&lt;a href="https://tech.meituan.com/2017/05/26/hotel-dw-layer-topic.html"&gt;美团点评酒旅数据仓库建设实践&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://tech.meituan.com/2018/12/27/onedata-origin.html"&gt;美团酒旅起源数据治理平台的建设与实践&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://tech.meituan.com/2018/02/11/mtdp-travel-yydp-present.html"&gt;美团点评运营数据产品化应用与实践&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://tech.meituan.com/2020/03/12/delivery-data-governance.html"&gt;美团配送数据治理实践&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://tech.youzan.com/you-zan-zhi-biao-ku-shi-jian/"&gt;有赞指标库实践&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://youdata.163.com/index/manual/o/4Analyze_data_and_visualize_it/38aggregation.html"&gt;网易有数&lt;/a&gt;&lt;/p&gt;</content><category term="Data"></category><category term="data"></category></entry><entry><title>Distributed Task Scheduler</title><link href="https://xingzuoshe.cn/distributed-task-scheduler.html" rel="alternate"></link><published>2021-01-26T10:00:00+08:00</published><updated>2021-01-26T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-01-26:/distributed-task-scheduler.html</id><summary type="html">&lt;p&gt;分布式任务调度&lt;/p&gt;</summary><content type="html">&lt;h2&gt;任务调度&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://mp.weixin.qq.com/s/-pLpLD_HMiasyyRxo5oTRQ"&gt;滴滴数据仓库指标体系建设实践&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://youdata.163.com/index/manual/o/4Analyze_data_and_visualize_it/38aggregation.html"&gt;网易有数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.cnblogs.com/niceshot/p/13640630.html"&gt;指标管理系统设计&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.cnblogs.com/niceshot/p/13735779.html"&gt;指标系统计算架构设计&lt;/a&gt;&lt;/p&gt;</content><category term="Data"></category><category term="data"></category></entry><entry><title>Distributed Task Scheduler</title><link href="https://xingzuoshe.cn/distributed-task-scheduler.html" rel="alternate"></link><published>2021-01-26T10:00:00+08:00</published><updated>2021-01-26T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-01-26:/distributed-task-scheduler.html</id><summary type="html">&lt;p&gt;分布式任务调度&lt;/p&gt;</summary><content type="html">&lt;h2&gt;任务调度&lt;/h2&gt;
 &lt;p&gt;简单的任务调度可以使用操作系统的服务，比如 cron 或者 windows 下的计划任务&lt;/p&gt;
 &lt;p&gt;在各个编程语言也有定时任务的支持，比如在 java 的 spring scheduler 或者 quartz&lt;/p&gt;
 &lt;h3&gt;分布式任务调度&lt;/h3&gt;

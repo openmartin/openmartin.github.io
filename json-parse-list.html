@@ -110,35 +110,35 @@
     <h2>json 反序列化</h2>
 <p>泛型的序列化比较简单，和一般对象的序列化没有区别，但是反序列化有一些不同。</p>
 <h3>jackson</h3>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
-<span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="p">;</span>
+<span class="n">ObjectMapper</span> <span class="n">mapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="p">();</span>
 
-<span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">myObjectList</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">jsonInput</span><span class="o">,</span> <span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;&gt;(){});</span>
-</pre></div>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">myObjectList</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">.</span><span class="na">readValue</span><span class="p">(</span><span class="n">jsonInput</span><span class="p">,</span> <span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;&gt;</span><span class="p">(){});</span>
+</code></pre></div>
 
 
 <h3>gson</h3>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
-<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="p">;</span>
+<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="p">();</span>
 
-<span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">myObjectList</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">researchIdStr</span><span class="o">,</span> <span class="k">new</span> <span class="n">TypeToken</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;&gt;(){}.</span><span class="na">getType</span><span class="o">());</span>
-</pre></div>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">myObjectList</span> <span class="o">=</span> <span class="n">gson</span><span class="p">.</span><span class="na">fromJson</span><span class="p">(</span><span class="n">researchIdStr</span><span class="p">,</span> <span class="k">new</span> <span class="n">TypeToken</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;&gt;</span><span class="p">(){}.</span><span class="na">getType</span><span class="p">());</span>
+</code></pre></div>
 
 
 <h3>fastjson</h3>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSON</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">com.alibaba.fastjson.JSON</span><span class="p">;</span>
 
-<span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">myObjectList</span> <span class="o">=</span> <span class="n">JSON</span><span class="o">.</span><span class="na">parseObject</span><span class="o">(</span><span class="n">researchIdStr</span><span class="o">,</span> <span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;&gt;(){});</span>
-</pre></div>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;</span> <span class="n">myObjectList</span> <span class="o">=</span> <span class="n">JSON</span><span class="p">.</span><span class="na">parseObject</span><span class="p">(</span><span class="n">researchIdStr</span><span class="p">,</span> <span class="k">new</span> <span class="n">TypeReference</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">MyClass</span><span class="o">&gt;&gt;</span><span class="p">(){});</span>
+</code></pre></div>
 
 
 <h3>List 的元素还是个泛型</h3>
 <p>如果 List 的元素还是一个泛型，需要指定具体的子类，见下面</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="o">;</span>
-<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="o">();</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">com.google.gson.Gson</span><span class="p">;</span>
+<span class="n">Gson</span> <span class="n">gson</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Gson</span><span class="p">();</span>
 
-<span class="n">List</span><span class="o">&lt;</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Boolean</span><span class="o">&gt;&gt;</span> <span class="n">pairList</span> <span class="o">=</span> <span class="n">gson</span><span class="o">.</span><span class="na">fromJson</span><span class="o">(</span><span class="n">researchIdStr</span><span class="o">,</span> <span class="k">new</span> <span class="n">TypeToken</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ImmutablePair</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Boolean</span><span class="o">&gt;&gt;&gt;(){}.</span><span class="na">getType</span><span class="o">());</span>
-</pre></div>
+<span class="n">List</span><span class="o">&lt;</span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Boolean</span><span class="o">&gt;&gt;</span> <span class="n">pairList</span> <span class="o">=</span> <span class="n">gson</span><span class="p">.</span><span class="na">fromJson</span><span class="p">(</span><span class="n">researchIdStr</span><span class="p">,</span> <span class="k">new</span> <span class="n">TypeToken</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">ImmutablePair</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Boolean</span><span class="o">&gt;&gt;&gt;</span><span class="p">(){}.</span><span class="na">getType</span><span class="p">());</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

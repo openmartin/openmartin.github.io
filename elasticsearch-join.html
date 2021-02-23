@@ -112,179 +112,179 @@
 <p>下面都是基于 Elasticsearch 7.3，有些语句低版本可能不支持</p>
 </blockquote>
 <p>下面以 question answer 一对多举例</p>
-<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="ss">&quot;localhost:9200/question-answer&quot;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
-<span class="s1">{</span>
-<span class="s1">  &quot;mappings&quot;: {</span>
-<span class="s1">    &quot;properties&quot;: {</span>
-<span class="s1">      &quot;question_id&quot;: {&quot;type&quot;: &quot;long&quot;},</span>
-<span class="s1">      &quot;content&quot;: {&quot;type&quot;: &quot;text&quot;},</span>
-<span class="s1">      &quot;answer_id&quot;: {&quot;type&quot;: &quot;long&quot;},</span>
-<span class="s1">      &quot;qaRelation&quot;:{&quot;type&quot;: &quot;join&quot;,</span>
-<span class="s1">         &quot;relations&quot;: {</span>
-<span class="s1">          &quot;question&quot;: &quot;answer&quot;</span>
-<span class="s1">           }</span>
-<span class="s1">         },</span>
-<span class="s1">      &quot;dataType&quot;: {&quot;type&quot;: &quot;keyword&quot;}</span>
-<span class="s1">    }</span>
-<span class="s1">  }</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">curl -X PUT &quot;localhost:9200/question-answer&quot; -H &#39;Content-Type: application/json&#39; -d&#39;</span>
+<span class="err">{</span>
+<span class="err">  &quot;mappings&quot;: {</span>
+<span class="err">    &quot;properties&quot;: {</span>
+<span class="err">      &quot;question_id&quot;: {&quot;type&quot;: &quot;long&quot;},</span>
+<span class="err">      &quot;content&quot;: {&quot;type&quot;: &quot;text&quot;},</span>
+<span class="err">      &quot;answer_id&quot;: {&quot;type&quot;: &quot;long&quot;},</span>
+<span class="err">      &quot;qaRelation&quot;:{&quot;type&quot;: &quot;join&quot;,</span>
+<span class="err">         &quot;relations&quot;: {</span>
+<span class="err">          &quot;question&quot;: &quot;answer&quot;</span>
+<span class="err">           }</span>
+<span class="err">         },</span>
+<span class="err">      &quot;dataType&quot;: {&quot;type&quot;: &quot;keyword&quot;}</span>
+<span class="err">    }</span>
+<span class="err">  }</span>
+<span class="err">}</span>
+<span class="err">&#39;</span>
+</code></pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="ss">&quot;localhost:9200/question-answer/_doc/1?refresh&amp;pretty&quot;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
-<span class="s1">{</span>
-<span class="s1">  &quot;question_id&quot;: &quot;1&quot;,</span>
-<span class="s1">  &quot;content&quot;: &quot;This is a question&quot;,</span>
-<span class="s1">  &quot;qaRelation&quot;: {</span>
-<span class="s1">    &quot;name&quot;: &quot;question&quot; </span>
-<span class="s1">  },</span>
-<span class="s1">  &quot;dataType&quot;: &quot;question&quot;</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span>
-<span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="ss">&quot;localhost:9200/question-answer/_doc/2?refresh&amp;pretty&quot;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
-<span class="s1">{</span>
-<span class="s1">  &quot;question_id&quot;: &quot;2&quot;,</span>
-<span class="s1">  &quot;content&quot;: &quot;This is another question&quot;,</span>
-<span class="s1">  &quot;qaRelation&quot;: {</span>
-<span class="s1">    &quot;name&quot;: &quot;question&quot; </span>
-<span class="s1">  },</span>
-<span class="s1">  &quot;dataType&quot;: &quot;question&quot;</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span>
-<span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="ss">&quot;localhost:9200/question-answer/_doc/3?routing=1&amp;refresh&amp;pretty&quot;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
-<span class="s1">{</span>
-<span class="s1">  &quot;answer_id&quot;: &quot;3&quot;,</span>
-<span class="s1">  &quot;content&quot;: &quot;This is an answer&quot;,</span>
-<span class="s1">  &quot;qaRelation&quot;: {</span>
-<span class="s1">    &quot;name&quot;: &quot;answer&quot;, </span>
-<span class="s1">    &quot;parent&quot;: &quot;1&quot; </span>
-<span class="s1">  },</span>
-<span class="s1">  &quot;dataType&quot;: &quot;answer&quot;</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span>
-<span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="ss">&quot;localhost:9200/question-answer/_doc/4?routing=1&amp;refresh&amp;pretty&quot;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
-<span class="s1">{</span>
-<span class="s1">  &quot;answer_id&quot;: &quot;4&quot;,</span>
-<span class="s1">  &quot;content&quot;: &quot;This is another answer&quot;,</span>
-<span class="s1">  &quot;qaRelation&quot;: {</span>
-<span class="s1">    &quot;name&quot;: &quot;answer&quot;,</span>
-<span class="s1">    &quot;parent&quot;: &quot;1&quot;</span>
-<span class="s1">  },</span>
-<span class="s1">  &quot;dataType&quot;: &quot;answer&quot;</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span>
-<span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">PUT</span> <span class="ss">&quot;localhost:9200/question-answer/_doc/4?routing=2&amp;refresh&amp;pretty&quot;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">d</span><span class="s1">&#39;</span>
-<span class="s1">{</span>
-<span class="s1">  &quot;answer_id&quot;: &quot;4&quot;,</span>
-<span class="s1">  &quot;content&quot;: &quot;This is a special answer&quot;,</span>
-<span class="s1">  &quot;qaRelation&quot;: {</span>
-<span class="s1">    &quot;name&quot;: &quot;answer&quot;,</span>
-<span class="s1">    &quot;parent&quot;: &quot;2&quot;</span>
-<span class="s1">  },</span>
-<span class="s1">  &quot;dataType&quot;: &quot;answer&quot;</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">curl -X PUT &quot;localhost:9200/question-answer/_doc/1?refresh&amp;pretty&quot; -H &#39;Content-Type: application/json&#39; -d&#39;</span>
+<span class="err">{</span>
+<span class="err">  &quot;question_id&quot;: &quot;1&quot;,</span>
+<span class="err">  &quot;content&quot;: &quot;This is a question&quot;,</span>
+<span class="err">  &quot;qaRelation&quot;: {</span>
+<span class="err">    &quot;name&quot;: &quot;question&quot; </span>
+<span class="err">  },</span>
+<span class="err">  &quot;dataType&quot;: &quot;question&quot;</span>
+<span class="err">}</span>
+<span class="err">&#39;</span>
+<span class="err">curl -X PUT &quot;localhost:9200/question-answer/_doc/2?refresh&amp;pretty&quot; -H &#39;Content-Type: application/json&#39; -d&#39;</span>
+<span class="err">{</span>
+<span class="err">  &quot;question_id&quot;: &quot;2&quot;,</span>
+<span class="err">  &quot;content&quot;: &quot;This is another question&quot;,</span>
+<span class="err">  &quot;qaRelation&quot;: {</span>
+<span class="err">    &quot;name&quot;: &quot;question&quot; </span>
+<span class="err">  },</span>
+<span class="err">  &quot;dataType&quot;: &quot;question&quot;</span>
+<span class="err">}</span>
+<span class="err">&#39;</span>
+<span class="err">curl -X PUT &quot;localhost:9200/question-answer/_doc/3?routing=1&amp;refresh&amp;pretty&quot; -H &#39;Content-Type: application/json&#39; -d&#39;</span>
+<span class="err">{</span>
+<span class="err">  &quot;answer_id&quot;: &quot;3&quot;,</span>
+<span class="err">  &quot;content&quot;: &quot;This is an answer&quot;,</span>
+<span class="err">  &quot;qaRelation&quot;: {</span>
+<span class="err">    &quot;name&quot;: &quot;answer&quot;, </span>
+<span class="err">    &quot;parent&quot;: &quot;1&quot; </span>
+<span class="err">  },</span>
+<span class="err">  &quot;dataType&quot;: &quot;answer&quot;</span>
+<span class="err">}</span>
+<span class="err">&#39;</span>
+<span class="err">curl -X PUT &quot;localhost:9200/question-answer/_doc/4?routing=1&amp;refresh&amp;pretty&quot; -H &#39;Content-Type: application/json&#39; -d&#39;</span>
+<span class="err">{</span>
+<span class="err">  &quot;answer_id&quot;: &quot;4&quot;,</span>
+<span class="err">  &quot;content&quot;: &quot;This is another answer&quot;,</span>
+<span class="err">  &quot;qaRelation&quot;: {</span>
+<span class="err">    &quot;name&quot;: &quot;answer&quot;,</span>
+<span class="err">    &quot;parent&quot;: &quot;1&quot;</span>
+<span class="err">  },</span>
+<span class="err">  &quot;dataType&quot;: &quot;answer&quot;</span>
+<span class="err">}</span>
+<span class="err">&#39;</span>
+<span class="err">curl -X PUT &quot;localhost:9200/question-answer/_doc/4?routing=2&amp;refresh&amp;pretty&quot; -H &#39;Content-Type: application/json&#39; -d&#39;</span>
+<span class="err">{</span>
+<span class="err">  &quot;answer_id&quot;: &quot;4&quot;,</span>
+<span class="err">  &quot;content&quot;: &quot;This is a special answer&quot;,</span>
+<span class="err">  &quot;qaRelation&quot;: {</span>
+<span class="err">    &quot;name&quot;: &quot;answer&quot;,</span>
+<span class="err">    &quot;parent&quot;: &quot;2&quot;</span>
+<span class="err">  },</span>
+<span class="err">  &quot;dataType&quot;: &quot;answer&quot;</span>
+<span class="err">}</span>
+<span class="err">&#39;</span>
+</code></pre></div>
 
 
 <h3>has_child</h3>
 <p>找出 answer 中内容有 another 的 question</p>
-<div class="highlight"><pre><span></span><span class="k">GET</span> <span class="n">question</span><span class="o">-</span><span class="n">answer</span><span class="o">/</span><span class="n">_search</span>
+<div class="highlight"><pre><span></span><code><span class="err">GET question-answer/_search</span>
 <span class="err">{</span>
-  <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-    <span class="ss">&quot;has_child&quot;</span><span class="p">:</span> <span class="err">{</span>
-      <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;answer&quot;</span><span class="p">,</span>
-      <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-        <span class="ss">&quot;match&quot;</span><span class="p">:</span> <span class="err">{</span>
-          <span class="ss">&quot;content&quot;</span><span class="p">:</span> <span class="ss">&quot;another&quot;</span>
-        <span class="err">}</span>
-      <span class="err">}</span>
-    <span class="err">}</span>
-  <span class="err">}</span>
+<span class="err">  &quot;query&quot;: {</span>
+<span class="err">    &quot;has_child&quot;: {</span>
+<span class="err">      &quot;type&quot;: &quot;answer&quot;,</span>
+<span class="err">      &quot;query&quot;: {</span>
+<span class="err">        &quot;match&quot;: {</span>
+<span class="err">          &quot;content&quot;: &quot;another&quot;</span>
+<span class="err">        }</span>
+<span class="err">      }</span>
+<span class="err">    }</span>
+<span class="err">  }</span>
 <span class="err">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>has_parent</h3>
 <p>找出 question 中内容有 another 的 answer</p>
-<div class="highlight"><pre><span></span><span class="k">GET</span> <span class="n">question</span><span class="o">-</span><span class="n">answer</span><span class="o">/</span><span class="n">_search</span>
+<div class="highlight"><pre><span></span><code><span class="err">GET question-answer/_search</span>
 <span class="err">{</span>
-  <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-    <span class="ss">&quot;has_parent&quot;</span><span class="p">:</span> <span class="err">{</span>
-      <span class="ss">&quot;parent_type&quot;</span><span class="p">:</span> <span class="ss">&quot;question&quot;</span><span class="p">,</span>
-      <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-        <span class="ss">&quot;match&quot;</span><span class="p">:</span> <span class="err">{</span>
-          <span class="ss">&quot;content&quot;</span><span class="p">:</span> <span class="ss">&quot;another&quot;</span>
-        <span class="err">}</span>
-      <span class="err">}</span>
-    <span class="err">}</span>
-  <span class="err">}</span>
+<span class="err">  &quot;query&quot;: {</span>
+<span class="err">    &quot;has_parent&quot;: {</span>
+<span class="err">      &quot;parent_type&quot;: &quot;question&quot;,</span>
+<span class="err">      &quot;query&quot;: {</span>
+<span class="err">        &quot;match&quot;: {</span>
+<span class="err">          &quot;content&quot;: &quot;another&quot;</span>
+<span class="err">        }</span>
+<span class="err">      }</span>
+<span class="err">    }</span>
+<span class="err">  }</span>
 <span class="err">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>parent_id</h3>
 <p>根据 parent_id 找出 所有 answer</p>
-<div class="highlight"><pre><span></span><span class="k">GET</span> <span class="n">question</span><span class="o">-</span><span class="n">answer</span><span class="o">/</span><span class="n">_search</span>
+<div class="highlight"><pre><span></span><code><span class="err">GET question-answer/_search</span>
 <span class="err">{</span>
-  <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-    <span class="ss">&quot;parent_id&quot;</span><span class="p">:</span> <span class="err">{</span>
-      <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;answer&quot;</span><span class="p">,</span>
-      <span class="ss">&quot;id&quot;</span><span class="p">:</span> <span class="ss">&quot;1&quot;</span>
-    <span class="err">}</span>
-  <span class="err">}</span>
+<span class="err">  &quot;query&quot;: {</span>
+<span class="err">    &quot;parent_id&quot;: {</span>
+<span class="err">      &quot;type&quot;: &quot;answer&quot;,</span>
+<span class="err">      &quot;id&quot;: &quot;1&quot;</span>
+<span class="err">    }</span>
+<span class="err">  }</span>
 <span class="err">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>组合查询</h3>
 <p>question 或者 answer 中包含 another 的</p>
-<div class="highlight"><pre><span></span><span class="k">GET</span> <span class="n">question</span><span class="o">-</span><span class="n">answer</span><span class="o">/</span><span class="n">_search</span>
+<div class="highlight"><pre><span></span><code><span class="err">GET question-answer/_search</span>
 <span class="err">{</span>
-  <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-    <span class="ss">&quot;bool&quot;</span><span class="p">:</span> <span class="err">{</span>
-      <span class="ss">&quot;should&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="err">{</span>
-          <span class="ss">&quot;has_child&quot;</span><span class="p">:</span> <span class="err">{</span>
-            <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;answer&quot;</span><span class="p">,</span>
-            <span class="ss">&quot;query&quot;</span><span class="p">:</span> <span class="err">{</span>
-              <span class="ss">&quot;match&quot;</span><span class="p">:</span> <span class="err">{</span>
-                <span class="ss">&quot;content&quot;</span><span class="p">:</span> <span class="ss">&quot;another&quot;</span>
-              <span class="err">}</span>
-            <span class="err">}</span>
-          <span class="err">}</span>
-        <span class="err">}</span><span class="p">,</span>
-        <span class="err">{</span>
-          <span class="ss">&quot;bool&quot;</span><span class="p">:</span> <span class="err">{</span>
-            <span class="ss">&quot;must&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="err">{</span>
-                <span class="ss">&quot;match&quot;</span><span class="p">:</span> <span class="err">{</span>
-                  <span class="ss">&quot;content&quot;</span><span class="p">:</span> <span class="ss">&quot;another&quot;</span>
-                <span class="err">}</span>
-              <span class="err">}</span><span class="p">,</span>
-              <span class="err">{</span>
-                <span class="ss">&quot;term&quot;</span><span class="p">:</span> <span class="err">{</span>
-                  <span class="ss">&quot;dataType&quot;</span><span class="p">:</span> <span class="err">{</span>
-                    <span class="ss">&quot;value&quot;</span><span class="p">:</span> <span class="ss">&quot;question&quot;</span>
-                  <span class="err">}</span>
-                <span class="err">}</span>
-              <span class="err">}</span>
-            <span class="p">]</span>
-          <span class="err">}</span>
-        <span class="err">}</span>
-      <span class="p">],</span>
-      <span class="ss">&quot;minimum_should_match&quot;</span><span class="p">:</span> <span class="mi">1</span>
-    <span class="err">}</span>
-  <span class="err">}</span>
+<span class="err">  &quot;query&quot;: {</span>
+<span class="err">    &quot;bool&quot;: {</span>
+<span class="err">      &quot;should&quot;: [</span>
+<span class="err">        {</span>
+<span class="err">          &quot;has_child&quot;: {</span>
+<span class="err">            &quot;type&quot;: &quot;answer&quot;,</span>
+<span class="err">            &quot;query&quot;: {</span>
+<span class="err">              &quot;match&quot;: {</span>
+<span class="err">                &quot;content&quot;: &quot;another&quot;</span>
+<span class="err">              }</span>
+<span class="err">            }</span>
+<span class="err">          }</span>
+<span class="err">        },</span>
+<span class="err">        {</span>
+<span class="err">          &quot;bool&quot;: {</span>
+<span class="err">            &quot;must&quot;: [</span>
+<span class="err">              {</span>
+<span class="err">                &quot;match&quot;: {</span>
+<span class="err">                  &quot;content&quot;: &quot;another&quot;</span>
+<span class="err">                }</span>
+<span class="err">              },</span>
+<span class="err">              {</span>
+<span class="err">                &quot;term&quot;: {</span>
+<span class="err">                  &quot;dataType&quot;: {</span>
+<span class="err">                    &quot;value&quot;: &quot;question&quot;</span>
+<span class="err">                  }</span>
+<span class="err">                }</span>
+<span class="err">              }</span>
+<span class="err">            ]</span>
+<span class="err">          }</span>
+<span class="err">        }</span>
+<span class="err">      ],</span>
+<span class="err">      &quot;minimum_should_match&quot;: 1</span>
+<span class="err">    }</span>
+<span class="err">  }</span>
 <span class="err">}</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>Java 代码</h3>
 <p>用 RestHighLevelClient，有 DSL 对应的</p>
-<div class="highlight"><pre><span></span><span class="n">BoolQueryBuilder</span> <span class="n">hasChildBoolQueryBuilder</span> <span class="o">=</span> <span class="n">QueryBuilders</span><span class="p">.</span><span class="n">boolQuery</span><span class="p">();</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">BoolQueryBuilder hasChildBoolQueryBuilder = QueryBuilders.boolQuery();</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

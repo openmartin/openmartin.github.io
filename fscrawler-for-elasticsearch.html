@@ -117,53 +117,53 @@ https://github.com/dadoonet/fscrawler</p>
 <p>需要 Java 1.8 及以上</p>
 </blockquote>
 <p>新建配置目录</p>
-<div class="highlight"><pre><span></span><span class="c1"># 在当前目录下新建配置目录 config\job_name</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在当前目录下新建配置目录 config\job_name</span>
 $ bin/fscrawler --config_dir config job_name
 <span class="m">18</span>:28:58,174 WARN  <span class="o">[</span>f.p.e.c.f.FsCrawler<span class="o">]</span> job <span class="o">[</span>job_name<span class="o">]</span> does not exist
 <span class="m">18</span>:28:58,177 INFO  <span class="o">[</span>f.p.e.c.f.FsCrawler<span class="o">]</span> Do you want to create it <span class="o">(</span>Y/N<span class="o">)</span>?
 y
-</pre></div>
+</code></pre></div>
 
 
 <p>建立配置目录如下</p>
-<div class="highlight"><pre><span></span><span class="n">config</span>
+<div class="highlight"><pre><span></span><code><span class="err">config</span>
 <span class="err">│</span>
-<span class="err">├─</span><span class="n">job_name</span>
-<span class="err">│</span>      <span class="n">_settings</span><span class="p">.</span><span class="n">yaml</span>
+<span class="err">├─job_name</span>
+<span class="err">│      _settings.yaml</span>
 <span class="err">│</span>
-<span class="err">└─</span><span class="n">_default</span>
-    <span class="err">├─</span><span class="mi">6</span>
-    <span class="err">│</span>      <span class="n">_settings</span><span class="p">.</span><span class="n">json</span>
-    <span class="err">│</span>      <span class="n">_settings_folder</span><span class="p">.</span><span class="n">json</span>
-    <span class="err">│</span>
-    <span class="err">└─</span><span class="mi">7</span>
-            <span class="n">_settings</span><span class="p">.</span><span class="n">json</span>
-            <span class="n">_settings_folder</span><span class="p">.</span><span class="n">json</span>
-</pre></div>
+<span class="err">└─_default</span>
+<span class="err">    ├─6</span>
+<span class="err">    │      _settings.json</span>
+<span class="err">    │      _settings_folder.json</span>
+<span class="err">    │</span>
+<span class="err">    └─7</span>
+<span class="err">            _settings.json</span>
+<span class="err">            _settings_folder.json</span>
+</code></pre></div>
 
 
 <p>最重要的配置文件是 <code>job_name\_settings.yaml</code>，配置参考 <a href="https://fscrawler.readthedocs.io/en/latest/admin/fs/index.html">Job file specification</a></p>
 <p><code>_default\6\_settings.json</code> 对应 es 6.x 版本，<code>_default\7\_settings.json</code> 对应 es 7.x 版本，只有一个地方可能需要修改，就是 content 的分词方法，我这里用的是 hanlp_index</p>
-<div class="highlight"><pre><span></span><span class="s2">&quot;content&quot;</span><span class="err">:</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;content&quot;</span><span class="err">:</span> <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="nt">&quot;analyzer&quot;</span><span class="p">:</span> <span class="s2">&quot;hanlp_index&quot;</span><span class="p">,</span> <span class="nt">&quot;search_analyzer&quot;</span><span class="p">:</span> <span class="s2">&quot;hanlp_index&quot;</span><span class="p">,</span> <span class="nt">&quot;index_options&quot;</span><span class="p">:</span>  <span class="s2">&quot;offsets&quot;</span>
       <span class="p">}</span><span class="err">,</span>
-</pre></div>
+</code></pre></div>
 
 
 <h3>run</h3>
-<div class="highlight"><pre><span></span><span class="n">fscrawler</span><span class="o">-</span><span class="n">es7</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="err">\</span><span class="n">bin</span><span class="err">\</span><span class="n">fscrawler</span><span class="p">.</span><span class="n">bat</span> <span class="c1">--config_dir config job_name</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">fscrawler-es7-2.7-SNAPSHOT\bin\fscrawler.bat --config_dir config job_name</span>
+</code></pre></div>
 
 
 <h3>其他</h3>
 <p>记录日志：可以指定一个log4j2.xml</p>
-<div class="highlight"><pre><span></span><span class="k">set</span> <span class="n">FS_JAVA_OPTS</span><span class="o">=</span><span class="ss">&quot;-Dlog4j.configurationFile=file:///D:/fscrawler/config/log4j2.xml&quot;</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">set FS_JAVA_OPTS=&quot;-Dlog4j.configurationFile=file:///D:/fscrawler/config/log4j2.xml&quot;</span>
+</code></pre></div>
 
 
 <p>开启 <a href="https://fscrawler.readthedocs.io/en/latest/admin/fs/rest.html">REST service</a></p>
-<div class="highlight"><pre><span></span><span class="n">fscrawler</span><span class="o">-</span><span class="n">es7</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">-</span><span class="n">SNAPSHOT</span><span class="err">\</span><span class="n">bin</span><span class="err">\</span><span class="n">fscrawler</span><span class="p">.</span><span class="n">bat</span> <span class="c1">--rest --config_dir config job_name</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">fscrawler-es7-2.7-SNAPSHOT\bin\fscrawler.bat --rest --config_dir config job_name</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

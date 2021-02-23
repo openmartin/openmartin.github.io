@@ -110,23 +110,23 @@
     <h2>问题</h2>
 <p>升级 python 之后，很多时候就会发现 virtualenv 失效了，因为 virtualenv 使用软链接链接到系统的 python, 系统的 python path 变化导致 virtualenv 失效</p>
 <h3>简单的修复</h3>
-<div class="highlight"><pre><span></span><span class="n">find</span> <span class="p">.</span> <span class="o">-</span><span class="k">type</span> <span class="n">l</span> <span class="o">-</span><span class="k">delete</span>
-<span class="n">cd</span> <span class="p">..</span>
-<span class="n">virtualenv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span> <span class="n">v_env</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">find . -type l -delete</span>
+<span class="err">cd ..</span>
+<span class="err">virtualenv -p python3 v_env</span>
+</code></pre></div>
 
 
 <p>已经安装的 package 不需要重新安装</p>
 <h3>复杂的修复</h3>
 <p>有时候如果 python 版本有比较大的变动，系统的 site-packages 有很多更新，这个时候需要重新生成 virtualenv</p>
-<div class="highlight"><pre><span></span><span class="o">#</span> <span class="err">保存已经安装的</span> <span class="n">package</span>
-<span class="n">pip</span> <span class="k">freeze</span> <span class="o">&gt;</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
-<span class="o">#</span> <span class="err">根据需要看看</span> <span class="n">package</span> <span class="err">是否需要更新版本</span>
-<span class="o">#</span> <span class="err">重新生成</span> <span class="n">virtualenv</span>
-<span class="n">virtualenv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span> <span class="n">new_env</span>
-<span class="o">#</span> <span class="err">安装</span> <span class="n">package</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err"># 保存已经安装的 package</span>
+<span class="err">pip freeze &gt; requirements.txt</span>
+<span class="err"># 根据需要看看 package 是否需要更新版本</span>
+<span class="err"># 重新生成 virtualenv</span>
+<span class="err">virtualenv -p python3 new_env</span>
+<span class="err"># 安装 package</span>
+<span class="err">pip install -r requirements.txt</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

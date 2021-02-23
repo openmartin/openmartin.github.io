@@ -117,13 +117,13 @@
 <p>伪分布式安装，<a href="https://blog.csdn.net/liuxinghao/article/details/40110773">参考</a></p>
 <p>需要编辑 <code>$HADOOP_HOME/etc/hadoop/core-site.xml</code> 和 <code>$HADOOP_HOME/etc/hadoop/hdfs-site.xml</code></p>
 <p>SSH 免密码登录，<a href="https://blog.csdn.net/liuxinghao/article/details/40082481">参考</a></p>
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="p">.</span><span class="n">ssh</span>
-<span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span> <span class="o">-</span><span class="n">t</span> <span class="n">rsa</span>
-<span class="n">cp</span> <span class="n">id_rsa</span><span class="p">.</span><span class="n">pub</span> <span class="n">authorized_keys</span>
-<span class="n">chmod</span> <span class="mi">600</span> <span class="n">authorized_keys</span>
-<span class="n">ssh</span><span class="o">-</span><span class="n">agent</span> <span class="n">bash</span>
-<span class="n">ssh</span><span class="o">-</span><span class="k">add</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">cd ~/.ssh</span>
+<span class="err">ssh-keygen -t rsa</span>
+<span class="err">cp id_rsa.pub authorized_keys</span>
+<span class="err">chmod 600 authorized_keys</span>
+<span class="err">ssh-agent bash</span>
+<span class="err">ssh-add</span>
+</code></pre></div>
 
 
 <p><a href="https://www.cnblogs.com/zhaojiedi1992/p/zhaojiedi_linux_043_hostname.html">如何修改hostname</a></p>

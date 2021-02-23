@@ -109,47 +109,47 @@
   <div>
     <h2>Logstash + GELF</h2>
 <p>配置文件</p>
-<div class="highlight"><pre><span></span><span class="nv">input</span> {
-    <span class="nv">gelf</span> {
-        <span class="nv">port</span> <span class="o">=&gt;</span> <span class="mi">12201</span>
-    }
-}
-<span class="nv">filter</span> {
-    <span class="nv">json</span> {
-        <span class="nv">source</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="s">message</span><span class="s2">&quot;</span>
-        <span class="nv">remove_field</span> <span class="o">=&gt;</span> [ <span class="s2">&quot;</span><span class="s">server</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">server.fqdn</span><span class="s2">&quot;</span>, <span class="s2">&quot;</span><span class="s">timestamp</span><span class="s2">&quot;</span> ]
-    }
-}
-<span class="nv">output</span> {
-  <span class="nv">stdout</span> { <span class="nv">codec</span> <span class="o">=&gt;</span> <span class="nv">rubydebug</span> }
+<div class="highlight"><pre><span></span><code><span class="k">input</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">gelf</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">port</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">12201</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="k">filter</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">json</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">source</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;message&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">remove_field</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">[</span><span class="n"> &quot;server&quot;, &quot;server.fqdn&quot;, &quot;timestamp&quot; </span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="k">output</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">stdout</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rubydebug</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
 
-<span class="k">if</span> <span class="s2">&quot;</span><span class="s">_jsonparsefailure</span><span class="s2">&quot;</span> <span class="nv">not</span> <span class="nv">in</span> [<span class="nv">tags</span>] {
-  <span class="nv">elasticsearch</span> {
-    <span class="nv">hosts</span> <span class="o">=&gt;</span> [<span class="s2">&quot;</span><span class="s">192.168.100.100:9200</span><span class="s2">&quot;</span>]
-    <span class="nv">index</span> <span class="o">=&gt;</span> <span class="s2">&quot;</span><span class="s">logstash-search-log-%{+YYYYMMDD}</span><span class="s2">&quot;</span>
-    }
-  }
-}
-</pre></div>
+<span class="k">if</span><span class="w"> </span><span class="ss">&quot;_jsonparsefailure&quot;</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">tags</span><span class="o">]</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">elasticsearch</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">hosts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;192.168.100.100:9200&quot;</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">index</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;logstash-search-log-%{+YYYYMMDD}&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">  </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div>
 
 
 <p>logstash 启动命令</p>
-<div class="highlight"><pre><span></span><span class="n">bin</span><span class="err">\</span><span class="n">logstash</span><span class="p">.</span><span class="n">bat</span> <span class="o">-</span><span class="n">f</span> <span class="n">log4j2</span><span class="o">-</span><span class="n">gelf</span><span class="p">.</span><span class="n">conf</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="err">bin\logstash.bat -f log4j2-gelf.conf</span>
+</code></pre></div>
 
 
 <p>log4j2 gelf 配置</p>
 <p>添加依赖关系</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
   <span class="nt">&lt;groupId&gt;</span>biz.paluch.logging<span class="nt">&lt;/groupId&gt;</span>
   <span class="nt">&lt;artifactId&gt;</span>logstash-gelf<span class="nt">&lt;/artifactId&gt;</span>
   <span class="nt">&lt;version&gt;</span>1.13.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>log4j2.xml 中添加 Gelf 配置, 然后在需要的包下添加 appender 就行</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;Gelf</span> <span class="na">name=</span><span class="s">&quot;GELF&quot;</span> <span class="na">host=</span><span class="s">&quot;udp:127.0.0.1&quot;</span> <span class="na">port=</span><span class="s">&quot;12201&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">extractStackTrace=</span><span class="s">&quot;true&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Gelf</span> <span class="na">name=</span><span class="s">&quot;GELF&quot;</span> <span class="na">host=</span><span class="s">&quot;udp:127.0.0.1&quot;</span> <span class="na">port=</span><span class="s">&quot;12201&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">extractStackTrace=</span><span class="s">&quot;true&quot;</span>
       <span class="na">filterStackTrace=</span><span class="s">&quot;true&quot;</span> <span class="na">mdcProfiling=</span><span class="s">&quot;true&quot;</span> <span class="na">includeFullMdc=</span><span class="s">&quot;true&quot;</span> <span class="na">maximumMessageSize=</span><span class="s">&quot;8192&quot;</span>
       <span class="na">originHost=</span><span class="s">&quot;%host{fqdn}&quot;</span> <span class="na">additionalFieldTypes=</span><span class="s">&quot;fieldName1=String,fieldName2=Double,fieldName3=Long&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;timestamp&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%d{dd MMM yyyy HH:mm:ss,SSS}&quot;</span> <span class="nt">/&gt;</span>
@@ -162,22 +162,22 @@
     <span class="c">&lt;!-- This is a field using MDC --&gt;</span>
     <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;userId&quot;</span> <span class="na">mdc=</span><span class="s">&quot;userId&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/Gelf&gt;</span>
-</pre></div>
+</code></pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="n">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="o">();</span>
-<span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">jsonLog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ip&quot;</span><span class="o">,</span> <span class="n">IpUtils</span><span class="o">.</span><span class="na">getIpAddr</span><span class="o">(</span><span class="n">request</span><span class="o">));</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;ua&quot;</span><span class="o">,</span> <span class="n">userAgent</span><span class="o">);</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;browser&quot;</span><span class="o">,</span> <span class="n">browser</span><span class="o">);</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;browserType&quot;</span><span class="o">,</span> <span class="n">browserType</span><span class="o">);</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;browserMajorVersion&quot;</span><span class="o">,</span> <span class="n">browserMajorVersion</span><span class="o">);</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;deviceType&quot;</span><span class="o">,</span> <span class="n">deviceType</span><span class="o">);</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;platform&quot;</span><span class="o">,</span> <span class="n">platform</span><span class="o">);</span>
-<span class="n">jsonLog</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;platformVersion&quot;</span><span class="o">,</span> <span class="n">platformVersion</span><span class="o">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="p">();</span>
+<span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">jsonLog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;ip&quot;</span><span class="p">,</span> <span class="n">IpUtils</span><span class="p">.</span><span class="na">getIpAddr</span><span class="p">(</span><span class="n">request</span><span class="p">));</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;ua&quot;</span><span class="p">,</span> <span class="n">userAgent</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;browser&quot;</span><span class="p">,</span> <span class="n">browser</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;browserType&quot;</span><span class="p">,</span> <span class="n">browserType</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;browserMajorVersion&quot;</span><span class="p">,</span> <span class="n">browserMajorVersion</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;deviceType&quot;</span><span class="p">,</span> <span class="n">deviceType</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;platform&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;platformVersion&quot;</span><span class="p">,</span> <span class="n">platformVersion</span><span class="p">);</span>
 
-<span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">searchMarker</span><span class="o">,</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">jsonLog</span><span class="o">));</span>
-</pre></div>
+<span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">searchMarker</span><span class="p">,</span> <span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">jsonLog</span><span class="p">));</span>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

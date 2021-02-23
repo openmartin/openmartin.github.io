@@ -22,67 +22,67 @@
 &lt;h3&gt;修改源&lt;/h3&gt;
 &lt;p&gt;修改下面的文件，连接国内的镜像源速度更快&lt;/p&gt;
 &lt;p&gt;/etc/apt/sources.list&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt;
 &lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;/etc/apt/sources.list.d/raspi.list&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;ui&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;ui&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;更新系统&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get update&lt;/span&gt;
+&lt;span class="err"&gt;sudo apt-get upgrade&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;安装 openmediavault&lt;/h3&gt;
 &lt;p&gt;openmediavault 官方有一个 &lt;a href="https://forum.openmediavault.org/index.php?thread/28789-installing-omv5-on-raspberry-pi-s-armbian-sbc-s-i386-32-bit-platforms/"&gt;guide&lt;/a&gt; &lt;/p&gt;
 &lt;p&gt;按照官方的步骤就可以了&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;systemd&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;99&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;link&lt;/span&gt; &lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="err"&gt;一点要记得删除，否则后续网络会有问题&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;reboot&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get update&lt;/span&gt;
+&lt;span class="err"&gt;sudo apt-get upgrade -y&lt;/span&gt;
+&lt;span class="err"&gt;sudo rm -f /etc/systemd/network/99-default.link ## 一点要记得删除，否则后续网络会有问题&lt;/span&gt;
+&lt;span class="err"&gt;sudo reboot&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;在国内访问 github 会有点问题，导致下载安装脚本失败。通过修改host文件可以解决这个问题, 从这个repo https://github.com/googlehosts/hosts 找到 github 的部分。 在 &lt;code&gt;/etc/hosts&lt;/code&gt; 中增加：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;GitHub&lt;/span&gt; &lt;span class="nv"&gt;Start&lt;/span&gt;
-&lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;30&lt;/span&gt;.&lt;span class="mi"&gt;255&lt;/span&gt;.&lt;span class="mi"&gt;112&lt;/span&gt;  &lt;span class="nv"&gt;gist&lt;/span&gt;.&lt;span class="nv"&gt;github&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;30&lt;/span&gt;.&lt;span class="mi"&gt;255&lt;/span&gt;.&lt;span class="mi"&gt;112&lt;/span&gt;  &lt;span class="nv"&gt;github&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;192&lt;/span&gt;.&lt;span class="mi"&gt;30&lt;/span&gt;.&lt;span class="mi"&gt;255&lt;/span&gt;.&lt;span class="mi"&gt;112&lt;/span&gt;  &lt;span class="nv"&gt;www&lt;/span&gt;.&lt;span class="nv"&gt;github&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars0&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars1&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars2&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars3&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars4&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars5&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars6&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars7&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;avatars8&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;camo&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;cloud&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;gist&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;marketplace&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;screenshots&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;raw&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;repository&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;images&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-&lt;span class="mi"&gt;151&lt;/span&gt;.&lt;span class="mi"&gt;101&lt;/span&gt;.&lt;span class="mi"&gt;56&lt;/span&gt;.&lt;span class="mi"&gt;133&lt;/span&gt;  &lt;span class="nv"&gt;user&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;images&lt;/span&gt;.&lt;span class="nv"&gt;githubusercontent&lt;/span&gt;.&lt;span class="nv"&gt;com&lt;/span&gt;
-# &lt;span class="nv"&gt;GitHub&lt;/span&gt; &lt;span class="k"&gt;End&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# GitHub Start&lt;/span&gt;
+&lt;span class="err"&gt;192.30.255.112  gist.github.com&lt;/span&gt;
+&lt;span class="err"&gt;192.30.255.112  github.com&lt;/span&gt;
+&lt;span class="err"&gt;192.30.255.112  www.github.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars0.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars1.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars2.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars3.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars4.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars5.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars6.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars7.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars8.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  camo.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  cloud.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  gist.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  marketplace-screenshots.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  raw.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  repository-images.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  user-images.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;# GitHub End&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;执行安装脚本，然后等着就可以了，时间会有点长。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;OpenMediaVault&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Plugin&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Developers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;installScript&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;硬盘底座的设备配置&lt;/h3&gt;
 &lt;p&gt;使用硬盘底座，硬盘的序列号显示不正确，需要修改配置， 见 https://openmediavault.readthedocs.io/en/5.x/troubleshooting.html&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;JMicron&lt;/span&gt; &lt;span class="n"&gt;drive&lt;/span&gt; &lt;span class="n"&gt;fix&lt;/span&gt;
-&lt;span class="n"&gt;KERNEL&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;sd*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;ID_VENDOR&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;JMicron&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SUBSYSTEMS&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;usb&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PROGRAM&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;/root/serial.sh %k&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;ID_SERIAL&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;USB-%c&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ENV&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;&lt;span class="n"&gt;ID_SERIAL_SHORT&lt;/span&gt;&lt;span class="err"&gt;}&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;%c&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# JMicron drive fix&lt;/span&gt;
+&lt;span class="err"&gt;KERNEL==&amp;quot;sd*&amp;quot;, ENV{ID_VENDOR}==&amp;quot;JMicron&amp;quot;, SUBSYSTEMS==&amp;quot;usb&amp;quot;, PROGRAM=&amp;quot;/root/serial.sh %k&amp;quot;, ENV{ID_SERIAL}=&amp;quot;USB-%c&amp;quot;, ENV{ID_SERIAL_SHORT}=&amp;quot;%c&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;配置 samba&lt;/h3&gt;
@@ -111,48 +111,48 @@
 &lt;li&gt;如果树莓派开机过程进入 emegency mode，肯定是之前哪个文件修改出错，可以把 SD 卡挂载到 Linux 系统上，然后把之前修改的还原。（Mac 不支持 读写ext4文件系统，起一个 Linux 虚拟机就行了，把 USB 口分配给虚拟机，然后就可以在虚拟机内处理了）&lt;/li&gt;
 &lt;/ol&gt;</content><category term="Linux"></category><category term="linux"></category><category term="nas"></category></entry><entry><title>在 centos 7 上安装 redis 6</title><link href="https://xingzuoshe.cn/redis-6-on-centos-7-setup.html" rel="alternate"></link><published>2020-05-22T17:00:00+08:00</published><updated>2020-05-22T17:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-22:/redis-6-on-centos-7-setup.html</id><summary type="html">&lt;p&gt;在 centos 7 上安装 最新的 redis 6 的步骤&lt;/p&gt;</summary><content type="html">&lt;h2&gt;遇到的问题&lt;/h2&gt;
 &lt;p&gt;在 centos  7 的 yum 源中 redis 的版本为 3.2.12-2.el7，想要安装最新版的 redis 6，只能通过源代码安装，但是默认的环境会遇到编译问题，如下：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;In&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt; &lt;span class="nv"&gt;included&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;server&lt;/span&gt;.&lt;span class="nv"&gt;c&lt;/span&gt;:&lt;span class="mi"&gt;30&lt;/span&gt;:&lt;span class="mi"&gt;0&lt;/span&gt;:
-&lt;span class="nv"&gt;server&lt;/span&gt;.&lt;span class="nv"&gt;h&lt;/span&gt;:&lt;span class="mi"&gt;1022&lt;/span&gt;:&lt;span class="mi"&gt;5&lt;/span&gt;: &lt;span class="nv"&gt;error&lt;/span&gt;: &lt;span class="nv"&gt;expected&lt;/span&gt; &lt;span class="nv"&gt;specifier&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;qualifier&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;list&lt;/span&gt; &lt;span class="nv"&gt;before&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;_Atomic&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
-     &lt;span class="nv"&gt;_Atomic&lt;/span&gt; &lt;span class="nv"&gt;unsigned&lt;/span&gt; &lt;span class="nv"&gt;int&lt;/span&gt; &lt;span class="nv"&gt;lruclock&lt;/span&gt;&lt;span class="c1"&gt;; /* Clock for LRU eviction */&lt;/span&gt;
-     &lt;span class="o"&gt;^&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;In file included from server.c:30:0:&lt;/span&gt;
+&lt;span class="err"&gt;server.h:1022:5: error: expected specifier-qualifier-list before &amp;#39;_Atomic&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;     _Atomic unsigned int lruclock; /* Clock for LRU eviction */&lt;/span&gt;
+&lt;span class="err"&gt;     ^&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;是因为默认的 gcc 版本(gcc version 4.8.5)太低导致，不支持新特性&lt;/p&gt;
 &lt;h2&gt;解决办法&lt;/h2&gt;
 &lt;p&gt;解决办法就是升级 gcc 版本&lt;/p&gt;
 &lt;p&gt;升级到 gcc 7.3&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;centos&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;scl&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gcc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;binutils&lt;/span&gt;
-&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;scl&lt;/span&gt; &lt;span class="n"&gt;enable&lt;/span&gt; &lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo yum -y install centos-release-scl&lt;/span&gt;
+&lt;span class="err"&gt;sudo yum -y install devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils&lt;/span&gt;
+&lt;span class="err"&gt;sudo scl enable devtoolset-7 bash&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;还可以选择升级到其他版本&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gcc&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;span class="n"&gt;devtoolset&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;gcc&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;devtoolset-8: gcc 8.3&lt;/span&gt;
+&lt;span class="c"&gt;devtoolset-9: gcc 9.1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;升级完成之后并不会覆盖系统默认的gcc，需要使用脚本来切换，x为要启用的版本&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scl &lt;span class="nb"&gt;enable&lt;/span&gt; devtoolset-x bash 
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;scl &lt;span class="nb"&gt;enable&lt;/span&gt; devtoolset-x bash 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;安装和配置&lt;/h2&gt;
 &lt;p&gt;后续就可以按照常规安装步骤来执行，就不再赘述了&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
 $ tar xzf redis-6.0.3.tar.gz
 $ &lt;span class="nb"&gt;cd&lt;/span&gt; redis-6.0.3
 $ make
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;修改配置文件&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bind&lt;/span&gt; &lt;span class="mi"&gt;192&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;168&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="mi"&gt;127&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; 
-&lt;span class="n"&gt;daemonize&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;span class="n"&gt;appendonly&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;bind 192.168.1.100 127.0.0.1 ::1 &lt;/span&gt;
+&lt;span class="err"&gt;daemonize yes&lt;/span&gt;
+&lt;span class="err"&gt;appendonly yes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;打开 appendonly yes 后，会启用 RDB-AOF 混合持久化&lt;/p&gt;</content><category term="Linux"></category><category term="centos"></category><category term="redis"></category></entry><entry><title>在 Amazon Linux 使用 Let's encrypt 免费的SSL</title><link href="https://xingzuoshe.cn/lets-encrypt-ssl.html" rel="alternate"></link><published>2017-04-03T20:20:00+08:00</published><updated>2017-04-03T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2017-04-03:/lets-encrypt-ssl.html</id><summary type="html">&lt;p&gt;在 Amazon Linux 使用 Let's encrypt 免费的SSL&lt;/p&gt;</summary><content type="html">&lt;p&gt;如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
@@ -166,27 +166,27 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 &lt;li&gt;ssh到Server&lt;/li&gt;
 &lt;li&gt;下载certbot&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;dl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eff&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
-&lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;wget https://dl.eff.org/certbot-auto&lt;/span&gt;
+&lt;span class="err"&gt;chmod a+x certbot-auto&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;执行certbot&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="c1"&gt;--debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo ./certbot-auto --debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;验证&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;How&lt;/span&gt; &lt;span class="n"&gt;would&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;authenticate&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;ACME&lt;/span&gt; &lt;span class="n"&gt;CA&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;
-&lt;span class="c1"&gt;---------------------------&lt;/span&gt;
-&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Place&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;webroot&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;webroot&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Spin&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;temporary&lt;/span&gt; &lt;span class="n"&gt;webserver&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;standalone&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="c1"&gt;---------------------------&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;How would you like to authenticate with the ACME CA?&lt;/span&gt;
+&lt;span class="err"&gt;---------------------------&lt;/span&gt;
+&lt;span class="c"&gt;1: Place files in webroot directory (webroot)&lt;/span&gt;
+&lt;span class="c"&gt;2: Spin up a temporary webserver (standalone)&lt;/span&gt;
+&lt;span class="err"&gt;---------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
@@ -195,73 +195,73 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 &lt;ul&gt;
 &lt;li&gt;证书路径&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Certificate&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cert&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
-&lt;span class="k"&gt;Full&lt;/span&gt; &lt;span class="k"&gt;Chain&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;fullchain&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
-&lt;span class="n"&gt;Private&lt;/span&gt; &lt;span class="k"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;privkey&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;Certificate: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/cert.pem&lt;/span&gt;
+&lt;span class="err"&gt;Full Chain: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem&lt;/span&gt;
+&lt;span class="err"&gt;Private Key: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;nginx 启用SSL&lt;/h2&gt;
 &lt;p&gt;启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;server&lt;/span&gt; {
-    &lt;span class="nv"&gt;listen&lt;/span&gt;       &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt;       &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    &lt;span class="nv"&gt;server_name&lt;/span&gt;  &lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;server_name&lt;/span&gt;  &lt;span class="err"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    # &lt;span class="nv"&gt;Redirect&lt;/span&gt; &lt;span class="nv"&gt;all&lt;/span&gt; &lt;span class="nv"&gt;HTTP&lt;/span&gt; &lt;span class="nv"&gt;requests&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;HTTPS&lt;/span&gt; &lt;span class="nv"&gt;with&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="mi"&gt;301&lt;/span&gt; &lt;span class="nv"&gt;Moved&lt;/span&gt; &lt;span class="nv"&gt;Permanently&lt;/span&gt; &lt;span class="nv"&gt;response&lt;/span&gt;.
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;301&lt;/span&gt; &lt;span class="nv"&gt;https&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;$&lt;span class="nv"&gt;request_uri&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;Redirect&lt;/span&gt; &lt;span class="err"&gt;all&lt;/span&gt; &lt;span class="err"&gt;HTTP&lt;/span&gt; &lt;span class="err"&gt;requests&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;HTTPS&lt;/span&gt; &lt;span class="err"&gt;with&lt;/span&gt; &lt;span class="err"&gt;a&lt;/span&gt; &lt;span class="err"&gt;301&lt;/span&gt; &lt;span class="err"&gt;Moved&lt;/span&gt; &lt;span class="err"&gt;Permanently&lt;/span&gt; &lt;span class="err"&gt;response.&lt;/span&gt;
+    &lt;span class="err"&gt;return&lt;/span&gt; &lt;span class="err"&gt;301&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;request_uri&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-}
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-&lt;span class="nv"&gt;server&lt;/span&gt; {
-    &lt;span class="nv"&gt;listen&lt;/span&gt; &lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="nv"&gt;ssl&lt;/span&gt; &lt;span class="nv"&gt;http2&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;listen&lt;/span&gt; [::]:&lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="nv"&gt;ssl&lt;/span&gt; &lt;span class="nv"&gt;http2&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;443&lt;/span&gt; &lt;span class="err"&gt;ssl&lt;/span&gt; &lt;span class="err"&gt;http2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="n"&gt;ssl&lt;/span&gt; &lt;span class="n"&gt;http2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    &lt;span class="nv"&gt;server_name&lt;/span&gt; &lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-    # &lt;span class="nv"&gt;certs&lt;/span&gt; &lt;span class="nv"&gt;sent&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;client&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;SERVER&lt;/span&gt; &lt;span class="nv"&gt;HELLO&lt;/span&gt; &lt;span class="nv"&gt;are&lt;/span&gt; &lt;span class="nv"&gt;concatenated&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;ssl_certificate&lt;/span&gt;
-    &lt;span class="nv"&gt;ssl_certificate&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;fullchain&lt;/span&gt;.&lt;span class="nv"&gt;pem&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;ssl_certificate_key&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;letsencrypt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;live&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;privkey&lt;/span&gt;.&lt;span class="nv"&gt;pem&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;ssl_session_timeout&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;ssl_session_cache&lt;/span&gt; &lt;span class="nv"&gt;shared&lt;/span&gt;:&lt;span class="nv"&gt;SSL&lt;/span&gt;:&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;ssl_session_tickets&lt;/span&gt; &lt;span class="nv"&gt;off&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;access_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;access&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;error_log&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;nginx&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;error&lt;/span&gt;.&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; {
-        &lt;span class="nv"&gt;proxy_pass&lt;/span&gt; &lt;span class="nv"&gt;http&lt;/span&gt;:&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mi"&gt;127&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;1&lt;/span&gt;:&lt;span class="mi"&gt;8003&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;Host&lt;/span&gt; $&lt;span class="nv"&gt;host&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Real&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;IP&lt;/span&gt; $&lt;span class="nv"&gt;remote_addr&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-        &lt;span class="nv"&gt;proxy_set_header&lt;/span&gt; &lt;span class="nv"&gt;X&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;Forwarded&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;For&lt;/span&gt; $&lt;span class="nv"&gt;proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="c1"&gt;;&lt;/span&gt;
-    }
-}
-&lt;/pre&gt;&lt;/div&gt;
+    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;certs&lt;/span&gt; &lt;span class="err"&gt;sent&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;client&lt;/span&gt; &lt;span class="err"&gt;in&lt;/span&gt; &lt;span class="err"&gt;SERVER&lt;/span&gt; &lt;span class="err"&gt;HELLO&lt;/span&gt; &lt;span class="err"&gt;are&lt;/span&gt; &lt;span class="err"&gt;concatenated&lt;/span&gt; &lt;span class="err"&gt;in&lt;/span&gt; &lt;span class="err"&gt;ssl_certificate&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_certificate&lt;/span&gt; &lt;span class="err"&gt;/etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_certificate_key&lt;/span&gt; &lt;span class="err"&gt;/etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_session_timeout&lt;/span&gt; &lt;span class="err"&gt;1d&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_session_cache&lt;/span&gt; &lt;span class="n"&gt;shared&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SSL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_session_tickets&lt;/span&gt; &lt;span class="err"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;access_log&lt;/span&gt; &lt;span class="err"&gt;/var/log/nginx/YOUR_WEBSITE_HERE-access.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;error_log&lt;/span&gt; &lt;span class="err"&gt;/var/log/nginx/YOUR_WEBSITE_HERE-error.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_pass&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8003&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;Host&lt;/span&gt; &lt;span class="err"&gt;$host&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;X-Real-IP&lt;/span&gt; &lt;span class="err"&gt;$remote_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;X-Forwarded-For&lt;/span&gt; &lt;span class="err"&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;自动更新证书&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;使用root用户&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo -i&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;增加定时任务&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;crontab&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;crontab -e&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;增加一行，每个月1号2点30分更新&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt; &lt;span class="n"&gt;renew&lt;/span&gt; &lt;span class="c1"&gt;--pre-hook &amp;quot;service nginx stop&amp;quot; --post-hook &amp;quot;service nginx start&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;30 2 1 * * /path/to/certbot renew --pre-hook &amp;quot;service nginx stop&amp;quot; --post-hook &amp;quot;service nginx start&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;ul&gt;
 &lt;li&gt;dry run&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;certbot&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt; &lt;span class="n"&gt;renew&lt;/span&gt; &lt;span class="c1"&gt;--dry-run&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;./path/to/certbot-auto renew --dry-run&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;chrome 变绿&lt;/h2&gt;
@@ -281,9 +281,9 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 &lt;p&gt;在Oracle 官网下载&lt;a href="http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"&gt;Oracle Database Express Edition 11g Release 2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;下载下来之后是一个rpm包，&lt;code&gt;oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;，上传到虚拟机当中安装，&lt;code&gt;sudo rmp -i oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;&lt;/p&gt;
 &lt;h2&gt;CentOS&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#使用root用户来初始化数据库，默认的实例名是XE&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#使用root用户来初始化数据库，默认的实例名是XE&lt;/span&gt;
 /etc/init.d/oracle-xe configure
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;code&gt;Usage: /etc/init.d/oracle-xe {start|stop|restart|force-reload|configure|status|enable|disable}&lt;/code&gt;&lt;/p&gt;
@@ -291,9 +291,9 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 &lt;h3&gt;Disable Firewall&lt;/h3&gt;
 &lt;p&gt;centos 默认有一个firewall，会阻止外部的访问，所以需要停止防火墙。
 使用root用户登录&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;disable&lt;/span&gt; &lt;span class="n"&gt;firewalld&lt;/span&gt;
-&lt;span class="n"&gt;systemctl&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;firewalld&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;systemctl disable firewalld&lt;/span&gt;
+&lt;span class="err"&gt;systemctl stop firewalld&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Oracle SQL Developer&lt;/h2&gt;
