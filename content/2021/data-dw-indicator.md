@@ -42,6 +42,14 @@ Summary: 数据仓库和指标体系
 
 [美团点评运营数据产品化应用与实践](https://tech.meituan.com/2018/02/11/mtdp-travel-yydp-present.html)
 
+[美团配送数据治理实践](https://tech.meituan.com/2020/03/12/delivery-data-governance.html)
+
 [有赞指标库实践](https://tech.youzan.com/you-zan-zhi-biao-ku-shi-jian/)
 
+[滴滴数据仓库指标体系建设实践](https://mp.weixin.qq.com/s/-pLpLD_HMiasyyRxo5oTRQ)
+
 [网易有数](https://youdata.163.com/index/manual/o/4Analyze_data_and_visualize_it/38aggregation.html)
+
+[指标管理系统设计](https://www.cnblogs.com/niceshot/p/13640630.html)
+
+[指标系统计算架构设计](https://www.cnblogs.com/niceshot/p/13735779.html)
