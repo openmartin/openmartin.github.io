@@ -22,6 +22,7 @@ Summary: 分布式任务调度
 2. azkaban
 3. elastic-job
 4. xxl-job
+5. PowerJob
 
 #### apache dolphinscheduler
 
@@ -58,7 +59,13 @@ Summary: 分布式任务调度
 缺点就是不支持DAG和只支持cron触发
 
 
+### PowerJob （原OhMyScheduler）
 
+[PowerJob](http://www.powerjob.tech/)
+
+支持DAG，还支持 JVM 容器
+
+功能强大，不过略微复杂，大公司可采用
 
 
 
