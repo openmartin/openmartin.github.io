@@ -97,3 +97,7 @@ ENV/
 *.out
 *.py[cod]
 output
+
+# markeditor
+.markeditor/
+configs/sorts.json
