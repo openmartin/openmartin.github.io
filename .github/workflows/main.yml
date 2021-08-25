@@ -22,7 +22,7 @@ jobs:
           git clone --recursive https://github.com/getpelican/pelican-plugins
       - name: GitHub Pages Pelican Build Action
         uses: nelsonjchen/gh-pages-pelican-action@0.1.10
-        with: 
+        env: 
           GH_PAGES_BRANCH: master
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
