@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 import os
 BASE_DIR = os.getcwd()
-ENV_DIR = os.path.dirname(BASE_DIR)
 
 AUTHOR = 'Martin'
 SITEURL = 'https://xingzuoshe.cn'
@@ -45,9 +44,9 @@ SOCIAL = (('github', 'https://github.com/openmartin'),
 RELATIVE_URLS = True
 
 # Theme
-THEME = os.path.join(ENV_DIR, "pelican-themes", "Flex")
+THEME = os.path.join(BASE_DIR, "pelican-themes", "Flex")
 
-PLUGIN_PATHS = [os.path.join(ENV_DIR, "pelican-plugins")]
+PLUGIN_PATHS = [os.path.join(BASE_DIR, "pelican-plugins")]
 PLUGINS = ['sitemap', 'i18n_subsites', 'liquid_tags.img', 'liquid_tags.include_code', 'liquid_tags.youtube']
 
 JINJA_ENVIRONMENT = {

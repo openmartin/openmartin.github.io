@@ -1,0 +1,28 @@
+name: Pelican site generator
+
+on:
+  push:
+    branches: [source]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Git clone pelican-plugins
+        run: |
+          git clone --recursive https://github.com/getpelican/pelican-plugins
+      - name: GitHub Pages Pelican Build Action
+        uses: nelsonjchen/gh-pages-pelican-action@0.1.10
+        with: 
+          GH_PAGES_BRANCH: master
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
