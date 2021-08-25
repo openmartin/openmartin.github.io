@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Python</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/python.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-05-25T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>修复 virtualenv 环境</title><link href="https://xingzuoshe.cn/fix-python-virtualenv.html" rel="alternate"></link><published>2020-05-25T12:00:00+08:00</published><updated>2020-05-25T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/fix-python-virtualenv.html</id><summary type="html">&lt;p&gt;很多时候升级 python 之后，virtualenv 中的软链接会失效，这时候就需要修复了&lt;/p&gt;</summary><content type="html">&lt;h2&gt;问题&lt;/h2&gt;
+&lt;p&gt;升级 python 之后，很多时候就会发现 virtualenv 失效了，因为 virtualenv 使用软链接链接到系统的 python, 系统的 python path 变化导致 virtualenv 失效&lt;/p&gt;
+&lt;h3&gt;简单的修复&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;find . -type l -delete&lt;/span&gt;
+&lt;span class="err"&gt;cd ..&lt;/span&gt;
+&lt;span class="err"&gt;virtualenv -p python3 v_env&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;已经安装的 package 不需要重新安装&lt;/p&gt;
+&lt;h3&gt;复杂的修复&lt;/h3&gt;
+&lt;p&gt;有时候如果 python 版本有比较大的变动，系统的 site-packages 有很多更新，这个时候需要重新生成 virtualenv&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# 保存已经安装的 package&lt;/span&gt;
+&lt;span class="err"&gt;pip freeze &amp;gt; requirements.txt&lt;/span&gt;
+&lt;span class="err"&gt;# 根据需要看看 package 是否需要更新版本&lt;/span&gt;
+&lt;span class="err"&gt;# 重新生成 virtualenv&lt;/span&gt;
+&lt;span class="err"&gt;virtualenv -p python3 new_env&lt;/span&gt;
+&lt;span class="err"&gt;# 安装 package&lt;/span&gt;
+&lt;span class="err"&gt;pip install -r requirements.txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Python"></category><category term="python"></category><category term="virtualenv"></category></entry><entry><title>使用 Pelican 和 Github Pages 建立博客网站</title><link href="https://xingzuoshe.cn/pelican-github-pages-setup.html" rel="alternate"></link><published>2019-06-09T22:20:00+08:00</published><updated>2019-06-09T22:30:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2019-06-09:/pelican-github-pages-setup.html</id><summary type="html">&lt;p&gt;Pelican 是一个 Python 语言开发的静态网站生成工具，用 markdown 写完博客之后，发布到Github Pages，免费而且好用，不过配置过程有些复杂，下面记录一下配置的过程。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;安装 pelican&lt;/h2&gt;
+&lt;p&gt;在 Python 3.5 以上，官方已经集成了虚拟环境功能，不需要再使用 &lt;code&gt;virtualenv&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;python3 -m venv pelican_env&lt;/span&gt;
+&lt;span class="err"&gt;cd pelican_env&lt;/span&gt;
+&lt;span class="err"&gt;source bin/active&lt;/span&gt;
+&lt;span class="err"&gt;pip install pelican markdown ghp-import&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;新建 pelican 项目&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;先在 github 上新建一个 repo &lt;code&gt;yourname.github.io&lt;/code&gt;, 然后 clone 到本地，&lt;/li&gt;
+&lt;li&gt;在项目文件夹中运行 &lt;code&gt;pelican-quickstart&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在选择的过程中注意选择 default language, time zone, Using Github Pages&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Welcome&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;v4&lt;/span&gt;&lt;span class="mf"&gt;.0.1&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;This&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;help&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;create&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;based&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+&lt;span class="n"&gt;Please&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;following&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;questions&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;script&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;generate&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;needed&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Pelican&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+
+
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Where&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;create&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;What&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;be&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Martin&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Blog&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Who&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;be&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;author&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Martin&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;What&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;will&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;be&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;language&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;of&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;zh&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;zh&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;specify&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;URL&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;prefix&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="p"&gt;.,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;article&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;How&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;many&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;articles&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;per&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;10&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;What&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;time&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;zone&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Europe/Paris&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Asia&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Shanghai&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;generate&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;tasks&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Makefile&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;automate&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;generation&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;and&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;publishing&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Y&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;FTP&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;SSH&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Dropbox&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;S3&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Rackspace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloud&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Files&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Do&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;you&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;want&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;upload&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;website&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;using&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;GitHub&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Pages&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;this&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;personal&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;page&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="vm"&gt;?&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;N&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;Done&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Your&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;project&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;available&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;at&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;demo&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pelican_env&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;yourname&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;pelican config&lt;/h2&gt;
+&lt;p&gt;quick-start 生成的只是最简单的配置，如果想要更好看一点需要更多的自定义配置&lt;/p&gt;
+&lt;p&gt;下面有一份配置的示例，使用 Flex 主题，sitemap 插件，配置了 disqus 和 Google Adsense&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;pelicanconf.py&lt;/span&gt;&lt;a href='/code/../code/pelicanconf.py'&gt;download&lt;/a&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class="c1"&gt;# -*- coding: utf-8 -*- #&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="n"&gt;BASE_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getcwd&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;ENV_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dirname&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;BASE_DIR&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;AUTHOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Martin&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#SITEURL = &amp;#39;https://xingzuoshe.cn&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;SITENAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;SITETITLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;SITESUBTITLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Martin&amp;#39;s Blog&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;SITEDESCRIPTION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Martin&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s1"&gt;s Thoughts and Writings&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;SITELOGO&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/images/default_profile_200x200.png&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;FAVICON&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/images/default_profile_200x200.png&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;BROWSER_COLOR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;#333333&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;PYGMENTS_STYLE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;default&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;ROBOTS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;index, follow&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;PATH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;DEFAULT_DATE_FORMAT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;%Y-%m-&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s1"&gt; %H:%M&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;TIMEZONE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Asia/Shanghai&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Feed generation is usually not desired when developing&lt;/span&gt;
+&lt;span class="n"&gt;FEED_ALL_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;feeds/all.atom.xml&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;CATEGORY_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;feeds/&lt;/span&gt;&lt;span class="si"&gt;{slug}&lt;/span&gt;&lt;span class="s1"&gt;.atom.xml&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;TRANSLATION_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="n"&gt;AUTHOR_FEED_ATOM&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;span class="n"&gt;AUTHOR_FEED_RSS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Blogroll&lt;/span&gt;
+&lt;span class="n"&gt;LINKS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;astrobook&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://astrobook.cn/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;astrohub&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://astrohub.cn&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Social widget&lt;/span&gt;
+&lt;span class="n"&gt;SOCIAL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;github&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://github.com/openmartin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;rss&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/blog/feeds/all.atom.xml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),)&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Uncomment following line if you want document-relative URLs when developing&lt;/span&gt;
+&lt;span class="n"&gt;RELATIVE_URLS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Theme&lt;/span&gt;
+&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ENV_DIR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pelican-themes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Flex&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;PLUGIN_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ENV_DIR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pelican-plugins&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;PLUGINS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sitemap&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;i18n_subsites&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;liquid_tags.img&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;liquid_tags.include_code&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;liquid_tags.youtube&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;JINJA_ENVIRONMENT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;extensions&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;jinja2.ext.i18n&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Sitemap&lt;/span&gt;
+&lt;span class="n"&gt;SITEMAP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;format&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;xml&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;changefreqs&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;articles&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;daily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;pages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;daily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;indexes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;daily&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Default theme language&lt;/span&gt;
+&lt;span class="n"&gt;I18N_TEMPLATE_LANG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zh_CN&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;DEFAULT_LANG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zh_CN&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;OG_LOCALE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zh_CN&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;LOCALE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;zh_CN&amp;#39;&lt;/span&gt;
+
+
+
+
+&lt;span class="c1"&gt;# MENU &lt;/span&gt;
+&lt;span class="n"&gt;DEFAULT_PAGINATION&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="n"&gt;DISPLAY_PAGES_ON_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;MAIN_MENU&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+&lt;span class="n"&gt;HOME_HIDE_TAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+&lt;span class="n"&gt;USE_FOLDER_AS_CATEGORY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;MENUITEMS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Archives&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/archives.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+             &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Categories&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/categories.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+             &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Tags&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/tags.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;COPYRIGHT_YEAR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2020&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# STATIC&lt;/span&gt;
+&lt;span class="n"&gt;STATIC_PATHS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;images&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;code&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;extra&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;CUSTOM_CSS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;static/custom.css&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;EXTRA_PATH_METADATA&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;extra/CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;CNAME&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;extra/custom.css&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;static/custom.css&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="n"&gt;CODE_DIR&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;code&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;USE_LESS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;True&lt;/span&gt;
+
+
+
+&lt;span class="c1"&gt;# Third page service&lt;/span&gt;
+&lt;span class="n"&gt;DISQUS_SITENAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;astro-2&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;# GOOGLE_ANALYTICS = &amp;#39;UA-1234-5678&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;GOOGLE_ADSENSE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;ca_id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ca-pub-8640171181637141&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;page_level_ads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;ads&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;aside&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;main_menu&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;index_top&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;index_bottom&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2770021113&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;article_top&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;article_bottom&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;4393383534&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
+
+&lt;h2&gt;新建一篇 markdown&lt;/h2&gt;
+&lt;p&gt;在 &lt;code&gt;content&lt;/code&gt; 文件夹下可以放 markdown 文件和一些图片，或者自定义的 css,js 文件&lt;/p&gt;
+&lt;p&gt;和普通的 markdown 不同的是在文件头上需要写一些 metadata，参考&lt;a href="https://docs.getpelican.com/en/stable/content.html#file-metadata"&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;My&lt;/span&gt; &lt;span class="kd"&gt;super&lt;/span&gt; &lt;span class="n"&gt;title&lt;/span&gt;
+&lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2010&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;03&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;span class="n"&gt;Modified&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2010&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;05&lt;/span&gt; &lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt;
+&lt;span class="n"&gt;Tags&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;publishing&lt;/span&gt;
+&lt;span class="n"&gt;Slug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kd"&gt;super&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;
+&lt;span class="n"&gt;Authors&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Alexis&lt;/span&gt; &lt;span class="n"&gt;Metaireau&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Conan&lt;/span&gt; &lt;span class="n"&gt;Doyle&lt;/span&gt;
+&lt;span class="n"&gt;Summary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Short&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;feeds&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Github Pages 提交&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;.gitignore 添加 output 文件夹 参考 &lt;a href="https://github.com/getpelican/pelican-blog/blob/master/.gitignore"&gt;官方博客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;新建&lt;code&gt;source&lt;/code&gt;分支，把原始的 markdown 文件和 配置文件都放到&lt;code&gt;source&lt;/code&gt; 分支上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;git checkout -b source&lt;/span&gt;
+&lt;span class="err"&gt;git add .&lt;/span&gt;
+&lt;span class="err"&gt;git commit -a -m &amp;quot;Initial commit&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;git push -u origin source&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;把生成的 html 放到 master 分支上，然后 push 到 Github 上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;ghp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;output&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;push&lt;/span&gt; &lt;span class="n"&gt;origin&lt;/span&gt; &lt;span class="n"&gt;master&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;这个时候就可以通过 &lt;code&gt;yourname.github.io&lt;/code&gt; 来访问你的博客了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Github Pages CNAME 设置&lt;/h2&gt;
+&lt;p&gt;参考 &lt;a href="https://help.github.com/en/articles/about-supported-custom-domains"&gt;Github Help&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;这里是设置 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 dns 服务商 设置域名 @泛解析 A 记录到 Github 的地址&lt;/li&gt;
+&lt;li&gt;然后在 Github Pages 的设置里添加域名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;daily workflow&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;编辑 markdown&lt;/li&gt;
+&lt;li&gt;make html&lt;/li&gt;
+&lt;li&gt;make github&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Editor&lt;/h2&gt;
+&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="pelican"></category></entry><entry><title>遍历S3</title><link href="https://xingzuoshe.cn/boto-scan-s3.html" rel="alternate"></link><published>2016-07-04T20:20:00+08:00</published><updated>2016-07-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-04:/boto-scan-s3.html</id><summary type="html">&lt;p&gt;使用 boto 遍历 s3&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;boto3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_key_id&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_secret_key&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_bucket&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Prefix&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_path_prefix&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Contents&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Size&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;分页默认大小是1000，可以修改PageSize，改小可以减少响应时间&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;paginator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_paginator&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;list_objects&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;page_iterator&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;paginator&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;paginate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;my-bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                   &lt;span class="n"&gt;PaginationConfig&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;PageSize&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考资料：
+1. https://github.com/boto/boto3
+2. https://boto3.readthedocs.io/en/latest/reference/services/s3.html#paginators
+3. https://boto3.readthedocs.io/en/latest/guide/paginators.html&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="aws"></category></entry><entry><title>python small tips</title><link href="https://xingzuoshe.cn/python-small-tips.html" rel="alternate"></link><published>2016-04-19T20:20:00+08:00</published><updated>2016-04-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-19:/python-small-tips.html</id><summary type="html">&lt;p&gt;一些Python小技巧&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。&lt;/p&gt;
+&lt;h2&gt;all()&lt;/h2&gt;
+&lt;p&gt;all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;def all(iterable):&lt;/span&gt;
+&lt;span class="err"&gt;    for element in iterable:&lt;/span&gt;
+&lt;span class="err"&gt;        if not element:&lt;/span&gt;
+&lt;span class="err"&gt;            return False&lt;/span&gt;
+&lt;span class="err"&gt;    return True&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;有一些情况需要注意，当list为空时，返回True；空字符串，None，0 的结果都是False。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([])&lt;/span&gt;
+&lt;span class="err"&gt;True&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;])&lt;/span&gt;
+&lt;span class="err"&gt;True&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;&amp;#39;])&lt;/span&gt;
+&lt;span class="err"&gt;False&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, None])&lt;/span&gt;
+&lt;span class="err"&gt;False&lt;/span&gt;
+&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; all([&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, 0])&lt;/span&gt;
+&lt;span class="err"&gt;False&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;注册表中有中文的问题&lt;/h2&gt;
+&lt;p&gt;在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;mimetypes.init() # try to read system mime.types&lt;/span&gt;
+&lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 358, in init&lt;/span&gt;
+&lt;span class="err"&gt;db.read_windows_registry()&lt;/span&gt;
+&lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 258, in read_windows_registry&lt;/span&gt;
+&lt;span class="err"&gt;for subkeyname in enum_types(hkcr):&lt;/span&gt;
+&lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 249, in enum_types&lt;/span&gt;
+&lt;span class="err"&gt;ctype = ctype.encode(default_encoding) # omit in 3.x!&lt;/span&gt;
+&lt;span class="c"&gt;UnicodeDecodeError: &amp;#39;ascii&amp;#39; codec can&amp;#39;t decode byte 0x88 in position 1: ordinal not in range(128)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这是因为python从注册表中HKEY_CLASSES_ROOT读取mimetype时，有包含中文的文件名后缀，一般都是阿里旺旺的。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;删除这项就不会再出现UnicodeDecodeError错误。&lt;/p&gt;
+&lt;p&gt;我的版本是Python 2.7.6，会出现这个问题，Python 2.7.7及以后的版本修复了这个问题。&lt;/p&gt;
+&lt;h2&gt;python setup.py develop&lt;/h2&gt;
+&lt;p&gt;develop模式并不会真正的install这个包，而是在site-packages文件夹中建立一个.egg-link文件，类似于操作系统的软链接。 这样你就可以随意编辑你的代码，并不需要每次测试的时候都reinstall一遍。当然你的程序要以python包的形似来组织才行。&lt;/p&gt;
+&lt;p&gt;更多信息考参考文档 &lt;a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode"&gt;http://pythonhosted.org//setuptools/setuptools.html#development-mode&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;json 格式中单引号是不合法的&lt;/h2&gt;
+&lt;p&gt;在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; json.loads(&amp;quot;[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]&amp;quot;)&lt;/span&gt;
+&lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;, line 1, in &amp;lt;module&amp;gt;&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\__init__.py&amp;quot;, line 338, in loads&lt;/span&gt;
+&lt;span class="err"&gt;    return _default_decoder.decode(s)&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;, line 365, in decode&lt;/span&gt;
+&lt;span class="err"&gt;    obj, end = self.raw_decode(s, idx=_w(s, 0).end())&lt;/span&gt;
+&lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;, line 383, in raw_decode&lt;/span&gt;
+&lt;span class="err"&gt;    raise ValueError(&amp;quot;No JSON object could be decoded&amp;quot;)&lt;/span&gt;
+&lt;span class="err"&gt; ValueError: No JSON object could be decoded&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;redis.Redis 和 redis.StrictRedis zadd的参数顺序不一样的&lt;/h2&gt;
+&lt;p&gt;redis.Redis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) value在前，分数在后&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;args, 如: name1, score1, name2, score2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2&lt;/p&gt;
+&lt;p&gt;redis.StrictRedis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) 分数在前，value在后&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>导入 pyspark 到 shell 和 pycharm当中</title><link href="https://xingzuoshe.cn/pyspark-pycharm.html" rel="alternate"></link><published>2016-01-19T20:20:00+08:00</published><updated>2016-01-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-01-19:/pyspark-pycharm.html</id><summary type="html">&lt;p&gt;导入pyspark 到 shell 和 pycharm当中&lt;/p&gt;</summary><content type="html">&lt;h2&gt;shell&lt;/h2&gt;
+&lt;p&gt;在.bashrc(bash shell) 或者 .zshrc(zshell) 中增加环境变量,具体路径注意自己修改:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;export SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;export PYTHONPATH=&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后在python console 可以 import pyspark&lt;/p&gt;
+&lt;h2&gt;pycharm&lt;/h2&gt;
+&lt;p&gt;在PyCharm的menu中找到Run -- Edit Configurations&lt;/p&gt;
+&lt;p&gt;在Defaults当中找到python, 点击Environment, 增加两行环境变量:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;PYTHONPATH=&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="pycharm_run_add_env" src="../images/pycharm_run_add_env.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;重启PyCharm应该就不会看到红色波浪线了.&lt;/p&gt;</content><category term="Python"></category><category term="pyspark"></category><category term="pycharm"></category></entry><entry><title>s3 本地测试环境的搭建</title><link href="https://xingzuoshe.cn/s3-local-test.html" rel="alternate"></link><published>2015-09-30T20:20:00+08:00</published><updated>2015-09-30T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-09-30:/s3-local-test.html</id><summary type="html">&lt;p&gt;s3 本地测试环境的搭建&lt;/p&gt;</summary><content type="html">&lt;h2&gt;s3 ninja&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://s3ninja.net/"&gt;http://s3ninja.net/&lt;/a&gt; s3 ninja 在本地模拟S3 API, 而且自带一个管理界面, 但是需要修改代码或者增加配置,把endpoint_url指定为 &lt;a href="http://localhost:9444/s3"&gt;http://localhost:9444/s3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果我们不想修改代码,可以通过一些简单的配置把请求导向本地 s3 ninja&lt;/p&gt;
+&lt;h2&gt;s3 virtual hosted-style and path-style access&lt;/h2&gt;
+&lt;p&gt;访问s3 bucket上的文件,有两种方式:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt; &lt;span class="n"&gt;bucket名字&lt;/span&gt; &lt;span class="n"&gt;johnsmith&lt;/span&gt;  &lt;span class="err"&gt;文件&lt;/span&gt; &lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Path&lt;/span&gt; &lt;span class="n"&gt;Style&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;Virtual&lt;/span&gt; &lt;span class="n"&gt;Hosted&lt;/span&gt;&lt;span class="err"&gt;–&lt;/span&gt;&lt;span class="n"&gt;Style&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;johnsmith&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;amazonaws&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;homepage&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多信息参考&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro"&gt;http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro&lt;/a&gt; &lt;a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html"&gt;http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;如何配置&lt;/h2&gt;
+&lt;p&gt;我们要达到的目的如下,把原本对亚马逊的HTTP请求指向本地的S3 ninja&lt;/p&gt;
+&lt;p&gt;mybucket.s3.amazonaws.com -&amp;gt; localhost:9444:s3/mybucket&lt;/p&gt;
+&lt;h3&gt;/etc/hosts&lt;/h3&gt;
+&lt;p&gt;添加一行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;127.0.0.1 mybucket.s3.amazonaws.com&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样可以把亚马逊的域名指向本地，但是端口和访问路径Path的修改需要nginx来实现&lt;/p&gt;
+&lt;h3&gt;nginx&lt;/h3&gt;
+&lt;p&gt;nginx 把127.0.0.1:80 的请求转向 127.0.0.1:9444&lt;/p&gt;
+&lt;p&gt;配置文件如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;server {&lt;/span&gt;
+&lt;span class="err"&gt;listen       80;&lt;/span&gt;
+&lt;span class="err"&gt;server_name  localhost;&lt;/span&gt;
+&lt;span class="err"&gt;location / {&lt;/span&gt;
+&lt;span class="err"&gt;    proxy_pass http://127.0.0.1:9444;&lt;/span&gt;
+&lt;span class="err"&gt;    rewrite ^(.*)$ /s3/mybucket$1 break; #例如 /homepage.html =&amp;gt; /s3/mybucket/homepage.html&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;配置多个bucket&lt;/h2&gt;
+&lt;p&gt;上面的配置只说了一个bucket的情况，如果有多个bucket需要测试，我们使用nginx virtualhost的功能就可以做到，把server_name 改成 bucket的域名就行&lt;/p&gt;
+&lt;h2&gt;推荐工具&lt;/h2&gt;
+&lt;p&gt;在 Mac 上 gas mask 可以很方便的切换和编辑hosts文件 &lt;a href="http://clockwise.ee/"&gt;http://clockwise.ee/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在 Mac 上 安装 nginx，可以使用brew install nginx &lt;a href="http://brew.sh/"&gt;http://brew.sh/&lt;/a&gt; 启动命令 sudo nginx， sudo nginx -s reload&lt;/p&gt;</content><category term="Python"></category><category term="s3"></category><category term="aws"></category></entry><entry><title>使用 Python 操作亚马逊 DynamoDB</title><link href="https://xingzuoshe.cn/python-operate-dynamodb.html" rel="alternate"></link><published>2015-08-20T20:20:00+08:00</published><updated>2015-08-21T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-20:/python-operate-dynamodb.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 DynamoDB&lt;/p&gt;</summary><content type="html">&lt;p&gt;DynamoDB 是亚马逊AWS提供的一种完全托管的NoSQL数据库，省去部署/监控/维护数据库环节，给开发者节约了大量时间。 而且亚马逊提供了一个本地模拟环境用于测试和开发，我们可以使用本地的DynamoDB.local来学习和熟悉DynamoDB的API。&lt;/p&gt;
+&lt;h2&gt;下载DynamoDB.local&lt;/h2&gt;
+&lt;p&gt;从亚马逊的官方文档可以找到&lt;a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html"&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压之后:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;dynamodb_local_2015-07-16_1.0$java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb&lt;/span&gt;
+&lt;span class="err"&gt;Initializing DynamoDB Local with the following configuration:&lt;/span&gt;
+&lt;span class="c"&gt;Port:   8000&lt;/span&gt;
+&lt;span class="c"&gt;InMemory:   false&lt;/span&gt;
+&lt;span class="c"&gt;DbPath: null&lt;/span&gt;
+&lt;span class="c"&gt;SharedDb:   true&lt;/span&gt;
+&lt;span class="c"&gt;shouldDelayTransientStatuses:   false&lt;/span&gt;
+&lt;span class="c"&gt;CorsParams: *&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在浏览器中打开http://localhost:8000/shell/，你会看到DynamoDB javascript shell，在网页上你可以试试javascript API的用法。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="DynamoDB_JavaScript_Shell" src="../images/DynamoDB_JavaScript_Shell.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Boto3&lt;/h2&gt;
+&lt;p&gt;在试用之后javascript API之后，你是不是很想念我们简洁的Python呢，接下来我们就来介绍Python的用法。&lt;/p&gt;
+&lt;p&gt;官方推荐的Pyhton SDK为Boto3，我们直接进入正题:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;anything&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 指定本地的endpoint就可以使用DynamoDB.local&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dynamodb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endpoint_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:8000&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;dynamodb&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dynamodb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;endpoint_url&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://localhost:8000&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 创建表&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dynamodb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;create_table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;TableName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;KeySchema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;KeyType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;HASH&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;KeyType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;RANGE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}],&lt;/span&gt;
+    &lt;span class="n"&gt;AttributeDefinitions&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;AttributeType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;AttributeName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;AttributeType&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;S&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},],&lt;/span&gt;
+    &lt;span class="n"&gt;ProvisionedThroughput&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;ReadCapacityUnits&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s1"&gt;&amp;#39;WriteCapacityUnits&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 使用已经存在的表&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;dynamodb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;users&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 增加一条记录&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;first_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Jane&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;25&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;span class="c1"&gt;# 通过Key查询&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Item&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# update 一条记录&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Item&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;item&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 删除一条记录&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delete_item&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# query&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.dynamodb.conditions&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Attr&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KeyConditionExpression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;janedoe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;# scan&lt;/span&gt;
+&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scan&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;FilterExpression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Attr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;# query和scan的区别就是，query的查询条件必须要有Key的条件，scan不用。&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 列出有哪些表&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list_tables&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;我们有两种操作Dynamodb的方法，一种是使用Resource，另一种是使用client。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Resources: a high level, object oriented interface&lt;/li&gt;
+&lt;li&gt;Clients: low level service connections&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;使用Resource更加方便一些，给出的代码中就是Resource的用法。&lt;/p&gt;
+&lt;h2&gt;其他资源&lt;/h2&gt;
+&lt;p&gt;boto3 &lt;a href="https://boto3.readthedocs.org/en/latest/index.html"&gt;https://boto3.readthedocs.org/en/latest/index.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;DynamoDB &lt;a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html"&gt;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&lt;/a&gt;&lt;/p&gt;</content><category term="Python"></category><category term="dynamodb"></category><category term="aws"></category></entry><entry><title>Python 中 class 的 JSON 序列化</title><link href="https://xingzuoshe.cn/python-obj-to-json.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-obj-to-json.html</id><summary type="html">&lt;p&gt;Python 中 class 的 JSON 序列化&lt;/p&gt;</summary><content type="html">&lt;p&gt;在Java中如果定义一个class，是十分方便JSON序列化的，比如说使用 jackson lib。&lt;/p&gt;
+&lt;p&gt;但是在Python中如果使用json.dumps(a)，a如果不是一个简单类型的就会报错:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;TypeError: &amp;lt;__main__.A instance at 0x109d553b0&amp;gt; is not JSON serializable&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;其实Python的class也十分方便JSON序列化,需要一小段代码就可以:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;JSONEncoder&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;memberlist&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="n"&gt;_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;memberlist&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;_&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;callable&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_dic&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JSONEncoder&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;obj2dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ClsEncoder&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在使用json.dumps的时候指定ClsEncoder就能够达到目的&lt;/p&gt;</content><category term="Python"></category><category term="json"></category></entry><entry><title>使用 Python 操作亚马逊 S3</title><link href="https://xingzuoshe.cn/python-operate-s3.html" rel="alternate"></link><published>2015-08-17T20:20:00+08:00</published><updated>2015-08-17T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-17:/python-operate-s3.html</id><summary type="html">&lt;p&gt;使用 Python 操作亚马逊 S3&lt;/p&gt;</summary><content type="html">&lt;p&gt;亚马逊S3(Amazon Simple Storage Service) 为开发人员和IT团队提供安全、耐久且扩展性高的对象存储。 可以理解为一个在线的网盘，而且这个网盘可以通过程序上传，下载，获取外链。亚马逊按照存储空间和请求次数收费。&lt;/p&gt;
+&lt;p&gt;对小公司来说是一个稳定的在线存储,可以减少维护成本。&lt;/p&gt;
+&lt;h2&gt;boto3 Python SDK&lt;/h2&gt;
+&lt;p&gt;目前官方推荐的Python SDK 是boto3 &lt;a href="https://github.com/boto/boto3"&gt;https://github.com/boto/boto3&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;接下来进入正题,直接看代码把。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;boto3.session&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;
+
+&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+    &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;lt;key&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; \
+    &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;s3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resource&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;client&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s3&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#上传&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;~/beakup.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;file_obj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Bucket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mybucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;put_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;breakup.gif&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Body&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;#获取URL&lt;/span&gt;
+&lt;span class="n"&gt;presigned_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_presigned_url&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;get_object&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Bucket&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;bucket_name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;file_obj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="n"&gt;ExpiresIn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3600&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;简单说明一下代码，S3&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;create() 创建Bucket&lt;/li&gt;
+&lt;li&gt;delete() 删除Bucket&lt;/li&gt;
+&lt;li&gt;put_object() 上传文件,Key是文件名,Body是文件内容&lt;/li&gt;
+&lt;li&gt;delete_object() 删除文件,Key是文件名&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;如何创建文件夹&lt;/h2&gt;
+&lt;p&gt;对于对象存储而言，没有文件夹的概念，所有的文件以及文件夹都看成是一个object，但是object前面可以有字符“/”来表示文件夹意义的标示符， 因而本身s3是没有提供直接建文件夹的API的，但是利用前面的概念可以建一个结尾带有“/”的key，这个key的content为空，来象征性的标示文件夹， 后续所谓的往这个文件夹里面继续存放东西就是在所有需要上传文件的文件名前面加上这个文件夹的key作为文件的key将文件上传，就是先所谓的文件夹的概念。&lt;/p&gt;
+&lt;h2&gt;其他&lt;/h2&gt;
+&lt;p&gt;如果需要使用客户端操作s3，推荐小黄鸭cyberduck。&lt;/p&gt;</content><category term="Python"></category><category term="s3"></category><category term="aws"></category></entry><entry><title>如何使用 pyside + HTML5 开发桌面应用</title><link href="https://xingzuoshe.cn/pyside-html5.html" rel="alternate"></link><published>2015-08-04T20:20:00+08:00</published><updated>2015-08-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2015-08-04:/pyside-html5.html</id><summary type="html">&lt;p&gt;使用 pyside + HTML5 开发桌面应用&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://pyside.org"&gt;pyside&lt;/a&gt; 是 &lt;a href="http://www.qt.io/"&gt;Qt&lt;/a&gt; 的Python绑定，使用没有任何限制，而且配合python丰富的类库和简洁的语法，开发起来非常方便&lt;/p&gt;
+&lt;h2&gt;pip&lt;/h2&gt;
+&lt;p&gt;如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中&lt;/p&gt;
+&lt;p&gt;怎么安装pip，参考这里 &lt;a href="https://pip.pypa.io/en/latest/installing.html"&gt;https://pip.pypa.io/en/latest/installing.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;安装pyside&lt;/h2&gt;
+&lt;p&gt;在Ubuntu 和　DeepinLinux　下安装非常方便:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get install python-pyside&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;或者使用pip安装:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo pip install pyside&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;创建窗口&lt;/h2&gt;
+&lt;p&gt;学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;class&lt;/span&gt; &lt;span class="nt"&gt;MainWindow&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QWidget&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
+    &lt;span class="nt"&gt;def&lt;/span&gt; &lt;span class="nt"&gt;__init__&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
+        &lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QWidget&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;__init__&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;初始化position&lt;/span&gt;
+        &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;pos&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+
+        &lt;span class="err"&gt;＃&lt;/span&gt;&lt;span class="nt"&gt;设置窗口大小&lt;/span&gt;
+        &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;resize&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nt"&gt;600&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="err"&gt;＃&lt;/span&gt;&lt;span class="nt"&gt;窗口特征&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;没有边框&lt;/span&gt;
+        &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;setWindowFlags&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;FramelessWindowHint&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nt"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;WindowSystemMenuHint&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;setMouseTracking&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;True&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;setStyleSheet&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;background-color:#f8f8f8;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+        &lt;span class="err"&gt;＃&lt;/span&gt;&lt;span class="nt"&gt;窗口居中&lt;/span&gt;
+        &lt;span class="nt"&gt;desktop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QApplication&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;desktop&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+        &lt;span class="nt"&gt;width&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;desktop&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;width&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+        &lt;span class="nt"&gt;height&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nt"&gt;desktop&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;height&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+        &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;move&lt;/span&gt;&lt;span class="o"&gt;((&lt;/span&gt;&lt;span class="nt"&gt;width&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;width&lt;/span&gt;&lt;span class="o"&gt;())/&lt;/span&gt;&lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;height&lt;/span&gt; &lt;span class="nt"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;height&lt;/span&gt;&lt;span class="o"&gt;())/&lt;/span&gt;&lt;span class="nt"&gt;2&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+
+        &lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;支持窗口拖动&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nt"&gt;重写两个方法&lt;/span&gt;
+        &lt;span class="nt"&gt;def&lt;/span&gt; &lt;span class="nt"&gt;mousePressEvent&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;event&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
+            &lt;span class="nt"&gt;if&lt;/span&gt; &lt;span class="nt"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;button&lt;/span&gt;&lt;span class="o"&gt;()==&lt;/span&gt;&lt;span class="nt"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;LeftButton&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;m_drag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;True&lt;/span&gt;
+                &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;globalPos&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="nt"&gt;-self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;pos&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+                &lt;span class="nt"&gt;event&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;accept&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+
+
+        &lt;span class="nt"&gt;def&lt;/span&gt; &lt;span class="nt"&gt;mouseMoveEvent&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;QMouseEvent&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
+            &lt;span class="nt"&gt;if&lt;/span&gt; &lt;span class="nt"&gt;QMouseEvent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;buttons&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="nt"&gt;and&lt;/span&gt; &lt;span class="nt"&gt;Qt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;LeftButton&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+                &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;move&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;QMouseEvent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;globalPos&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="nt"&gt;-self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;m_DragPosition&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+                &lt;span class="nt"&gt;QMouseEvent&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;accept&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+
+
+        &lt;span class="nt"&gt;def&lt;/span&gt; &lt;span class="nt"&gt;mouseReleaseEvent&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;QMouseEvent&lt;/span&gt;&lt;span class="o"&gt;):&lt;/span&gt;
+            &lt;span class="nt"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;m_drag&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;False&lt;/span&gt;
+
+&lt;span class="nt"&gt;if&lt;/span&gt; &lt;span class="nt"&gt;__name__&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+    &lt;span class="nt"&gt;mapp&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;QtGui&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;QApplication&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;argv&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="nt"&gt;mw&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nt"&gt;MainWindow&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+    &lt;span class="nt"&gt;mw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;show&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+    &lt;span class="nt"&gt;sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;exit&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nt"&gt;mapp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;exec_&lt;/span&gt;&lt;span class="o"&gt;())&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;设计UI&lt;/h2&gt;
+&lt;p&gt;pyside有三种设计UI的方式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;手工编码,编码layout+widget&lt;/li&gt;
+&lt;li&gt;xml定义(使用Qt Designer)&lt;/li&gt;
+&lt;li&gt;QtQuick/QML定义(使用Qt Creator)，在QT5下更好用,QT4还不完善&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;查找帮助&lt;/h2&gt;
+&lt;p&gt;网上pyside的资料不多，我们该怎么查找资料呢？ QT Creator是QT的官方IDE，里面有官方的帮助文档，C++，不过pyside的函数名是一模一样的，功能也保持一致。&lt;/p&gt;
+&lt;p&gt;pyside的API文档也是很好的参考资料　http://pyside.github.io/docs/pyside/&lt;/p&gt;
+&lt;h2&gt;webkit&lt;/h2&gt;
+&lt;p&gt;WebKit是一个排版引擎，主要设计是用来让网页浏览器绘制网页。WebKit目前作为Apple Safari及Google Chrome（直到版本27）等浏览器的主要引擎。&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://qt-project.org/wiki/QtWebKit"&gt;http://qt-project.org/wiki/QtWebKit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Qt WebKit is the port of WebKit on top of Qt. QtWebKit relies on the public APIs of Qt and can theoretically be used on any platform supported by Qt (theoretically because WebKit also requires a recent/good compiler).&lt;/p&gt;
+&lt;h2&gt;Qt Webkit Bridge&lt;/h2&gt;
+&lt;p&gt;在Web环境中，web和后端的交互是通过http协议,但是在qtwebkit中怎么样才能和webkit中的网页交互。 Qt　提供了一个机制　Qt Webkit Bridge来实现这个功能。&lt;/p&gt;
+&lt;p&gt;有两个特别的函数,实现这个功能&lt;/p&gt;
+&lt;p&gt;让javascript调用python方法　QtWebKit.QWebView().page().mainFrame().addToJavaScriptWindowObject("pyObj", pyObj)&lt;/p&gt;
+&lt;p&gt;python中调用javascript函数　QtWebKit.QWebView().page().mainFrame().evaluateJavaScript("alert('Hello World!');")&lt;/p&gt;</content><category term="Python"></category><category term="pyside"></category></entry></feed>

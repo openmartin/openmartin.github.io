@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Javascript</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/javascript.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-05-25T14:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>echarts 初级教程</title><link href="https://xingzuoshe.cn/echarts-preliminary-guide.html" rel="alternate"></link><published>2020-05-25T14:00:00+08:00</published><updated>2020-05-25T14:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/echarts-preliminary-guide.html</id><summary type="html">&lt;p&gt;echarts 基本概念，初级教程&lt;/p&gt;</summary><content type="html">&lt;h2&gt;echarts 初级教程&lt;/h2&gt;
+&lt;p&gt;柱状图的例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;option&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;text&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ECharts 入门示例&amp;#39;&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="nx"&gt;tooltip&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt;
+    &lt;span class="nx"&gt;legend&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;销量&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="nx"&gt;xAxis&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;衬衫&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;羊毛衫&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;雪纺衫&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;裤子&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;高跟鞋&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;袜子&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="nx"&gt;yAxis&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{},&lt;/span&gt;
+    &lt;span class="nx"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[{&lt;/span&gt;
+        &lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;销量&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bar&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;36&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;}]&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+
+&lt;span class="c1"&gt;// 设置 echarts option&lt;/span&gt;
+&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;myChart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;echarts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;document&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;getElementById&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;echartsContainer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="nx"&gt;myChart&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setOption&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;option&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;核心概念&lt;/h2&gt;
+&lt;p&gt;xAxis.type&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;#39;value&amp;#39; 数值轴，适用于连续数据。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;category&amp;#39; 类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 series.data 或 dataset.source 中取，或者可通过 xAxis.data 设置类目数据。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;time&amp;#39; 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;log&amp;#39; 对数轴。适用于对数数据。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;yAxis.type&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;#39;value&amp;#39; 数值轴，适用于连续数据。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;category&amp;#39; 类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 series.data 或 dataset.source 中取，或者可通过 xAxis.data 设置类目数据。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;time&amp;#39; 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;log&amp;#39; 对数轴。适用于对数数据。&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;series.type&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;#39;line&amp;#39; 折线图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;bar&amp;#39; 柱状图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;pie&amp;#39;  饼图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;scatter&amp;#39; 散点（气泡）图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;effectScatter&amp;#39; 带有涟漪特效动画的散点（气泡）图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;radar&amp;#39; 雷达图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;tree&amp;#39; 树图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;treemap&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;sunburst&amp;#39; 旭日图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;boxplot&amp;#39;  中文可以称为『箱形图』、『盒须图』、『盒式图』、『盒状图』、『箱线图』&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;candlestick&amp;#39; K线图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;heatmap&amp;#39; 热力图主要通过颜色去表现数值的大小&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;map&amp;#39; 地图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;parallel&amp;#39; 平行坐标系&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;lines&amp;#39; 用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;graph&amp;#39; 关系图 用于展现节点以及节点之间的关系数据。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;sankey&amp;#39; 桑基图 是一种特殊的流图（可以看作是有向无环图）。 它主要用来表示原材料、能量等如何从最初形式经过中间过程的加工或转化达到最终状态。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;funnel&amp;#39; 漏斗图&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;gauge&amp;#39; 仪表盘&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;pictorialBar&amp;#39; 象形柱图 象形柱图是可以设置各种具象图形元素（如图片、SVG PathData 等）的柱状图。往往用在信息图中。用于有至少一个类目轴或时间轴的直角坐标系上。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;themeRiver&amp;#39; 主题河流 是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。&lt;/span&gt;
+&lt;span class="err"&gt;&amp;#39;custom&amp;#39; 自定义系列&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;如何学习&lt;/h2&gt;
+&lt;p&gt;echarts 有非常多的 option，建议先找一个最接近的官方实例，然后在此上修改，比自己去看 API 更快更方便。&lt;/p&gt;</content><category term="Javascript"></category><category term="echarts"></category><category term="javascript"></category></entry></feed>

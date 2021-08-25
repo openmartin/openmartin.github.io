@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL" />
+<meta name="keywords" content="aws, linux, ssl">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL"/>
+<meta property="og:description" content="在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./lets-encrypt-ssl.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-04-03 20:20:00+08:00"/>
+<meta property="article:modified_time" content="2017-04-03 20:20:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Linux"/>
+<meta property="article:tag" content="aws"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="ssl"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="lets-encrypt-ssl">在 Amazon Linux 使用 Let's encrypt 免费的SSL</h1>
+    <p>
+      Posted on 2017-04-03 20:20 in <a href="./category/linux.html">Linux</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
+Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要renew，官方还提供自动renew的工具certbot</p>
+<h2>certbot</h2>
+<p>certbot 是一个自动申请和续期SSL证书的工具。在<a href="https://certbot.eff.org/">官网certbot.eff.org</a>可以找到各种OS和Web服务器下的安装方法。常见的Ubuntu和CentOS安装起来十分方便。</p>
+<h2>Amazon Linux</h2>
+<p>在AWS EC2上，官方推荐的是OS是Amazon Linux，基于RHEL 6源码重新编译的，提供了Amazon自己的工具和源。certbot的安装方式类似于RHEL 6/CentOS 6</p>
+<h2>申请SSL证书步骤</h2>
+<ul>
+<li>ssh到Server</li>
+<li>下载certbot</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">wget https://dl.eff.org/certbot-auto</span>
+<span class="err">chmod a+x certbot-auto</span>
+</code></pre></div>
+
+
+<ul>
+<li>执行certbot</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">sudo ./certbot-auto --debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE</span>
+</code></pre></div>
+
+
+<ul>
+<li>验证</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">How would you like to authenticate with the ACME CA?</span>
+<span class="err">---------------------------</span>
+<span class="c">1: Place files in webroot directory (webroot)</span>
+<span class="c">2: Spin up a temporary webserver (standalone)</span>
+<span class="err">---------------------------</span>
+</code></pre></div>
+
+
+<p>选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
+选择2certbot会启动一个web服务，占用443端口，所以需要暂停一下nginx，一般情况下选择2比较省事。</p>
+<p><code>记得在AWS EC2的安全组中放开443端口</code></p>
+<ul>
+<li>证书路径</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c">Certificate: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/cert.pem</span>
+<span class="err">Full Chain: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem</span>
+<span class="err">Private Key: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem</span>
+</code></pre></div>
+
+
+<h2>nginx 启用SSL</h2>
+<p>启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子</p>
+<div class="highlight"><pre><span></span><code><span class="nt">server</span> <span class="p">{</span>
+    <span class="err">listen</span>       <span class="err">80</span><span class="p">;</span>
+
+    <span class="err">server_name</span>  <span class="err">YOUR_WEBSITE_HERE</span><span class="p">;</span>
+
+    <span class="err">#</span> <span class="err">Redirect</span> <span class="err">all</span> <span class="err">HTTP</span> <span class="err">requests</span> <span class="err">to</span> <span class="err">HTTPS</span> <span class="err">with</span> <span class="err">a</span> <span class="err">301</span> <span class="err">Moved</span> <span class="err">Permanently</span> <span class="err">response.</span>
+    <span class="err">return</span> <span class="err">301</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">YOUR_WEBSITE_HERE</span><span class="err">$</span><span class="n">request_uri</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="nt">server</span> <span class="p">{</span>
+    <span class="err">listen</span> <span class="err">443</span> <span class="err">ssl</span> <span class="err">http2</span><span class="p">;</span>
+    <span class="n">listen</span> <span class="cp">[</span><span class="p">::</span><span class="cp">]</span><span class="p">:</span><span class="mi">443</span> <span class="n">ssl</span> <span class="n">http2</span><span class="p">;</span>
+
+    <span class="err">server_name</span> <span class="err">YOUR_WEBSITE_HERE</span><span class="p">;</span>
+
+    <span class="err">#</span> <span class="err">certs</span> <span class="err">sent</span> <span class="err">to</span> <span class="err">the</span> <span class="err">client</span> <span class="err">in</span> <span class="err">SERVER</span> <span class="err">HELLO</span> <span class="err">are</span> <span class="err">concatenated</span> <span class="err">in</span> <span class="err">ssl_certificate</span>
+    <span class="err">ssl_certificate</span> <span class="err">/etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem</span><span class="p">;</span>
+    <span class="err">ssl_certificate_key</span> <span class="err">/etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem</span><span class="p">;</span>
+    <span class="err">ssl_session_timeout</span> <span class="err">1d</span><span class="p">;</span>
+    <span class="err">ssl_session_cache</span> <span class="n">shared</span><span class="p">:</span><span class="n">SSL</span><span class="o">:</span><span class="mi">50</span><span class="n">m</span><span class="p">;</span>
+    <span class="err">ssl_session_tickets</span> <span class="err">off</span><span class="p">;</span>
+    <span class="err">access_log</span> <span class="err">/var/log/nginx/YOUR_WEBSITE_HERE-access.log</span><span class="p">;</span>
+    <span class="err">error_log</span> <span class="err">/var/log/nginx/YOUR_WEBSITE_HERE-error.log</span><span class="p">;</span>
+    <span class="err">location</span> <span class="err">/</span> <span class="err">{</span>
+        <span class="err">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">8003</span><span class="p">;</span>
+        <span class="err">proxy_set_header</span> <span class="err">Host</span> <span class="err">$host</span><span class="p">;</span>
+        <span class="err">proxy_set_header</span> <span class="err">X-Real-IP</span> <span class="err">$remote_addr</span><span class="p">;</span>
+        <span class="err">proxy_set_header</span> <span class="err">X-Forwarded-For</span> <span class="err">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</code></pre></div>
+
+
+<h2>自动更新证书</h2>
+<ul>
+<li>使用root用户</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">sudo -i</span>
+</code></pre></div>
+
+
+<ul>
+<li>增加定时任务</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">crontab -e</span>
+</code></pre></div>
+
+
+<p>增加一行，每个月1号2点30分更新</p>
+<div class="highlight"><pre><span></span><code><span class="err">30 2 1 * * /path/to/certbot renew --pre-hook &quot;service nginx stop&quot; --post-hook &quot;service nginx start&quot;</span>
+</code></pre></div>
+
+
+<ul>
+<li>dry run</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">./path/to/certbot-auto renew --dry-run</span>
+</code></pre></div>
+
+
+<h2>chrome 变绿</h2>
+<p>在chrome下需要全站都使用https地址栏才会变绿，需要检查一下网站里面的各种URL，比如外链图片或JS文件，都需要使用https才行。</p>
+<p>参考资料:
+- http://frontenddev.org/article/using-certbot-deployment-let-s-encrypt-free-ssl-certificate-implementation-https.html
+- https://segmentfault.com/a/1190000005797776
+- https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/
+- https://ksmx.me/letsencrypt-ssl-https/
+- https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/aws.html">aws</a>
+      <a href="./tag/linux.html">linux</a>
+      <a href="./tag/ssl.html">ssl</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

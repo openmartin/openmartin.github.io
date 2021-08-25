@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="一些Python小技巧" />
+<meta name="keywords" content="python">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="python small tips"/>
+<meta property="og:description" content="一些Python小技巧"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./python-small-tips.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-04-19 20:20:00+08:00"/>
+<meta property="article:modified_time" content="2016-04-19 20:20:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Python"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; python small tips</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="python-small-tips">python small tips</h1>
+    <p>
+      Posted on 2016-04-19 20:20 in <a href="./category/python.html">Python</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。</p>
+<h2>all()</h2>
+<p>all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:</p>
+<div class="highlight"><pre><span></span><code><span class="err">def all(iterable):</span>
+<span class="err">    for element in iterable:</span>
+<span class="err">        if not element:</span>
+<span class="err">            return False</span>
+<span class="err">    return True</span>
+</code></pre></div>
+
+
+<p>有一些情况需要注意，当list为空时，返回True；空字符串，None，0 的结果都是False。:</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt;&gt;&gt; all([])</span>
+<span class="err">True</span>
+<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span>
+<span class="err">True</span>
+<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, &#39;&#39;])</span>
+<span class="err">False</span>
+<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, None])</span>
+<span class="err">False</span>
+<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, 0])</span>
+<span class="err">False</span>
+</code></pre></div>
+
+
+<h2>注册表中有中文的问题</h2>
+<p>在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:</p>
+<div class="highlight"><pre><span></span><code><span class="err">mimetypes.init() # try to read system mime.types</span>
+<span class="err">File &quot;C:\Python27\lib\mimetypes.py&quot;, line 358, in init</span>
+<span class="err">db.read_windows_registry()</span>
+<span class="err">File &quot;C:\Python27\lib\mimetypes.py&quot;, line 258, in read_windows_registry</span>
+<span class="err">for subkeyname in enum_types(hkcr):</span>
+<span class="err">File &quot;C:\Python27\lib\mimetypes.py&quot;, line 249, in enum_types</span>
+<span class="err">ctype = ctype.encode(default_encoding) # omit in 3.x!</span>
+<span class="c">UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0x88 in position 1: ordinal not in range(128)</span>
+</code></pre></div>
+
+
+<p>这是因为python从注册表中HKEY_CLASSES_ROOT读取mimetype时，有包含中文的文件名后缀，一般都是阿里旺旺的。:</p>
+<div class="highlight"><pre><span></span><code><span class="err">HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件</span>
+</code></pre></div>
+
+
+<p>删除这项就不会再出现UnicodeDecodeError错误。</p>
+<p>我的版本是Python 2.7.6，会出现这个问题，Python 2.7.7及以后的版本修复了这个问题。</p>
+<h2>python setup.py develop</h2>
+<p>develop模式并不会真正的install这个包，而是在site-packages文件夹中建立一个.egg-link文件，类似于操作系统的软链接。 这样你就可以随意编辑你的代码，并不需要每次测试的时候都reinstall一遍。当然你的程序要以python包的形似来组织才行。</p>
+<p>更多信息考参考文档 <a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode">http://pythonhosted.org//setuptools/setuptools.html#development-mode</a></p>
+<h2>json 格式中单引号是不合法的</h2>
+<p>在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:</p>
+<div class="highlight"><pre><span></span><code><span class="err">&gt;&gt;&gt; json.loads(&quot;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&quot;)</span>
+<span class="err">Traceback (most recent call last):</span>
+<span class="err">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="err">  File &quot;D:\Python27\lib\json\__init__.py&quot;, line 338, in loads</span>
+<span class="err">    return _default_decoder.decode(s)</span>
+<span class="err">  File &quot;D:\Python27\lib\json\decoder.py&quot;, line 365, in decode</span>
+<span class="err">    obj, end = self.raw_decode(s, idx=_w(s, 0).end())</span>
+<span class="err">  File &quot;D:\Python27\lib\json\decoder.py&quot;, line 383, in raw_decode</span>
+<span class="err">    raise ValueError(&quot;No JSON object could be decoded&quot;)</span>
+<span class="err"> ValueError: No JSON object could be decoded</span>
+</code></pre></div>
+
+
+<h2>redis.Redis 和 redis.StrictRedis zadd的参数顺序不一样的</h2>
+<p>redis.Redis.zadd(name, <em>args,</em>*kwargs) value在前，分数在后</p>
+<p><em>args, 如: name1, score1, name2, score2, ... 或者是</em>*kwargs, 如: name1=score1, name2=score2</p>
+<p>redis.StrictRedis.zadd(name, <em>args,</em>*kwargs) 分数在前，value在后</p>
+<p><em>args, 如: score1, name1, score2, name2, ... 或者是</em>*kwargs, 如: name1=score1, name2=score2,</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

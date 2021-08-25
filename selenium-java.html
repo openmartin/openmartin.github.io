@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="selenium 的用法，Java API" />
+<meta name="keywords" content="java, selenium">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="selenium 的用法"/>
+<meta property="og:description" content="selenium 的用法，Java API"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./selenium-java.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-09-25 11:00:00+08:00"/>
+<meta property="article:modified_time" content="2020-09-25 12:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="java"/>
+<meta property="article:tag" content="selenium"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; selenium 的用法</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="selenium-java">selenium 的用法</h1>
+    <p>
+      Posted on 2020-09-25 11:00 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>selenium</h2>
+<p>selenium 是一个 web 自动化测试工具，提供了各种API，就像真正的用户在操作一样。而且支持各种浏览器 Chrome、Firfox、Edge、Safari。</p>
+<p>这里推荐用 Firefox，如果是用 Chrome 的话，跟随 Chrome 的升级，webdriver 也要频繁更新，但 Firefox 的 webdirver 不用这么频繁更新。</p>
+<h3>Java API</h3>
+<p>selenium 提供很多种语言的 API，Python、Java、C#、Javascript、Ruby</p>
+<p>这里介绍一下 Java API</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 打开页面</span>
+<span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;webdriver.gecko.driver&quot;</span><span class="p">,</span> <span class="s">&quot;E:\\workspace\\demo\\src\\main\\resources\\geckodriver.exe&quot;</span><span class="p">);</span>
+<span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="p">();</span>
+<span class="n">driver</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;http://www.example.com/login&quot;</span><span class="p">);</span>
+
+<span class="c1">// input</span>
+<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span> <span class="n">driver</span><span class="p">).</span><span class="na">findElementById</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">).</span><span class="na">sendKeys</span><span class="p">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="p">);</span>
+<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span> <span class="n">driver</span><span class="p">).</span><span class="na">findElementById</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">).</span><span class="na">sendKeys</span><span class="p">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="p">);</span>
+
+<span class="c1">// click</span>
+<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span> <span class="n">driver</span><span class="p">).</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">cssSelector</span><span class="p">(</span><span class="s">&quot;#login-btn&quot;</span><span class="p">)).</span><span class="na">click</span><span class="p">();</span>
+
+
+<span class="c1">// 获取网页源文件</span>
+<span class="n">String</span> <span class="n">pageSource</span> <span class="o">=</span> <span class="n">driver</span><span class="p">.</span><span class="na">getPageSource</span><span class="p">();</span>
+<span class="c1">// 后续可以用 jsoup 处理，获取部分的 html</span>
+
+<span class="c1">// findElement 返回 WebElement，如果找不到抛出 NoSuchElementException</span>
+<span class="c1">// findElements 返回 list，如果找不到 list.size() = 0</span>
+<span class="n">element</span><span class="p">.</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">cssSelector</span><span class="p">(</span><span class="s">&quot;ul&gt;li&gt;span:nth-child(1)&quot;</span><span class="p">)</span>
+<span class="n">element</span><span class="p">.</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">xpath</span><span class="p">(</span><span class="s">&quot;ul/li&quot;</span><span class="p">)</span>
+<span class="n">element</span><span class="p">.</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">id</span><span class="p">(</span><span class="s">&quot;mainContent&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>可用浏览器的开发者工具获取 dom 节点的 xpath, cssSelector</p>
+<p>如果是 ajax 加载的最好 Thread.sleep 几秒，等待 dom 节点加载完毕</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/java.html">java</a>
+      <a href="./tag/selenium.html">selenium</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

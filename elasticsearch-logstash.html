@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="Elasticsearch Logstash 配置" />
+<meta name="keywords" content="elasticsearch, logstash">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="Elasticsearch Logstash"/>
+<meta property="og:description" content="Elasticsearch Logstash 配置"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./elasticsearch-logstash.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-11-27 11:00:00+08:00"/>
+<meta property="article:modified_time" content="2020-11-27 12:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="elasticsearch"/>
+<meta property="article:tag" content="logstash"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; Elasticsearch Logstash</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="elasticsearch-logstash">Elasticsearch Logstash</h1>
+    <p>
+      Posted on 2020-11-27 11:00 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>Logstash + GELF</h2>
+<p>配置文件</p>
+<div class="highlight"><pre><span></span><code><span class="k">input</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">gelf</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">port</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">12201</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="k">filter</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">json</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">source</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;message&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">remove_field</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">[</span><span class="n"> &quot;server&quot;, &quot;server.fqdn&quot;, &quot;timestamp&quot; </span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="k">output</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">stdout</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rubydebug</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
+
+<span class="k">if</span><span class="w"> </span><span class="ss">&quot;_jsonparsefailure&quot;</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">tags</span><span class="o">]</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">elasticsearch</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">hosts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;192.168.100.100:9200&quot;</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">index</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;logstash-search-log-%{+YYYYMMDD}&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">  </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div>
+
+
+<p>logstash 启动命令</p>
+<div class="highlight"><pre><span></span><code><span class="err">bin\logstash.bat -f log4j2-gelf.conf</span>
+</code></pre></div>
+
+
+<p>log4j2 gelf 配置</p>
+<p>添加依赖关系</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+  <span class="nt">&lt;groupId&gt;</span>biz.paluch.logging<span class="nt">&lt;/groupId&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>logstash-gelf<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.13.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+
+
+<p>log4j2.xml 中添加 Gelf 配置, 然后在需要的包下添加 appender 就行</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Gelf</span> <span class="na">name=</span><span class="s">&quot;GELF&quot;</span> <span class="na">host=</span><span class="s">&quot;udp:127.0.0.1&quot;</span> <span class="na">port=</span><span class="s">&quot;12201&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span> <span class="na">extractStackTrace=</span><span class="s">&quot;true&quot;</span>
+      <span class="na">filterStackTrace=</span><span class="s">&quot;true&quot;</span> <span class="na">mdcProfiling=</span><span class="s">&quot;true&quot;</span> <span class="na">includeFullMdc=</span><span class="s">&quot;true&quot;</span> <span class="na">maximumMessageSize=</span><span class="s">&quot;8192&quot;</span>
+      <span class="na">originHost=</span><span class="s">&quot;%host{fqdn}&quot;</span> <span class="na">additionalFieldTypes=</span><span class="s">&quot;fieldName1=String,fieldName2=Double,fieldName3=Long&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;timestamp&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%d{dd MMM yyyy HH:mm:ss,SSS}&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;level&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%level&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;simpleClassName&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%C{1}&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;className&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%C&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;server&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%host&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;server.fqdn&quot;</span> <span class="na">pattern=</span><span class="s">&quot;%host{fqdn}&quot;</span> <span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- This is a field using MDC --&gt;</span>
+    <span class="nt">&lt;Field</span> <span class="na">name=</span><span class="s">&quot;userId&quot;</span> <span class="na">mdc=</span><span class="s">&quot;userId&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/Gelf&gt;</span>
+</code></pre></div>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectMapper</span><span class="p">();</span>
+<span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">jsonLog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;ip&quot;</span><span class="p">,</span> <span class="n">IpUtils</span><span class="p">.</span><span class="na">getIpAddr</span><span class="p">(</span><span class="n">request</span><span class="p">));</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;ua&quot;</span><span class="p">,</span> <span class="n">userAgent</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;browser&quot;</span><span class="p">,</span> <span class="n">browser</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;browserType&quot;</span><span class="p">,</span> <span class="n">browserType</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;browserMajorVersion&quot;</span><span class="p">,</span> <span class="n">browserMajorVersion</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;deviceType&quot;</span><span class="p">,</span> <span class="n">deviceType</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;platform&quot;</span><span class="p">,</span> <span class="n">platform</span><span class="p">);</span>
+<span class="n">jsonLog</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;platformVersion&quot;</span><span class="p">,</span> <span class="n">platformVersion</span><span class="p">);</span>
+
+<span class="n">logger</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="n">searchMarker</span><span class="p">,</span> <span class="n">objectMapper</span><span class="p">.</span><span class="na">writeValueAsString</span><span class="p">(</span><span class="n">jsonLog</span><span class="p">));</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/elasticsearch.html">elasticsearch</a>
+      <a href="./tag/logstash.html">logstash</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="PDF 版权保护的思路" />
+<meta name="keywords" content="pdf">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="PDF 版权保护"/>
+<meta property="og:description" content="PDF 版权保护的思路"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./pdf-copyright.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-09-25 11:00:00+08:00"/>
+<meta property="article:modified_time" content="2020-09-25 12:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="pdf"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; PDF 版权保护</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pdf-copyright">PDF 版权保护</h1>
+    <p>
+      Posted on 2020-09-25 11:00 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>PDF 版权保护</h2>
+<p>先说结论：PDF 作为一种开放的格式其实很难做到严格的版权保护。</p>
+<h3>DRM (Digital rights management)</h3>
+<p>Adobe 官方提供 DRM 解决方案， 需要安装专用的软件，比如 Adobe Digital Editions，或者其他支持 Adobe Content Server 的软件，非常不方便。</p>
+<p>而且有很多破解的方案，比如 Calibre DRM Removal Plugins</p>
+<h3>使用口令加密 或 使用证书加密</h3>
+<p>可以限制打印，内容复制，注释</p>
+<p><img alt="Adobe Acrobat" src="../images/pdf_security.png"></p>
+<p><img alt="Adobe Acrobat" src="../images/pdf_security_2.png"></p>
+<p>不过这个很容易破解，网上有一大把方法</p>
+<h3>数字签名</h3>
+<p><img alt="Adobe Acrobat" src="../images/pdf_security_3.png"></p>
+<p>数字签名只能防篡改，可以配合打水印一起，起到保护文档的作用。</p>
+<p>签名的验证需要联网，在没有互联网的环境无法验证，参考 https://helpx.adobe.com/cn/acrobat/using/validating-digital-signatures.html</p>
+<p>不过数字签名也很容易去掉，也有工具和代码。</p>
+<h3>打水印</h3>
+<p>打水印不用说了，是最常见的防盗版手段，一般都在页眉页脚添加。图灵社区就是这么做的，随机在某些页的页脚添加。</p>
+<p>不过既然是写程序打水印，那肯定是有规律的，怎么加上的水印就可以怎么写程序去掉。</p>
+<h3>最后的方法</h3>
+<p>目前没有太好的办法，只能选择多加几处水印，增加去除水印的难度，在发现PDF被盗版之后，及时跟换打水印的方法，并且在水印中增加渠道识别码，追踪从哪个渠道泄漏出去的，然后动用法律手段发律师函。</p>
+<ul>
+<li>水印的位置和页码增加随机性</li>
+<li>在 PDF MetaData 中增加字段和版权声明</li>
+<li>在 PDF 中增加不可见的内容，比如没有引用到的obj，里面包含可追踪的数据</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/pdf.html">pdf</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="Elasticsearch Java Client 配置和使用" />
+<meta name="keywords" content="java, elasticsearch">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="Elasticsearch Java Client"/>
+<meta property="og:description" content="Elasticsearch Java Client 配置和使用"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./elasticsearch-java-client.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-22 10:57:00+08:00"/>
+<meta property="article:modified_time" content="2019-08-22 10:57:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="java"/>
+<meta property="article:tag" content="elasticsearch"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; Elasticsearch Java Client</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="elasticsearch-java-client">Elasticsearch Java Client</h1>
+    <p>
+      Posted on 2019-08-22 10:57 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>Java REST Client</h2>
+<h3>maven 配置</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.client<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>elasticsearch-rest-high-level-client<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>7.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+
+
+<h3>spring 构建 RestHighLevelClient 对象</h3>
+<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- config elasticsearch RestHighLevelClient --&gt;</span>
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;httpHost&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.http.HttpHost&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">value=</span><span class="s">&quot;${elasticsearch.host}&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;1&quot;</span> <span class="na">value=</span><span class="s">&quot;${elasticsearch.port}&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;restClientBuilder&quot;</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestClientBuilder&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;list&gt;</span>
+            <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.Node&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">ref=</span><span class="s">&quot;httpHost&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/bean&gt;</span>
+        <span class="nt">&lt;/list&gt;</span>
+    <span class="nt">&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+
+<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;restHighLevelClient&quot;</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestHighLevelClient&quot;</span> <span class="na">destroy-method=</span><span class="s">&quot;close&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">ref=</span><span class="s">&quot;restClientBuilder&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div>
+
+
+<h3>使用 Demo</h3>
+<p>API 使用方法 https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html</p>
+<div class="highlight"><pre><span></span><code><span class="n">SearchRequest</span> <span class="n">searchRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchRequest</span><span class="p">(</span><span class="s">&quot;web-log-2019-01&quot;</span><span class="p">);</span>
+<span class="n">SearchSourceBuilder</span> <span class="n">searchSourceBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchSourceBuilder</span><span class="p">();</span>
+
+<span class="c1">// 设置分页</span>
+<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="c1">// 设置查询条件</span>
+<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">QueryBuilders</span><span class="p">.</span><span class="na">matchPhraseQuery</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="n">queryword</span><span class="p">));</span>
+
+<span class="c1">// 设置 exclude</span>
+<span class="n">String</span><span class="o">[]</span> <span class="n">excludeFields</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="p">{</span><span class="s">&quot;content&quot;</span><span class="p">};</span>
+<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">fetchSource</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">excludeFields</span><span class="p">);</span>
+
+<span class="n">searchRequest</span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="n">searchSourceBuilder</span><span class="p">);</span>
+
+<span class="c1">// send request and get response</span>
+<span class="n">SearchResponse</span> <span class="n">searchResponse</span> <span class="o">=</span> <span class="n">restHighLevelClient</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="n">searchRequest</span><span class="p">,</span> <span class="n">RequestOptions</span><span class="p">.</span><span class="na">DEFAULT</span><span class="p">);</span>
+<span class="n">SearchHits</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">searchResponse</span><span class="p">.</span><span class="na">getHits</span><span class="p">();</span>
+<span class="n">SearchHit</span><span class="o">[]</span> <span class="n">searchHits</span> <span class="o">=</span> <span class="n">hits</span><span class="p">.</span><span class="na">getHits</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">SearchHit</span> <span class="n">hit</span> <span class="p">:</span> <span class="n">searchHits</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with the SearchHit</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="na">getSourceAsString</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h2>Elasticsearch SQL</h2>
+<h3>maven 配置</h3>
+<p>添加 repository</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;repository&gt;</span>
+    <span class="nt">&lt;id&gt;</span>elastic.co<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Elastic Repository<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;url&gt;</span>https://artifacts.elastic.co/maven<span class="nt">&lt;/url&gt;</span>
+<span class="nt">&lt;/repository&gt;</span>
+</code></pre></div>
+
+
+<p>dependency</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.plugin<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>x-pack-sql-jdbc<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>${es.version}<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>
+
+
+<h3>Elasticsearch SQL + mybatis + spring</h3>
+<p>Elasticsearch SQL 可以和 mybatis, spring 结合起来，和关系型数据库一样的开发模式</p>
+<p>因为 SQL 和 Elasticsearch DSL 不能完全对应，适合比较简单的场景</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/java.html">java</a>
+      <a href="./tag/elasticsearch.html">elasticsearch</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

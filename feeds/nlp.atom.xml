@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - NLP</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/nlp.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-06-15T14:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>计算文本相似度</title><link href="https://xingzuoshe.cn/text-similarity-nlp.html" rel="alternate"></link><published>2020-06-15T14:00:00+08:00</published><updated>2020-05-15T14:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-06-15:/text-similarity-nlp.html</id><summary type="html">&lt;p&gt;如何计算文本相似度&lt;/p&gt;</summary><content type="html">&lt;h2&gt;词的相似度&lt;/h2&gt;
+&lt;p&gt;作为一个NLP的门外汉， word2vec 算法只能看懂个大概，个人的理解就是假定一个词跟它周围的词是相关的，通过大量的数据可以训练出一个模型。&lt;/p&gt;
+&lt;p&gt;使用的话只用调用模型得出结果就行，训练模型的问题就交给大神去做了，而且目前有一些开源的。&lt;/p&gt;
+&lt;p&gt;目前使用的是 hanlp 开源的 https://github.com/hankcs/HanLP/wiki/word2vec&lt;/p&gt;
+&lt;p&gt;https://www.hankcs.com/nlp/word2vec.html&lt;/p&gt;
+&lt;h2&gt;句子的相似度&lt;/h2&gt;
+&lt;p&gt;句子的相似度可以把所有的词向量加起来再计算，目前也是使用 hanlp 开源的&lt;/p&gt;
+&lt;p&gt;https://zhuanlan.zhihu.com/p/37104535&lt;/p&gt;
+&lt;p&gt;https://github.com/shibing624/text2vec&lt;/p&gt;
+&lt;h2&gt;文章的相似度&lt;/h2&gt;
+&lt;p&gt;Google 提出的 samehash 算法，可以去搜索一下，对长文本的效果不错，对短文本的效果反而不太好。&lt;/p&gt;</content><category term="NLP"></category><category term="nlp"></category></entry></feed>

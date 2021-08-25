@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2021-08-18T19:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>Nginx WebSocket 代理配置</title><link href="https://xingzuoshe.cn/nginx-websocket.html" rel="alternate"></link><published>2021-08-18T18:00:00+08:00</published><updated>2021-08-18T19:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-08-18:/nginx-websocket.html</id><summary type="html">&lt;p&gt;Nginx WebSocket 代理配置&lt;/p&gt;</summary><content type="html">&lt;p&gt;Tomcat 从 7.0.27开始支持 WebSocket，从 7.0.47 开始支持 JSR-356，如果前面有个 nginx 代理，nginx 也需要针对 websocket 做一下配置&lt;/p&gt;
+&lt;p&gt;&lt;img alt="nginx代理" src="../image/../images/nginx-websocket.png"&gt;&lt;/p&gt;
+&lt;p&gt;在 http 段里定义两个变量&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;map $http_upgrade $connection_upgrade {&lt;/span&gt;
+&lt;span class="err"&gt;  default upgrade;&lt;/span&gt;
+&lt;span class="err"&gt;  &amp;#39;&amp;#39; close;&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在 server proxy 里面添加&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# websocket&lt;/span&gt;
+&lt;span class="err"&gt;proxy_http_version 1.1;&lt;/span&gt;
+&lt;span class="err"&gt;proxy_set_header Upgrade $http_upgrade;&lt;/span&gt;
+&lt;span class="err"&gt;proxy_set_header Connection $connection_upgrade;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;nginx 里设置了 prxoy_read_timeout，所以导致 websocket 经过一段时间之后会就超时，所以要增加心跳检测，下面是简单的写法，也可以使用别人封装好的 js lib。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;// 60s 一次心跳&lt;/span&gt;
+&lt;span class="nb"&gt;window&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setInterval&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;JSON&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;stringify&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+        &lt;span class="nx"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ping&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}));&lt;/span&gt;
+&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="mi"&gt;60000&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="nginx"></category><category term="websocket"></category></entry><entry><title>乞丐版 nas</title><link href="https://xingzuoshe.cn/begger-nas.html" rel="alternate"></link><published>2020-07-04T14:00:00+08:00</published><updated>2020-07-04T14:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-07-04:/begger-nas.html</id><summary type="html">&lt;p&gt;用树莓派3b做一个乞丐版 NAS&lt;/p&gt;</summary><content type="html">&lt;h2&gt;贫穷&lt;/h2&gt;
+&lt;p&gt;看着群晖流口水，可惜钱包没这么鼓，但是 Mac 的硬盘又这么小，天天都要清理，电影视频都觉得是个宝贝，不想删除，实在很难受。&lt;/p&gt;
+&lt;p&gt;手头上正好有个闲置(chihui)的树莓派3b，虽然各种性能都不行，但又不是不能用，实现一个乞丐版 nas 还是很简单的。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="又不是不能用" src="../images/laoluo-youbushibunengyong.jpg"&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;树莓派3b USB 接口都是2.0，而且网口只有百兆，如果新买的话，推荐购买新出的树莓派4b，千兆网卡加上 USB 3.0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;购物清单&lt;/h2&gt;
+&lt;p&gt;为了尽可能增加存储空间，购买了一个双盘位的硬盘底座，加上两个2T的西数普通盘（由于贫穷就没有买西数红盘，价格比普通的贵了差不多40%）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;奥睿科(ORICO)硬盘底座USB3.0 双盘位6228US3   价格118&lt;/li&gt;
+&lt;li&gt;西部数据(Western Digital)蓝盘 2TB * 2      价格359 * 2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;软件安装&lt;/h2&gt;
+&lt;p&gt;推荐安装 openmediavault 开源的 nas 系统，基于 debian，通过 web 管理，非常方便&lt;/p&gt;
+&lt;h3&gt;安装 Raspberry Pi OS&lt;/h3&gt;
+&lt;p&gt;从官网下载 SD 卡工具 https://www.raspberrypi.org/downloads/&lt;/p&gt;
+&lt;p&gt;选择不需要桌面环境的 Raspberry Pi OS (32-bit) Lite (Minimal image based on Debian Buster&lt;/p&gt;
+&lt;p&gt;如果有显示器和键盘可以看到开机过程，默认的用户名是 pi，密码是 raspberry&lt;/p&gt;
+&lt;p&gt;如果没有显示器和键盘，在写入 SD 卡镜像之前有一些配置，参考 http://sonicguo.com/2019/Initialize-RaspBerry-3-with-wifi/&lt;/p&gt;
+&lt;h3&gt;修改源&lt;/h3&gt;
+&lt;p&gt;修改下面的文件，连接国内的镜像源速度更快&lt;/p&gt;
+&lt;p&gt;/etc/apt/sources.list&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt;
+&lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;/etc/apt/sources.list.d/raspi.list&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/&lt;/span&gt; &lt;span class="kp"&gt;buster&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;ui&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更新系统&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get update&lt;/span&gt;
+&lt;span class="err"&gt;sudo apt-get upgrade&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;安装 openmediavault&lt;/h3&gt;
+&lt;p&gt;openmediavault 官方有一个 &lt;a href="https://forum.openmediavault.org/index.php?thread/28789-installing-omv5-on-raspberry-pi-s-armbian-sbc-s-i386-32-bit-platforms/"&gt;guide&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;按照官方的步骤就可以了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get update&lt;/span&gt;
+&lt;span class="err"&gt;sudo apt-get upgrade -y&lt;/span&gt;
+&lt;span class="err"&gt;sudo rm -f /etc/systemd/network/99-default.link ## 一点要记得删除，否则后续网络会有问题&lt;/span&gt;
+&lt;span class="err"&gt;sudo reboot&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在国内访问 github 会有点问题，导致下载安装脚本失败。通过修改host文件可以解决这个问题, 从这个repo https://github.com/googlehosts/hosts 找到 github 的部分。 在 &lt;code&gt;/etc/hosts&lt;/code&gt; 中增加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# GitHub Start&lt;/span&gt;
+&lt;span class="err"&gt;192.30.255.112  gist.github.com&lt;/span&gt;
+&lt;span class="err"&gt;192.30.255.112  github.com&lt;/span&gt;
+&lt;span class="err"&gt;192.30.255.112  www.github.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars0.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars1.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars2.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars3.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars4.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars5.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars6.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars7.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  avatars8.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  camo.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  cloud.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  gist.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  marketplace-screenshots.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  raw.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  repository-images.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;151.101.56.133  user-images.githubusercontent.com&lt;/span&gt;
+&lt;span class="err"&gt;# GitHub End&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;执行安装脚本，然后等着就可以了，时间会有点长。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;硬盘底座的设备配置&lt;/h3&gt;
+&lt;p&gt;使用硬盘底座，硬盘的序列号显示不正确，需要修改配置， 见 https://openmediavault.readthedocs.io/en/5.x/troubleshooting.html&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;# JMicron drive fix&lt;/span&gt;
+&lt;span class="err"&gt;KERNEL==&amp;quot;sd*&amp;quot;, ENV{ID_VENDOR}==&amp;quot;JMicron&amp;quot;, SUBSYSTEMS==&amp;quot;usb&amp;quot;, PROGRAM=&amp;quot;/root/serial.sh %k&amp;quot;, ENV{ID_SERIAL}=&amp;quot;USB-%c&amp;quot;, ENV{ID_SERIAL_SHORT}=&amp;quot;%c&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;配置 samba&lt;/h3&gt;
+&lt;p&gt;后面就可以全部通过网页来配置&lt;/p&gt;
+&lt;p&gt;先看 &lt;code&gt;存储器-&amp;gt;磁盘&lt;/code&gt; 能否找到我们的磁盘（如果是全新的磁盘需要先创建文件系统，容量越大耗时越长），然后去 &lt;code&gt;存储器-&amp;gt;文件系统&lt;/code&gt; 挂载文件系统&lt;/p&gt;
+&lt;p&gt;&lt;img alt="存储器-&amp;gt;磁盘" src="../images/omv-disk.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="存储器-&amp;gt;文件系统" src="../images/omv-fs.png"&gt;&lt;/p&gt;
+&lt;p&gt;可以修改一下磁盘配置，延长磁盘寿命&lt;/p&gt;
+&lt;p&gt;&lt;img alt="存储器-&amp;gt;磁盘" src="../images/omv-disk-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;接下来就是配置 samba，先把启用钩上，然后添加共享文件夹&lt;/p&gt;
+&lt;p&gt;&lt;img alt="服务-&amp;gt;SMB/CIFS" src="../images/omv-samba-0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="服务-&amp;gt;SMB/CIFS" src="../images/omv-samba-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="服务-&amp;gt;SMB/CIFS" src="../images/omv-samba-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="服务-&amp;gt;SMB/CIFS" src="../images/omv-samba-3.png"&gt;&lt;/p&gt;
+&lt;p&gt;还需要配置共享文件夹的权限，让 pi 用户拥有读写权限&lt;/p&gt;
+&lt;p&gt;&lt;img alt="访问权限管理-&amp;gt;共享文件夹" src="../images/omv-samba-4.png"&gt;&lt;/p&gt;
+&lt;p&gt;这个时候去 &lt;code&gt;Finder-&amp;gt;前往-&amp;gt;连接服务器&lt;/code&gt; 里面连接 samba 的时候，会发现密码不正确。有一个不容易理解的地方是 samba 的密码是单独，不是系统用户的密码，如果是通过 omv 的 web 修改用户密码，omv 会帮你把系统的密码和 samba 的密码改为一致。所以去用户管理的界面修改一下密码就行。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="访问权限管理-&amp;gt;用户" src="../images/omv-user.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Finder-&amp;gt;前往-&amp;gt;连接服务器" src="../images/omv-finder-0.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Finder-&amp;gt;前往-&amp;gt;连接服务器" src="../images/omv-finder-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;然后你就可以像访问本地磁盘一样访问树莓派挂载的硬盘了，速度受网络情况限制，尽量通过有线网络访问，无线网络的速度还是比不上网线。&lt;/p&gt;
+&lt;h2&gt;其他需要注意的地方&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;安装 openmediavault 之前一定要删除 /etc/systemd/network/99-default.link&lt;/li&gt;
+&lt;li&gt;安装好 openmediavault 之后 wifi 会被禁用，如果你是通过 wifi ssh 连接树莓派的话，需要先把树莓派通过网线连接到路由器上。然后可以通过 &lt;code&gt;系统-&amp;gt;网络&lt;/code&gt; 再添加 wifi 接口&lt;/li&gt;
+&lt;li&gt;如果树莓派开机过程进入 emegency mode，肯定是之前哪个文件修改出错，可以把 SD 卡挂载到 Linux 系统上，然后把之前修改的还原。（Mac 不支持 读写ext4文件系统，起一个 Linux 虚拟机就行了，把 USB 口分配给虚拟机，然后就可以在虚拟机内处理了）&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="linux"></category><category term="nas"></category></entry><entry><title>在 centos 7 上安装 redis 6</title><link href="https://xingzuoshe.cn/redis-6-on-centos-7-setup.html" rel="alternate"></link><published>2020-05-22T17:00:00+08:00</published><updated>2020-05-22T17:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-22:/redis-6-on-centos-7-setup.html</id><summary type="html">&lt;p&gt;在 centos 7 上安装 最新的 redis 6 的步骤&lt;/p&gt;</summary><content type="html">&lt;h2&gt;遇到的问题&lt;/h2&gt;
+&lt;p&gt;在 centos  7 的 yum 源中 redis 的版本为 3.2.12-2.el7，想要安装最新版的 redis 6，只能通过源代码安装，但是默认的环境会遇到编译问题，如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;In file included from server.c:30:0:&lt;/span&gt;
+&lt;span class="err"&gt;server.h:1022:5: error: expected specifier-qualifier-list before &amp;#39;_Atomic&amp;#39;&lt;/span&gt;
+&lt;span class="err"&gt;     _Atomic unsigned int lruclock; /* Clock for LRU eviction */&lt;/span&gt;
+&lt;span class="err"&gt;     ^&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;是因为默认的 gcc 版本(gcc version 4.8.5)太低导致，不支持新特性&lt;/p&gt;
+&lt;h2&gt;解决办法&lt;/h2&gt;
+&lt;p&gt;解决办法就是升级 gcc 版本&lt;/p&gt;
+&lt;p&gt;升级到 gcc 7.3&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo yum -y install centos-release-scl&lt;/span&gt;
+&lt;span class="err"&gt;sudo yum -y install devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils&lt;/span&gt;
+&lt;span class="err"&gt;sudo scl enable devtoolset-7 bash&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;还可以选择升级到其他版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;devtoolset-8: gcc 8.3&lt;/span&gt;
+&lt;span class="c"&gt;devtoolset-9: gcc 9.1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;升级完成之后并不会覆盖系统默认的gcc，需要使用脚本来切换，x为要启用的版本&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;scl &lt;span class="nb"&gt;enable&lt;/span&gt; devtoolset-x bash 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;安装和配置&lt;/h2&gt;
+&lt;p&gt;后续就可以按照常规安装步骤来执行，就不再赘述了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
+$ tar xzf redis-6.0.3.tar.gz
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; redis-6.0.3
+$ make
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改配置文件&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;bind 192.168.1.100 127.0.0.1 ::1 &lt;/span&gt;
+&lt;span class="err"&gt;daemonize yes&lt;/span&gt;
+&lt;span class="err"&gt;appendonly yes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;打开 appendonly yes 后，会启用 RDB-AOF 混合持久化&lt;/p&gt;</content><category term="Linux"></category><category term="centos"></category><category term="redis"></category></entry><entry><title>在 Amazon Linux 使用 Let's encrypt 免费的SSL</title><link href="https://xingzuoshe.cn/lets-encrypt-ssl.html" rel="alternate"></link><published>2017-04-03T20:20:00+08:00</published><updated>2017-04-03T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2017-04-03:/lets-encrypt-ssl.html</id><summary type="html">&lt;p&gt;在 Amazon Linux 使用 Let's encrypt 免费的SSL&lt;/p&gt;</summary><content type="html">&lt;p&gt;如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
+Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要renew，官方还提供自动renew的工具certbot&lt;/p&gt;
+&lt;h2&gt;certbot&lt;/h2&gt;
+&lt;p&gt;certbot 是一个自动申请和续期SSL证书的工具。在&lt;a href="https://certbot.eff.org/"&gt;官网certbot.eff.org&lt;/a&gt;可以找到各种OS和Web服务器下的安装方法。常见的Ubuntu和CentOS安装起来十分方便。&lt;/p&gt;
+&lt;h2&gt;Amazon Linux&lt;/h2&gt;
+&lt;p&gt;在AWS EC2上，官方推荐的是OS是Amazon Linux，基于RHEL 6源码重新编译的，提供了Amazon自己的工具和源。certbot的安装方式类似于RHEL 6/CentOS 6&lt;/p&gt;
+&lt;h2&gt;申请SSL证书步骤&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;ssh到Server&lt;/li&gt;
+&lt;li&gt;下载certbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;wget https://dl.eff.org/certbot-auto&lt;/span&gt;
+&lt;span class="err"&gt;chmod a+x certbot-auto&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;执行certbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo ./certbot-auto --debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;How would you like to authenticate with the ACME CA?&lt;/span&gt;
+&lt;span class="err"&gt;---------------------------&lt;/span&gt;
+&lt;span class="c"&gt;1: Place files in webroot directory (webroot)&lt;/span&gt;
+&lt;span class="c"&gt;2: Spin up a temporary webserver (standalone)&lt;/span&gt;
+&lt;span class="err"&gt;---------------------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
+选择2certbot会启动一个web服务，占用443端口，所以需要暂停一下nginx，一般情况下选择2比较省事。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;记得在AWS EC2的安全组中放开443端口&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;证书路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;Certificate: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/cert.pem&lt;/span&gt;
+&lt;span class="err"&gt;Full Chain: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem&lt;/span&gt;
+&lt;span class="err"&gt;Private Key: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;nginx 启用SSL&lt;/h2&gt;
+&lt;p&gt;启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt;       &lt;span class="err"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="err"&gt;server_name&lt;/span&gt;  &lt;span class="err"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;Redirect&lt;/span&gt; &lt;span class="err"&gt;all&lt;/span&gt; &lt;span class="err"&gt;HTTP&lt;/span&gt; &lt;span class="err"&gt;requests&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;HTTPS&lt;/span&gt; &lt;span class="err"&gt;with&lt;/span&gt; &lt;span class="err"&gt;a&lt;/span&gt; &lt;span class="err"&gt;301&lt;/span&gt; &lt;span class="err"&gt;Moved&lt;/span&gt; &lt;span class="err"&gt;Permanently&lt;/span&gt; &lt;span class="err"&gt;response.&lt;/span&gt;
+    &lt;span class="err"&gt;return&lt;/span&gt; &lt;span class="err"&gt;301&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;request_uri&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="nt"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;listen&lt;/span&gt; &lt;span class="err"&gt;443&lt;/span&gt; &lt;span class="err"&gt;ssl&lt;/span&gt; &lt;span class="err"&gt;http2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;listen&lt;/span&gt; &lt;span class="cp"&gt;[&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="cp"&gt;]&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;443&lt;/span&gt; &lt;span class="n"&gt;ssl&lt;/span&gt; &lt;span class="n"&gt;http2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="err"&gt;server_name&lt;/span&gt; &lt;span class="err"&gt;YOUR_WEBSITE_HERE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;certs&lt;/span&gt; &lt;span class="err"&gt;sent&lt;/span&gt; &lt;span class="err"&gt;to&lt;/span&gt; &lt;span class="err"&gt;the&lt;/span&gt; &lt;span class="err"&gt;client&lt;/span&gt; &lt;span class="err"&gt;in&lt;/span&gt; &lt;span class="err"&gt;SERVER&lt;/span&gt; &lt;span class="err"&gt;HELLO&lt;/span&gt; &lt;span class="err"&gt;are&lt;/span&gt; &lt;span class="err"&gt;concatenated&lt;/span&gt; &lt;span class="err"&gt;in&lt;/span&gt; &lt;span class="err"&gt;ssl_certificate&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_certificate&lt;/span&gt; &lt;span class="err"&gt;/etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_certificate_key&lt;/span&gt; &lt;span class="err"&gt;/etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_session_timeout&lt;/span&gt; &lt;span class="err"&gt;1d&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_session_cache&lt;/span&gt; &lt;span class="n"&gt;shared&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;SSL&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;ssl_session_tickets&lt;/span&gt; &lt;span class="err"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;access_log&lt;/span&gt; &lt;span class="err"&gt;/var/log/nginx/YOUR_WEBSITE_HERE-access.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;error_log&lt;/span&gt; &lt;span class="err"&gt;/var/log/nginx/YOUR_WEBSITE_HERE-error.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="err"&gt;location&lt;/span&gt; &lt;span class="err"&gt;/&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_pass&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="mf"&gt;127.0.0.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;8003&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;Host&lt;/span&gt; &lt;span class="err"&gt;$host&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;X-Real-IP&lt;/span&gt; &lt;span class="err"&gt;$remote_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="err"&gt;proxy_set_header&lt;/span&gt; &lt;span class="err"&gt;X-Forwarded-For&lt;/span&gt; &lt;span class="err"&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;自动更新证书&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;使用root用户&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo -i&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;增加定时任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;crontab -e&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;增加一行，每个月1号2点30分更新&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;30 2 1 * * /path/to/certbot renew --pre-hook &amp;quot;service nginx stop&amp;quot; --post-hook &amp;quot;service nginx start&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;dry run&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;./path/to/certbot-auto renew --dry-run&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;chrome 变绿&lt;/h2&gt;
+&lt;p&gt;在chrome下需要全站都使用https地址栏才会变绿，需要检查一下网站里面的各种URL，比如外链图片或JS文件，都需要使用https才行。&lt;/p&gt;
+&lt;p&gt;参考资料:
+- http://frontenddev.org/article/using-certbot-deployment-let-s-encrypt-free-ssl-certificate-implementation-https.html
+- https://segmentfault.com/a/1190000005797776
+- https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/
+- https://ksmx.me/letsencrypt-ssl-https/
+- https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657&lt;/p&gt;</content><category term="Linux"></category><category term="aws"></category><category term="linux"></category><category term="ssl"></category></entry><entry><title>Oracle Express on CentOS 7</title><link href="https://xingzuoshe.cn/oracle-express-editon-on-centos7.html" rel="alternate"></link><published>2016-09-19T20:20:00+08:00</published><updated>2016-09-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-09-19:/oracle-express-editon-on-centos7.html</id><summary type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;</summary><content type="html">&lt;p&gt;有些时候我们需要一个Oracle的环境来做测试或实验，但是苦于没有服务器，或者不在工作环境当中。值得高兴的是，Oracle有一个Oracle Express Edition，提供了rpm安装包，快捷方便。&lt;/p&gt;
+&lt;h2&gt;VirtualBox VM&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.centos.org"&gt;下载CentOS 7 DVD&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;virtualbox的网络设置中建议选择桥接，因为我们需要从宿主机连接虚拟机，默认的NAT只能从虚拟机内部访问外部。&lt;/p&gt;
+&lt;p&gt;安装过程中建议选择Server with GUI，再选择develop tools。&lt;/p&gt;
+&lt;p&gt;安装完成之后，需要同意license(比较坑)，先按1，再按2同意条款，接下来按C继续。&lt;/p&gt;
+&lt;h2&gt;Oracle Express Edition&lt;/h2&gt;
+&lt;p&gt;在Oracle 官网下载&lt;a href="http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"&gt;Oracle Database Express Edition 11g Release 2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载下来之后是一个rpm包，&lt;code&gt;oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;，上传到虚拟机当中安装，&lt;code&gt;sudo rmp -i oracle-xe-11.2.0-1.0.x86_64.rpm&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;CentOS&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;#使用root用户来初始化数据库，默认的实例名是XE&lt;/span&gt;
+/etc/init.d/oracle-xe configure
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;Usage: /etc/init.d/oracle-xe {start|stop|restart|force-reload|configure|status|enable|disable}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Oracle Express Edition 安装好之后会有一个oracle用户，通过root切换到oracle用户，&lt;code&gt;source /u01/app/oracle/prduct/11.2.0/xe/bin/oracle_env.sh&lt;/code&gt;设置Oracle 的环境变量，接下来就可以用一些Oracle的命令了。&lt;/p&gt;
+&lt;h3&gt;Disable Firewall&lt;/h3&gt;
+&lt;p&gt;centos 默认有一个firewall，会阻止外部的访问，所以需要停止防火墙。
+使用root用户登录&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;systemctl disable firewalld&lt;/span&gt;
+&lt;span class="err"&gt;systemctl stop firewalld&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Oracle SQL Developer&lt;/h2&gt;
+&lt;p&gt;在macOS下没有PLSQL Developer这样方便的工具，Oracle官方出品的&lt;a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html"&gt;Oracle SQL Developer&lt;/a&gt;可以体验一下，一般功能都有。&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="oracle"></category></entry></feed>

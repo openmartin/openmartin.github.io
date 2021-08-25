@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="使用 django-zinnia-blog 建立个人博客，一步一步" />
+<meta name="keywords" content="django, aws, zinnia">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="如何使用 django-zinnia-blog 建立个人博客"/>
+<meta property="og:description" content="使用 django-zinnia-blog 建立个人博客，一步一步"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./how-to-install-django-blog-zinnia.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-04-19 20:20:00+08:00"/>
+<meta property="article:modified_time" content="2016-04-19 20:20:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Django"/>
+<meta property="article:tag" content="django"/>
+<meta property="article:tag" content="aws"/>
+<meta property="article:tag" content="zinnia"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 如何使用 django-zinnia-blog 建立个人博客</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="how-to-install-django-blog-zinnia">如何使用 django-zinnia-blog 建立个人博客</h1>
+    <p>
+      Posted on 2016-04-19 20:20 in <a href="./category/django.html">Django</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p><a href="http://django-blog-zinnia.com/">django-zinnia-blog</a> 顾名思义就是一套用Django开发的个人博客程序，虽然比大名鼎鼎的wordpress略显简陋，不过在以Python作为开发语言的博客系统中算是很不错的。</p>
+<h2>pip</h2>
+<p>如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中</p>
+<p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
+<h2>virtualenv</h2>
+<p>virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:</p>
+<div class="highlight"><pre><span></span><code><span class="err">pip install virtualenv</span>
+<span class="err"># 创建虚拟环境</span>
+<span class="err">virtualenv ENV</span>
+<span class="err">cd ENV</span>
+<span class="err">source ./bin/activate</span>
+</code></pre></div>
+
+
+<p>磨刀不误砍柴工，接下来开始大展身手啦。</p>
+<h2>django-zinnia-blog</h2>
+<p>直接使用pip安装:</p>
+<div class="highlight"><pre><span></span><code><span class="err">pip install Pillow</span>
+<span class="err">pip install django-zinnia-blog</span>
+<span class="err">#如果数据库使用MySQL</span>
+<span class="err">pip install python-mysql</span>
+</code></pre></div>
+
+
+<p>然后按照 <a href="http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html">http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html</a> 建立一个django-project</p>
+<p>Django1.7的命令和以前有些不一样，记录一下:</p>
+<div class="highlight"><pre><span></span><code><span class="err">manage.py migrate</span>
+<span class="err">mamage.py createsuperuser</span>
+</code></pre></div>
+
+
+<h2>安装theme</h2>
+<p>使用zinnia不像wordpress那样有丰富多样的主题可以选择，需要我们手动修改一番，我们可以选择zinnia-theme-bootstrap，然后在这个基础上修修改改:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="n">app</span><span class="o">-</span><span class="n">namespace</span><span class="o">-</span><span class="k">template</span><span class="o">-</span><span class="n">loader</span>
+
+<span class="err">下载</span><span class="n">zinnia</span><span class="o">-</span><span class="n">theme</span><span class="o">-</span><span class="n">bootstrap</span><span class="err">，解压到你的项目文件夹下</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">django</span><span class="o">-</span><span class="n">blog</span><span class="o">-</span><span class="n">zinnia</span><span class="o">/</span><span class="n">zinnia</span><span class="o">-</span><span class="n">theme</span><span class="o">-</span><span class="n">bootstrap</span>
+
+<span class="n">zinnia_bootstrap</span><span class="err">\</span><span class="n">templates</span><span class="err">\</span><span class="n">zinnia</span>
+<span class="n">base</span><span class="p">.</span><span class="n">html</span>
+<span class="n">skeleton</span><span class="p">.</span><span class="n">html</span>
+</code></pre></div>
+
+
+<p>上面是两个最关键的模板，可以按照自己的想法修改</p>
+<h2>使用reStructuredText写博客</h2>
+<p>如果你喜欢用reStructuredText写文档的话，zinnia也支持，不过需要我们配置一下。:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">docutils</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">zinnia</span><span class="o">-</span><span class="n">wysiwyg</span><span class="o">-</span><span class="n">markitup</span>
+
+<span class="o">#</span><span class="n">settings</span><span class="p">.</span><span class="n">py</span> <span class="err">中需要添加一行</span>
+<span class="n">ZINNIA_MARKUP_LANGUAGE</span> <span class="o">=</span> <span class="s1">&#39;restructuredtext&#39;</span>
+</code></pre></div>
+
+
+<h2>settings.py和urls.py</h2>
+<p>在配置文件中有很多坑，我被坑了好长时间才爬出来，希望后来人不要接着被坑了。</p>
+<p>settings.py中需要注意的片段:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 如果DEBUG=False 这个地方需要配置，否则会有HTTP 400的错误</span>
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span>
+
+<span class="c1"># Email backend</span>
+<span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.dummy.EmailBackend&#39;</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+<span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.sites&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django_comments&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.contrib.sitemaps&#39;</span><span class="p">,</span>
+<span class="s1">&#39;mptt&#39;</span><span class="p">,</span>
+<span class="s1">&#39;tagging&#39;</span><span class="p">,</span>
+<span class="s1">&#39;zinnia_bootstrap&#39;</span><span class="p">,</span>
+<span class="s1">&#39;zinnia&#39;</span><span class="p">,</span>
+<span class="s1">&#39;zinnia_markitup&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Template</span>
+<span class="c1"># List of callables that know how to import templates from various sources.</span>
+<span class="n">TEMPLATE_LOADERS</span> <span class="o">=</span> <span class="p">(</span>
+<span class="s1">&#39;app_namespace.Loader&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.template.loaders.filesystem.Loader&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.template.loaders.app_directories.Loader&#39;</span><span class="p">,</span>
+<span class="s1">&#39;django.template.loaders.eggs.Loader&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 语言代码是zh-hans 对应 zh_Hans</span>
+<span class="n">LANGUAGE_CODE</span> <span class="o">=</span> <span class="s1">&#39;zh-hans&#39;</span>
+
+<span class="c1"># zinnia config</span>
+<span class="n">ZINNIA_MARKUP_LANGUAGE</span> <span class="o">=</span> <span class="s1">&#39;restructuredtext&#39;</span>
+</code></pre></div>
+
+
+<p>urls.py可以按照以下来配置:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.views.generic.base</span> <span class="kn">import</span> <span class="n">RedirectView</span>
+
+<span class="kn">from</span> <span class="nn">zinnia.sitemaps</span> <span class="kn">import</span> <span class="n">TagSitemap</span>
+<span class="kn">from</span> <span class="nn">zinnia.sitemaps</span> <span class="kn">import</span> <span class="n">EntrySitemap</span>
+<span class="kn">from</span> <span class="nn">zinnia.sitemaps</span> <span class="kn">import</span> <span class="n">CategorySitemap</span>
+<span class="kn">from</span> <span class="nn">zinnia.sitemaps</span> <span class="kn">import</span> <span class="n">AuthorSitemap</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="c1"># Examples:</span>
+    <span class="c1"># url(r&#39;^$&#39;, &#39;myblog.views.home&#39;, name=&#39;home&#39;),</span>
+    <span class="c1"># url(r&#39;^blog/&#39;, include(&#39;blog.urls&#39;)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^$&#39;</span><span class="p">,</span> <span class="n">RedirectView</span><span class="o">.</span><span class="n">as_view</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;/weblog/&#39;</span><span class="p">)),</span>  
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^admin/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^weblog/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;zinnia.urls&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s1">&#39;zinnia&#39;</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^comments/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;django_comments.urls&#39;</span><span class="p">)),</span>
+<span class="p">)</span>
+
+
+
+<span class="n">sitemaps</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">TagSitemap</span><span class="p">,</span>
+            <span class="s1">&#39;blog&#39;</span><span class="p">:</span> <span class="n">EntrySitemap</span><span class="p">,</span>
+            <span class="s1">&#39;authors&#39;</span><span class="p">:</span> <span class="n">AuthorSitemap</span><span class="p">,</span>
+            <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="n">CategorySitemap</span><span class="p">,}</span>
+
+<span class="n">urlpatterns</span> <span class="o">+=</span> <span class="n">patterns</span><span class="p">(</span>
+    <span class="s1">&#39;django.contrib.sitemaps.views&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^sitemap.xml$&#39;</span><span class="p">,</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s1">&#39;sitemaps&#39;</span><span class="p">:</span> <span class="n">sitemaps</span><span class="p">}),</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^sitemap-(?P&lt;section&gt;.+)\.xml$&#39;</span><span class="p">,</span> <span class="s1">&#39;sitemap&#39;</span><span class="p">,</span>
+        <span class="p">{</span><span class="s1">&#39;sitemaps&#39;</span><span class="p">:</span> <span class="n">sitemaps</span><span class="p">}),)</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/django.html">django</a>
+      <a href="./tag/aws.html">aws</a>
+      <a href="./tag/zinnia.html">zinnia</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

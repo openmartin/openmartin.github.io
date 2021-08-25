@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="Logstash Plugin -- logstash-filter-geoip" />
+<meta name="keywords" content="elasticsearch, logstash, geoip">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="Logstash Plugin -- logstash-filter-geoip"/>
+<meta property="og:description" content="Logstash Plugin -- logstash-filter-geoip"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./logstash-filter-geoip.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-12-11 11:00:00+08:00"/>
+<meta property="article:modified_time" content="2020-12-11 12:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="elasticsearch"/>
+<meta property="article:tag" content="logstash"/>
+<meta property="article:tag" content="geoip"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; Logstash Plugin -- logstash-filter-geoip</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="logstash-filter-geoip">Logstash Plugin -- logstash-filter-geoip</h1>
+    <p>
+      Posted on 2020-12-11 11:00 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>logstash-filter-geoip</h2>
+<p>logstash-filter-geoip 默认打包在 logstash 的安装包中</p>
+<div class="highlight"><pre><span></span><code><span class="err"># 查看插件版本</span>
+<span class="err">bin/logstash-plugin list --verbose</span>
+</code></pre></div>
+
+
+<p>作者的 logstash 7.5.1 目前使用的是这个插件的<a href="https://www.elastic.co/guide/en/logstash-versioned-plugins/current/v6.0.3-plugins-filters-geoip.html">最新版</a></p>
+<div class="highlight"><pre><span></span><code><span class="err">logstash-filter-geoip (6.0.3)</span>
+</code></pre></div>
+
+
+<p><a href="https://github.com/P3TERX/GeoLite.mmdb">GeoLite2 下载地址</a></p>
+<h2>配置</h2>
+<p>在 logstash 的配置文件中增加一个 filter</p>
+<div class="highlight"><pre><span></span><code><span class="err">filter {</span>
+<span class="err">    geoip {</span>
+<span class="err">        source =&gt; &quot;ip&quot;</span>
+<span class="err">        database =&gt; &quot;C:\logstash-7.5.1\GeoLite2-City_20201210\GeoLite2-City.mmdb&quot;</span>
+<span class="err">    }</span>
+</code></pre></div>
+
+
+<p>只是这样是不够，还需要把索引 mapping 中的 类型修改一下，指定为 geo_point，最好是指定索引的 template 来修改数据类型</p>
+<div class="highlight"><pre><span></span><code><span class="k">input</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">gelf</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">port</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">12201</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="k">filter</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">json</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">source</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;message&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">remove_field</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">[</span><span class="n"> &quot;server&quot;, &quot;server.fqdn&quot;, &quot;timestamp&quot; </span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">geoip</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">source</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;ip&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">database</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;C:\logstash-7.5.1\GeoLite2-City_20201210\GeoLite2-City.mmdb&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+<span class="k">output</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">stdout</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rubydebug</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
+
+<span class="k">if</span><span class="w"> </span><span class="ss">&quot;_jsonparsefailure&quot;</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">tags</span><span class="o">]</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">elasticsearch</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">hosts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;192.168.100.1:9200&quot;</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">index</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;logstash-log-%{+YYYY}&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">template</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;C:\logstash-7.5.1\logstash-log-template.json&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">template_name</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="ss">&quot;logstash-log&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">template_overwrite</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">true</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">  </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div>
+
+
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;template&quot;</span> <span class="p">:</span> <span class="s2">&quot;logstash-log&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;index_patterns&quot;</span> <span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;logstash-log-*&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;mappings&quot;</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;@timestamp&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;date&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;@version&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;browser&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;browserMajorVersion&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;browserType&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;className&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;deviceType&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;facility&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;geoip&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;properties&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;city_name&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;continent_code&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;country_code2&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;country_code3&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;country_name&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;ip&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;ip&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;latitude&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;float&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;location&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;geo_point&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_malformed&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;longitude&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;float&quot;</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;postal_code&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;region_code&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;region_name&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="nt">&quot;timezone&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;host&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;ip&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;ip&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;level&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;message&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;platform&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;platformVersion&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;short_message&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;simpleClassName&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;source_host&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;ua&quot;</span> <span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;fields&quot;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;keyword&quot;</span> <span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&quot;type&quot;</span> <span class="p">:</span> <span class="s2">&quot;keyword&quot;</span><span class="p">,</span>
+              <span class="nt">&quot;ignore_above&quot;</span> <span class="p">:</span> <span class="mi">256</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h2>Kibana Coordinate Map</h2>
+<p>配置完成之后就可以看到地图了，感觉还是很赞的</p>
+<p><img alt="Coordinate Map" src="../images/kibana-coordinate-map.png"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/elasticsearch.html">elasticsearch</a>
+      <a href="./tag/logstash.html">logstash</a>
+      <a href="./tag/geoip.html">geoip</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

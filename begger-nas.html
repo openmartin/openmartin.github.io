@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="用树莓派3b做一个乞丐版 NAS" />
+<meta name="keywords" content="linux, nas">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="乞丐版 nas"/>
+<meta property="og:description" content="用树莓派3b做一个乞丐版 NAS"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./begger-nas.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-07-04 14:00:00+08:00"/>
+<meta property="article:modified_time" content="2020-07-04 14:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Linux"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="nas"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 乞丐版 nas</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="begger-nas">乞丐版 nas</h1>
+    <p>
+      Posted on 2020-07-04 14:00 in <a href="./category/linux.html">Linux</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>贫穷</h2>
+<p>看着群晖流口水，可惜钱包没这么鼓，但是 Mac 的硬盘又这么小，天天都要清理，电影视频都觉得是个宝贝，不想删除，实在很难受。</p>
+<p>手头上正好有个闲置(chihui)的树莓派3b，虽然各种性能都不行，但又不是不能用，实现一个乞丐版 nas 还是很简单的。</p>
+<p><img alt="又不是不能用" src="../images/laoluo-youbushibunengyong.jpg"></p>
+<blockquote>
+<p>树莓派3b USB 接口都是2.0，而且网口只有百兆，如果新买的话，推荐购买新出的树莓派4b，千兆网卡加上 USB 3.0</p>
+</blockquote>
+<h2>购物清单</h2>
+<p>为了尽可能增加存储空间，购买了一个双盘位的硬盘底座，加上两个2T的西数普通盘（由于贫穷就没有买西数红盘，价格比普通的贵了差不多40%）</p>
+<ol>
+<li>奥睿科(ORICO)硬盘底座USB3.0 双盘位6228US3   价格118</li>
+<li>西部数据(Western Digital)蓝盘 2TB * 2      价格359 * 2</li>
+</ol>
+<h2>软件安装</h2>
+<p>推荐安装 openmediavault 开源的 nas 系统，基于 debian，通过 web 管理，非常方便</p>
+<h3>安装 Raspberry Pi OS</h3>
+<p>从官网下载 SD 卡工具 https://www.raspberrypi.org/downloads/</p>
+<p>选择不需要桌面环境的 Raspberry Pi OS (32-bit) Lite (Minimal image based on Debian Buster</p>
+<p>如果有显示器和键盘可以看到开机过程，默认的用户名是 pi，密码是 raspberry</p>
+<p>如果没有显示器和键盘，在写入 SD 卡镜像之前有一些配置，参考 http://sonicguo.com/2019/Initialize-RaspBerry-3-with-wifi/</p>
+<h3>修改源</h3>
+<p>修改下面的文件，连接国内的镜像源速度更快</p>
+<p>/etc/apt/sources.list</p>
+<div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
+<span class="k">deb-src</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
+</code></pre></div>
+
+
+<p>/etc/apt/sources.list.d/raspi.list</p>
+<div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">ui</span>
+</code></pre></div>
+
+
+<p>更新系统</p>
+<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get update</span>
+<span class="err">sudo apt-get upgrade</span>
+</code></pre></div>
+
+
+<h3>安装 openmediavault</h3>
+<p>openmediavault 官方有一个 <a href="https://forum.openmediavault.org/index.php?thread/28789-installing-omv5-on-raspberry-pi-s-armbian-sbc-s-i386-32-bit-platforms/">guide</a> </p>
+<p>按照官方的步骤就可以了</p>
+<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get update</span>
+<span class="err">sudo apt-get upgrade -y</span>
+<span class="err">sudo rm -f /etc/systemd/network/99-default.link ## 一点要记得删除，否则后续网络会有问题</span>
+<span class="err">sudo reboot</span>
+</code></pre></div>
+
+
+<p>在国内访问 github 会有点问题，导致下载安装脚本失败。通过修改host文件可以解决这个问题, 从这个repo https://github.com/googlehosts/hosts 找到 github 的部分。 在 <code>/etc/hosts</code> 中增加：</p>
+<div class="highlight"><pre><span></span><code><span class="err"># GitHub Start</span>
+<span class="err">192.30.255.112  gist.github.com</span>
+<span class="err">192.30.255.112  github.com</span>
+<span class="err">192.30.255.112  www.github.com</span>
+<span class="err">151.101.56.133  avatars0.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars1.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars2.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars3.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars4.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars5.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars6.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars7.githubusercontent.com</span>
+<span class="err">151.101.56.133  avatars8.githubusercontent.com</span>
+<span class="err">151.101.56.133  camo.githubusercontent.com</span>
+<span class="err">151.101.56.133  cloud.githubusercontent.com</span>
+<span class="err">151.101.56.133  gist.githubusercontent.com</span>
+<span class="err">151.101.56.133  marketplace-screenshots.githubusercontent.com</span>
+<span class="err">151.101.56.133  raw.githubusercontent.com</span>
+<span class="err">151.101.56.133  repository-images.githubusercontent.com</span>
+<span class="err">151.101.56.133  user-images.githubusercontent.com</span>
+<span class="err"># GitHub End</span>
+</code></pre></div>
+
+
+<p>执行安装脚本，然后等着就可以了，时间会有点长。</p>
+<div class="highlight"><pre><span></span><code><span class="err">wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash</span>
+</code></pre></div>
+
+
+<h3>硬盘底座的设备配置</h3>
+<p>使用硬盘底座，硬盘的序列号显示不正确，需要修改配置， 见 https://openmediavault.readthedocs.io/en/5.x/troubleshooting.html</p>
+<div class="highlight"><pre><span></span><code><span class="err"># JMicron drive fix</span>
+<span class="err">KERNEL==&quot;sd*&quot;, ENV{ID_VENDOR}==&quot;JMicron&quot;, SUBSYSTEMS==&quot;usb&quot;, PROGRAM=&quot;/root/serial.sh %k&quot;, ENV{ID_SERIAL}=&quot;USB-%c&quot;, ENV{ID_SERIAL_SHORT}=&quot;%c&quot;</span>
+</code></pre></div>
+
+
+<h3>配置 samba</h3>
+<p>后面就可以全部通过网页来配置</p>
+<p>先看 <code>存储器-&gt;磁盘</code> 能否找到我们的磁盘（如果是全新的磁盘需要先创建文件系统，容量越大耗时越长），然后去 <code>存储器-&gt;文件系统</code> 挂载文件系统</p>
+<p><img alt="存储器-&gt;磁盘" src="../images/omv-disk.png"></p>
+<p><img alt="存储器-&gt;文件系统" src="../images/omv-fs.png"></p>
+<p>可以修改一下磁盘配置，延长磁盘寿命</p>
+<p><img alt="存储器-&gt;磁盘" src="../images/omv-disk-1.png"></p>
+<p>接下来就是配置 samba，先把启用钩上，然后添加共享文件夹</p>
+<p><img alt="服务-&gt;SMB/CIFS" src="../images/omv-samba-0.png"></p>
+<p><img alt="服务-&gt;SMB/CIFS" src="../images/omv-samba-1.png"></p>
+<p><img alt="服务-&gt;SMB/CIFS" src="../images/omv-samba-2.png"></p>
+<p><img alt="服务-&gt;SMB/CIFS" src="../images/omv-samba-3.png"></p>
+<p>还需要配置共享文件夹的权限，让 pi 用户拥有读写权限</p>
+<p><img alt="访问权限管理-&gt;共享文件夹" src="../images/omv-samba-4.png"></p>
+<p>这个时候去 <code>Finder-&gt;前往-&gt;连接服务器</code> 里面连接 samba 的时候，会发现密码不正确。有一个不容易理解的地方是 samba 的密码是单独，不是系统用户的密码，如果是通过 omv 的 web 修改用户密码，omv 会帮你把系统的密码和 samba 的密码改为一致。所以去用户管理的界面修改一下密码就行。</p>
+<p><img alt="访问权限管理-&gt;用户" src="../images/omv-user.png"></p>
+<p><img alt="Finder-&gt;前往-&gt;连接服务器" src="../images/omv-finder-0.png"></p>
+<p><img alt="Finder-&gt;前往-&gt;连接服务器" src="../images/omv-finder-1.png"></p>
+<p>然后你就可以像访问本地磁盘一样访问树莓派挂载的硬盘了，速度受网络情况限制，尽量通过有线网络访问，无线网络的速度还是比不上网线。</p>
+<h2>其他需要注意的地方</h2>
+<ol>
+<li>安装 openmediavault 之前一定要删除 /etc/systemd/network/99-default.link</li>
+<li>安装好 openmediavault 之后 wifi 会被禁用，如果你是通过 wifi ssh 连接树莓派的话，需要先把树莓派通过网线连接到路由器上。然后可以通过 <code>系统-&gt;网络</code> 再添加 wifi 接口</li>
+<li>如果树莓派开机过程进入 emegency mode，肯定是之前哪个文件修改出错，可以把 SD 卡挂载到 Linux 系统上，然后把之前修改的还原。（Mac 不支持 读写ext4文件系统，起一个 Linux 虚拟机就行了，把 USB 口分配给虚拟机，然后就可以在虚拟机内处理了）</li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/linux.html">linux</a>
+      <a href="./tag/nas.html">nas</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>

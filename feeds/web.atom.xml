@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Web</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/web.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-12-30T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>CSS Grid Layout</title><link href="https://xingzuoshe.cn/css-grid-layout.html" rel="alternate"></link><published>2020-12-30T10:00:00+08:00</published><updated>2020-12-30T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-12-30:/css-grid-layout.html</id><summary type="html">&lt;p&gt;CSS Grid Layout&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Grid 布局&lt;/h2&gt;
+&lt;p&gt;Grid 布局是比 Flex 布局更强大的布局&lt;/p&gt;
+&lt;p&gt;教程：&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html"&gt;CSS Grid 网格布局教程&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout"&gt;MDN CSS 网格布局&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;常见用法&lt;/h2&gt;
+&lt;p&gt;单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用auto-fill关键字表示自动填充。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;container&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="k"&gt;display&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="k"&gt;grid-template-columns&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nf"&gt;repeat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="kc"&gt;fill&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;行和列的间距&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;grid-row-gap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;grid-column-gap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;grid-gap&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nt"&gt;20px&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;CSS trick&lt;/h2&gt;
+&lt;p&gt;紧挨着的下一个邻节点, 加号表示&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;thumbnail&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;focus&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nt"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;thumbnail&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nd"&gt;hover&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#ff7c08&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Web"></category><category term="css"></category></entry></feed>

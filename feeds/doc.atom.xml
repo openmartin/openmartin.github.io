@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Doc</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/doc.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2021-08-25T15:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>Markdown 编辑器推荐</title><link href="https://xingzuoshe.cn/markdown-editor-recommend.html" rel="alternate"></link><published>2021-08-25T14:00:00+08:00</published><updated>2021-08-25T15:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-08-25:/markdown-editor-recommend.html</id><summary type="html">&lt;p&gt;Markdown 编辑器推荐&lt;/p&gt;</summary><content type="html">&lt;h2&gt;markdown pad 2&lt;/h2&gt;
+&lt;p&gt;Win7 系统中，直接安装好MarkDownPad2就能直接运行，但在Win10系统中，会报“渲染错误 awesomium（ This view has crashed ）”的错误，为了解决这一问题，需要安装awesomium_v1.6.6_sdk_win.exe。参考&lt;a href="https://markdownpad.com/faq.html#livepreview-directx"&gt;FAQ&lt;/a&gt;页面&lt;/p&gt;
+&lt;p&gt;markdownpad2-setup.exe &lt;a href="http://markdownpad.com/download/markdownpad2-setup.exe"&gt;官网下载&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;awesomium_v1.6.6_sdk_win.exe &lt;a href="http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe"&gt;官网下载&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;注册邮箱：&lt;code&gt;Soar360@live.com&lt;/code&gt;;  授权码：
+&lt;code&gt;GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;优化设置，可以设置&lt;code&gt;程序语言&lt;/code&gt;和&lt;code&gt;markdown风格&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="markdownpad2-config-lang" src="../images/markdownpad2-config-lang.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="markdownpad2-config-theme" src="../images/markdownpad2-config-theme.png"&gt;&lt;/p&gt;
+&lt;h2&gt;IDEA 插件&lt;/h2&gt;
+&lt;p&gt;IDEA &lt;a href="https://plugins.jetbrains.com/plugin/7793-markdown"&gt;官方的插件&lt;/a&gt;支持 markdown，不过想要更多功能可以安装第三方插件&lt;/p&gt;
+&lt;p&gt;https://plugins.jetbrains.com/plugin/17254-markdown-editor&lt;/p&gt;
+&lt;p&gt;仅支持 2020.2 以后的版本&lt;/p&gt;
+&lt;h2&gt;vscode 插件&lt;/h2&gt;
+&lt;p&gt;vscode markdown 的插件也很方便&lt;/p&gt;
+&lt;p&gt;安装插件 &lt;code&gt;Markdown All in One&lt;/code&gt;, &lt;code&gt;Markdown Preview Enhanced&lt;/code&gt;&lt;/p&gt;</content><category term="Doc"></category><category term="markdown"></category></entry><entry><title>hugo hosting on netlify</title><link href="https://xingzuoshe.cn/hugo-hosting-on-netlify.html" rel="alternate"></link><published>2021-07-20T10:00:00+08:00</published><updated>2021-07-20T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-07-20:/hugo-hosting-on-netlify.html</id><content type="html">&lt;p&gt;虽然本站是使用 pelican + github pages 发布的，不过现在出现了很多最新的工具，比如 hugo + netlify 。&lt;/p&gt;
+&lt;p&gt;pelican + github pages 需要在本地生成静态网页然后 push 到 github 上， github pages 会展示 repo 的一个分支。&lt;/p&gt;
+&lt;p&gt;hugo + netlify 通过CI/CD 自动生成静态网页的，生成静态网页的这一步都自动化了，只需要写好 markdown 文件就行。&lt;/p&gt;
+&lt;p&gt;具体做法可以直接看&lt;a href="https://gohugo.io/hosting-and-deployment/hosting-on-netlify/"&gt;官方文档文档&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;配置文件 &lt;code&gt;netlify.toml&lt;/code&gt;，配置好之后，推送到 github 之后会自动触发 netlify 生成和部署静态网页的动作&lt;/p&gt;</content><category term="Doc"></category></entry><entry><title>reStructuredText to Markdown</title><link href="https://xingzuoshe.cn/pandoc-trans-rst-markdown.html" rel="alternate"></link><published>2016-04-20T20:20:00+08:00</published><updated>2016-04-25T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-04-20:/pandoc-trans-rst-markdown.html</id><summary type="html">&lt;p&gt;pandoc 是一个haskell语言开发的文档格式转换工具，支持非常丰富的格式，覆盖了常见的所有格式。使用起来非常方便。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;pandoc&lt;/h2&gt;
+&lt;p&gt;pandoc 是一个haskell语言开发的文档格式转换工具，支持非常丰富的格式，覆盖了常见的所有格式。使用起来非常方便。&lt;/p&gt;
+&lt;h3&gt;安装&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# mac osx&lt;/span&gt;
+brew install pandoc
+&lt;span class="c1"&gt;# ubuntu&lt;/span&gt;
+sudo apt-get install pandoc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;格式转换&lt;/h3&gt;
+&lt;p&gt;reStructuredText to markdown&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pandoc -f rst --toc small_tip.rst -t markdown_github -o small_tip.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更多例子
+&lt;a href="http://pandoc.org/demos.html"&gt;pandoc demo&lt;/a&gt;&lt;/p&gt;</content><category term="Doc"></category><category term="pandoc"></category></entry></feed>

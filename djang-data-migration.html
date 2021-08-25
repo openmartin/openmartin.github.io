@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="django data migration 常见问题及应对" />
+<meta name="keywords" content="django">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="django data migration"/>
+<meta property="og:description" content="django data migration 常见问题及应对"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./djang-data-migration.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-05-13 20:20:00+08:00"/>
+<meta property="article:modified_time" content="2016-06-13 20:20:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Django"/>
+<meta property="article:tag" content="django"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; django data migration</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrobook.cn/" target="_blank">astrobook</a></li>
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="djang-data-migration">django data migration</h1>
+    <p>
+      Posted on 2016-05-13 20:20 in <a href="./category/django.html">Django</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>在使用django框架开发的过程中，我们不可避免的遇到models层的变更，就涉及到数据库表的变动，django给我提供了一个migration的工具来做这些数据库表的变更。</p>
+<h2>djang migration</h2>
+<p>如果不加appname，那么就是指所有包含migrations 目录的app</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 基于当前的model 检测修改，创建迁移策略文件</span>
+python manage.py makemigrations &lt;appname&gt;
+<span class="c1"># 执行迁移动作</span>
+python manage.py migrate
+</code></pre></div>
+
+
+<h3>migrations失败</h3>
+<p>有时候如果models改动比较大，migrations会失败，这个时候有两种选择，手工去修改migrations文件，第二种是清除所有migrations，重新migrate</p>
+<h4>手工修改migrations文件</h4>
+<p>通过报错信息加上SQL语句找到找到问题，然后具体问题具体分析，是修改数据库里面的数据，还是修改migrations生成的脚本。</p>
+<div class="highlight"><pre><span></span><code>python manage.py migrate
+
+python manage.py sqlmigrate &lt;appname&gt; <span class="m">0001</span>
+</code></pre></div>
+
+
+<p>当处理模型修改的时候：</p>
+<ul>
+<li>
+<p>如果模型包含一个未曾在数据库里建立的字段，Django会报出错信息。 当你第一次用Django的数据库API请求表中不存在的字段时会导致错误。</p>
+</li>
+<li>
+<p>Django不关心数据库表中是否存在未在模型中定义的列。</p>
+</li>
+<li>
+<p>Django不关心数据库中是否存在未被模型表示的table。</p>
+</li>
+</ul>
+<p>在使用SQLite3数据库时, 因为SQLite3 不支持删除列操作，只有有限地 ALTER TABLE 支持，
+所以修改数据库列的操作被新建表然后select into newtable 代替，所以会存在更多问题</p>
+<p>参考</p>
+<p>http://www.tuicool.com/articles/yM3IVr</p>
+<h5>NULL to NOT NULL</h5>
+<div class="highlight"><pre><span></span><code>python manage.py makemigrations
+You are trying to add a non-nullable field <span class="s1">&#39;college&#39;</span> to majorproperty without a default<span class="p">;</span> we can<span class="err">&#39;</span>t <span class="k">do</span> that <span class="o">(</span>the database needs something to populate existing rows<span class="o">)</span>.
+Please <span class="k">select</span> a fix:
+ <span class="m">1</span><span class="o">)</span> Provide a one-off default now <span class="o">(</span>will be <span class="nb">set</span> on all existing rows<span class="o">)</span>
+ <span class="m">2</span><span class="o">)</span> Quit, and <span class="nb">let</span> me add a default in models.py
+Select an option: <span class="m">1</span>
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can <span class="k">do</span> e.g. timezone.now<span class="o">()</span>
+&gt;&gt;&gt; <span class="m">1</span>
+</code></pre></div>
+
+
+<p>在migrate的时候提示你需要指定一个默认值，用以处理NULL的情况</p>
+<h4>清除migrations</h4>
+<p>清除所有app目录/migrations/下除__init__.py 文件之外的py文件</p>
+<div class="highlight"><pre><span></span><code>find . -path <span class="s2">&quot;*migrations*&quot;</span> -name <span class="s2">&quot;*.py&quot;</span> -not -path <span class="s2">&quot;*__init__*&quot;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
+</code></pre></div>
+
+
+<h4>squashmigrations</h4>
+<p>当migrations越来越多的时候执行 makemigrations 和 migrate 就会越来越慢，可以考虑对其瘦身（减少migrations文件的数量）</p>
+<div class="highlight"><pre><span></span><code>python manage.py squashmigrations schools <span class="m">0002</span>
+</code></pre></div>
+
+
+<h2>数据导入导出</h2>
+<h3>数据导出</h3>
+<p>django 项目提供了一个导出的方法 python manage.py dumpdata, 不指定 appname 时默认为导出所有的app</p>
+<div class="highlight"><pre><span></span><code>python manage.py dumpdata <span class="o">[</span>appname<span class="o">]</span> &gt; appname_data.json
+</code></pre></div>
+
+
+<h3>数据导入</h3>
+<p>数据导入,不需要指定 appname</p>
+<div class="highlight"><pre><span></span><code><span class="err">python manage.py loaddata appname_data.json</span>
+</code></pre></div>
+
+
+<p>优点：可以兼容各种支持的数据库，也就是说，以前用的是 SQLite3，可以导出后，用这种方法导入到 MySQL, PostgreSQL等数据库，反过来也可以。</p>
+<p>缺点：数据量大的时候，速度相对较慢，表的关系比较复杂的时候可以导入不成功。</p>
+<h3>常见数据导入导出</h3>
+<p>一般情况下，我们导入导出的时候需要排除一些app，contenttypes(新环境migrate的时候会重新生成，而且包含数据)，sessions(用户session相关数据),  admin(admin log)</p>
+<p>auth 包含用户，可视情况决定是否导出</p>
+<div class="highlight"><pre><span></span><code><span class="err">python manage.py dumpdata --all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &gt; all.json</span>
+<span class="err">python manage.py loaddata all.json</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/django.html">django</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
