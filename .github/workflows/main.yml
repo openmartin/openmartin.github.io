@@ -21,9 +21,9 @@ jobs:
         run: |
           git clone --recursive https://github.com/getpelican/pelican-plugins
       - name: GitHub Pages Pelican Build Action
-        uses: nelsonjchen/gh-pages-pelican-action@0.1.10
+        uses: rehanhaider/pelican-to-github-pages@v1.2.0
         env: 
-          GH_PAGES_BRANCH: master
+          GH_PAGES_BRANCH: gh-pages
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           GH_PAGES_CNAME: xingzuoshe.cn
 
