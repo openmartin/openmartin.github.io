@@ -144,9 +144,9 @@ y
 
 <p>最重要的配置文件是 <code>job_name\_settings.yaml</code>，配置参考 <a href="https://fscrawler.readthedocs.io/en/latest/admin/fs/index.html">Job file specification</a></p>
 <p><code>_default\6\_settings.json</code> 对应 es 6.x 版本，<code>_default\7\_settings.json</code> 对应 es 7.x 版本，只有一个地方可能需要修改，就是 content 的分词方法，我这里用的是 hanlp_index</p>
-<div class="highlight"><pre><span></span><code><span class="s2">&quot;content&quot;</span><span class="err">:</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="nt">&quot;analyzer&quot;</span><span class="p">:</span> <span class="s2">&quot;hanlp_index&quot;</span><span class="p">,</span> <span class="nt">&quot;search_analyzer&quot;</span><span class="p">:</span> <span class="s2">&quot;hanlp_index&quot;</span><span class="p">,</span> <span class="nt">&quot;index_options&quot;</span><span class="p">:</span>  <span class="s2">&quot;offsets&quot;</span>
-      <span class="p">}</span><span class="err">,</span>
+      <span class="p">},</span>
 </code></pre></div>
 
 

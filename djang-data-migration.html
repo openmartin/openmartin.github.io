@@ -147,7 +147,7 @@ python manage.py sqlmigrate &lt;appname&gt; <span class="m">0001</span>
 You are trying to add a non-nullable field <span class="s1">&#39;college&#39;</span> to majorproperty without a default<span class="p">;</span> we can<span class="err">&#39;</span>t <span class="k">do</span> that <span class="o">(</span>the database needs something to populate existing rows<span class="o">)</span>.
 Please <span class="k">select</span> a fix:
  <span class="m">1</span><span class="o">)</span> Provide a one-off default now <span class="o">(</span>will be <span class="nb">set</span> on all existing rows<span class="o">)</span>
- <span class="m">2</span><span class="o">)</span> Quit, and <span class="nb">let</span> me add a default in models.py
+ <span class="m">2</span><span class="o">)</span> Quit, and <span class="nb">let</span> me add a default <span class="k">in</span> models.py
 Select an option: <span class="m">1</span>
 Please enter the default value now, as valid Python
 The datetime and django.utils.timezone modules are available, so you can <span class="k">do</span> e.g. timezone.now<span class="o">()</span>
@@ -177,7 +177,7 @@ The datetime and django.utils.timezone modules are available, so you can <span c
 
 <h3>数据导入</h3>
 <p>数据导入,不需要指定 appname</p>
-<div class="highlight"><pre><span></span><code><span class="err">python manage.py loaddata appname_data.json</span>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">appname_data</span><span class="o">.</span><span class="n">json</span>
 </code></pre></div>
 
 
@@ -186,8 +186,8 @@ The datetime and django.utils.timezone modules are available, so you can <span c
 <h3>常见数据导入导出</h3>
 <p>一般情况下，我们导入导出的时候需要排除一些app，contenttypes(新环境migrate的时候会重新生成，而且包含数据)，sessions(用户session相关数据),  admin(admin log)</p>
 <p>auth 包含用户，可视情况决定是否导出</p>
-<div class="highlight"><pre><span></span><code><span class="err">python manage.py dumpdata --all --indent=4 --exclude=auth --exclude=contenttypes --exclude=sessions --exclude=admin &gt; all.json</span>
-<span class="err">python manage.py loaddata all.json</span>
+<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="o">--</span><span class="n">all</span> <span class="o">--</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">auth</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">contenttypes</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">sessions</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">admin</span> <span class="o">&gt;</span> <span class="n">all</span><span class="o">.</span><span class="n">json</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">all</span><span class="o">.</span><span class="n">json</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">

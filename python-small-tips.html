@@ -133,14 +133,14 @@
 
 <h2>注册表中有中文的问题</h2>
 <p>在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:</p>
-<div class="highlight"><pre><span></span><code><span class="err">mimetypes.init() # try to read system mime.types</span>
-<span class="err">File &quot;C:\Python27\lib\mimetypes.py&quot;, line 358, in init</span>
-<span class="err">db.read_windows_registry()</span>
-<span class="err">File &quot;C:\Python27\lib\mimetypes.py&quot;, line 258, in read_windows_registry</span>
-<span class="err">for subkeyname in enum_types(hkcr):</span>
-<span class="err">File &quot;C:\Python27\lib\mimetypes.py&quot;, line 249, in enum_types</span>
-<span class="err">ctype = ctype.encode(default_encoding) # omit in 3.x!</span>
-<span class="c">UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0x88 in position 1: ordinal not in range(128)</span>
+<div class="highlight"><pre><span></span><code><span class="n">mimetypes</span><span class="o">.</span><span class="n">init</span><span class="p">()</span> <span class="c1"># try to read system mime.types</span>
+<span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">358</span><span class="p">,</span> <span class="ow">in</span> <span class="n">init</span>
+<span class="n">db</span><span class="o">.</span><span class="n">read_windows_registry</span><span class="p">()</span>
+<span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">258</span><span class="p">,</span> <span class="ow">in</span> <span class="n">read_windows_registry</span>
+<span class="k">for</span> <span class="n">subkeyname</span> <span class="ow">in</span> <span class="n">enum_types</span><span class="p">(</span><span class="n">hkcr</span><span class="p">):</span>
+<span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">249</span><span class="p">,</span> <span class="ow">in</span> <span class="n">enum_types</span>
+<span class="n">ctype</span> <span class="o">=</span> <span class="n">ctype</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">default_encoding</span><span class="p">)</span> <span class="c1"># omit in 3.x!</span>
+<span class="n">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0x88 in position 1: ordinal not in range(128)</span>
 </code></pre></div>
 
 
@@ -156,16 +156,16 @@
 <p>更多信息考参考文档 <a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode">http://pythonhosted.org//setuptools/setuptools.html#development-mode</a></p>
 <h2>json 格式中单引号是不合法的</h2>
 <p>在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt;&gt;&gt; json.loads(&quot;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&quot;)</span>
-<span class="err">Traceback (most recent call last):</span>
-<span class="err">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
-<span class="err">  File &quot;D:\Python27\lib\json\__init__.py&quot;, line 338, in loads</span>
-<span class="err">    return _default_decoder.decode(s)</span>
-<span class="err">  File &quot;D:\Python27\lib\json\decoder.py&quot;, line 365, in decode</span>
-<span class="err">    obj, end = self.raw_decode(s, idx=_w(s, 0).end())</span>
-<span class="err">  File &quot;D:\Python27\lib\json\decoder.py&quot;, line 383, in raw_decode</span>
-<span class="err">    raise ValueError(&quot;No JSON object could be decoded&quot;)</span>
-<span class="err"> ValueError: No JSON object could be decoded</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s2">&quot;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&quot;</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">&quot;D:\Python27\lib\json\__init__.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">338</span><span class="p">,</span> <span class="ow">in</span> <span class="n">loads</span>
+    <span class="k">return</span> <span class="n">_default_decoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;D:\Python27\lib\json\decoder.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">365</span><span class="p">,</span> <span class="ow">in</span> <span class="n">decode</span>
+    <span class="n">obj</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">_w</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
+  <span class="n">File</span> <span class="s2">&quot;D:\Python27\lib\json\decoder.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">383</span><span class="p">,</span> <span class="ow">in</span> <span class="n">raw_decode</span>
+    <span class="n">raise</span> <span class="n">ValueError</span><span class="p">(</span><span class="s2">&quot;No JSON object could be decoded&quot;</span><span class="p">)</span>
+ <span class="n">ValueError</span><span class="p">:</span> <span class="n">No</span> <span class="n">JSON</span> <span class="n">object</span> <span class="n">could</span> <span class="n">be</span> <span class="n">decoded</span>
 </code></pre></div>
 
 

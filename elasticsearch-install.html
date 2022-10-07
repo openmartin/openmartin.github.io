@@ -114,11 +114,11 @@
 <h3>install</h3>
 <p>通过 rpm 安装，参考 https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html</p>
 <h3>启动和优化</h3>
-<div class="highlight"><pre><span></span><code><span class="err">sudo /bin/systemctl daemon-reload</span>
-<span class="err">sudo /bin/systemctl enable elasticsearch.service</span>
-<span class="err">sudo systemctl start elasticsearch.service</span>
-<span class="err">sudo systemctl stop elasticsearch.service</span>
-<span class="err">sudo systemctl status kibana.service</span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
 </code></pre></div>
 
 
@@ -137,10 +137,10 @@
 
 
 <h3>rpm 安装 ElasticSearch 之后的目录结构</h3>
-<div class="highlight"><pre><span></span><code><span class="err">/usr/share/elasticsearch  # ES_HOME</span>
-<span class="err">/var/log/elasticsearch    # log 目录</span>
-<span class="err">/etc/elasticsearch        # config 目录</span>
-<span class="err">/var/lib/elasticsearch    # data 目录</span>
+<div class="highlight"><pre><span></span><code><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">elasticsearch</span>  <span class="c1"># ES_HOME</span>
+<span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">elasticsearch</span>    <span class="c1"># log 目录</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">elasticsearch</span>        <span class="c1"># config 目录</span>
+<span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">elasticsearch</span>    <span class="c1"># data 目录</span>
 </code></pre></div>
 
 
@@ -163,11 +163,11 @@
 <h3>install</h3>
 <p>通过 rpm 安装，参考 https://www.elastic.co/guide/en/kibana/current/rpm.html</p>
 <h3>启动和配置</h3>
-<div class="highlight"><pre><span></span><code><span class="err">sudo /bin/systemctl daemon-reload</span>
-<span class="err">sudo /bin/systemctl enable kibana.service</span>
-<span class="err">sudo systemctl start kibana.service</span>
-<span class="err">sudo systemctl stop kibana.service</span>
-<span class="err">sudo systemctl status kibana.service</span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
 </code></pre></div>
 
 

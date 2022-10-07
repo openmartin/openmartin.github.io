@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Python</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/python.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-05-25T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>修复 virtualenv 环境</title><link href="https://xingzuoshe.cn/fix-python-virtualenv.html" rel="alternate"></link><published>2020-05-25T12:00:00+08:00</published><updated>2020-05-25T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/fix-python-virtualenv.html</id><summary type="html">&lt;p&gt;很多时候升级 python 之后，virtualenv 中的软链接会失效，这时候就需要修复了&lt;/p&gt;</summary><content type="html">&lt;h2&gt;问题&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Python</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/python.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2022-10-08T01:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>使用 GitHub Actions 自动部署 pelican 生成的 GitHub Pages</title><link href="https://xingzuoshe.cn/pelican-github-actions.html" rel="alternate"></link><published>2022-10-08T01:00:00+08:00</published><updated>2022-10-08T01:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2022-10-08:/pelican-github-actions.html</id><summary type="html">&lt;p&gt;GitHub Actions 非常方便，自动化的 CI/CD 工具&lt;/p&gt;</summary><content type="html">&lt;h2&gt;GitHub Actions&lt;/h2&gt;
+&lt;p&gt;GitHub Actions 作为自动化的 CI/CD 工具，结合 GitHub 使用起来非常方便。&lt;/p&gt;
+&lt;p&gt;下面是 &lt;code&gt;.github/workflows/main.yaml&lt;/code&gt; 文件的写法&lt;/p&gt;
+&lt;figure class='code'&gt;
+&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;main.yml&lt;/span&gt;&lt;a href='/code/../code/main.yml'&gt;download&lt;/a&gt;&lt;/figcaption&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Pelican site generator&lt;/span&gt;
+
+&lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;push&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;branches&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;main&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+
+&lt;span class="nt"&gt;jobs&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;build&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nt"&gt;runs-on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ubuntu-latest&lt;/span&gt;
+
+    &lt;span class="nt"&gt;steps&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;actions/checkout@v2&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Set up Python 3.9&lt;/span&gt;
+        &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;actions/setup-python@v2&lt;/span&gt;
+        &lt;span class="nt"&gt;with&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="nt"&gt;python-version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;3.9&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Install dependencies&lt;/span&gt;
+        &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+          &lt;span class="no"&gt;if [ -f requirements.txt ]; then pip install -r requirements.txt; fi&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Git clone pelican-plugins&lt;/span&gt;
+        &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+          &lt;span class="no"&gt;git clone --recursive https://github.com/getpelican/pelican-plugins&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Generate html output&lt;/span&gt;
+        &lt;span class="nt"&gt;run&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;make html&lt;/span&gt;
+      &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Deploy&lt;/span&gt;
+        &lt;span class="nt"&gt;uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;peaceiris/actions-gh-pages@v3&lt;/span&gt;
+        &lt;span class="nt"&gt;with&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+          &lt;span class="nt"&gt;github_token&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;
+          &lt;span class="nt"&gt;publish_dir&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;./output&lt;/span&gt;
+          &lt;span class="nt"&gt;cname&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;xingzuoshe.cn&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/figure&gt;
+
+&lt;p&gt;有些注意事项:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;GitHub 会从&lt;code&gt;默认分支&lt;/code&gt;下找&lt;code&gt;.github/workflows/*.yml&lt;/code&gt;文件, 所以只能放在默认分支上, repo 的 settings 里可以修改默认分支。&lt;/li&gt;
+&lt;li&gt;其他人写的 GitHub Actions 不一定能拿来用，还是需要了解里面具体写的是什么命令，有的是直接下载一个 docker，但是里面的环境不一定和你的项目需要的环境一致。&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Python"></category><category term="pelican"></category><category term="github"></category></entry><entry><title>修复 virtualenv 环境</title><link href="https://xingzuoshe.cn/fix-python-virtualenv.html" rel="alternate"></link><published>2020-05-25T12:00:00+08:00</published><updated>2020-05-25T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/fix-python-virtualenv.html</id><summary type="html">&lt;p&gt;很多时候升级 python 之后，virtualenv 中的软链接会失效，这时候就需要修复了&lt;/p&gt;</summary><content type="html">&lt;h2&gt;问题&lt;/h2&gt;
 &lt;p&gt;升级 python 之后，很多时候就会发现 virtualenv 失效了，因为 virtualenv 使用软链接链接到系统的 python, 系统的 python path 变化导致 virtualenv 失效&lt;/p&gt;
 &lt;h3&gt;简单的修复&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;find . -type l -delete&lt;/span&gt;
@@ -241,7 +286,7 @@
 &lt;li&gt;make github&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Editor&lt;/h2&gt;
-&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="pelican"></category></entry><entry><title>遍历S3</title><link href="https://xingzuoshe.cn/boto-scan-s3.html" rel="alternate"></link><published>2016-07-04T20:20:00+08:00</published><updated>2016-07-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-04:/boto-scan-s3.html</id><summary type="html">&lt;p&gt;使用 boto 遍历 s3&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历&lt;/p&gt;
+&lt;p&gt;推荐使用 vscode 来编辑 markdown&lt;/p&gt;</content><category term="Python"></category><category term="python"></category><category term="pelican"></category><category term="github"></category></entry><entry><title>遍历S3</title><link href="https://xingzuoshe.cn/boto-scan-s3.html" rel="alternate"></link><published>2016-07-04T20:20:00+08:00</published><updated>2016-07-04T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-07-04:/boto-scan-s3.html</id><summary type="html">&lt;p&gt;使用 boto 遍历 s3&lt;/p&gt;</summary><content type="html">&lt;p&gt;首先你需要一个有S3 list权限的key，如果bucket里面的文件很多的话，推荐使用分页来遍历&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;boto3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;aws_access_key_id&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_key_id&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                             &lt;span class="n"&gt;aws_secret_access_key&lt;/span&gt;&lt;span class="o"&gt;=&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;s3_aws_secret_key&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                             &lt;span class="n"&gt;region_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;us-east-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -292,14 +337,14 @@
 
 &lt;h2&gt;注册表中有中文的问题&lt;/h2&gt;
 &lt;p&gt;在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;mimetypes.init() # try to read system mime.types&lt;/span&gt;
-&lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 358, in init&lt;/span&gt;
-&lt;span class="err"&gt;db.read_windows_registry()&lt;/span&gt;
-&lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 258, in read_windows_registry&lt;/span&gt;
-&lt;span class="err"&gt;for subkeyname in enum_types(hkcr):&lt;/span&gt;
-&lt;span class="err"&gt;File &amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;, line 249, in enum_types&lt;/span&gt;
-&lt;span class="err"&gt;ctype = ctype.encode(default_encoding) # omit in 3.x!&lt;/span&gt;
-&lt;span class="c"&gt;UnicodeDecodeError: &amp;#39;ascii&amp;#39; codec can&amp;#39;t decode byte 0x88 in position 1: ordinal not in range(128)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;mimetypes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="c1"&gt;# try to read system mime.types&lt;/span&gt;
+&lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;358&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;
+&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_windows_registry&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;258&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;read_windows_registry&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;subkeyname&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;enum_types&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hkcr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;C:\Python27\lib\mimetypes.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;249&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;enum_types&lt;/span&gt;
+&lt;span class="n"&gt;ctype&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ctype&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default_encoding&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# omit in 3.x!&lt;/span&gt;
+&lt;span class="n"&gt;UnicodeDecodeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ascii&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;codec&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;t decode byte 0x88 in position 1: ordinal not in range(128)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -315,16 +360,16 @@
 &lt;p&gt;更多信息考参考文档 &lt;a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode"&gt;http://pythonhosted.org//setuptools/setuptools.html#development-mode&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;json 格式中单引号是不合法的&lt;/h2&gt;
 &lt;p&gt;在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;gt;&amp;gt;&amp;gt; json.loads(&amp;quot;[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]&amp;quot;)&lt;/span&gt;
-&lt;span class="err"&gt;Traceback (most recent call last):&lt;/span&gt;
-&lt;span class="err"&gt;  File &amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;, line 1, in &amp;lt;module&amp;gt;&lt;/span&gt;
-&lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\__init__.py&amp;quot;, line 338, in loads&lt;/span&gt;
-&lt;span class="err"&gt;    return _default_decoder.decode(s)&lt;/span&gt;
-&lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;, line 365, in decode&lt;/span&gt;
-&lt;span class="err"&gt;    obj, end = self.raw_decode(s, idx=_w(s, 0).end())&lt;/span&gt;
-&lt;span class="err"&gt;  File &amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;, line 383, in raw_decode&lt;/span&gt;
-&lt;span class="err"&gt;    raise ValueError(&amp;quot;No JSON object could be decoded&amp;quot;)&lt;/span&gt;
-&lt;span class="err"&gt; ValueError: No JSON object could be decoded&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;stdin&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;D:\Python27\lib\json\__init__.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;338&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;loads&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;_default_decoder&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;365&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;decode&lt;/span&gt;
+    &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raw_decode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;idx&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_w&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;D:\Python27\lib\json\decoder.py&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;383&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;raw_decode&lt;/span&gt;
+    &lt;span class="n"&gt;raise&lt;/span&gt; &lt;span class="n"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;No JSON object could be decoded&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="n"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;JSON&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;could&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;decoded&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
@@ -334,8 +379,8 @@
 &lt;p&gt;redis.StrictRedis.zadd(name, &lt;em&gt;args,&lt;/em&gt;*kwargs) 分数在前，value在后&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;args, 如: score1, name1, score2, name2, ... 或者是&lt;/em&gt;*kwargs, 如: name1=score1, name2=score2,&lt;/p&gt;</content><category term="Python"></category><category term="python"></category></entry><entry><title>导入 pyspark 到 shell 和 pycharm当中</title><link href="https://xingzuoshe.cn/pyspark-pycharm.html" rel="alternate"></link><published>2016-01-19T20:20:00+08:00</published><updated>2016-01-19T20:20:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2016-01-19:/pyspark-pycharm.html</id><summary type="html">&lt;p&gt;导入pyspark 到 shell 和 pycharm当中&lt;/p&gt;</summary><content type="html">&lt;h2&gt;shell&lt;/h2&gt;
 &lt;p&gt;在.bashrc(bash shell) 或者 .zshrc(zshell) 中增加环境变量,具体路径注意自己修改:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;export SPARK_HOME=&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
-&lt;span class="err"&gt;export PYTHONPATH=&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="n"&gt;SPARK_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$HOME/spark/spark-1.6.0-bin-hadoop2.6&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PYTHONPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;$SPARK_HOME/python/:$SPARK_HOME/python/lib/py4j-0.9-src.zip:$PYTHONPATH&amp;quot;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 

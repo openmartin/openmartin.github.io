@@ -111,8 +111,8 @@
 <p>我的环境是amazon ec2，选择的操作系统是Amazon Linux AMI 2015.03 (HVM) ，选择的最常见的部署方案 nginx + gunicorn + django + mysql</p>
 <h2>mysql</h2>
 <p>首先安装mysql-sever:</p>
-<div class="highlight"><pre><span></span><code><span class="err">$sudo yum install mysql-server mysql mysql-devel</span>
-<span class="err">$sudo chown mysql.mysql -R /var/lib/mysql</span>
+<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">mysql</span><span class="o">-</span><span class="n">server</span> <span class="n">mysql</span> <span class="n">mysql</span><span class="o">-</span><span class="n">devel</span>
+<span class="o">$</span><span class="n">sudo</span> <span class="n">chown</span> <span class="n">mysql</span><span class="o">.</span><span class="n">mysql</span> <span class="o">-</span><span class="n">R</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
 </code></pre></div>
 
 
@@ -134,7 +134,7 @@
 
 <p>设置root密码，执行/usr/bin/mysql_secure_installation</p>
 <p>如果需要通过客户端工具管理MySQL，需要添加远程连接MySQL权限:</p>
-<div class="highlight"><pre><span></span><code><span class="err">$</span><span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span>
+<div class="highlight"><pre><span></span><code><span class="n">$mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span>
 
 <span class="n">mysql</span><span class="o">&gt;</span><span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="n">TO</span> <span class="n">root</span><span class="s">@&quot;%&quot;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="err">&#39;</span><span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;</span><span class="err">&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
 <span class="n">mysql</span><span class="o">&gt;</span><span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
@@ -195,24 +195,24 @@
 
 
 <p>编辑 /etc/nginx/conf.d/virtual.conf:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">server</span> <span class="p">{</span>
-    <span class="err">listen</span>       <span class="err">80</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">server</span> <span class="p">{</span>
+    <span class="n">listen</span>       <span class="mi">80</span><span class="p">;</span>
 
-    <span class="err">server_name</span>  <span class="err">blog.dailyastrology.info</span><span class="p">;</span>
+    <span class="n">server_name</span>  <span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="p">;</span>
 
-    <span class="err">access_log</span> <span class="err">/var/log/nginx/blog.dailyastrology.info-access.log</span><span class="p">;</span>
-    <span class="err">error_log</span> <span class="err">/var/log/nginx/blog.dailyastrology.info-error.log</span><span class="p">;</span>
+    <span class="n">access_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="o">-</span><span class="n">access</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+    <span class="n">error_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="o">-</span><span class="n">error</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
 
-    <span class="err">location</span> <span class="err">/</span> <span class="err">{</span>
-        <span class="err">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">8001</span><span class="p">;</span>
-        <span class="err">proxy_set_header</span> <span class="err">Host</span> <span class="err">$host</span><span class="p">;</span>
-        <span class="err">proxy_set_header</span> <span class="err">X-Real-IP</span> <span class="err">$remote_addr</span><span class="p">;</span>
-        <span class="err">proxy_set_header</span> <span class="err">X-Forwarded-For</span> <span class="err">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8001</span><span class="p">;</span>
+        <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="o">$</span><span class="n">host</span><span class="p">;</span>
+        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="o">$</span><span class="n">remote_addr</span><span class="p">;</span>
+        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span> <span class="o">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="nt">location</span> <span class="o">/</span><span class="nt">static</span> <span class="p">{</span>
-        <span class="err">root</span> <span class="err">/home/ec2-user/blogenv/myblog</span><span class="p">;</span>
+    <span class="n">location</span> <span class="o">/</span><span class="k">static</span> <span class="p">{</span>
+        <span class="n">root</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">/</span><span class="n">blogenv</span><span class="o">/</span><span class="n">myblog</span><span class="p">;</span>
     <span class="p">}</span>
-<span class="err">}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 

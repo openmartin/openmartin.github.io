@@ -5,42 +5,49 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2022-10-07T16:18:26-00:00</lastmod>
+<lastmod>2022-10-07T16:36:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2022-10-07T16:18:26-00:00</lastmod>
+<lastmod>2022-10-07T16:36:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2022-10-07T16:18:26-00:00</lastmod>
+<lastmod>2022-10-07T16:36:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2022-10-07T16:18:26-00:00</lastmod>
+<lastmod>2022-10-07T16:36:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2022-10-07T16:18:26-00:00</lastmod>
+<lastmod>2022-10-07T16:36:28-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2022-10-07T16:18:26-00:00</lastmod>
+<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/pelican-github-actions.html</loc>
+<lastmod>2022-10-08T01:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -558,7 +565,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/category/python.html</loc>
-<lastmod>2020-05-25T12:00:00+08:06</lastmod>
+<lastmod>2022-10-08T01:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -566,6 +573,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/category/web.html</loc>
 <lastmod>2020-12-30T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/pelican.html</loc>
+<lastmod>2022-10-08T01:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/github.html</loc>
+<lastmod>2022-10-08T01:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -879,13 +900,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://xingzuoshe.cn/tag/pelican.html</loc>
-<lastmod>2019-06-09T22:30:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://xingzuoshe.cn/tag/aws.html</loc>
 <lastmod>2017-04-03T20:20:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -985,7 +999,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/author/martin.html</loc>
-<lastmod>2021-08-25T15:00:00+08:06</lastmod>
+<lastmod>2022-10-08T01:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
