@@ -31,9 +31,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (
-         ('astrobook', 'https://astrobook.cn/'),
-         ('astrohub', 'https://astrohub.cn'),)
+LINKS = (('astrohub', 'https://astrohub.cn'),)
 
 # Social widget
 SOCIAL = (('github', 'https://github.com/openmartin'),

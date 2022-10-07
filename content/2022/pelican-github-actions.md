@@ -14,7 +14,38 @@ GitHub Actions 作为自动化的 CI/CD 工具，结合 GitHub 使用起来非�
 
 下面是 `.github/workflows/main.yaml` 文件的写法
 
-{% include_code ../code/main.yml lang:yaml %}
+```yaml
+name: Pelican site generator
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Git clone pelican-plugins
+        run: |
+          git clone --recursive https://github.com/getpelican/pelican-plugins
+      - name: Generate html output
+        run: make html
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          cname: xingzuoshe.cn
+```
 
 有些注意事项:
 

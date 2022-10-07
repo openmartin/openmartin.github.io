@@ -2,8 +2,8 @@ Title: 如何从命令行运行 TestCase
 Status: published
 Date: 2020-11-24 11:00
 Modified: 2020-11-24 12:00
-Category: Java, Test
-Tags: junit, testcase
+Category: Java
+Tags: junit, test, testcase
 Slug: junit-cmd
 Authors: Martin
 Summary: 如何从命令行运行 TestCase
