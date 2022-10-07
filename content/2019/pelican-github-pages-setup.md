@@ -2,7 +2,7 @@ Title: 使用 Pelican 和 Github Pages 建立博客网站
 Date: 2019-06-09 22:20
 Modified: 2019-06-09 22:30
 Category: Python
-Tags: python, pelican
+Tags: python, pelican, github
 Slug: pelican-github-pages-setup
 Authors: Martin
 Summary: Pelican 是一个 Python 语言开发的静态网站生成工具，用 markdown 写完博客之后，发布到Github Pages，免费而且好用，不过配置过程有些复杂，下面记录一下配置的过程。
