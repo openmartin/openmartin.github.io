@@ -2,7 +2,7 @@ name: Pelican site generator
 
 on:
   push:
-    branches: [source]
+    branches: [main]
 
 jobs:
   build:
