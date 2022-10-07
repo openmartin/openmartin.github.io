@@ -5,42 +5,42 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<lastmod>2022-10-07T16:57:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<lastmod>2022-10-07T16:57:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<lastmod>2022-10-07T16:57:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<lastmod>2022-10-07T16:57:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<lastmod>2022-10-07T16:57:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2022-10-07T16:36:28-00:00</lastmod>
+<lastmod>2022-10-07T16:57:02-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -536,13 +536,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://xingzuoshe.cn/category/java-test.html</loc>
-<lastmod>2020-11-24T12:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://xingzuoshe.cn/category/javascript.html</loc>
 <lastmod>2020-05-25T14:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -676,6 +669,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://xingzuoshe.cn/tag/test.html</loc>
+<lastmod>2020-11-24T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://xingzuoshe.cn/tag/testcase.html</loc>
 <lastmod>2020-11-24T12:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -789,13 +789,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/tag/spring.html</loc>
-<lastmod>2020-06-03T21:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/test.html</loc>
 <lastmod>2020-06-03T21:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>

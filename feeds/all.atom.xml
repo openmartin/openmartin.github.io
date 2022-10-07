@@ -2,9 +2,6 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2022-10-08T01:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>使用 GitHub Actions 自动部署 pelican 生成的 GitHub Pages</title><link href="https://xingzuoshe.cn/pelican-github-actions.html" rel="alternate"></link><published>2022-10-08T01:00:00+08:00</published><updated>2022-10-08T01:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2022-10-08:/pelican-github-actions.html</id><summary type="html">&lt;p&gt;GitHub Actions 非常方便，自动化的 CI/CD 工具&lt;/p&gt;</summary><content type="html">&lt;h2&gt;GitHub Actions&lt;/h2&gt;
 &lt;p&gt;GitHub Actions 作为自动化的 CI/CD 工具，结合 GitHub 使用起来非常方便。&lt;/p&gt;
 &lt;p&gt;下面是 &lt;code&gt;.github/workflows/main.yaml&lt;/code&gt; 文件的写法&lt;/p&gt;
-&lt;figure class='code'&gt;
-&lt;figcaption&gt;&lt;span class="liquid-tags-code-filename"&gt;main.yml&lt;/span&gt;&lt;a href='/code/../code/main.yml'&gt;download&lt;/a&gt;&lt;/figcaption&gt;
-
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;Pelican site generator&lt;/span&gt;
 
 &lt;span class="nt"&gt;on&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -37,8 +34,6 @@
           &lt;span class="nt"&gt;cname&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;xingzuoshe.cn&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
-&lt;/figure&gt;
 
 &lt;p&gt;有些注意事项:&lt;/p&gt;
 &lt;ol&gt;
@@ -821,7 +816,7 @@ curl -X PUT &lt;span class="s2"&gt;&amp;quot;localhost:9200/netdisk-document-v2/
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;gradle test&lt;/span&gt;
 &lt;span class="err"&gt;gradle test --tests your.package.TestClassName&lt;/span&gt;
 &lt;span class="err"&gt;gradle test --tests your.package.TestClassName.particularMethod&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Java, Test"></category><category term="junit"></category><category term="testcase"></category></entry><entry><title>Apache JMeter 压力测试</title><link href="https://xingzuoshe.cn/jmeter-stress-test.html" rel="alternate"></link><published>2020-11-05T11:00:00+08:00</published><updated>2020-11-05T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-11-05:/jmeter-stress-test.html</id><summary type="html">&lt;p&gt;Apache JMeter 压力测试&lt;/p&gt;</summary><content type="html">&lt;h2&gt;压力测试&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Java"></category><category term="junit"></category><category term="test"></category><category term="testcase"></category></entry><entry><title>Apache JMeter 压力测试</title><link href="https://xingzuoshe.cn/jmeter-stress-test.html" rel="alternate"></link><published>2020-11-05T11:00:00+08:00</published><updated>2020-11-05T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-11-05:/jmeter-stress-test.html</id><summary type="html">&lt;p&gt;Apache JMeter 压力测试&lt;/p&gt;</summary><content type="html">&lt;h2&gt;压力测试&lt;/h2&gt;
 &lt;p&gt;压力测试是对系统不断施加压力，来获得系统最大服务能力的测试。参考&lt;a href="https://testerhome.com/articles/20911"&gt;压力测试&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;比如可以用 50/100/200 并发之下服务器的响应时间和是否能发生异常，来判断系统正常可以处理多少并发。&lt;/p&gt;
 &lt;p&gt;目的：
