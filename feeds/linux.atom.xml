@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2021-08-18T19:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>Nginx WebSocket 代理配置</title><link href="https://xingzuoshe.cn/nginx-websocket.html" rel="alternate"></link><published>2021-08-18T18:00:00+08:00</published><updated>2021-08-18T19:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-08-18:/nginx-websocket.html</id><summary type="html">&lt;p&gt;Nginx WebSocket 代理配置&lt;/p&gt;</summary><content type="html">&lt;p&gt;Tomcat 从 7.0.27开始支持 WebSocket，从 7.0.47 开始支持 JSR-356，如果前面有个 nginx 代理，nginx 也需要针对 websocket 做一下配置&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2022-10-08T01:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>Proxmox VE 导入 VirtualBox 中的虚拟机</title><link href="https://xingzuoshe.cn/proxmox-import-from-virtualbox.html" rel="alternate"></link><published>2022-10-08T01:00:00+08:00</published><updated>2022-10-08T01:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2022-10-08:/proxmox-import-from-virtualbox.html</id><summary type="html">&lt;p&gt;如何把 VirtualBox 中的虚拟机导入 Proxmox VE 中&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Proxmox VE&lt;/h2&gt;
+&lt;p&gt;Proxmox VE 是一个适合家用的免费的 KVM 虚拟机管理的 debian 发行版，大部分都可以通过网页操作，十分方便&lt;/p&gt;
+&lt;p&gt;之前用在本地用 VirtualBox 安装的虚拟机，想直接导入到 Proxmox VE 中，不想重新安装一编 Windows 10，还有很多软件。&lt;/p&gt;
+&lt;p&gt;在网上找了一下，有些帖子，但是没有完整的步骤，所以截图做了一个简单明了的步骤。&lt;/p&gt;
+&lt;h2&gt;VirtualBox 导出&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="virtualbox-export-win10" src="../images/proxmox/virtualbox-export-win10.png"&gt;&lt;/p&gt;
+&lt;p&gt;默认选择&lt;code&gt;开放式虚拟化格式 1.0&lt;/code&gt;就行，导出的文件是&lt;code&gt;win10.ova&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="virtualbox-export-win10-2" src="../images/proxmox/virtualbox-export-win10-2.png"&gt;&lt;/p&gt;
+&lt;h2&gt;Proxmox 导入&lt;/h2&gt;
+&lt;p&gt;首先把文件上传到 Proxmox 主机的 /tmp 目录下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /tmp
+tar -xvf win10.ova 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;解压出来有三个文件：
+- win10.mf 
+- win10.ovf 
+- win10-disk001.vmdk&lt;/p&gt;
+&lt;p&gt;最重要的就是&lt;code&gt;win10-disk001.vmdk&lt;/code&gt;磁盘文件，接下来我们就要把这个文件导入到一个新建的虚拟机中&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：新建虚拟机的时候删掉磁盘&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img alt="proxmox-create-win10.png" src="../images/proxmox/proxmox-create-win10.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="proxmox-create-win10-disk.png" src="../images/proxmox/proxmox-create-win10-disk.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="proxmox-create-win10-disk-del.png" src="../images/proxmox/proxmox-create-win10-disk-del.png"&gt;&lt;/p&gt;
+&lt;p&gt;导入磁盘，数字是之前新建虚拟的数字ID，后面那个&lt;code&gt;local-vm&lt;/code&gt;是存储的名称，根据自己的需要修改命令&lt;/p&gt;
+&lt;p&gt;需要等一会，等进度条跑到 100% 就行了&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;qm importdisk &lt;span class="m"&gt;111&lt;/span&gt; win10-disk001.vmdk local-vm -format qcow2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;导入之后，就可以直接启动了&lt;/p&gt;
+&lt;p&gt;&lt;img alt="proxmox-import-disk.png" src="../images/proxmox/proxmox-import-disk.png"&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="proxmox"></category><category term="virtualbox"></category></entry><entry><title>Nginx WebSocket 代理配置</title><link href="https://xingzuoshe.cn/nginx-websocket.html" rel="alternate"></link><published>2021-08-18T18:00:00+08:00</published><updated>2021-08-18T19:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2021-08-18:/nginx-websocket.html</id><summary type="html">&lt;p&gt;Nginx WebSocket 代理配置&lt;/p&gt;</summary><content type="html">&lt;p&gt;Tomcat 从 7.0.27开始支持 WebSocket，从 7.0.47 开始支持 JSR-356，如果前面有个 nginx 代理，nginx 也需要针对 websocket 做一下配置&lt;/p&gt;
 &lt;p&gt;&lt;img alt="nginx代理" src="../image/../images/nginx-websocket.png"&gt;&lt;/p&gt;
 &lt;p&gt;在 http 段里定义两个变量&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;map $http_upgrade $connection_upgrade {&lt;/span&gt;
