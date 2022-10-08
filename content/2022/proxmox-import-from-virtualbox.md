@@ -1,7 +1,7 @@
 Title: Proxmox VE 导入 VirtualBox 中的虚拟机
 Status: published
-Date: 2022-10-08 01:00
-Modified: 2022-10-08 01:00
+Date: 2022-10-08 23:00
+Modified: 2022-10-08 23:00
 Category: Linux
 Tags: proxmox, virtualbox
 Slug: proxmox-import-from-virtualbox
