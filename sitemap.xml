@@ -5,42 +5,49 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2022-10-08T15:59:09-00:00</lastmod>
+<lastmod>2022-10-18T16:48:17-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2022-10-08T15:59:09-00:00</lastmod>
+<lastmod>2022-10-18T16:48:17-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2022-10-08T15:59:09-00:00</lastmod>
+<lastmod>2022-10-18T16:48:17-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2022-10-08T15:59:09-00:00</lastmod>
+<lastmod>2022-10-18T16:48:17-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2022-10-08T15:59:09-00:00</lastmod>
+<lastmod>2022-10-18T16:48:17-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2022-10-08T15:59:09-00:00</lastmod>
+<lastmod>2022-10-18T16:48:17-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/rest-template-post-multipart-file.html</loc>
+<lastmod>2022-10-18T23:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -537,7 +544,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/category/java.html</loc>
-<lastmod>2021-08-11T19:00:00+08:06</lastmod>
+<lastmod>2022-10-18T23:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -573,6 +580,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/category/web.html</loc>
 <lastmod>2020-12-30T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/java.html</loc>
+<lastmod>2022-10-18T23:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/spring.html</loc>
+<lastmod>2022-10-18T23:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -622,13 +643,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/tag/websocket.html</loc>
 <lastmod>2021-08-18T19:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/java.html</loc>
-<lastmod>2021-08-11T19:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -804,13 +818,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/tag/nlp.html</loc>
 <lastmod>2020-06-15T14:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/spring.html</loc>
-<lastmod>2020-06-03T21:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1013,7 +1020,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/author/martin.html</loc>
-<lastmod>2022-10-08T23:00:00+08:06</lastmod>
+<lastmod>2022-10-18T23:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
