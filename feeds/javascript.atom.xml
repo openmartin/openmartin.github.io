@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Javascript</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/javascript.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2020-05-25T14:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>echarts 初级教程</title><link href="https://xingzuoshe.cn/echarts-preliminary-guide.html" rel="alternate"></link><published>2020-05-25T14:00:00+08:00</published><updated>2020-05-25T14:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/echarts-preliminary-guide.html</id><summary type="html">&lt;p&gt;echarts 基本概念，初级教程&lt;/p&gt;</summary><content type="html">&lt;h2&gt;echarts 初级教程&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Javascript</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/javascript.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2022-10-19T23:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>jquery 实现文本比较</title><link href="https://xingzuoshe.cn/jquery-text-diff.html" rel="alternate"></link><published>2022-10-19T23:00:00+08:00</published><updated>2022-10-19T23:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2022-10-19:/jquery-text-diff.html</id><summary type="html">&lt;p&gt;jquery 实现文本比较&lt;/p&gt;</summary><content type="html">&lt;h2&gt;文本比较&lt;/h2&gt;
+&lt;p&gt;文本比较是一个常用的功能，但是如何通过 Javascript 实现呢。&lt;/p&gt;
+&lt;p&gt;思路，生成 diff 文件，然后左右栏显示&lt;/p&gt;
+&lt;p&gt;参考资料：
+1. &lt;a href="https://juejin.cn/post/6855129008007774216"&gt;https://juejin.cn/post/6855129008007774216&lt;/a&gt;
+2. &lt;a href="https://github.com/kpdecker/jsdiff"&gt;jsdiff&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;jquery 写法&lt;/h2&gt;
+&lt;h2&gt;vue diff&lt;/h2&gt;
+&lt;p&gt;新的前端框架比较方便，可以直接引用别人做好的组件&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/hoiheart/vue-diff"&gt;https://github.com/hoiheart/vue-diff&lt;/a&gt;&lt;/p&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="jquery"></category></entry><entry><title>echarts 初级教程</title><link href="https://xingzuoshe.cn/echarts-preliminary-guide.html" rel="alternate"></link><published>2020-05-25T14:00:00+08:00</published><updated>2020-05-25T14:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/echarts-preliminary-guide.html</id><summary type="html">&lt;p&gt;echarts 基本概念，初级教程&lt;/p&gt;</summary><content type="html">&lt;h2&gt;echarts 初级教程&lt;/h2&gt;
 &lt;p&gt;柱状图的例子&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nx"&gt;option&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="nx"&gt;title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
