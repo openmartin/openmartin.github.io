@@ -6,6 +6,8 @@
 1. &lt;a href="https://juejin.cn/post/6855129008007774216"&gt;https://juejin.cn/post/6855129008007774216&lt;/a&gt;
 2. &lt;a href="https://github.com/kpdecker/jsdiff"&gt;jsdiff&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;jquery 写法&lt;/h2&gt;
+&lt;p&gt;可以参考这个 demo 的写法
+&lt;a href="https://github.com/openmartin/jquery-diff"&gt;https://github.com/openmartin/jquery-diff&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;vue diff&lt;/h2&gt;
 &lt;p&gt;新的前端框架比较方便，可以直接引用别人做好的组件&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/hoiheart/vue-diff"&gt;https://github.com/hoiheart/vue-diff&lt;/a&gt;&lt;/p&gt;</content><category term="Javascript"></category><category term="javascript"></category><category term="jquery"></category></entry><entry><title>echarts 初级教程</title><link href="https://xingzuoshe.cn/echarts-preliminary-guide.html" rel="alternate"></link><published>2020-05-25T14:00:00+08:00</published><updated>2020-05-25T14:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2020-05-25:/echarts-preliminary-guide.html</id><summary type="html">&lt;p&gt;echarts 基本概念，初级教程&lt;/p&gt;</summary><content type="html">&lt;h2&gt;echarts 初级教程&lt;/h2&gt;
