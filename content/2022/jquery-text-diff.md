@@ -20,7 +20,8 @@ Summary: jquery 实现文本比较
 
 ## jquery 写法
 
-
+可以参考这个 demo 的写法
+[https://github.com/openmartin/jquery-diff](https://github.com/openmartin/jquery-diff)
 
 ## vue diff
 
