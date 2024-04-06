@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="修改数据库然后重启" />
+<meta name="keywords" content="java, flowable">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="如何修改 flowable 流程图重新发布后对正在运行的流程生效"/>
+<meta property="og:description" content="修改数据库然后重启"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./how-to-modify-flowable-active-process-instance.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-04-06 18:00:00+08:00"/>
+<meta property="article:modified_time" content="2024-04-06 18:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Java"/>
+<meta property="article:tag" content="java"/>
+<meta property="article:tag" content="flowable"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 如何修改 flowable 流程图重新发布后对正在运行的流程生效</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="how-to-modify-flowable-active-process-instance">如何修改 flowable 流程图重新发布后对正在运行的流程生效</h1>
+    <p>
+      Posted on 2024-04-06 18:00 in <a href="./category/java.html">Java</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>修改 flowable 流程图</h2>
+<p>如果 flowable 流程有变化，部署新流程之后如何让已经启动的旧的流程更换成新的流程图</p>
+<p>首先，流程图应该在上次的基础上修改，节点的ID至少不能变化，可以增加节点，减少的节点只要已有的流程实例不处于那个节点就行。</p>
+<p>然后部署流程，会得到新的流程定义</p>
+<h2>修改数据库</h2>
+<p>流程引擎中是根据 act_ge_bytearray 中存储的 BPMN 二进制信息知道流程的走向的，所以，实现思路就是拿新的 BPMN 二进制文件替换旧的 BPMN 文件即可实现新的流程应用到新的流程中。</p>
+<p><img alt="flowabe-db" src="../images/flowable-modify-db.png"></p>
+<div class="highlight"><pre><span></span><code><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">act_run_task</span> <span class="k">where</span> <span class="n">ID_</span> <span class="o">=</span> <span class="o">?</span><span class="p">;</span> <span class="c1">-- 找到 proc_def_id</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">act_re_procdf</span> <span class="k">where</span> <span class="n">PROC_DEF_ID_</span> <span class="o">=</span> <span class="o">?</span><span class="p">;</span>  <span class="c1">-- 找到 deployment_id</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">act_ge_bytearray</span> <span class="k">where</span> <span class="n">DEPLOYMENT_ID_</span> <span class="o">=</span> <span class="o">?</span><span class="p">;</span> <span class="c1">-- 找到流程定义 bpmn.xml</span>
+</code></pre></div>
+
+
+<h2>缓存失效或者重启</h2>
+<p>因为flowable 有缓存，在数据库中替换了 xml 之后，还需要清楚缓存才能生效，旧的流程实例才能使用新的流程定义</p>
+<p>最简单的方法，<code>重启</code>即可</p>
+<p>也有用编程的方法实现清除缓存的，这个功能是需要提前做好的，而不是临时处理线上流程。</p>
+<div class="highlight"><pre><span></span><code><span class="n">DeploymentManager</span> <span class="n">deploymentManager</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">.</span><span class="na">getDeploymentManager</span><span class="p">();</span>
+<span class="n">deploymentManager</span><span class="p">.</span><span class="na">getBpmnModelCache</span><span class="p">().</span><span class="na">remove</span><span class="p">(</span><span class="n">definition</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+<span class="n">deploymentManager</span><span class="p">.</span><span class="na">getProcessDefinitionCache</span><span class="p">().</span><span class="na">remove</span><span class="p">(</span><span class="n">definition</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
+</code></pre></div>
+
+
+<p>参考
+1. https://dou-chi.gitee.io/actdynamicprocess/
+2. https://blog.csdn.net/u014596024/article/details/112937832</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/java.html">java</a>
+      <a href="./tag/flowable.html">flowable</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
