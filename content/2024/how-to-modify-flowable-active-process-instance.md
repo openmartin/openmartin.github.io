@@ -44,5 +44,5 @@ deploymentManager.getProcessDefinitionCache().remove(definition.getId());
 ```
 
 参考
-1. https://dou-chi.gitee.io/actdynamicprocess/
-2. https://blog.csdn.net/u014596024/article/details/112937832
+1. [https://dou-chi.gitee.io/actdynamicprocess/](https://dou-chi.gitee.io/actdynamicprocess/)
+2. [https://blog.csdn.net/u014596024/article/details/112937832](https://blog.csdn.net/u014596024/article/details/112937832)

@@ -22,4 +22,4 @@ Spring 下的 BeanUtils # copyProperties 方法实现比较简单，就是对两
 CglibBeanCopier 但是 cglib 已经不维护了，不支持 JDK 17+，一般情况使用 Spring BeanUtils 就行了，但是大量使用得时候也是存在性能问题的，直接set get 是更快的，如果存在性能问题，建议改成最简单的 set get 方法。
 
 参考：
-1. https://juejin.cn/post/6974303935972507656
+1. [https://juejin.cn/post/6974303935972507656](https://juejin.cn/post/6974303935972507656)
