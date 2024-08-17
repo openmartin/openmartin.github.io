@@ -16,7 +16,7 @@ Summary: 不要选 KDE Plasma/Wayland 桌面环境
 
 第一件事就是重新系统，因为之前是 AMD RX580的显卡，应该是需要重装，此处存疑？为了一个干净的系统从头开始，硬盘里也没啥重要资料，都是些下载的电影，所以选择了重装。
 
-习惯了 KDE 桌面环境，所以安装的时候选择了KDE Plasma 桌面环境，但是安装完成之后重启，无法进入桌面，启动过程卡在了 CUPS Scheduler，和[这个帖子](https://forums.debian.net/viewtopic.php?t=155493)的现象相同。
+习惯了 KDE 桌面环境，所以安装的时候选择了 KDE Plasma 桌面环境，但是安装完成之后重启，无法进入桌面，启动过程卡在了 CUPS Scheduler，和[这个帖子](https://forums.debian.net/viewtopic.php?t=155493)的现象相同。
 
 看了帖子的内容之后和网上摸索，发现是 KDE Plasma 用了 Wayland，而 N 卡的 Wayland 支持并不好，所以会出现启动卡住的问题。
 
