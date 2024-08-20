@@ -5,42 +5,49 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2024-08-20T17:22:29-00:00</lastmod>
+<lastmod>2024-08-20T17:27:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2024-08-20T17:22:29-00:00</lastmod>
+<lastmod>2024-08-20T17:27:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2024-08-20T17:22:29-00:00</lastmod>
+<lastmod>2024-08-20T17:27:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2024-08-20T17:22:29-00:00</lastmod>
+<lastmod>2024-08-20T17:27:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2024-08-20T17:22:29-00:00</lastmod>
+<lastmod>2024-08-20T17:27:34-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2024-08-20T17:22:29-00:00</lastmod>
+<lastmod>2024-08-20T17:27:34-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/ragflow-install-on-centos-7-offline.html</loc>
+<lastmod>2024-08-21T18:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -613,6 +620,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://xingzuoshe.cn/category/llm.html</loc>
+<lastmod>2024-08-21T18:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://xingzuoshe.cn/category/nlp.html</loc>
 <lastmod>2020-06-15T14:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -629,6 +643,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/category/web.html</loc>
 <lastmod>2020-12-30T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/llm.html</loc>
+<lastmod>2024-08-21T18:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/ai.html</loc>
+<lastmod>2024-08-21T18:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1125,7 +1153,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/author/martin.html</loc>
-<lastmod>2024-08-15T22:00:00+08:06</lastmod>
+<lastmod>2024-08-21T18:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
