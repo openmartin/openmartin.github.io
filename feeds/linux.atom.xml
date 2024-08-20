@@ -7,7 +7,7 @@
 
 
 &lt;p&gt;在 &lt;code&gt;root ALL=(ALL:ALL) ALL&lt;/code&gt; 下面加一行 &lt;code&gt;xxx ALL=(ALL:ALL) ALL&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;一般第一步就是跟换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点&lt;/p&gt;
+&lt;p&gt;一般第一步就是更换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;https://mirrors.cloud.tencent.com/debian/&lt;/span&gt; &lt;span class="kp"&gt;bookworm&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
 &lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;https://mirrors.cloud.tencent.com/debian/&lt;/span&gt; &lt;span class="kp"&gt;bookworm&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
 
@@ -63,7 +63,7 @@ Logfile is /var/log/cuda-installer.log
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;&lt;code&gt;nvidia-smi&lt;/code&gt; 输出下面的界面，说明找了显卡&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;nvidia-smi&lt;/code&gt; 输出下面的界面，说明找到了显卡&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;+-----------------------------------------------------------------------------------------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;
 &lt;span class="c"&gt;| NVIDIA&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;SMI 560&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;28&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;03              Driver Version: 560&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;28&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;03      CUDA Version: 12&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;6     |&lt;/span&gt;
 &lt;span class="c"&gt;|&lt;/span&gt;&lt;span class="nb"&gt;-----------------------------------------+------------------------+----------------------+&lt;/span&gt;&lt;span class="c"&gt;&lt;/span&gt;

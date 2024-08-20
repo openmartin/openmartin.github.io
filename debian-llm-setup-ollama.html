@@ -114,7 +114,7 @@
 
 
 <p>在 <code>root ALL=(ALL:ALL) ALL</code> 下面加一行 <code>xxx ALL=(ALL:ALL) ALL</code></p>
-<p>一般第一步就是跟换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点</p>
+<p>一般第一步就是更换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点</p>
 <div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">https://mirrors.cloud.tencent.com/debian/</span> <span class="kp">bookworm</span> <span class="kp">main</span> <span class="kp">contrib</span> <span class="kp">non-free</span> <span class="kp">non-free-firmware</span>
 <span class="k">deb-src</span> <span class="s">https://mirrors.cloud.tencent.com/debian/</span> <span class="kp">bookworm</span> <span class="kp">main</span> <span class="kp">contrib</span> <span class="kp">non-free</span> <span class="kp">non-free-firmware</span>
 
@@ -170,7 +170,7 @@ Logfile is /var/log/cuda-installer.log
 </code></pre></div>
 
 
-<p><code>nvidia-smi</code> 输出下面的界面，说明找了显卡</p>
+<p><code>nvidia-smi</code> 输出下面的界面，说明找到了显卡</p>
 <div class="highlight"><pre><span></span><code><span class="nb">+-----------------------------------------------------------------------------------------+</span><span class="c"></span>
 <span class="c">| NVIDIA</span><span class="nb">-</span><span class="c">SMI 560</span><span class="nt">.</span><span class="c">28</span><span class="nt">.</span><span class="c">03              Driver Version: 560</span><span class="nt">.</span><span class="c">28</span><span class="nt">.</span><span class="c">03      CUDA Version: 12</span><span class="nt">.</span><span class="c">6     |</span>
 <span class="c">|</span><span class="nb">-----------------------------------------+------------------------+----------------------+</span><span class="c"></span>
