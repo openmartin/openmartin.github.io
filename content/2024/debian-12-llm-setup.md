@@ -20,7 +20,7 @@ visudo
 在 `root ALL=(ALL:ALL) ALL` 下面加一行 `xxx ALL=(ALL:ALL) ALL`
 
 
-一般第一步就是跟换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点
+一般第一步就是更换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点
 
 ```
 deb https://mirrors.cloud.tencent.com/debian/ bookworm main contrib non-free non-free-firmware
@@ -84,7 +84,7 @@ To uninstall the NVIDIA Driver, run nvidia-uninstall
 Logfile is /var/log/cuda-installer.log
 ```
 
-`nvidia-smi` 输出下面的界面，说明找了显卡
+`nvidia-smi` 输出下面的界面，说明找到了显卡
 
 ```
 +-----------------------------------------------------------------------------------------+
