@@ -1,7 +1,7 @@
 Title: 在 redhat/centos 7.9 上离线安装 raglow
-Status: draft
-Date: 2024-08-16 18:00
-Modified: 2024-08-16 18:00
+Status: published
+Date: 2024-08-21 18:00
+Modified: 2024-08-21 18:00
 Category: llm
 Tags: llm, ai
 Slug: ragflow-install-on-centos-7-offline
