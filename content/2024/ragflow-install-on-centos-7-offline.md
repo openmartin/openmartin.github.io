@@ -2,7 +2,7 @@ Title: 在 redhat/centos 7.9 上离线安装 raglow
 Status: published
 Date: 2024-08-21 18:00
 Modified: 2024-08-21 18:00
-Category: llm
+Category: Linux
 Tags: llm, ai
 Slug: ragflow-install-on-centos-7-offline
 Authors: Martin
@@ -69,7 +69,7 @@ sudo yum -y install centos-release-scl
 sudo yum -y install devtoolset-11 --downloadonly --downloaddir /home/centos/rpms/devtoolset-11
 ```
 
-把 rpm 包传输到离线的服务器上，然后安装
+把 rpm 包传输到离线的服务器上，然后安装，切换到 gcc 11
 
 ```bash
 sudo rpm -ivh *.rpm --force --nodeps
@@ -78,7 +78,7 @@ scl enable devtoolset-11 bash
 
 ### 升级 python 3.11，openssl，sqlite3
 
-centos/redhat 7.9 默认带 openssl, sqlite3 版本也太低，会影响 python 3.11 的编译安装，需要升级
+centos/redhat 7.9 默认带的 openssl, sqlite3 版本太低，会影响 python 3.11 的编译安装，需要升级
 
 openssl 的安装过程如下，为了简洁，不在详细解释了
 
@@ -143,7 +143,7 @@ make install
 
 #### pytorch
 
-因为 centos/redhat 7.9 支持支 cuda 11，所以安装 pytorch 需要指定 cuda 11
+因为 centos/redhat 7.9 仅支持 cuda 11，所以安装 pytorch 需要指定 cuda 11
 
 手工下载安装
 
@@ -154,7 +154,7 @@ triton-2.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 
 #### onnxruntime
 
-pypi 上下载的 onnxruntime 安装包需要比较新的 glibc, 所以只能自己从源码编译，需要在可以联网的那台机器上先编译，把编译好的包拷贝到离线的服务器上
+pypi 上下载的 onnxruntime 安装包需要比较新的 glibc 2.27, 所以只能自己从源码编译，需要在可以联网的那台机器上先编译，把编译好的包拷贝到离线的服务器上
 
 ```bash
 # 1.17.3
