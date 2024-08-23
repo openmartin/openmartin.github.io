@@ -45,14 +45,14 @@ sudo yum -y install devtoolset-11 --downloadonly --downloaddir /home/centos/rpms
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;把 rpm 包传输到离线的服务器上，然后安装&lt;/p&gt;
+&lt;p&gt;把 rpm 包传输到离线的服务器上，然后安装，切换到 gcc 11&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo rpm -ivh *.rpm --force --nodeps
 scl &lt;span class="nb"&gt;enable&lt;/span&gt; devtoolset-11 bash
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;升级 python 3.11，openssl，sqlite3&lt;/h3&gt;
-&lt;p&gt;centos/redhat 7.9 默认带 openssl, sqlite3 版本也太低，会影响 python 3.11 的编译安装，需要升级&lt;/p&gt;
+&lt;p&gt;centos/redhat 7.9 默认带的 openssl, sqlite3 版本太低，会影响 python 3.11 的编译安装，需要升级&lt;/p&gt;
 &lt;p&gt;openssl 的安装过程如下，为了简洁，不在详细解释了&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;releases&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;download&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;OpenSSL_1_1_1w&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gz&lt;/span&gt;
 &lt;span class="n"&gt;tar&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;zxvf&lt;/span&gt; &lt;span class="n"&gt;openssl&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gz&lt;/span&gt;
@@ -109,7 +109,7 @@ make install
 
 &lt;h3&gt;pip 安装依赖&lt;/h3&gt;
 &lt;h4&gt;pytorch&lt;/h4&gt;
-&lt;p&gt;因为 centos/redhat 7.9 支持支 cuda 11，所以安装 pytorch 需要指定 cuda 11&lt;/p&gt;
+&lt;p&gt;因为 centos/redhat 7.9 仅支持 cuda 11，所以安装 pytorch 需要指定 cuda 11&lt;/p&gt;
 &lt;p&gt;手工下载安装&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;torch-2.3.0+cu118-cp311-cp311-linux_x86_64.whl&lt;/span&gt;
 &lt;span class="err"&gt;triton-2.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl&lt;/span&gt;
@@ -117,7 +117,7 @@ make install
 
 
 &lt;h4&gt;onnxruntime&lt;/h4&gt;
-&lt;p&gt;pypi 上下载的 onnxruntime 安装包需要比较新的 glibc, 所以只能自己从源码编译，需要在可以联网的那台机器上先编译，把编译好的包拷贝到离线的服务器上&lt;/p&gt;
+&lt;p&gt;pypi 上下载的 onnxruntime 安装包需要比较新的 glibc 2.27, 所以只能自己从源码编译，需要在可以联网的那台机器上先编译，把编译好的包拷贝到离线的服务器上&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 1.17.3&lt;/span&gt;
 pip install &lt;span class="nv"&gt;numpy&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.26.4
 pip install packaging
@@ -229,7 +229,7 @@ vim .umirc.ts
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;如果没问题的话，现在就可以打开前端页面了 &lt;code&gt;http://ip:80/&lt;/code&gt;, 如果有问题再针对性的查找问题&lt;/p&gt;</content><category term="llm"></category><category term="llm"></category><category term="ai"></category></entry><entry><title>在 debian 12 体验大模型, Ollama 和 open-webui 安装</title><link href="https://xingzuoshe.cn/debian-llm-setup-ollama.html" rel="alternate"></link><published>2024-08-15T22:00:00+08:00</published><updated>2024-08-15T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-15:/debian-llm-setup-ollama.html</id><summary type="html">&lt;p&gt;安装 Ollama 和 open-webui 的步骤&lt;/p&gt;</summary><content type="html">&lt;h3&gt;系统设置&lt;/h3&gt;
+&lt;p&gt;如果没问题的话，现在就可以打开前端页面了 &lt;code&gt;http://ip:80/&lt;/code&gt;, 如果有问题再针对性的查找问题&lt;/p&gt;</content><category term="Linux"></category><category term="llm"></category><category term="ai"></category></entry><entry><title>在 debian 12 体验大模型, Ollama 和 open-webui 安装</title><link href="https://xingzuoshe.cn/debian-llm-setup-ollama.html" rel="alternate"></link><published>2024-08-15T22:00:00+08:00</published><updated>2024-08-15T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-15:/debian-llm-setup-ollama.html</id><summary type="html">&lt;p&gt;安装 Ollama 和 open-webui 的步骤&lt;/p&gt;</summary><content type="html">&lt;h3&gt;系统设置&lt;/h3&gt;
 &lt;p&gt;在安装的时候选设置了 root 账号，但是需要把常用的账号加到sudoer列表里，使用起来更方便一点。root 作为特权账号，不适合日常使用。系统操作系统时的注意事项可以参考&lt;a href="./debian-12-with-4060ti.md"&gt;上一篇&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;su - root&lt;/span&gt;
 &lt;span class="err"&gt;visudo&lt;/span&gt;

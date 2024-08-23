@@ -48,7 +48,7 @@
 <meta property="article:published_time" content="2024-08-21 18:00:00+08:00"/>
 <meta property="article:modified_time" content="2024-08-21 18:00:00+08:00"/>
 <meta property="article:author" content="./author/martin.html">
-<meta property="article:section" content="llm"/>
+<meta property="article:section" content="Linux"/>
 <meta property="article:tag" content="llm"/>
 <meta property="article:tag" content="ai"/>
 <meta property="og:image" content="/images/default_profile_200x200.png">
@@ -99,7 +99,7 @@
       
     <h1 id="ragflow-install-on-centos-7-offline">在 redhat/centos 7.9 上离线安装 raglow</h1>
     <p>
-      Posted on 2024-08-21 18:00 in <a href="./category/llm.html">llm</a>
+      Posted on 2024-08-21 18:00 in <a href="./category/linux.html">Linux</a>
 
     </p>
   </header>
@@ -152,14 +152,14 @@ sudo yum -y install devtoolset-11 --downloadonly --downloaddir /home/centos/rpms
 </code></pre></div>
 
 
-<p>把 rpm 包传输到离线的服务器上，然后安装</p>
+<p>把 rpm 包传输到离线的服务器上，然后安装，切换到 gcc 11</p>
 <div class="highlight"><pre><span></span><code>sudo rpm -ivh *.rpm --force --nodeps
 scl <span class="nb">enable</span> devtoolset-11 bash
 </code></pre></div>
 
 
 <h3>升级 python 3.11，openssl，sqlite3</h3>
-<p>centos/redhat 7.9 默认带 openssl, sqlite3 版本也太低，会影响 python 3.11 的编译安装，需要升级</p>
+<p>centos/redhat 7.9 默认带的 openssl, sqlite3 版本太低，会影响 python 3.11 的编译安装，需要升级</p>
 <p>openssl 的安装过程如下，为了简洁，不在详细解释了</p>
 <div class="highlight"><pre><span></span><code><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">openssl</span><span class="o">/</span><span class="n">openssl</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">OpenSSL_1_1_1w</span><span class="o">/</span><span class="n">openssl</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mi">1</span><span class="n">w</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 <span class="n">tar</span> <span class="o">-</span><span class="n">zxvf</span> <span class="n">openssl</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mi">1</span><span class="n">w</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
@@ -216,7 +216,7 @@ make install
 
 <h3>pip 安装依赖</h3>
 <h4>pytorch</h4>
-<p>因为 centos/redhat 7.9 支持支 cuda 11，所以安装 pytorch 需要指定 cuda 11</p>
+<p>因为 centos/redhat 7.9 仅支持 cuda 11，所以安装 pytorch 需要指定 cuda 11</p>
 <p>手工下载安装</p>
 <div class="highlight"><pre><span></span><code><span class="err">torch-2.3.0+cu118-cp311-cp311-linux_x86_64.whl</span>
 <span class="err">triton-2.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl</span>
@@ -224,7 +224,7 @@ make install
 
 
 <h4>onnxruntime</h4>
-<p>pypi 上下载的 onnxruntime 安装包需要比较新的 glibc, 所以只能自己从源码编译，需要在可以联网的那台机器上先编译，把编译好的包拷贝到离线的服务器上</p>
+<p>pypi 上下载的 onnxruntime 安装包需要比较新的 glibc 2.27, 所以只能自己从源码编译，需要在可以联网的那台机器上先编译，把编译好的包拷贝到离线的服务器上</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 1.17.3</span>
 pip install <span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.26.4
 pip install packaging
