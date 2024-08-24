@@ -180,7 +180,7 @@ onnxruntime-1.17.1/build/Linux/Release/dist/onnxruntime_gpu-1.17.1-cp311-cp311-l
 
 #### requirements.txt
 
-先把 `requirements.txt` 中 jina 那一行注释掉，因为有以来冲突，而且一般用不到
+先把 `requirements.txt` 中 jina 那一行注释掉，因为依赖冲突，而且一般用不到
 
 先建立一个虚拟环境，然后安装依赖包
 
