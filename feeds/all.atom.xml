@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-08-21T18:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在 redhat/centos 7.9 上离线安装 raglow</title><link href="https://xingzuoshe.cn/ragflow-install-on-centos-7-offline.html" rel="alternate"></link><published>2024-08-21T18:00:00+08:00</published><updated>2024-08-21T18:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-21:/ragflow-install-on-centos-7-offline.html</id><summary type="html">&lt;p&gt;源码安装非常复杂，尽量用 docker 安装&lt;/p&gt;</summary><content type="html">&lt;p&gt;众所周知还有很多企业用户被锁死在 redhat 7.9 上，一直没法升级，glibc 2.17，gcc 4，python 2，导致安装新一点软件的都是噩梦，所以尽量用 docker，减少因为系统环境浪费的时间。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-08-29T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在 debian 12 安装微信</title><link href="https://xingzuoshe.cn/install-wechat-on-debian-12.html" rel="alternate"></link><published>2024-08-29T22:00:00+08:00</published><updated>2024-08-29T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-29:/install-wechat-on-debian-12.html</id><summary type="html">&lt;p&gt;在 debian 12 上安装微信&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前在 linux 上用微信只能用 deepin 打包的基于 wine 的微信，经常会异常推出，使用起来也不流畅，但是现在微信在linux 上有原生版本了&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/lovechoudoufu/wechat_for_linux"&gt;https://github.com/lovechoudoufu/wechat_for_linux&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下载最新版，直接安装 deb 包，但是安装之后，点击图标之后闪退，没打开登陆窗口。&lt;/p&gt;
+&lt;p&gt;这时候可以直接在命令行输入&lt;code&gt;wechat&lt;/code&gt;，看看有什么报错信息，我的情况提示下面的错误&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;loading&lt;/span&gt; &lt;span class="n"&gt;shared&lt;/span&gt; &lt;span class="n"&gt;libraries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;libatomic&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;so&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;cannot&lt;/span&gt; &lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;shared&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;No&lt;/span&gt; &lt;span class="n"&gt;such&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;马上安装对应的包&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt-get install libatomic1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后就可以登陆，但是窗口有点小，因为我的屏幕是4K屏幕，KDE Plasma 桌面缩放设置成了 200% ，这个微信使用 QT 开发的，所以需要设置一下环境变量，让微信的也显示成 200%&lt;/p&gt;
+&lt;p&gt;&lt;img alt="weichat desktop" src="../images/wechat_desktop.png"&gt;&lt;/p&gt;
+&lt;p&gt;如果用命令行启动的话，在命令行 &lt;code&gt;export QT_SCALE_FACTOR=2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这样使用起来就比较完美了，支持通讯录，搜一搜，视频号，小程序&lt;/p&gt;
+&lt;p&gt;&lt;img alt="weichat demo" src="../images/wechat_demo.png"&gt;&lt;/p&gt;
+&lt;p&gt;看来这个包看起来是给 kylin 开发的，所以打的包里有 &lt;code&gt;/etc/lsb-release&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;DISTRIB_ID=Kylin&lt;/span&gt;
+&lt;span class="err"&gt;DISTRIB_RELEASE=V10&lt;/span&gt;
+&lt;span class="err"&gt;DISTRIB_CODENAME=kylin&lt;/span&gt;
+&lt;span class="err"&gt;DISTRIB_DESCRIPTION=&amp;quot;Kylin V10 SP1&amp;quot;&lt;/span&gt;
+&lt;span class="err"&gt;DISTRIB_KYLIN_RELEASE=V10&lt;/span&gt;
+&lt;span class="err"&gt;DISTRIB_VERSION_TYPE=enterprise&lt;/span&gt;
+&lt;span class="err"&gt;DISTRIB_VERSION_MODE=normal&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;还有一些其他配置信息，伪装成国产操作系统，更多信息可以查看下面的连接&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.52pojie.cn/thread-1896902-1-1.html"&gt;https://www.52pojie.cn/thread-1896902-1-1.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap"&gt;https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aur.archlinux.org/packages/wechat-universal-bwrap"&gt;https://aur.archlinux.org/packages/wechat-universal-bwrap&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="debian"></category><category term="wechat"></category></entry><entry><title>在 redhat/centos 7.9 上离线安装 raglow</title><link href="https://xingzuoshe.cn/ragflow-install-on-centos-7-offline.html" rel="alternate"></link><published>2024-08-21T18:00:00+08:00</published><updated>2024-08-21T18:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-21:/ragflow-install-on-centos-7-offline.html</id><summary type="html">&lt;p&gt;源码安装非常复杂，尽量用 docker 安装&lt;/p&gt;</summary><content type="html">&lt;p&gt;众所周知还有很多企业用户被锁死在 redhat 7.9 上，一直没法升级，glibc 2.17，gcc 4，python 2，导致安装新一点软件的都是噩梦，所以尽量用 docker，减少因为系统环境浪费的时间。&lt;/p&gt;
 &lt;p&gt;需要有一台同样版本的 redhat/centos 7.9 而且可以联网的服务器，也可以去云上开一台，联网把依赖的包都下载下来，然后复制到离线的那台机器上去，基本的思路就是这样。&lt;/p&gt;
 &lt;p&gt;这里以 ragflow v0.9.0 的版本为例子&lt;/p&gt;
 &lt;h2&gt;如何用 docker 安装&lt;/h2&gt;

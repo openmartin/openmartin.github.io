@@ -5,42 +5,49 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2024-08-24T01:29:00-00:00</lastmod>
+<lastmod>2024-08-29T17:49:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2024-08-24T01:29:00-00:00</lastmod>
+<lastmod>2024-08-29T17:49:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2024-08-24T01:29:00-00:00</lastmod>
+<lastmod>2024-08-29T17:49:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2024-08-24T01:29:00-00:00</lastmod>
+<lastmod>2024-08-29T17:49:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2024-08-24T01:29:00-00:00</lastmod>
+<lastmod>2024-08-29T17:49:21-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2024-08-24T01:29:00-00:00</lastmod>
+<lastmod>2024-08-29T17:49:21-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/install-wechat-on-debian-12.html</loc>
+<lastmod>2024-08-29T22:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -614,7 +621,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/category/linux.html</loc>
-<lastmod>2024-08-21T18:00:00+08:06</lastmod>
+<lastmod>2024-08-29T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -641,6 +648,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>https://xingzuoshe.cn/tag/debian.html</loc>
+<lastmod>2024-08-29T22:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/wechat.html</loc>
+<lastmod>2024-08-29T22:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>https://xingzuoshe.cn/tag/llm.html</loc>
 <lastmod>2024-08-21T18:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -650,13 +671,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/tag/ai.html</loc>
 <lastmod>2024-08-21T18:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/debian.html</loc>
-<lastmod>2024-08-15T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -1146,7 +1160,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/author/martin.html</loc>
-<lastmod>2024-08-21T18:00:00+08:06</lastmod>
+<lastmod>2024-08-29T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="在 debian 12 上安装微信" />
+<meta name="keywords" content="debian, wechat">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="在 debian 12 安装微信"/>
+<meta property="og:description" content="在 debian 12 上安装微信"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./install-wechat-on-debian-12.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2024-08-29 22:00:00+08:00"/>
+<meta property="article:modified_time" content="2024-08-29 22:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Linux"/>
+<meta property="article:tag" content="debian"/>
+<meta property="article:tag" content="wechat"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 在 debian 12 安装微信</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="install-wechat-on-debian-12">在 debian 12 安装微信</h1>
+    <p>
+      Posted on 2024-08-29 22:00 in <a href="./category/linux.html">Linux</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>之前在 linux 上用微信只能用 deepin 打包的基于 wine 的微信，经常会异常推出，使用起来也不流畅，但是现在微信在linux 上有原生版本了</p>
+<p><a href="https://github.com/lovechoudoufu/wechat_for_linux">https://github.com/lovechoudoufu/wechat_for_linux</a></p>
+<p>下载最新版，直接安装 deb 包，但是安装之后，点击图标之后闪退，没打开登陆窗口。</p>
+<p>这时候可以直接在命令行输入<code>wechat</code>，看看有什么报错信息，我的情况提示下面的错误</p>
+<div class="highlight"><pre><span></span><code><span class="n">error</span> <span class="k">while</span> <span class="n">loading</span> <span class="n">shared</span> <span class="n">libraries</span><span class="p">:</span> <span class="n">libatomic</span><span class="o">.</span><span class="n">so</span><span class="o">.</span><span class="mi">1</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">open</span> <span class="n">shared</span> <span class="n">object</span> <span class="n">file</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</code></pre></div>
+
+
+<p>马上安装对应的包</p>
+<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get install libatomic1</span>
+</code></pre></div>
+
+
+<p>然后就可以登陆，但是窗口有点小，因为我的屏幕是4K屏幕，KDE Plasma 桌面缩放设置成了 200% ，这个微信使用 QT 开发的，所以需要设置一下环境变量，让微信的也显示成 200%</p>
+<p><img alt="weichat desktop" src="../images/wechat_desktop.png"></p>
+<p>如果用命令行启动的话，在命令行 <code>export QT_SCALE_FACTOR=2</code></p>
+<p>这样使用起来就比较完美了，支持通讯录，搜一搜，视频号，小程序</p>
+<p><img alt="weichat demo" src="../images/wechat_demo.png"></p>
+<p>看来这个包看起来是给 kylin 开发的，所以打的包里有 <code>/etc/lsb-release</code></p>
+<div class="highlight"><pre><span></span><code><span class="err">DISTRIB_ID=Kylin</span>
+<span class="err">DISTRIB_RELEASE=V10</span>
+<span class="err">DISTRIB_CODENAME=kylin</span>
+<span class="err">DISTRIB_DESCRIPTION=&quot;Kylin V10 SP1&quot;</span>
+<span class="err">DISTRIB_KYLIN_RELEASE=V10</span>
+<span class="err">DISTRIB_VERSION_TYPE=enterprise</span>
+<span class="err">DISTRIB_VERSION_MODE=normal</span>
+</code></pre></div>
+
+
+<p>还有一些其他配置信息，伪装成国产操作系统，更多信息可以查看下面的连接</p>
+<ol>
+<li><a href="https://www.52pojie.cn/thread-1896902-1-1.html">https://www.52pojie.cn/thread-1896902-1-1.html</a></li>
+<li><a href="https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap">https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap</a></li>
+<li><a href="https://aur.archlinux.org/packages/wechat-universal-bwrap">https://aur.archlinux.org/packages/wechat-universal-bwrap</a></li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/debian.html">debian</a>
+      <a href="./tag/wechat.html">wechat</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
