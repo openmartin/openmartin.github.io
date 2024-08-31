@@ -8,7 +8,7 @@ Slug: install-wechat-on-debian-12
 Authors: Martin
 Summary: 在 debian 12 上安装微信
 
-之前在 linux 上用微信只能用 deepin 打包的基于 wine 的微信，经常会异常推出，使用起来也不流畅，但是现在微信在linux 上有原生版本了
+之前在 linux 上用微信只能用 deepin 打包的基于 wine 的微信，经常会异常退出，使用起来也不流畅，但是现在微信在linux 上有原生版本了
 
 
 [https://github.com/lovechoudoufu/wechat_for_linux](https://github.com/lovechoudoufu/wechat_for_linux)
