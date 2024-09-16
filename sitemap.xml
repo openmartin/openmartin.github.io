@@ -5,42 +5,49 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2024-09-16T01:48:00-00:00</lastmod>
+<lastmod>2024-09-16T03:13:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2024-09-16T01:48:00-00:00</lastmod>
+<lastmod>2024-09-16T03:13:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2024-09-16T01:48:00-00:00</lastmod>
+<lastmod>2024-09-16T03:13:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2024-09-16T01:48:00-00:00</lastmod>
+<lastmod>2024-09-16T03:13:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2024-09-16T01:48:00-00:00</lastmod>
+<lastmod>2024-09-16T03:13:03-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2024-09-16T01:48:00-00:00</lastmod>
+<lastmod>2024-09-16T03:13:03-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/beelink-GTR5-5900HX-fancontrol.html</loc>
+<lastmod>2024-09-15T22:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -614,7 +621,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/category/hardware.html</loc>
-<lastmod>2023-06-13T07:00:00+08:06</lastmod>
+<lastmod>2024-09-15T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -657,6 +664,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/category/web.html</loc>
 <lastmod>2020-12-30T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/hardware.html</loc>
+<lastmod>2024-09-15T22:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/fancontrol.html</loc>
+<lastmod>2024-09-15T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -747,13 +768,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/tag/pc.html</loc>
-<lastmod>2023-06-13T07:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>https://xingzuoshe.cn/tag/hardware.html</loc>
 <lastmod>2023-06-13T07:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
@@ -1188,7 +1202,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/author/martin.html</loc>
-<lastmod>2024-09-07T22:00:00+08:06</lastmod>
+<lastmod>2024-09-15T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

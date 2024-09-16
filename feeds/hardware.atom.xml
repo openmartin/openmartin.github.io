@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Hardware</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/hardware.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2023-06-13T07:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>如何组装台式机</title><link href="https://xingzuoshe.cn/how-to-assemble-your-pc.html" rel="alternate"></link><published>2023-06-13T07:00:00+08:00</published><updated>2023-06-13T07:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2023-06-13:/how-to-assemble-your-pc.html</id><summary type="html">&lt;p&gt;如何组装台式机&lt;/p&gt;</summary><content type="html">&lt;h2&gt;硬件&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Hardware</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/hardware.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-09-15T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>调整零刻 GTR5 5900HX 的风扇速度</title><link href="https://xingzuoshe.cn/beelink-GTR5-5900HX-fancontrol.html" rel="alternate"></link><published>2024-09-15T22:00:00+08:00</published><updated>2024-09-15T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-15:/beelink-GTR5-5900HX-fancontrol.html</id><summary type="html">&lt;p&gt;设置 BIOS 风扇控制&lt;/p&gt;</summary><content type="html">&lt;p&gt;默认情况下零刻 GTR5 5900HX 的风扇转速设置的比较高，放在桌面上会比较吵，不过 BIOS 里可以设置风扇转速，可以让噪音减少&lt;/p&gt;
+&lt;p&gt;路径比较深&lt;/p&gt;
+&lt;p&gt;Advanced -&amp;gt; AMD CBS -&amp;gt; NBIO Common Options -&amp;gt; SMU Common Options -&amp;gt; Fan Control&lt;/p&gt;
+&lt;p&gt;&lt;img alt="beelink-GTR5-BIOS-1" src="../images/beelink-GTR5-BIOS-1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="beelink-GTR5-BIOS-2" src="../images/beelink-GTR5-BIOS-2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="beelink-GTR5-BIOS-3" src="../images/beelink-GTR5-BIOS-3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;为了把噪音降到最低，可以把功耗设置为 35w。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="fancontrol" src="../images/fancontrol.png"&gt;&lt;/p&gt;
+&lt;p&gt;BIOS里的设置类似于上面的图&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Low Temperature&lt;/li&gt;
+&lt;li&gt;Medium Temperature&lt;/li&gt;
+&lt;li&gt;High Temperature&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Critical Temperature&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Low Pwm&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Medium Pwm&lt;/li&gt;
+&lt;li&gt;High Pwm&lt;/li&gt;
+&lt;li&gt;Critical Pwm，虽然没有选项，但是默认是 100&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对应了上面图中的4个点，50°C/20% 转速， 70°C/40% 转速， 80°C/80% 转速，90°C/100% 转速，这样在温度比较低的时候转速比较低，就非常静音，默认是50°C/40% 转速，就比较吵，所以需要调整，但是我好像没有看网上有关于零刻 GTR5 的 BIOS 设置，后面比较新的有类似的设置，不过在 BIOS 里的菜单跟 GTR5 的差别比较大。&lt;/p&gt;
+&lt;p&gt;Temperature Hysteresis 滞后，风扇滞变温度，也就是保存导致风扇转速变化的最后一个温度，如果温度下降，但下降的温度比这里设置的温度要低，风扇转速就不会变化。&lt;/p&gt;
+&lt;p&gt;参考 
+* &lt;a href="https://post.smzdm.com/p/a8x2n2mn/"&gt;简单3步，温度直降14度！拯救零刻SER 5 Pro电脑散热问题 &lt;/a&gt;
+* &lt;a href="https://blog.csdn.net/u012514495/article/details/130546000"&gt;EQ12&amp;amp;EQ12Pro调整风扇转速教程&lt;/a&gt;&lt;/p&gt;</content><category term="Hardware"></category><category term="hardware"></category><category term="fancontrol"></category></entry><entry><title>如何组装台式机</title><link href="https://xingzuoshe.cn/how-to-assemble-your-pc.html" rel="alternate"></link><published>2023-06-13T07:00:00+08:00</published><updated>2023-06-13T07:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2023-06-13:/how-to-assemble-your-pc.html</id><summary type="html">&lt;p&gt;如何组装台式机&lt;/p&gt;</summary><content type="html">&lt;h2&gt;硬件&lt;/h2&gt;
 &lt;p&gt;组装台式机需要一定的硬件，最关键的是主板，主板是连接所有设备的核心部件。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;CPU&lt;/li&gt;
