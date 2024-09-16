@@ -22,8 +22,14 @@
 &lt;li&gt;High Pwm&lt;/li&gt;
 &lt;li&gt;Critical Pwm，虽然没有选项，但是默认是 100&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;对应了上面图中的4个点，50°C/20% 转速， 70°C/40% 转速， 80°C/80% 转速，90°C/100% 转速，这样在温度比较低的时候转速比较低，就非常静音，默认是50°C/40% 转速，就比较吵，所以需要调整，但是我好像没有看网上有关于零刻 GTR5 的 BIOS 设置，后面比较新的有类似的设置，不过在 BIOS 里的菜单跟 GTR5 的差别比较大。&lt;/p&gt;
+&lt;p&gt;对应了上面图中的4个点，50°C/20% 转速， 70°C/40% 转速， 80°C/80% 转速，90°C/100% 转速，这样在温度比较低的时候转速比较低，就非常静音，默认是50°C/40% 转速， 70°C/60% 转速，就比较吵，所以需要调整，但是我好像没有看网上有关于零刻 GTR5 的 BIOS 设置，后面比较新的有类似的设置，不过在 BIOS 里的菜单跟 GTR5 的差别比较大。&lt;/p&gt;
 &lt;p&gt;Temperature Hysteresis 滞后，风扇滞变温度，也就是保存导致风扇转速变化的最后一个温度，如果温度下降，但下降的温度比这里设置的温度要低，风扇转速就不会变化。&lt;/p&gt;
+&lt;p&gt;在 debian 下可以安装 psensor 来查看温度，检查风扇温度控制设置的是否合理，既保证有效散热，又保证噪音低就比较合理。可以通过多次尝试来设置最适合自己的组合。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt install lm-sensors psensor
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;img alt="psensor" src="../images/debian-psensor.png"&gt;&lt;/p&gt;
 &lt;p&gt;参考 
 * &lt;a href="https://post.smzdm.com/p/a8x2n2mn/"&gt;简单3步，温度直降14度！拯救零刻SER 5 Pro电脑散热问题 &lt;/a&gt;
 * &lt;a href="https://blog.csdn.net/u012514495/article/details/130546000"&gt;EQ12&amp;amp;EQ12Pro调整风扇转速教程&lt;/a&gt;&lt;/p&gt;</content><category term="Hardware"></category><category term="hardware"></category><category term="fancontrol"></category></entry><entry><title>设置 vscode 的字体</title><link href="https://xingzuoshe.cn/debian-12-vscode-font.html" rel="alternate"></link><published>2024-09-07T22:00:00+08:00</published><updated>2024-09-07T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-07:/debian-12-vscode-font.html</id><summary type="html">&lt;p&gt;设置 vscode 的字体&lt;/p&gt;</summary><content type="html">&lt;p&gt;在 Debian 12 KDE Plasma 默认中文的环境下，vscode 的英文字体是 Droid Sans Mono，不适合写代码，我们可以替换成 Jetbrains 出的 JetBrains Mono 字体，看起来效果就会好很多。Terminal 的字体也会替换过来。&lt;/p&gt;
