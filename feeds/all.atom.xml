@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-08-31T12:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>github push in 2024</title><link href="https://xingzuoshe.cn/github-push-in-2024.html" rel="alternate"></link><published>2024-08-31T12:00:00+08:00</published><updated>2024-08-31T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-31:/github-push-in-2024.html</id><summary type="html">&lt;p&gt;在2024年应该如何往 github 上 push 代码&lt;/p&gt;</summary><content type="html">&lt;p&gt;github 推送代码的时候不支持使用密码了，需要使用一个token，setttings -&amp;gt;  Developer Settings -&amp;gt; Personal access tokens&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-09-07T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>设置 vscode 的字体</title><link href="https://xingzuoshe.cn/debian-12-vscode-font.html" rel="alternate"></link><published>2024-09-07T22:00:00+08:00</published><updated>2024-09-07T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-07:/debian-12-vscode-font.html</id><summary type="html">&lt;p&gt;设置 vscode 的字体&lt;/p&gt;</summary><content type="html">&lt;p&gt;在 Debian 12 KDE Plasma 默认中文的环境下，vscode 的英文字体是 Droid Sans Mono，不适合写代码，我们可以替换成 Jetbrains 出的 JetBrains Mono 字体，看起来效果就会好很多。Terminal 的字体也会替换过来。&lt;/p&gt;
+&lt;p&gt;先去 JetBrains 官网下载字体 &lt;a href="https://www.jetbrains.com/lp/mono/"&gt;https://www.jetbrains.com/lp/mono/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="JetBrainsMono-2.304" src="../images/JetBrainsMono-2.304.png"&gt;&lt;/p&gt;
+&lt;p&gt;把 ttf 文件夹下的字体 复制到 /usr/share/fonts/JetBrains-Mono，然后刷新字体缓存&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 有可能要修改字体文件的权限&lt;/span&gt;
+sudo chmod -R &lt;span class="m"&gt;644&lt;/span&gt; /usr/share/fonts/JetBrains-Mono/*
+fc-cache -f -v
+&lt;span class="c1"&gt;# 检查字体是否安装成功&lt;/span&gt;
+fc-list &lt;span class="p"&gt;|&lt;/span&gt; grep JetBrains
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;还有一种安装方式是使用 debian 源里面的 fonts-jetbrains-mono&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;sudo apt install fonts-jetbrains-mono&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;设置 vscode -&amp;gt; Settings -&amp;gt; Text Editor -&amp;gt; Font -&amp;gt; Font Famliy ，把 'Jetbrains Mono' 加到字体的最前面该上去&lt;/p&gt;
+&lt;p&gt;&lt;img alt="vscode-editor-font-jetbrains-mono" src="../images/vscode-editor-font-jetbrains-mono.png"&gt;&lt;/p&gt;
+&lt;p&gt;对应 settings.json 中会设置如下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;&amp;quot;editor.fontFamily&amp;quot;: &amp;quot;&amp;#39;JetBrains Mono&amp;#39;, &amp;#39;Droid Sans Mono&amp;#39;, &amp;#39;monospace&amp;#39;, monospace&amp;quot;,&lt;/span&gt;
+&lt;span class="err"&gt;&amp;quot;editor.fontLigatures&amp;quot;: false // 是否启用字体连字&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;参考 &lt;a href="https://msdemt.github.io/p/ubuntu-vscode-font/"&gt;https://msdemt.github.io/p/ubuntu-vscode-font/&lt;/a&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="debian"></category><category term="vscode"></category></entry><entry><title>github push in 2024</title><link href="https://xingzuoshe.cn/github-push-in-2024.html" rel="alternate"></link><published>2024-08-31T12:00:00+08:00</published><updated>2024-08-31T12:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-08-31:/github-push-in-2024.html</id><summary type="html">&lt;p&gt;在2024年应该如何往 github 上 push 代码&lt;/p&gt;</summary><content type="html">&lt;p&gt;github 推送代码的时候不支持使用密码了，需要使用一个token，setttings -&amp;gt;  Developer Settings -&amp;gt; Personal access tokens&lt;/p&gt;
 &lt;p&gt;&lt;img alt="github token" src="../images/github_token.png"&gt;&lt;/p&gt;
 &lt;p&gt;Generate new token 新建一个 token ，最好设置一个有效期，把 repo 相关的权限都勾上&lt;/p&gt;
 &lt;p&gt;&lt;img alt="github token new" src="../images/github_token_new.png"&gt;&lt;/p&gt;
