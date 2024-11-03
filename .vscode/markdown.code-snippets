@@ -1,0 +1,20 @@
+{
+  "Markdown Blog Header":{
+		"prefix": "header",
+		"body": [
+			"Title: $TM_FILENAME_BASE",
+			"Status: published",
+			"Date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+			"Modified: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+			"Category: Linux",
+			"Tags: vscode",
+			"Slug: $TM_FILENAME_BASE",
+			"Authors: Martin",
+			"Summary: ",
+			"",
+			"$0"
+		],
+		"description": "markdown blog header",
+		"isFileTemplate": true
+	}
+}
