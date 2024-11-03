@@ -12,7 +12,11 @@
 &lt;p&gt;还有需要联网的蓝牙网关，比如各种版本的小爱同学，比较便宜，100～200左右就可以搞定。智能家庭屏可以看作带屏幕的小爱同学，300～800不等。&lt;/p&gt;
 &lt;p&gt;Xiaomi Sound 高保真智能音箱也可以当作蓝牙mesh网关，当然性价比不高。&lt;/p&gt;
 &lt;p&gt;如果要找最便宜的蓝牙mesh网关，可以去淘个二手的 Redmi小爱音箱play，2020年出的，现在应该停产了，只能去找二手的，40块钱左右就能买到。&lt;/p&gt;
-&lt;p&gt;最后我选择了小米智能音箱Pro，239拿下，音质不错，有时候可以放点音乐，有点坑的是需要绑定QQ音乐会员或者网易云音乐SVIP才能随意听音乐。&lt;/p&gt;</content><category term="Hardware"></category><category term="switch"></category></entry><entry><title>使用 scrcpy 在电脑上镜像手机</title><link href="https://xingzuoshe.cn/scrcpy-mirror.html" rel="alternate"></link><published>2024-11-03T22:00:00+08:00</published><updated>2024-11-03T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-11-03:/scrcpy-mirror.html</id><summary type="html">&lt;p&gt;scrcpy 的用法&lt;/p&gt;</summary><content type="html">&lt;p&gt;属手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具&lt;code&gt;scrcpy&lt;/code&gt;可以在电脑上镜像手机，控制手机，开源而且免费的。&lt;/p&gt;
+&lt;p&gt;最后我选择了小米智能音箱Pro，239拿下，音质不错，有时候可以放点音乐，有点坑的是需要绑定QQ音乐会员或者网易云音乐SVIP才能随意听音乐。&lt;/p&gt;
+&lt;h2&gt;自动化配置&lt;/h2&gt;
+&lt;p&gt;通过米家可以十分方便的进行自动化配置，对写代码的人，配置起来十分舒适，就是一种编程的方式，可以看看下面两个简单的配置，一个是回家之后自动开灯，通过门锁开门的动作判断回家，然后把智能开关的状态的设置为开，一个是把按钮和智能开关绑定起来，相当于把开关挪了个位置。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="go home" src="../images/xiaomi-mijia-automation-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="button on/off" src="../images/xiaomi-mijia-automation.png"&gt;&lt;/p&gt;</content><category term="Hardware"></category><category term="switch"></category></entry><entry><title>使用 scrcpy 在电脑上镜像手机</title><link href="https://xingzuoshe.cn/scrcpy-mirror.html" rel="alternate"></link><published>2024-11-03T22:00:00+08:00</published><updated>2024-11-03T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-11-03:/scrcpy-mirror.html</id><summary type="html">&lt;p&gt;scrcpy 的用法&lt;/p&gt;</summary><content type="html">&lt;p&gt;属手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具&lt;code&gt;scrcpy&lt;/code&gt;可以在电脑上镜像手机，控制手机，开源而且免费的。&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/Genymobile/scrcpy"&gt;https://github.com/Genymobile/scrcpy&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;先安装依赖&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt install ffmpeg libsdl2-2.0-0 adb wget &lt;span class="se"&gt;\&lt;/span&gt;
