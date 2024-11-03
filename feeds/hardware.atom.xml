@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Hardware</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/hardware.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-09-15T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>调整零刻 GTR5 5900HX 的风扇速度</title><link href="https://xingzuoshe.cn/beelink-GTR5-5900HX-fancontrol.html" rel="alternate"></link><published>2024-09-15T22:00:00+08:00</published><updated>2024-09-15T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-15:/beelink-GTR5-5900HX-fancontrol.html</id><summary type="html">&lt;p&gt;设置 BIOS 风扇控制&lt;/p&gt;</summary><content type="html">&lt;p&gt;默认情况下零刻 GTR5 5900HX 的风扇转速设置的比较高，放在桌面上会比较吵，不过 BIOS 里可以设置风扇转速，可以让噪音减少&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Hardware</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/hardware.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-11-03T23:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>小米智能开关实现自动化</title><link href="https://xingzuoshe.cn/xiaomi-smart-switch-automation.html" rel="alternate"></link><published>2024-11-03T23:00:00+08:00</published><updated>2024-11-03T23:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-11-03:/xiaomi-smart-switch-automation.html</id><summary type="html">&lt;p&gt;小米的智能生态已经建立起来了&lt;/p&gt;</summary><content type="html">&lt;p&gt;冬天快到了，卧室有个开关不在床边上，需要下床去关灯，夏天还好，冬天离开被窝毕竟有点冷，所以想了想办法，最开始有两个方案，一个是把开关换成小米智能开关，另一个是用手指机器人去控制原来的老式开关。手指机器人价格贵，而且需要用到遥控器，用手机控制的话还需要单独买个网关。家里目前已经有了小爱同学作为蓝牙mesh网关，所以用小米米家智能开关算起来成本比较低。&lt;/p&gt;
+&lt;p&gt;小米智能开关控制面板(单开)一个50左右，如果凑到双十一活动，应该价格能更便宜一点。为了能在床边关灯，还买了一个小米无线开关蓝牙版，在米家上设置自动化，联动控制智能开关。&lt;/p&gt;
+&lt;h2&gt;蓝牙mesh网关&lt;/h2&gt;
+&lt;p&gt;蓝牙mesh网关的选择&lt;/p&gt;
+&lt;p&gt;本地中枢是小米最高档的网关产品，价格比较贵，可以实现断网情况下的本地控制&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;500 左右的 小米路由BE6500 PRO&lt;/li&gt;
+&lt;li&gt;300 左右的 小米智能中枢网关&lt;/li&gt;
+&lt;li&gt;700 左右的 小米路由E3600 Pro 两只套装&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;还有需要联网的蓝牙网关，比如各种版本的小爱同学，比较便宜，100～200左右就可以搞定。智能家庭屏可以看作带屏幕的小爱同学，300～800不等。&lt;/p&gt;
+&lt;p&gt;Xiaomi Sound 高保真智能音箱也可以当作蓝牙mesh网关，当然性价比不高。&lt;/p&gt;
+&lt;p&gt;如果要找最便宜的蓝牙mesh网关，可以去淘个二手的 Redmi小爱音箱play，2020年出的，现在应该停产了，只能去找二手的，40块钱左右就能买到。&lt;/p&gt;
+&lt;p&gt;最后我选择了小米智能音箱Pro，239拿下，音质不错，有时候可以放点音乐，有点坑的是需要绑定QQ音乐会员或者网易云音乐SVIP才能随意听音乐。&lt;/p&gt;</content><category term="Hardware"></category><category term="switch"></category></entry><entry><title>调整零刻 GTR5 5900HX 的风扇速度</title><link href="https://xingzuoshe.cn/beelink-GTR5-5900HX-fancontrol.html" rel="alternate"></link><published>2024-09-15T22:00:00+08:00</published><updated>2024-09-15T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-15:/beelink-GTR5-5900HX-fancontrol.html</id><summary type="html">&lt;p&gt;设置 BIOS 风扇控制&lt;/p&gt;</summary><content type="html">&lt;p&gt;默认情况下零刻 GTR5 5900HX 的风扇转速设置的比较高，放在桌面上会比较吵，不过 BIOS 里可以设置风扇转速，可以让噪音减少&lt;/p&gt;
 &lt;p&gt;路径比较深&lt;/p&gt;
 &lt;p&gt;Advanced -&amp;gt; AMD CBS -&amp;gt; NBIO Common Options -&amp;gt; SMU Common Options -&amp;gt; Fan Control&lt;/p&gt;
 &lt;p&gt;&lt;img alt="beelink-GTR5-BIOS-1" src="../images/beelink-GTR5-BIOS-1.jpg"&gt;&lt;/p&gt;

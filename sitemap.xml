@@ -5,42 +5,56 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/</loc>
-<lastmod>2024-09-16T03:20:56-00:00</lastmod>
+<lastmod>2024-11-03T10:21:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/tags.html</loc>
-<lastmod>2024-09-16T03:20:56-00:00</lastmod>
+<lastmod>2024-11-03T10:21:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/categories.html</loc>
-<lastmod>2024-09-16T03:20:56-00:00</lastmod>
+<lastmod>2024-11-03T10:21:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/authors.html</loc>
-<lastmod>2024-09-16T03:20:56-00:00</lastmod>
+<lastmod>2024-11-03T10:21:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/archives.html</loc>
-<lastmod>2024-09-16T03:20:56-00:00</lastmod>
+<lastmod>2024-11-03T10:21:55-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>https://xingzuoshe.cn/pages/about.html</loc>
-<lastmod>2024-09-16T03:20:56-00:00</lastmod>
+<lastmod>2024-11-03T10:21:55-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/xiaomi-smart-switch-automation.html</loc>
+<lastmod>2024-11-03T23:00:00+08:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/scrcpy-mirror.html</loc>
+<lastmod>2024-11-03T22:00:00+08:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -621,7 +635,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/category/hardware.html</loc>
-<lastmod>2024-09-15T22:00:00+08:06</lastmod>
+<lastmod>2024-11-03T23:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -642,7 +656,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/category/linux.html</loc>
-<lastmod>2024-09-07T22:00:00+08:06</lastmod>
+<lastmod>2024-11-03T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -664,6 +678,27 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://xingzuoshe.cn/category/web.html</loc>
 <lastmod>2020-12-30T12:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/switch.html</loc>
+<lastmod>2024-11-03T23:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/linux.html</loc>
+<lastmod>2024-11-03T22:00:00+08:06</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>https://xingzuoshe.cn/tag/android.html</loc>
+<lastmod>2024-11-03T22:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -991,13 +1026,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>https://xingzuoshe.cn/tag/linux.html</loc>
-<lastmod>2020-07-04T14:00:00+08:06</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://xingzuoshe.cn/tag/nas.html</loc>
 <lastmod>2020-07-04T14:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
@@ -1202,7 +1230,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>https://xingzuoshe.cn/author/martin.html</loc>
-<lastmod>2024-09-15T22:00:00+08:06</lastmod>
+<lastmod>2024-11-03T23:00:00+08:06</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

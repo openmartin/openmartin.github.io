@@ -1,5 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-09-07T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>设置 vscode 的字体</title><link href="https://xingzuoshe.cn/debian-12-vscode-font.html" rel="alternate"></link><published>2024-09-07T22:00:00+08:00</published><updated>2024-09-07T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-07:/debian-12-vscode-font.html</id><summary type="html">&lt;p&gt;设置 vscode 的字体&lt;/p&gt;</summary><content type="html">&lt;p&gt;在 Debian 12 KDE Plasma 默认中文的环境下，vscode 的英文字体是 Droid Sans Mono，不适合写代码，我们可以替换成 Jetbrains 出的 JetBrains Mono 字体，看起来效果就会好很多。Terminal 的字体也会替换过来。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2024-11-03T22:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>使用 scrcpy 在电脑上镜像手机</title><link href="https://xingzuoshe.cn/scrcpy-mirror.html" rel="alternate"></link><published>2024-11-03T22:00:00+08:00</published><updated>2024-11-03T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-11-03:/scrcpy-mirror.html</id><summary type="html">&lt;p&gt;scrcpy 的用法&lt;/p&gt;</summary><content type="html">&lt;p&gt;属手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具&lt;code&gt;scrcpy&lt;/code&gt;可以在电脑上镜像手机，控制手机，开源而且免费的。&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Genymobile/scrcpy"&gt;https://github.com/Genymobile/scrcpy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;先安装依赖&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt install ffmpeg libsdl2-2.0-0 adb wget &lt;span class="se"&gt;\&lt;/span&gt;
+                 gcc git pkg-config meson ninja-build libsdl2-dev &lt;span class="se"&gt;\&lt;/span&gt;
+                 libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev &lt;span class="se"&gt;\&lt;/span&gt;
+                 libswresample-dev libusb-1.0-0 libusb-10-0-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;安装 scrcpy&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; scrcpy
+./install_release.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;手机需要开调试模式，用USB线连上电脑，用下面的命令就可以打开一个手机的窗口，更多选项可以参考官方文档&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;scrcpy --video-codec&lt;span class="o"&gt;=&lt;/span&gt;h265 --max-size&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1920&lt;/span&gt; --max-fps&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;60&lt;/span&gt; --no-audio --keyboard&lt;span class="o"&gt;=&lt;/span&gt;uhid --turn-screen-off --stay-awake 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;有些情况不能镜像，比如支付的时候输入密码，国产的 android 系统都会黑屏来保护用户的输入。&lt;/p&gt;
+&lt;p&gt;一些快捷键&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;作用&lt;/th&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Home 键&lt;/td&gt;
+&lt;td&gt;Alt + h&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;返回键&lt;/td&gt;
+&lt;td&gt;Alt + b 或者鼠标右键单击&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;近期任务&lt;/td&gt;
+&lt;td&gt;Alt + s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;展开通知栏&lt;/td&gt;
+&lt;td&gt;Alt + n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;收起通知栏&lt;/td&gt;
+&lt;td&gt;Alt + Shitf + n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;菜单键&lt;/td&gt;
+&lt;td&gt;Alt + m&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;音量键 +&lt;/td&gt;
+&lt;td&gt;Alt + ↑&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;音量键 -&lt;/td&gt;
+&lt;td&gt;Alt + ↓&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;电源键&lt;/td&gt;
+&lt;td&gt;Alt + p&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;熄屏但是继续投屏&lt;/td&gt;
+&lt;td&gt;Alt + o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;点亮屏幕&lt;/td&gt;
+&lt;td&gt;鼠标右键单击&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;传文件到手机&lt;/td&gt;
+&lt;td&gt;将文件拖入显示窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;粘贴电脑上的文字&lt;/td&gt;
+&lt;td&gt;Ctrl + v&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;小米手机打开调试模式&lt;/h2&gt;
+&lt;p&gt;小米手机打开调试模式稍微有点困难&lt;/p&gt;
+&lt;p&gt;设置 -&amp;gt; 我的设备 -&amp;gt; 全部参数与信息&lt;/p&gt;
+&lt;p&gt;&lt;img alt="scrcpy" src="../images/scrcpy_1.png"&gt;&lt;/p&gt;
+&lt;p&gt;多次点击【MIUI版本】（大概是6次左右），就会在【更多设置】中打开开发者选项&lt;/p&gt;
+&lt;p&gt;&lt;img alt="scrcpy" src="../images/scrcpy_2.png"&gt;&lt;/p&gt;
+&lt;p&gt;在开发者选项中，打开调试模式，有两个地方要打开&lt;/p&gt;
+&lt;p&gt;&lt;img alt="scrcpy" src="../images/scrcpy_3.png"&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="android"></category></entry><entry><title>设置 vscode 的字体</title><link href="https://xingzuoshe.cn/debian-12-vscode-font.html" rel="alternate"></link><published>2024-09-07T22:00:00+08:00</published><updated>2024-09-07T22:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-09-07:/debian-12-vscode-font.html</id><summary type="html">&lt;p&gt;设置 vscode 的字体&lt;/p&gt;</summary><content type="html">&lt;p&gt;在 Debian 12 KDE Plasma 默认中文的环境下，vscode 的英文字体是 Droid Sans Mono，不适合写代码，我们可以替换成 Jetbrains 出的 JetBrains Mono 字体，看起来效果就会好很多。Terminal 的字体也会替换过来。&lt;/p&gt;
 &lt;p&gt;先去 JetBrains 官网下载字体 &lt;a href="https://www.jetbrains.com/lp/mono/"&gt;https://www.jetbrains.com/lp/mono/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img alt="JetBrainsMono-2.304" src="../images/JetBrainsMono-2.304.png"&gt;&lt;/p&gt;
 &lt;p&gt;把 ttf 文件夹下的字体 复制到 /usr/share/fonts/JetBrains-Mono，然后刷新字体缓存&lt;/p&gt;
@@ -316,8 +408,8 @@ vim .umirc.ts
 &lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;https://mirrors.cloud.tencent.com/debian/&lt;/span&gt; &lt;span class="kp"&gt;bookworm-backports&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
 &lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;https://mirrors.cloud.tencent.com/debian/&lt;/span&gt; &lt;span class="kp"&gt;bookworm-backports&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
 
-&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;https://security.debian.org/debian-security&lt;/span&gt; &lt;span class="kp"&gt;bookworm-security&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
-&lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;https://security.debian.org/debian-security&lt;/span&gt; &lt;span class="kp"&gt;bookworm-security&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;https://mirrors.cloud.tencent.com/debian-security&lt;/span&gt; &lt;span class="kp"&gt;bookworm-security&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
+&lt;span class="k"&gt;deb-src&lt;/span&gt; &lt;span class="s"&gt;mirrors.cloud.tencent.com/debian-security&lt;/span&gt; &lt;span class="kp"&gt;bookworm-security&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt; &lt;span class="kp"&gt;non-free-firmware&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
