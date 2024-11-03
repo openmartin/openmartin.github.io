@@ -32,8 +32,8 @@ deb-src https://mirrors.cloud.tencent.com/debian/ bookworm-updates main contrib 
 deb https://mirrors.cloud.tencent.com/debian/ bookworm-backports main contrib non-free non-free-firmware
 deb-src https://mirrors.cloud.tencent.com/debian/ bookworm-backports main contrib non-free non-free-firmware
 
-deb https://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
-deb-src https://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb https://mirrors.cloud.tencent.com/debian-security bookworm-security main contrib non-free non-free-firmware
+deb-src mirrors.cloud.tencent.com/debian-security bookworm-security main contrib non-free non-free-firmware
 ```
 
 
