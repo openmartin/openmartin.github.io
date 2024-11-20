@@ -55,3 +55,10 @@ DISTRIB_VERSION_MODE=normal
 1. [https://www.52pojie.cn/thread-1896902-1-1.html](https://www.52pojie.cn/thread-1896902-1-1.html)
 2. [https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap](https://github.com/7Ji-PKGBUILDs/wechat-universal-bwrap)
 3. [https://aur.archlinux.org/packages/wechat-universal-bwrap](https://aur.archlinux.org/packages/wechat-universal-bwrap)
+
+
+2024-11-20 更新 微信官方出了 linux 包
+
+[https://linux.weixin.qq.com/](https://linux.weixin.qq.com/)
+
+直接安装就行，非常完美，支持朋友圈，视频号，如果显示太小，可以参考上面的设置 `QT_SCALE_FACTOR=2`
