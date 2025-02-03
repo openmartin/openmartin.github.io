@@ -36,14 +36,3 @@ Summary: 万能的淘宝啥都要卖的，自己动手组装一下就可以了
 
 ![](../images/water-artifact-3.jpg)
 
-
-
-
-
-
-
-
-
-
-
-
