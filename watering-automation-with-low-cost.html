@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="万能的淘宝啥都要卖的，自己动手组装一下就可以了" />
+<meta name="keywords" content="watering, automation">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="低成本打造一个阳台自动灌溉系统"/>
+<meta property="og:description" content="万能的淘宝啥都要卖的，自己动手组装一下就可以了"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./watering-automation-with-low-cost.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2025-02-01 23:00:00+08:00"/>
+<meta property="article:modified_time" content="2025-02-02 10:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Hardware"/>
+<meta property="article:tag" content="watering"/>
+<meta property="article:tag" content="automation"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 低成本打造一个阳台自动灌溉系统</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">Home</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="watering-automation-with-low-cost">低成本打造一个阳台自动灌溉系统</h1>
+    <p>
+      Posted on 2025-02-01 23:00 in <a href="./category/hardware.html">Hardware</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>春节假期要回家十多天，担心阳台的菜没人浇水会挂掉，打算搞一套自动浇水的，首先是上淘宝搜索相关的商品，价格比较贵，虽然看起来很漂亮，但是我只是临时用一下，不打算长期使用。</p>
+<p>后面打算自己DIY一套自动浇水的设备，首先是需要一个水泵，作为输送水的动力源，网上有帖子推荐用385水泵，这是一个直流水泵，还单独需要一个交流转直流的电源, 水泵的输入电压 12V。很多茶吧上水的水泵就是这个，大部分作为配件来卖，卖一整套电源+水泵的不多。后面想到有没有USB接口 5V 的水泵卖，搜了一下还真有，养鱼的潜水泵很多都这种。水泵有个指标是扬程。扬程就是水泵抽水可以抽多高，根据自己家里的情况，花架的高度选择合适扬程的水泵，一般扬程越高的水泵功率越高，价格也越贵。</p>
+<p>最后选择了这款，2m扬程的，USB 供电的，可以利用旧手机的 USB 充电头</p>
+<p><img alt="water pump" src="../images/water-pump-taobao.png"></p>
+<p>灌溉可以使用滴箭来控制水流的大小，建议使用可调节的滴箭，因为如果有花架的话，不同高度的水压大小不一样，可能导致不同的地方浇水不均匀。</p>
+<p><img alt="water pipe" src="../images/water-pipe-taobao.png"></p>
+<p>有一个细节需要注意，水泵水管的直径，一般都是 8mm，但是灌溉用的水管都是 4mm，需要买个转接头</p>
+<p><img alt="water pipe connector" src="../images/water-pipe-connector-taobao.png"></p>
+<p>再加上一个小米智能插线板，作为定时开关，这个因为已经有了，不算成本。水泵，水管加起来总成本在40元左右，还行，如果在淘宝再仔细翻一翻应该能找到更便宜的。</p>
+<p>最后组装起来，调节一下滴箭的流速，不要过快也不要过慢，每一盆的流速都差不多。</p>
+<p>最后看一下组装起来的效果</p>
+<p><img alt="" src="../images/water-artifact-1.jpg"></p>
+<p><img alt="" src="../images/water-artifact-2.jpg"></p>
+<p><img alt="" src="../images/water-artifact-3.jpg"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/watering.html">watering</a>
+      <a href="./tag/automation.html">automation</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8640171181637141"
+         data-ad-slot="4393383534"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2020</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
