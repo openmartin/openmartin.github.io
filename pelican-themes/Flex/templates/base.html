@@ -72,15 +72,9 @@
 
   <title>{{ SITENAME }}{% block title %}{% endblock %}</title>
 
-  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.page_level_ads %}
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "{{ GOOGLE_ADSENSE.ca_id }}",
-      enable_page_level_ads: true
-    });
-  </script>
-  {% endif %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141"
+     crossorigin="anonymous"></script>
+
   {% if GOOGLE_TAG_MANAGER %}
     {% include "partial/gtm.html" %}
   {% endif %}
@@ -126,33 +120,8 @@
       </ul>
     </div>
 
-    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.aside %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
-      <ins class="adsbygoogle ads-aside"
-           style="display:block"
-           data-ad-format="auto"
-           data-full-width-responsive="true"
-           data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
-           data-ad-slot="{{ GOOGLE_ADSENSE.ads.aside }}"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    {% endif %}
-
   </aside>
   <main>
-    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.main_menu %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
-      <ins class="adsbygoogle ads-responsive"
-           style="display:block"
-           data-ad-format="auto"
-           data-full-width-responsive="true"
-           data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
-           data-ad-slot="{{ GOOGLE_ADSENSE.ads.main_menu }}"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    {% endif %}
 
     {% if MAIN_MENU %}
     <nav>
