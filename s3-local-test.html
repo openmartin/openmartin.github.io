@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; s3 本地测试环境的搭建</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="s3-local-test">s3 本地测试环境的搭建</h1>
     <p>
-      Posted on 2015-09-30 20:20 in <a href="./category/python.html">Python</a>
+          Posted on 2015-09-30 20:20 in <a href="./category/python.html">Python</a>
+
 
     </p>
   </header>
@@ -111,15 +131,14 @@
 <p>如果我们不想修改代码,可以通过一些简单的配置把请求导向本地 s3 ninja</p>
 <h2>s3 virtual hosted-style and path-style access</h2>
 <p>访问s3 bucket上的文件,有两种方式:</p>
-<div class="highlight"><pre><span></span><code><span class="o">#</span> <span class="n">example</span> <span class="n">bucket名字</span> <span class="n">johnsmith</span>  <span class="err">文件</span> <span class="n">homepage</span><span class="p">.</span><span class="n">html</span>
+<div class="highlight"><pre><span></span><code># example bucket名字 johnsmith  文件 homepage.html
 
-<span class="o">#</span> <span class="n">Path</span> <span class="n">Style</span>
-<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">s3</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">johnsmith</span><span class="o">/</span><span class="n">homepage</span><span class="p">.</span><span class="n">html</span>
+# Path Style
+http://s3.amazonaws.com/johnsmith/homepage.html
 
-<span class="o">#</span> <span class="n">Virtual</span> <span class="n">Hosted</span><span class="err">–</span><span class="n">Style</span>
-<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">johnsmith</span><span class="p">.</span><span class="n">s3</span><span class="p">.</span><span class="n">amazonaws</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">homepage</span><span class="p">.</span><span class="n">html</span>
+# Virtual Hosted–Style
+http://johnsmith.s3.amazonaws.com/homepage.html
 </code></pre></div>
-
 
 <p>更多信息参考</p>
 <p><a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro">http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/UsingBucket.html#access-bucket-intro</a> <a href="http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html">http://docs.aws.amazon.com/zh_cn/AmazonS3/latest/dev/VirtualHosting.html</a></p>
@@ -128,23 +147,21 @@
 <p>mybucket.s3.amazonaws.com -&gt; localhost:9444:s3/mybucket</p>
 <h3>/etc/hosts</h3>
 <p>添加一行:</p>
-<div class="highlight"><pre><span></span><code><span class="err">127.0.0.1 mybucket.s3.amazonaws.com</span>
+<div class="highlight"><pre><span></span><code><span class="mf">127.0.0.1</span><span class="w"> </span><span class="n">mybucket</span><span class="mf">.</span><span class="n">s3</span><span class="mf">.</span><span class="n">amazonaws</span><span class="mf">.</span><span class="n">com</span>
 </code></pre></div>
-
 
 <p>这样可以把亚马逊的域名指向本地，但是端口和访问路径Path的修改需要nginx来实现</p>
 <h3>nginx</h3>
 <p>nginx 把127.0.0.1:80 的请求转向 127.0.0.1:9444</p>
 <p>配置文件如下:</p>
-<div class="highlight"><pre><span></span><code><span class="err">server {</span>
-<span class="err">listen       80;</span>
-<span class="err">server_name  localhost;</span>
-<span class="err">location / {</span>
-<span class="err">    proxy_pass http://127.0.0.1:9444;</span>
-<span class="err">    rewrite ^(.*)$ /s3/mybucket$1 break; #例如 /homepage.html =&gt; /s3/mybucket/homepage.html</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span></span><code><span class="nt">server</span><span class="w"> </span><span class="p">{</span>
+<span class="err">listen</span><span class="w">       </span><span class="err">80</span><span class="p">;</span>
+<span class="err">server_name</span><span class="w">  </span><span class="err">localhost</span><span class="p">;</span>
+<span class="err">location</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">{</span>
+<span class="w">    </span><span class="err">proxy_pass</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="o">:</span><span class="mi">9444</span><span class="p">;</span>
+<span class="w">    </span><span class="err">rewrite</span><span class="w"> </span><span class="err">^(.*)$</span><span class="w"> </span><span class="err">/s3/mybucket$1</span><span class="w"> </span><span class="err">break</span><span class="p">;</span><span class="w"> </span><span class="err">#例如</span><span class="w"> </span><span class="err">/homepage.html</span><span class="w"> </span><span class="err">=&gt;</span><span class="w"> </span><span class="err">/s3/mybucket/homepage.html</span>
+<span class="p">}</span>
 </code></pre></div>
-
 
 <h2>配置多个bucket</h2>
 <p>上面的配置只说了一个bucket的情况，如果有多个bucket需要测试，我们使用nginx virtualhost的功能就可以做到，把server_name 改成 bucket的域名就行</p>
@@ -162,8 +179,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -181,14 +201,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

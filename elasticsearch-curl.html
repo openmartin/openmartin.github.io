@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Elasticsearch 常用 curl 命令</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="elasticsearch-curl">Elasticsearch 常用 curl 命令</h1>
     <p>
-      Posted on 2019-08-22 11:11 in <a href="./category/java.html">Java</a>
+          Posted on 2019-08-22 11:11 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -109,44 +129,40 @@
     <h2>Elasticsearch 常用 curl 命令</h2>
 <p>虽然可以通过各种语言的 client 来操作 Elasticsearch，但是 curl 还是最方便和最常用的。</p>
 <h3>查看 Elasticsearch 版本</h3>
-<div class="highlight"><pre><span></span><code>curl -XGET <span class="s1">&#39;localhost:9200&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-XGET<span class="w"> </span><span class="s1">&#39;localhost:9200&#39;</span>
 </code></pre></div>
 
-
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;node-1&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;cluster_name&quot;</span> <span class="p">:</span> <span class="s2">&quot;rs-application&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;cluster_uuid&quot;</span> <span class="p">:</span> <span class="s2">&quot;ouChgr_bTKmGm4MicVEt6g&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;version&quot;</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;number&quot;</span> <span class="p">:</span> <span class="s2">&quot;7.3.0&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;build_flavor&quot;</span> <span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;build_type&quot;</span> <span class="p">:</span> <span class="s2">&quot;rpm&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;build_hash&quot;</span> <span class="p">:</span> <span class="s2">&quot;de777fa&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;build_date&quot;</span> <span class="p">:</span> <span class="s2">&quot;2019-07-24T18:30:11.767338Z&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;build_snapshot&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nt">&quot;lucene_version&quot;</span> <span class="p">:</span> <span class="s2">&quot;8.1.0&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;minimum_wire_compatibility_version&quot;</span> <span class="p">:</span> <span class="s2">&quot;6.8.0&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;minimum_index_compatibility_version&quot;</span> <span class="p">:</span> <span class="s2">&quot;6.0.0-beta1&quot;</span>
-  <span class="p">},</span>
-  <span class="nt">&quot;tagline&quot;</span> <span class="p">:</span> <span class="s2">&quot;You Know, for Search&quot;</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;node-1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cluster_name&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rs-application&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cluster_uuid&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ouChgr_bTKmGm4MicVEt6g&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;number&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7.3.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build_flavor&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build_type&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rpm&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build_hash&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;de777fa&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build_date&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-07-24T18:30:11.767338Z&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build_snapshot&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lucene_version&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;minimum_wire_compatibility_version&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.8.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;minimum_index_compatibility_version&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.0.0-beta1&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;tagline&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You Know, for Search&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <h3>查看索引状态</h3>
-<div class="highlight"><pre><span></span><code>curl -XGET <span class="s1">&#39;localhost:9200/_cat/indices?v&amp;pretty&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-XGET<span class="w"> </span><span class="s1">&#39;localhost:9200/_cat/indices?v&amp;pretty&#39;</span>
 </code></pre></div>
 
-
-<div class="highlight"><pre><span></span><code>health status index                   uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   .kibana_task_manager    EYi69PoYQASniv_dTpvkdA   <span class="m">1</span>   <span class="m">0</span>          <span class="m">2</span>            <span class="m">0</span>     <span class="m">30</span>.8kb         <span class="m">30</span>.8kb
-green  open   kibana_sample_data_logs L0oSKJgnRmOxCp3zSHZojw   <span class="m">1</span>   <span class="m">0</span>      <span class="m">14075</span>            <span class="m">0</span>     <span class="m">11</span>.5mb         <span class="m">11</span>.5mb
-green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1</span>   <span class="m">0</span>         <span class="m">44</span>            <span class="m">1</span>    <span class="m">127</span>.7kb        <span class="m">127</span>.7kb
+<div class="highlight"><pre><span></span><code>health<span class="w"> </span>status<span class="w"> </span>index<span class="w">                   </span>uuid<span class="w">                   </span>pri<span class="w"> </span>rep<span class="w"> </span>docs.count<span class="w"> </span>docs.deleted<span class="w"> </span>store.size<span class="w"> </span>pri.store.size
+green<span class="w">  </span>open<span class="w">   </span>.kibana_task_manager<span class="w">    </span>EYi69PoYQASniv_dTpvkdA<span class="w">   </span><span class="m">1</span><span class="w">   </span><span class="m">0</span><span class="w">          </span><span class="m">2</span><span class="w">            </span><span class="m">0</span><span class="w">     </span><span class="m">30</span>.8kb<span class="w">         </span><span class="m">30</span>.8kb
+green<span class="w">  </span>open<span class="w">   </span>kibana_sample_data_logs<span class="w"> </span>L0oSKJgnRmOxCp3zSHZojw<span class="w">   </span><span class="m">1</span><span class="w">   </span><span class="m">0</span><span class="w">      </span><span class="m">14075</span><span class="w">            </span><span class="m">0</span><span class="w">     </span><span class="m">11</span>.5mb<span class="w">         </span><span class="m">11</span>.5mb
+green<span class="w">  </span>open<span class="w">   </span>.kibana_1<span class="w">               </span>SaISvKYHQ6Su72LVtLpv9A<span class="w">   </span><span class="m">1</span><span class="w">   </span><span class="m">0</span><span class="w">         </span><span class="m">44</span><span class="w">            </span><span class="m">1</span><span class="w">    </span><span class="m">127</span>.7kb<span class="w">        </span><span class="m">127</span>.7kb
 </code></pre></div>
-
 
 <h3>新建 index mapping</h3>
-<div class="highlight"><pre><span></span><code>curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v1&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;mappings&quot;: {</span>
 <span class="s1">    &quot;properties&quot;: {</span>
@@ -160,50 +176,42 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 <span class="s1">&#39;</span>
 </code></pre></div>
 
-
 <h3>查看 index mapping</h3>
-<div class="highlight"><pre><span></span><code>curl -XGET <span class="s1">&#39;localhost:9200/netdisk-document-v1/_mapping/?pretty&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-XGET<span class="w"> </span><span class="s1">&#39;localhost:9200/netdisk-document-v1/_mapping/?pretty&#39;</span>
 </code></pre></div>
-
 
 <h3>删除 index</h3>
-<div class="highlight"><pre><span></span><code>curl -X DELETE <span class="s1">&#39;localhost:9200/netdisk-document-v1?pretty&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s1">&#39;localhost:9200/netdisk-document-v1?pretty&#39;</span>
 </code></pre></div>
-
 
 <h3>设置 index 别名 alias</h3>
-<div class="highlight"><pre><span></span><code>curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/netdisk-document?pretty&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/netdisk-document?pretty&quot;</span>
 </code></pre></div>
-
 
 <h3>删除 index 别名 alias</h3>
-<div class="highlight"><pre><span></span><code>curl -X DELETE <span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/netdisk-document?pretty&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/netdisk-document?pretty&quot;</span>
 </code></pre></div>
-
 
 <h3>alias 和 index 互查</h3>
-<div class="highlight"><pre><span></span><code>curl -X GET <span class="s2">&quot;localhost:9200/*/_alias/netdisk-document?pretty&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;localhost:9200/*/_alias/netdisk-document?pretty&quot;</span>
 </code></pre></div>
 
-
-<div class="highlight"><pre><span></span><code>curl -X GET <span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/*?pretty&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/*?pretty&quot;</span>
 </code></pre></div>
-
 
 <p>返回的结果都是</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-  <span class="nt">&quot;netdisk-document-v1&quot;</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;aliases&quot;</span> <span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;netdisk-document-cn&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;netdisk-document-v1&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;aliases&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;netdisk-document-cn&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <h3>重建索引 reindex</h3>
 <p>因为 index 的 mapping 只能新增字段，不能修改现有的字段，只能通过重建索引可以完成</p>
-<div class="highlight"><pre><span></span><code>curl -X POST <span class="s2">&quot;localhost:9200/_reindex?pretty&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;localhost:9200/_reindex?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;source&quot;: {</span>
 <span class="s1">    &quot;index&quot;: &quot;netdisk-document-v1&quot;</span>
@@ -215,16 +223,14 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 <span class="s1">&#39;</span>
 </code></pre></div>
 
-
 <h3>查看 Elasticsearch 后台任务</h3>
 <p>可以查看重建索引目前的进度</p>
-<div class="highlight"><pre><span></span><code>curl -X GET <span class="s2">&quot;localhost:9200/_tasks?detailed=true&amp;actions=*reindex&amp;pretty&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;localhost:9200/_tasks?detailed=true&amp;actions=*reindex&amp;pretty&quot;</span>
 </code></pre></div>
-
 
 <h3>新增记录和查询</h3>
 <p>新增和更新记录</p>
-<div class="highlight"><pre><span></span><code>curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v1/_doc/123&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1/_doc/123&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">    &quot;title&quot;: &quot;这是一个测试标题&quot;, </span>
 <span class="s1">    &quot;content&quot;: &quot;这是一个测试内容&quot;, </span>
@@ -233,16 +239,14 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 <span class="s1">&#39;</span>
 </code></pre></div>
 
-
 <p>删除记录</p>
-<div class="highlight"><pre><span></span><code>curl -X DELETE <span class="s2">&quot;localhost:9200/netdisk-document-v1/_doc/123&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1/_doc/123&quot;</span>
 </code></pre></div>
-
 
 <p>查询 DSL</p>
 <p>term/match/match_phrase 的区别 <code>https://www.jianshu.com/p/eb30eee13923</code></p>
 <p>设置 minimum_should_match <code>https://my.oschina.net/u/3625378/blog/1492575</code></p>
-<div class="highlight"><pre><span></span><code>curl -XGET <span class="s2">&quot;http://localhost:9200/report-doc-cn/_search?pretty&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-XGET<span class="w"> </span><span class="s2">&quot;http://localhost:9200/report-doc-cn/_search?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">    &quot;query&quot;: {</span>
 <span class="s1">        &quot;match_phrase&quot;: {</span>
@@ -254,9 +258,8 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 <span class="s1">}&#39;</span>
 </code></pre></div>
 
-
 <h3>测试 analyzer</h3>
-<div class="highlight"><pre><span></span><code>curl -XPOST <span class="s1">&#39;http://localhost:9200/_analyze?pretty&#39;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-XPOST<span class="w"> </span><span class="s1">&#39;http://localhost:9200/_analyze?pretty&#39;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;analyzer&quot;: &quot;hanlp_index&quot;,</span>
 <span class="s1">  &quot;text&quot;: &quot;5G是未来重要的趋势&quot;</span>
@@ -273,8 +276,11 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -292,14 +298,16 @@ green  open   .kibana_1               SaISvKYHQ6Su72LVtLpv9A   <span class="m">1
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -54,6 +54,13 @@
 
   <title>Martin's Blog &ndash; 如何使用 pyside + HTML5 开发桌面应用</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -78,18 +85,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -98,7 +117,8 @@
       
     <h1 id="pyside-html5">如何使用 pyside + HTML5 开发桌面应用</h1>
     <p>
-      Posted on 2015-08-04 20:20 in <a href="./category/python.html">Python</a>
+          Posted on 2015-08-04 20:20 in <a href="./category/python.html">Python</a>
+
 
     </p>
   </header>
@@ -111,62 +131,59 @@
 <p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
 <h2>安装pyside</h2>
 <p>在Ubuntu 和　DeepinLinux　下安装非常方便:</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get install python-pyside</span>
+<div class="highlight"><pre><span></span><code>sudo apt-get install python-pyside
 </code></pre></div>
-
 
 <p>或者使用pip安装:</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo pip install pyside</span>
+<div class="highlight"><pre><span></span><code>sudo pip install pyside
 </code></pre></div>
-
 
 <h2>创建窗口</h2>
 <p>学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">class</span> <span class="nt">MainWindow</span><span class="o">(</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="o">):</span>
-    <span class="nt">def</span> <span class="nt">__init__</span><span class="o">(</span><span class="nt">self</span><span class="o">):</span>
-        <span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="p">.</span><span class="nc">__init__</span><span class="o">(</span><span class="nt">self</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code><span class="nt">class</span><span class="w"> </span><span class="nt">MainWindow</span><span class="o">(</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="o">):</span>
+<span class="w">    </span><span class="nt">def</span><span class="w"> </span><span class="nt">__init__</span><span class="o">(</span><span class="nt">self</span><span class="o">):</span>
+<span class="w">        </span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QWidget</span><span class="p">.</span><span class="nc">__init__</span><span class="o">(</span><span class="nt">self</span><span class="o">)</span>
 
-        <span class="p">#</span><span class="nn">初始化position</span>
-        <span class="nt">self</span><span class="p">.</span><span class="nc">m_DragPosition</span><span class="o">=</span><span class="nt">self</span><span class="p">.</span><span class="nc">pos</span><span class="o">()</span>
+<span class="w">        </span><span class="p">#</span><span class="nn">初始化position</span>
+<span class="w">        </span><span class="nt">self</span><span class="p">.</span><span class="nc">m_DragPosition</span><span class="o">=</span><span class="nt">self</span><span class="p">.</span><span class="nc">pos</span><span class="o">()</span>
 
-        <span class="err">＃</span><span class="nt">设置窗口大小</span>
-        <span class="nt">self</span><span class="p">.</span><span class="nc">resize</span><span class="o">(</span><span class="nt">1024</span><span class="o">,</span><span class="nt">600</span><span class="o">)</span>
-        <span class="err">＃</span><span class="nt">窗口特征</span><span class="p">:</span><span class="nd">没有边框</span>
-        <span class="nt">self</span><span class="p">.</span><span class="nc">setWindowFlags</span><span class="o">(</span><span class="nt">Qt</span><span class="p">.</span><span class="nc">FramelessWindowHint</span> <span class="o">|</span> <span class="nt">Qt</span><span class="p">.</span><span class="nc">WindowSystemMenuHint</span><span class="o">)</span>
-        <span class="nt">self</span><span class="p">.</span><span class="nc">setMouseTracking</span><span class="o">(</span><span class="nt">True</span><span class="o">)</span>
-        <span class="p">#</span><span class="nn">self</span><span class="p">.</span><span class="nc">setStyleSheet</span><span class="o">(</span><span class="s2">&quot;background-color:#f8f8f8;&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="err">＃</span><span class="nt">设置窗口大小</span>
+<span class="w">        </span><span class="nt">self</span><span class="p">.</span><span class="nc">resize</span><span class="o">(</span><span class="nt">1024</span><span class="o">,</span><span class="nt">600</span><span class="o">)</span>
+<span class="w">        </span><span class="err">＃</span><span class="nt">窗口特征</span><span class="p">:</span><span class="nd">没有边框</span>
+<span class="w">        </span><span class="nt">self</span><span class="p">.</span><span class="nc">setWindowFlags</span><span class="o">(</span><span class="nt">Qt</span><span class="p">.</span><span class="nc">FramelessWindowHint</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nt">Qt</span><span class="p">.</span><span class="nc">WindowSystemMenuHint</span><span class="o">)</span>
+<span class="w">        </span><span class="nt">self</span><span class="p">.</span><span class="nc">setMouseTracking</span><span class="o">(</span><span class="nt">True</span><span class="o">)</span>
+<span class="w">        </span><span class="p">#</span><span class="nn">self</span><span class="p">.</span><span class="nc">setStyleSheet</span><span class="o">(</span><span class="s2">&quot;background-color:#f8f8f8;&quot;</span><span class="o">)</span>
 
-        <span class="err">＃</span><span class="nt">窗口居中</span>
-        <span class="nt">desktop</span> <span class="o">=</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QApplication</span><span class="p">.</span><span class="nc">desktop</span><span class="o">()</span>
-        <span class="nt">width</span> <span class="o">=</span> <span class="nt">desktop</span><span class="p">.</span><span class="nc">width</span><span class="o">()</span>
-        <span class="nt">height</span> <span class="o">=</span> <span class="nt">desktop</span><span class="p">.</span><span class="nc">height</span><span class="o">()</span>
-        <span class="nt">self</span><span class="p">.</span><span class="nc">move</span><span class="o">((</span><span class="nt">width</span> <span class="nt">-</span> <span class="nt">self</span><span class="p">.</span><span class="nc">width</span><span class="o">())/</span><span class="nt">2</span><span class="o">,</span> <span class="o">(</span><span class="nt">height</span> <span class="nt">-</span> <span class="nt">self</span><span class="p">.</span><span class="nc">height</span><span class="o">())/</span><span class="nt">2</span><span class="o">)</span>
+<span class="w">        </span><span class="err">＃</span><span class="nt">窗口居中</span>
+<span class="w">        </span><span class="nt">desktop</span><span class="w"> </span><span class="o">=</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QApplication</span><span class="p">.</span><span class="nc">desktop</span><span class="o">()</span>
+<span class="w">        </span><span class="nt">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">desktop</span><span class="p">.</span><span class="nc">width</span><span class="o">()</span>
+<span class="w">        </span><span class="nt">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">desktop</span><span class="p">.</span><span class="nc">height</span><span class="o">()</span>
+<span class="w">        </span><span class="nt">self</span><span class="p">.</span><span class="nc">move</span><span class="o">((</span><span class="nt">width</span><span class="w"> </span><span class="nt">-</span><span class="w"> </span><span class="nt">self</span><span class="p">.</span><span class="nc">width</span><span class="o">())/</span><span class="nt">2</span><span class="o">,</span><span class="w"> </span><span class="o">(</span><span class="nt">height</span><span class="w"> </span><span class="nt">-</span><span class="w"> </span><span class="nt">self</span><span class="p">.</span><span class="nc">height</span><span class="o">())/</span><span class="nt">2</span><span class="o">)</span>
 
-        <span class="p">#</span><span class="nn">支持窗口拖动</span><span class="o">,</span><span class="nt">重写两个方法</span>
-        <span class="nt">def</span> <span class="nt">mousePressEvent</span><span class="o">(</span><span class="nt">self</span><span class="o">,</span> <span class="nt">event</span><span class="o">):</span>
-            <span class="nt">if</span> <span class="nt">event</span><span class="p">.</span><span class="nc">button</span><span class="o">()==</span><span class="nt">Qt</span><span class="p">.</span><span class="nc">LeftButton</span><span class="o">:</span>
-                <span class="nt">self</span><span class="p">.</span><span class="nc">m_drag</span><span class="o">=</span><span class="nt">True</span>
-                <span class="nt">self</span><span class="p">.</span><span class="nc">m_DragPosition</span><span class="o">=</span><span class="nt">event</span><span class="p">.</span><span class="nc">globalPos</span><span class="o">()</span><span class="nt">-self</span><span class="p">.</span><span class="nc">pos</span><span class="o">()</span>
-                <span class="nt">event</span><span class="p">.</span><span class="nc">accept</span><span class="o">()</span>
-
-
-        <span class="nt">def</span> <span class="nt">mouseMoveEvent</span><span class="o">(</span><span class="nt">self</span><span class="o">,</span> <span class="nt">QMouseEvent</span><span class="o">):</span>
-            <span class="nt">if</span> <span class="nt">QMouseEvent</span><span class="p">.</span><span class="nc">buttons</span><span class="o">()</span> <span class="nt">and</span> <span class="nt">Qt</span><span class="p">.</span><span class="nc">LeftButton</span><span class="o">:</span>
-                <span class="nt">self</span><span class="p">.</span><span class="nc">move</span><span class="o">(</span><span class="nt">QMouseEvent</span><span class="p">.</span><span class="nc">globalPos</span><span class="o">()</span><span class="nt">-self</span><span class="p">.</span><span class="nc">m_DragPosition</span><span class="o">)</span>
-                <span class="nt">QMouseEvent</span><span class="p">.</span><span class="nc">accept</span><span class="o">()</span>
+<span class="w">        </span><span class="p">#</span><span class="nn">支持窗口拖动</span><span class="o">,</span><span class="nt">重写两个方法</span>
+<span class="w">        </span><span class="nt">def</span><span class="w"> </span><span class="nt">mousePressEvent</span><span class="o">(</span><span class="nt">self</span><span class="o">,</span><span class="w"> </span><span class="nt">event</span><span class="o">):</span>
+<span class="w">            </span><span class="nt">if</span><span class="w"> </span><span class="nt">event</span><span class="p">.</span><span class="nc">button</span><span class="o">()==</span><span class="nt">Qt</span><span class="p">.</span><span class="nc">LeftButton</span><span class="o">:</span>
+<span class="w">                </span><span class="nt">self</span><span class="p">.</span><span class="nc">m_drag</span><span class="o">=</span><span class="nt">True</span>
+<span class="w">                </span><span class="nt">self</span><span class="p">.</span><span class="nc">m_DragPosition</span><span class="o">=</span><span class="nt">event</span><span class="p">.</span><span class="nc">globalPos</span><span class="o">()</span><span class="nt">-self</span><span class="p">.</span><span class="nc">pos</span><span class="o">()</span>
+<span class="w">                </span><span class="nt">event</span><span class="p">.</span><span class="nc">accept</span><span class="o">()</span>
 
 
-        <span class="nt">def</span> <span class="nt">mouseReleaseEvent</span><span class="o">(</span><span class="nt">self</span><span class="o">,</span> <span class="nt">QMouseEvent</span><span class="o">):</span>
-            <span class="nt">self</span><span class="p">.</span><span class="nc">m_drag</span><span class="o">=</span><span class="nt">False</span>
+<span class="w">        </span><span class="nt">def</span><span class="w"> </span><span class="nt">mouseMoveEvent</span><span class="o">(</span><span class="nt">self</span><span class="o">,</span><span class="w"> </span><span class="nt">QMouseEvent</span><span class="o">):</span>
+<span class="w">            </span><span class="nt">if</span><span class="w"> </span><span class="nt">QMouseEvent</span><span class="p">.</span><span class="nc">buttons</span><span class="o">()</span><span class="w"> </span><span class="nt">and</span><span class="w"> </span><span class="nt">Qt</span><span class="p">.</span><span class="nc">LeftButton</span><span class="o">:</span>
+<span class="w">                </span><span class="nt">self</span><span class="p">.</span><span class="nc">move</span><span class="o">(</span><span class="nt">QMouseEvent</span><span class="p">.</span><span class="nc">globalPos</span><span class="o">()</span><span class="nt">-self</span><span class="p">.</span><span class="nc">m_DragPosition</span><span class="o">)</span>
+<span class="w">                </span><span class="nt">QMouseEvent</span><span class="p">.</span><span class="nc">accept</span><span class="o">()</span>
 
-<span class="nt">if</span> <span class="nt">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="o">:</span>
 
-    <span class="nt">mapp</span><span class="o">=</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QApplication</span><span class="o">(</span><span class="nt">sys</span><span class="p">.</span><span class="nc">argv</span><span class="o">)</span>
-    <span class="nt">mw</span><span class="o">=</span><span class="nt">MainWindow</span><span class="o">()</span>
-    <span class="nt">mw</span><span class="p">.</span><span class="nc">show</span><span class="o">()</span>
-    <span class="nt">sys</span><span class="p">.</span><span class="nc">exit</span><span class="o">(</span><span class="nt">mapp</span><span class="p">.</span><span class="nc">exec_</span><span class="o">())</span>
+<span class="w">        </span><span class="nt">def</span><span class="w"> </span><span class="nt">mouseReleaseEvent</span><span class="o">(</span><span class="nt">self</span><span class="o">,</span><span class="w"> </span><span class="nt">QMouseEvent</span><span class="o">):</span>
+<span class="w">            </span><span class="nt">self</span><span class="p">.</span><span class="nc">m_drag</span><span class="o">=</span><span class="nt">False</span>
+
+<span class="nt">if</span><span class="w"> </span><span class="nt">__name__</span><span class="o">==</span><span class="s2">&quot;__main__&quot;</span><span class="o">:</span>
+
+<span class="w">    </span><span class="nt">mapp</span><span class="o">=</span><span class="nt">QtGui</span><span class="p">.</span><span class="nc">QApplication</span><span class="o">(</span><span class="nt">sys</span><span class="p">.</span><span class="nc">argv</span><span class="o">)</span>
+<span class="w">    </span><span class="nt">mw</span><span class="o">=</span><span class="nt">MainWindow</span><span class="o">()</span>
+<span class="w">    </span><span class="nt">mw</span><span class="p">.</span><span class="nc">show</span><span class="o">()</span>
+<span class="w">    </span><span class="nt">sys</span><span class="p">.</span><span class="nc">exit</span><span class="o">(</span><span class="nt">mapp</span><span class="p">.</span><span class="nc">exec_</span><span class="o">())</span>
 </code></pre></div>
-
 
 <h2>设计UI</h2>
 <p>pyside有三种设计UI的方式</p>
@@ -197,8 +214,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -216,14 +236,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

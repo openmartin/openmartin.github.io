@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Nginx WebSocket 代理配置</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="nginx-websocket">Nginx WebSocket 代理配置</h1>
     <p>
-      Posted on 2021-08-18 18:00 in <a href="./category/linux.html">Linux</a>
+          Posted on 2021-08-18 18:00 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -109,28 +129,26 @@
     <p>Tomcat 从 7.0.27开始支持 WebSocket，从 7.0.47 开始支持 JSR-356，如果前面有个 nginx 代理，nginx 也需要针对 websocket 做一下配置</p>
 <p><img alt="nginx代理" src="../image/../images/nginx-websocket.png"></p>
 <p>在 http 段里定义两个变量</p>
-<div class="highlight"><pre><span></span><code><span class="err">map $http_upgrade $connection_upgrade {</span>
-<span class="err">  default upgrade;</span>
-<span class="err">  &#39;&#39; close;</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span></span><code>map $http_upgrade $connection_upgrade {
+  default upgrade;
+  &#39;&#39; close;
+}
 </code></pre></div>
-
 
 <p>在 server proxy 里面添加</p>
-<div class="highlight"><pre><span></span><code><span class="err"># websocket</span>
-<span class="err">proxy_http_version 1.1;</span>
-<span class="err">proxy_set_header Upgrade $http_upgrade;</span>
-<span class="err">proxy_set_header Connection $connection_upgrade;</span>
+<div class="highlight"><pre><span></span><code><span class="gh">#</span> websocket
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection $connection_upgrade;
 </code></pre></div>
-
 
 <p>nginx 里设置了 prxoy_read_timeout，所以导致 websocket 经过一段时间之后会就超时，所以要增加心跳检测，下面是简单的写法，也可以使用别人封装好的 js lib。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// 60s 一次心跳</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
-        <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;ping&quot;</span>
-    <span class="p">}));</span>
-<span class="p">},</span> <span class="mf">60000</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ping&quot;</span>
+<span class="w">    </span><span class="p">}));</span>
+<span class="p">},</span><span class="w"> </span><span class="mf">60000</span><span class="p">);</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -143,8 +161,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -162,14 +183,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -54,6 +54,13 @@
 
   <title>Martin's Blog &ndash; django data migration</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -78,18 +85,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -98,7 +117,8 @@
       
     <h1 id="djang-data-migration">django data migration</h1>
     <p>
-      Posted on 2016-05-13 20:20 in <a href="./category/django.html">Django</a>
+          Posted on 2016-05-13 20:20 in <a href="./category/django.html">Django</a>
+
 
     </p>
   </header>
@@ -109,21 +129,19 @@
 <h2>djang migration</h2>
 <p>如果不加appname，那么就是指所有包含migrations 目录的app</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 基于当前的model 检测修改，创建迁移策略文件</span>
-python manage.py makemigrations &lt;appname&gt;
+python<span class="w"> </span>manage.py<span class="w"> </span>makemigrations<span class="w"> </span>&lt;appname&gt;
 <span class="c1"># 执行迁移动作</span>
-python manage.py migrate
+python<span class="w"> </span>manage.py<span class="w"> </span>migrate
 </code></pre></div>
-
 
 <h3>migrations失败</h3>
 <p>有时候如果models改动比较大，migrations会失败，这个时候有两种选择，手工去修改migrations文件，第二种是清除所有migrations，重新migrate</p>
 <h4>手工修改migrations文件</h4>
 <p>通过报错信息加上SQL语句找到找到问题，然后具体问题具体分析，是修改数据库里面的数据，还是修改migrations生成的脚本。</p>
-<div class="highlight"><pre><span></span><code>python manage.py migrate
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>migrate
 
-python manage.py sqlmigrate &lt;appname&gt; <span class="m">0001</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>sqlmigrate<span class="w"> </span>&lt;appname&gt;<span class="w"> </span><span class="m">0001</span>
 </code></pre></div>
-
 
 <p>当处理模型修改的时候：</p>
 <ul>
@@ -142,51 +160,46 @@ python manage.py sqlmigrate &lt;appname&gt; <span class="m">0001</span>
 <p>参考</p>
 <p>http://www.tuicool.com/articles/yM3IVr</p>
 <h5>NULL to NOT NULL</h5>
-<div class="highlight"><pre><span></span><code>python manage.py makemigrations
-You are trying to add a non-nullable field <span class="s1">&#39;college&#39;</span> to majorproperty without a default<span class="p">;</span> we can<span class="err">&#39;</span>t <span class="k">do</span> that <span class="o">(</span>the database needs something to populate existing rows<span class="o">)</span>.
-Please <span class="k">select</span> a fix:
- <span class="m">1</span><span class="o">)</span> Provide a one-off default now <span class="o">(</span>will be <span class="nb">set</span> on all existing rows<span class="o">)</span>
- <span class="m">2</span><span class="o">)</span> Quit, and <span class="nb">let</span> me add a default <span class="k">in</span> models.py
-Select an option: <span class="m">1</span>
-Please enter the default value now, as valid Python
-The datetime and django.utils.timezone modules are available, so you can <span class="k">do</span> e.g. timezone.now<span class="o">()</span>
-&gt;&gt;&gt; <span class="m">1</span>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+You<span class="w"> </span>are<span class="w"> </span>trying<span class="w"> </span>to<span class="w"> </span>add<span class="w"> </span>a<span class="w"> </span>non-nullable<span class="w"> </span>field<span class="w"> </span><span class="s1">&#39;college&#39;</span><span class="w"> </span>to<span class="w"> </span>majorproperty<span class="w"> </span>without<span class="w"> </span>a<span class="w"> </span>default<span class="p">;</span><span class="w"> </span>we<span class="w"> </span>can<span class="err">&#39;</span>t<span class="w"> </span><span class="k">do</span><span class="w"> </span>that<span class="w"> </span><span class="o">(</span>the<span class="w"> </span>database<span class="w"> </span>needs<span class="w"> </span>something<span class="w"> </span>to<span class="w"> </span>populate<span class="w"> </span>existing<span class="w"> </span>rows<span class="o">)</span>.
+Please<span class="w"> </span><span class="k">select</span><span class="w"> </span>a<span class="w"> </span>fix:
+<span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span>Provide<span class="w"> </span>a<span class="w"> </span>one-off<span class="w"> </span>default<span class="w"> </span>now<span class="w"> </span><span class="o">(</span>will<span class="w"> </span>be<span class="w"> </span><span class="nb">set</span><span class="w"> </span>on<span class="w"> </span>all<span class="w"> </span>existing<span class="w"> </span>rows<span class="o">)</span>
+<span class="w"> </span><span class="m">2</span><span class="o">)</span><span class="w"> </span>Quit,<span class="w"> </span>and<span class="w"> </span><span class="nb">let</span><span class="w"> </span>me<span class="w"> </span>add<span class="w"> </span>a<span class="w"> </span>default<span class="w"> </span><span class="k">in</span><span class="w"> </span>models.py
+Select<span class="w"> </span>an<span class="w"> </span>option:<span class="w"> </span><span class="m">1</span>
+Please<span class="w"> </span>enter<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>value<span class="w"> </span>now,<span class="w"> </span>as<span class="w"> </span>valid<span class="w"> </span>Python
+The<span class="w"> </span>datetime<span class="w"> </span>and<span class="w"> </span>django.utils.timezone<span class="w"> </span>modules<span class="w"> </span>are<span class="w"> </span>available,<span class="w"> </span>so<span class="w"> </span>you<span class="w"> </span>can<span class="w"> </span><span class="k">do</span><span class="w"> </span>e.g.<span class="w"> </span>timezone.now<span class="o">()</span>
+&gt;&gt;&gt;<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
-
 
 <p>在migrate的时候提示你需要指定一个默认值，用以处理NULL的情况</p>
 <h4>清除migrations</h4>
 <p>清除所有app目录/migrations/下除__init__.py 文件之外的py文件</p>
-<div class="highlight"><pre><span></span><code>find . -path <span class="s2">&quot;*migrations*&quot;</span> -name <span class="s2">&quot;*.py&quot;</span> -not -path <span class="s2">&quot;*__init__*&quot;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-path<span class="w"> </span><span class="s2">&quot;*migrations*&quot;</span><span class="w"> </span>-name<span class="w"> </span><span class="s2">&quot;*.py&quot;</span><span class="w"> </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s2">&quot;*__init__*&quot;</span><span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
 </code></pre></div>
-
 
 <h4>squashmigrations</h4>
 <p>当migrations越来越多的时候执行 makemigrations 和 migrate 就会越来越慢，可以考虑对其瘦身（减少migrations文件的数量）</p>
-<div class="highlight"><pre><span></span><code>python manage.py squashmigrations schools <span class="m">0002</span>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>squashmigrations<span class="w"> </span>schools<span class="w"> </span><span class="m">0002</span>
 </code></pre></div>
-
 
 <h2>数据导入导出</h2>
 <h3>数据导出</h3>
 <p>django 项目提供了一个导出的方法 python manage.py dumpdata, 不指定 appname 时默认为导出所有的app</p>
-<div class="highlight"><pre><span></span><code>python manage.py dumpdata <span class="o">[</span>appname<span class="o">]</span> &gt; appname_data.json
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>dumpdata<span class="w"> </span><span class="o">[</span>appname<span class="o">]</span><span class="w"> </span>&gt;<span class="w"> </span>appname_data.json
 </code></pre></div>
-
 
 <h3>数据导入</h3>
 <p>数据导入,不需要指定 appname</p>
-<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">appname_data</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">loaddata</span><span class="w"> </span><span class="n">appname_data</span><span class="o">.</span><span class="n">json</span>
 </code></pre></div>
-
 
 <p>优点：可以兼容各种支持的数据库，也就是说，以前用的是 SQLite3，可以导出后，用这种方法导入到 MySQL, PostgreSQL等数据库，反过来也可以。</p>
 <p>缺点：数据量大的时候，速度相对较慢，表的关系比较复杂的时候可以导入不成功。</p>
 <h3>常见数据导入导出</h3>
 <p>一般情况下，我们导入导出的时候需要排除一些app，contenttypes(新环境migrate的时候会重新生成，而且包含数据)，sessions(用户session相关数据),  admin(admin log)</p>
 <p>auth 包含用户，可视情况决定是否导出</p>
-<div class="highlight"><pre><span></span><code><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="o">--</span><span class="n">all</span> <span class="o">--</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">auth</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">contenttypes</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">sessions</span> <span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">admin</span> <span class="o">&gt;</span> <span class="n">all</span><span class="o">.</span><span class="n">json</span>
-<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">all</span><span class="o">.</span><span class="n">json</span>
+<div class="highlight"><pre><span></span><code><span class="n">python</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">dumpdata</span><span class="w"> </span><span class="o">--</span><span class="n">all</span><span class="w"> </span><span class="o">--</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="w"> </span><span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">auth</span><span class="w"> </span><span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">contenttypes</span><span class="w"> </span><span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">sessions</span><span class="w"> </span><span class="o">--</span><span class="n">exclude</span><span class="o">=</span><span class="n">admin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">all</span><span class="o">.</span><span class="n">json</span>
+<span class="n">python</span><span class="w"> </span><span class="n">manage</span><span class="o">.</span><span class="n">py</span><span class="w"> </span><span class="n">loaddata</span><span class="w"> </span><span class="n">all</span><span class="o">.</span><span class="n">json</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -198,8 +211,11 @@ The datetime and django.utils.timezone modules are available, so you can <span c
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -217,14 +233,16 @@ The datetime and django.utils.timezone modules are available, so you can <span c
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

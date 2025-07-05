@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 使用 Python 操作亚马逊 DynamoDB</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="python-operate-dynamodb">使用 Python 操作亚马逊 DynamoDB</h1>
     <p>
-      Posted on 2015-08-20 20:20 in <a href="./category/python.html">Python</a>
+          Posted on 2015-08-20 20:20 in <a href="./category/python.html">Python</a>
+
 
     </p>
   </header>
@@ -110,66 +130,65 @@
 <h2>下载DynamoDB.local</h2>
 <p>从亚马逊的官方文档可以找到<a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html">下载地址</a></p>
 <p>解压之后:</p>
-<div class="highlight"><pre><span></span><code><span class="err">dynamodb_local_2015-07-16_1.0$java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb</span>
-<span class="err">Initializing DynamoDB Local with the following configuration:</span>
-<span class="c">Port:   8000</span>
-<span class="c">InMemory:   false</span>
-<span class="c">DbPath: null</span>
-<span class="c">SharedDb:   true</span>
-<span class="c">shouldDelayTransientStatuses:   false</span>
-<span class="c">CorsParams: *</span>
+<div class="highlight"><pre><span></span><code><span class="nx">dynamodb_local_2015</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">16</span><span class="nx">_1</span><span class="m m-Double">.0</span><span class="err">$</span><span class="nx">java</span><span class="w"> </span><span class="o">-</span><span class="nx">Djava</span><span class="p">.</span><span class="kn">library</span><span class="p">.</span><span class="nx">path</span><span class="p">=.</span><span class="o">/</span><span class="nx">DynamoDBLocal_lib</span><span class="w"> </span><span class="o">-</span><span class="nx">jar</span><span class="w"> </span><span class="nx">DynamoDBLocal</span><span class="p">.</span><span class="nx">jar</span><span class="w"> </span><span class="o">-</span><span class="nx">sharedDb</span>
+<span class="nx">Initializing</span><span class="w"> </span><span class="nx">DynamoDB</span><span class="w"> </span><span class="nx">Local</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">configuration</span><span class="p">:</span>
+<span class="nx">Port</span><span class="p">:</span><span class="w">   </span><span class="mi">8000</span>
+<span class="nx">InMemory</span><span class="p">:</span><span class="w">   </span><span class="kc">false</span>
+<span class="nx">DbPath</span><span class="p">:</span><span class="w"> </span><span class="nx">null</span>
+<span class="nx">SharedDb</span><span class="p">:</span><span class="w">   </span><span class="kc">true</span>
+<span class="nx">shouldDelayTransientStatuses</span><span class="p">:</span><span class="w">   </span><span class="kc">false</span>
+<span class="nx">CorsParams</span><span class="p">:</span><span class="w"> </span><span class="o">*</span>
 </code></pre></div>
-
 
 <p>在浏览器中打开http://localhost:8000/shell/，你会看到DynamoDB javascript shell，在网页上你可以试试javascript API的用法。</p>
 <p><img alt="DynamoDB_JavaScript_Shell" src="../images/DynamoDB_JavaScript_Shell.png"></p>
 <h2>Boto3</h2>
 <p>在试用之后javascript API之后，你是不是很想念我们简洁的Python呢，接下来我们就来介绍Python的用法。</p>
 <p>官方推荐的Pyhton SDK为Boto3，我们直接进入正题:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">boto3.session</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Session</span>
 
-<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;anything&#39;</span><span class="p">,</span>
-                  <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;anything&#39;</span><span class="p">,</span>
-                  <span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">)</span>
+<span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;anything&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;anything&#39;</span><span class="p">,</span>
+<span class="w">                  </span><span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">)</span>
 
 <span class="c1"># 指定本地的endpoint就可以使用DynamoDB.local</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">,</span> <span class="n">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">)</span>
-<span class="n">dynamodb</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">,</span> <span class="n">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">)</span>
+<span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">)</span>
+<span class="n">dynamodb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;dynamodb&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">endpoint_url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8000&#39;</span><span class="p">)</span>
 
 <span class="c1"># 创建表</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
-    <span class="n">TableName</span><span class="o">=</span><span class="s1">&#39;users&#39;</span><span class="p">,</span>
-    <span class="n">KeySchema</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;KeyType&#39;</span><span class="p">:</span> <span class="s1">&#39;HASH&#39;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;KeyType&#39;</span><span class="p">:</span> <span class="s1">&#39;RANGE&#39;</span><span class="p">}],</span>
-    <span class="n">AttributeDefinitions</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;AttributeType&#39;</span><span class="p">:</span> <span class="s1">&#39;S&#39;</span><span class="p">},</span>
-        <span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span> <span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;AttributeType&#39;</span><span class="p">:</span> <span class="s1">&#39;S&#39;</span><span class="p">},],</span>
-    <span class="n">ProvisionedThroughput</span><span class="o">=</span><span class="p">{</span>
-        <span class="s1">&#39;ReadCapacityUnits&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s1">&#39;WriteCapacityUnits&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynamodb</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
+<span class="w">    </span><span class="n">TableName</span><span class="o">=</span><span class="s1">&#39;users&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">KeySchema</span><span class="o">=</span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;KeyType&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;HASH&#39;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;KeyType&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;RANGE&#39;</span><span class="p">}],</span>
+<span class="w">    </span><span class="n">AttributeDefinitions</span><span class="o">=</span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;username&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;AttributeType&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;S&#39;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s1">&#39;AttributeName&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;last_name&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;AttributeType&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;S&#39;</span><span class="p">},],</span>
+<span class="w">    </span><span class="n">ProvisionedThroughput</span><span class="o">=</span><span class="p">{</span>
+<span class="w">        </span><span class="s1">&#39;ReadCapacityUnits&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="s1">&#39;WriteCapacityUnits&#39;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
 <span class="p">)</span>
 
 <span class="c1"># 使用已经存在的表</span>
-<span class="n">user</span> <span class="o">=</span> <span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
+<span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dynamodb</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span>
 
 <span class="c1"># 增加一条记录</span>
-<span class="n">user</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span> <span class="s1">&#39;first_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span> <span class="s1">&#39;last_name&#39;</span><span class="p">:</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">})</span>
+<span class="n">user</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;first_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Jane&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span><span class="s1">&#39;Doe&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;age&#39;</span><span class="p">:</span><span class="mi">25</span><span class="p">})</span>
 <span class="c1"># 通过Key查询</span>
-<span class="n">item</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span> <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Item&#39;</span><span class="p">)</span>
+<span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">get_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Doe&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Item&#39;</span><span class="p">)</span>
 <span class="c1"># update 一条记录</span>
-<span class="n">item</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">item</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
 <span class="n">user</span><span class="o">.</span><span class="n">put_item</span><span class="p">(</span><span class="n">Item</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
 <span class="c1"># 删除一条记录</span>
-<span class="n">user</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span> <span class="s1">&#39;last_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Doe&#39;</span><span class="p">})</span>
+<span class="n">user</span><span class="o">.</span><span class="n">delete_item</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;username&#39;</span><span class="p">:</span><span class="s1">&#39;janedoe&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;last_name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Doe&#39;</span><span class="p">})</span>
 
 
 <span class="c1"># query</span>
-<span class="kn">from</span> <span class="nn">boto3.dynamodb.conditions</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Attr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">boto3.dynamodb.conditions</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Key</span><span class="p">,</span><span class="w"> </span><span class="n">Attr</span>
 <span class="n">user</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">KeyConditionExpression</span><span class="o">=</span><span class="n">Key</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="s1">&#39;janedoe&#39;</span><span class="p">))</span>
 
 <span class="c1"># scan</span>
@@ -179,7 +198,6 @@
 <span class="c1"># 列出有哪些表</span>
 <span class="n">client</span><span class="o">.</span><span class="n">list_tables</span><span class="p">()</span>
 </code></pre></div>
-
 
 <p>我们有两种操作Dynamodb的方法，一种是使用Resource，另一种是使用client。</p>
 <ol>
@@ -201,8 +219,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -220,14 +241,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

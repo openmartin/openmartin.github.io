@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -54,6 +54,13 @@
 
   <title>Martin's Blog &ndash; python small tips</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -78,18 +85,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -98,7 +117,8 @@
       
     <h1 id="python-small-tips">python small tips</h1>
     <p>
-      Posted on 2016-04-19 20:20 in <a href="./category/python.html">Python</a>
+          Posted on 2016-04-19 20:20 in <a href="./category/python.html">Python</a>
+
 
     </p>
   </header>
@@ -108,45 +128,41 @@
     <p>最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。</p>
 <h2>all()</h2>
 <p>all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:</p>
-<div class="highlight"><pre><span></span><code><span class="err">def all(iterable):</span>
-<span class="err">    for element in iterable:</span>
-<span class="err">        if not element:</span>
-<span class="err">            return False</span>
-<span class="err">    return True</span>
+<div class="highlight"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">all</span><span class="ss">(</span><span class="nv">iterable</span><span class="ss">)</span>:
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nv">element</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">iterable</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">element</span>:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">False</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">True</span>
 </code></pre></div>
-
 
 <p>有一些情况需要注意，当list为空时，返回True；空字符串，None，0 的结果都是False。:</p>
-<div class="highlight"><pre><span></span><code><span class="err">&gt;&gt;&gt; all([])</span>
-<span class="err">True</span>
-<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span>
-<span class="err">True</span>
-<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, &#39;&#39;])</span>
-<span class="err">False</span>
-<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, None])</span>
-<span class="err">False</span>
-<span class="err">&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, 0])</span>
-<span class="err">False</span>
+<div class="highlight"><pre><span></span><code>&gt;&gt;&gt; all([])
+True
+&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])
+True
+&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, &#39;&#39;])
+False
+&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, None])
+False
+&gt;&gt;&gt; all([&#39;a&#39;, &#39;b&#39;, 0])
+False
 </code></pre></div>
-
 
 <h2>注册表中有中文的问题</h2>
 <p>在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:</p>
-<div class="highlight"><pre><span></span><code><span class="n">mimetypes</span><span class="o">.</span><span class="n">init</span><span class="p">()</span> <span class="c1"># try to read system mime.types</span>
-<span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">358</span><span class="p">,</span> <span class="ow">in</span> <span class="n">init</span>
+<div class="highlight"><pre><span></span><code><span class="n">mimetypes</span><span class="o">.</span><span class="n">init</span><span class="p">()</span><span class="w"> </span><span class="c1"># try to read system mime.types</span>
+<span class="n">File</span><span class="w"> </span><span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">358</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">init</span>
 <span class="n">db</span><span class="o">.</span><span class="n">read_windows_registry</span><span class="p">()</span>
-<span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">258</span><span class="p">,</span> <span class="ow">in</span> <span class="n">read_windows_registry</span>
-<span class="k">for</span> <span class="n">subkeyname</span> <span class="ow">in</span> <span class="n">enum_types</span><span class="p">(</span><span class="n">hkcr</span><span class="p">):</span>
-<span class="n">File</span> <span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">249</span><span class="p">,</span> <span class="ow">in</span> <span class="n">enum_types</span>
-<span class="n">ctype</span> <span class="o">=</span> <span class="n">ctype</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">default_encoding</span><span class="p">)</span> <span class="c1"># omit in 3.x!</span>
-<span class="n">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0x88 in position 1: ordinal not in range(128)</span>
+<span class="n">File</span><span class="w"> </span><span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">258</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">read_windows_registry</span>
+<span class="k">for</span><span class="w"> </span><span class="n">subkeyname</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">enum_types</span><span class="p">(</span><span class="n">hkcr</span><span class="p">):</span>
+<span class="n">File</span><span class="w"> </span><span class="s2">&quot;C:\Python27\lib\mimetypes.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">249</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">enum_types</span>
+<span class="n">ctype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctype</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">default_encoding</span><span class="p">)</span><span class="w"> </span><span class="c1"># omit in 3.x!</span>
+<span class="n">UnicodeDecodeError</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;ascii&#39;</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="n">can</span><span class="s1">&#39;t decode byte 0x88 in position 1: ordinal not in range(128)</span>
 </code></pre></div>
-
 
 <p>这是因为python从注册表中HKEY_CLASSES_ROOT读取mimetype时，有包含中文的文件名后缀，一般都是阿里旺旺的。:</p>
-<div class="highlight"><pre><span></span><code><span class="err">HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件</span>
+<div class="highlight"><pre><span></span><code>HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件
 </code></pre></div>
-
 
 <p>删除这项就不会再出现UnicodeDecodeError错误。</p>
 <p>我的版本是Python 2.7.6，会出现这个问题，Python 2.7.7及以后的版本修复了这个问题。</p>
@@ -155,18 +171,17 @@
 <p>更多信息考参考文档 <a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode">http://pythonhosted.org//setuptools/setuptools.html#development-mode</a></p>
 <h2>json 格式中单引号是不合法的</h2>
 <p>在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s2">&quot;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&quot;</span><span class="p">)</span>
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
-  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-  <span class="n">File</span> <span class="s2">&quot;D:\Python27\lib\json\__init__.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">338</span><span class="p">,</span> <span class="ow">in</span> <span class="n">loads</span>
-    <span class="k">return</span> <span class="n">_default_decoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-  <span class="n">File</span> <span class="s2">&quot;D:\Python27\lib\json\decoder.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">365</span><span class="p">,</span> <span class="ow">in</span> <span class="n">decode</span>
-    <span class="n">obj</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">idx</span><span class="o">=</span><span class="n">_w</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
-  <span class="n">File</span> <span class="s2">&quot;D:\Python27\lib\json\decoder.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">383</span><span class="p">,</span> <span class="ow">in</span> <span class="n">raw_decode</span>
-    <span class="n">raise</span> <span class="n">ValueError</span><span class="p">(</span><span class="s2">&quot;No JSON object could be decoded&quot;</span><span class="p">)</span>
- <span class="n">ValueError</span><span class="p">:</span> <span class="n">No</span> <span class="n">JSON</span> <span class="n">object</span> <span class="n">could</span> <span class="n">be</span> <span class="n">decoded</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s2">&quot;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&quot;</span><span class="p">)</span>
+<span class="n">Traceback</span><span class="w"> </span><span class="p">(</span><span class="n">most</span><span class="w"> </span><span class="n">recent</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="n">last</span><span class="p">):</span>
+<span class="w">  </span><span class="n">File</span><span class="w"> </span><span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="w">  </span><span class="n">File</span><span class="w"> </span><span class="s2">&quot;D:\Python27\lib\json\__init__.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">338</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">loads</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">_default_decoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="w">  </span><span class="n">File</span><span class="w"> </span><span class="s2">&quot;D:\Python27\lib\json\decoder.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">365</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">decode</span>
+<span class="w">    </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">raw_decode</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">idx</span><span class="o">=</span><span class="n">_w</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">end</span><span class="p">())</span>
+<span class="w">  </span><span class="n">File</span><span class="w"> </span><span class="s2">&quot;D:\Python27\lib\json\decoder.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">383</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">raw_decode</span>
+<span class="w">    </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="s2">&quot;No JSON object could be decoded&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="n">ValueError</span><span class="p">:</span><span class="w"> </span><span class="n">No</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">decoded</span>
 </code></pre></div>
-
 
 <h2>redis.Redis 和 redis.StrictRedis zadd的参数顺序不一样的</h2>
 <p>redis.Redis.zadd(name, <em>args,</em>*kwargs) value在前，分数在后</p>
@@ -183,8 +198,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -202,14 +220,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

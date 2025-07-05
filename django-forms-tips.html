@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -54,6 +54,13 @@
 
   <title>Martin's Blog &ndash; django forms tips</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -78,18 +85,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -98,7 +117,8 @@
       
     <h1 id="django-forms-tips">django forms tips</h1>
     <p>
-      Posted on 2016-09-19 20:20 in <a href="./category/django.html">Django</a>
+          Posted on 2016-09-19 20:20 in <a href="./category/django.html">Django</a>
+
 
     </p>
   </header>
@@ -109,9 +129,8 @@
 <p>djang forms 是django非常有用的功能之一，展示表单和接收表单数据非常方便。</p>
 <h3>css class</h3>
 <p>比如下面的代码:</p>
-<div class="highlight"><pre><span></span><code><span class="err">n_tz = forms.ChoiceField(choices=TIMEZONE_CHOICE, initial=8, required=True, widget=forms.Select(attrs={&quot;class&quot;: &quot;form-control&quot;, &quot;id&quot;: &#39;n_tz&#39;}))</span>
+<div class="highlight"><pre><span></span><code><span class="nx">n_tz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">forms</span><span class="p">.</span><span class="nx">ChoiceField</span><span class="p">(</span><span class="nx">choices</span><span class="p">=</span><span class="nx">TIMEZONE_CHOICE</span><span class="p">,</span><span class="w"> </span><span class="nx">initial</span><span class="p">=</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="nx">required</span><span class="p">=</span><span class="nx">True</span><span class="p">,</span><span class="w"> </span><span class="nx">widget</span><span class="p">=</span><span class="nx">forms</span><span class="p">.</span><span class="nx">Select</span><span class="p">(</span><span class="nx">attrs</span><span class="p">={</span><span class="s">&quot;class&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;form-control&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">n_tz</span><span class="err">&#39;</span><span class="p">}))</span>
 </code></pre></div>
-
 
 <p>实现了两个常用的功能
 - 指定css class 和 id
@@ -140,56 +159,51 @@
         <span class="k">return</span> <span class="n">cleaned_data</span>
 </code></pre></div>
 
-
 <p>如果是比较简单的逻辑，可以在valid之前直接修改form的属性</p>
-<div class="highlight"><pre><span></span><code><span class="err">form.fields[&#39;a&#39;].required = False  # 改变required</span>
-<span class="err">form.is_valid()</span>
+<div class="highlight"><pre><span></span><code>form.fields[&#39;a&#39;].required = False  # 改变required
+form.is_valid()
 </code></pre></div>
-
 
 <h3>form提示错误</h3>
 <p>经常用到的一个功能是提示用户输入的有哪些错误，django的form提供了这样的功能，在template中可以用<code>form.fieldname.erros</code>,<code>form.fieldname.erros.as_text</code>
 表示。</p>
 <p>最近碰到一个很奇怪问题，给一个field initial 值之后，在template中可以展示，然后POST也能接到这个值，但是再次在template中展示却取不到这个值。只能用一个土办法绕过这个问题。</p>
-<div class="highlight"><pre><span></span><code><span class="err">form = DemoForm(request.POST)</span>
-<span class="err">if form.is_valid():</span>
-<span class="err">    save()</span>
-<span class="err">    return redirect</span>
-<span class="c">else:</span>
-<span class="c">    new_form = DemoForm(initial=cif.cleaned_data)</span>
-<span class="c">    new_form._errors = form._errors</span>
-<span class="c">    return render(&#39;demo.html&#39;,  {&quot;form&quot;: new_form})</span>
+<div class="highlight"><pre><span></span><code>form = DemoForm(request.POST)
+if form.is_valid():
+    save()
+    return redirect
+else:
+    new_form = DemoForm(initial=cif.cleaned_data)
+    new_form._errors = form._errors
+    return render(&#39;demo.html&#39;,  {&quot;form&quot;: new_form})
 </code></pre></div>
-
 
 <h3>使用decrator做权限检查</h3>
 <p>比如某几个view需要特定的权限才能查看，在每个view中写判断的逻辑有点冗余，这时候我们可以使用装饰器<code>@check_perm('foo')</code>，代码如下，检查权限的代码需要根据具体情况修改。</p>
-<div class="highlight"><pre><span></span><code><span class="n">def</span> <span class="n">check_perm</span><span class="p">(</span><span class="n">perm_name</span><span class="p">):</span>
-    <span class="n">def</span> <span class="n">handle_func</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-        <span class="n">def</span> <span class="n">handle_args</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-            <span class="k">user</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">siteuser</span>
-            <span class="n">try</span><span class="p">:</span>
-                <span class="n">uperm</span> <span class="o">=</span> <span class="n">UserPermission</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="k">user</span><span class="o">=</span><span class="k">user</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">uperm</span><span class="p">.</span><span class="n">has_module_perms</span><span class="p">(</span><span class="n">perm_name</span><span class="p">):</span>
-                    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">raise</span> <span class="n">PermissionDenied</span>
-            <span class="k">except</span> <span class="n">UserPermission</span><span class="p">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
-                <span class="n">raise</span> <span class="n">PermissionDenied</span>
+<div class="highlight"><pre><span></span><code>def check_perm(perm_name):
+    def handle_func(func):
+        def handle_args(request, <span class="gs">*args, *</span>*kwargs):
+            user = request.siteuser
+            try:
+                uperm = UserPermission.objects.get(user=user)
+                if uperm.has_module_perms(perm_name):
+                    return func(request, <span class="gs">*args, *</span>*kwargs)
+                else:
+                    raise PermissionDenied
+            except UserPermission.DoesNotExist:
+                raise PermissionDenied
 
-            <span class="k">except</span> <span class="n">TypeError</span><span class="p">:</span>
-                <span class="n">raise</span> <span class="n">PermissionDenied</span>
+            except TypeError:
+                raise PermissionDenied
 
-        <span class="k">return</span> <span class="n">handle_args</span>
-    <span class="k">return</span> <span class="n">handle_func</span>
+        return handle_args
+    return handle_func
 </code></pre></div>
-
 
 <h3>自定义400，403，404，500页面</h3>
 <p>如果要自定义错误页面，需要在 urls.py 中指定error handler。</p>
-<div class="highlight"><pre><span></span><code><span class="err">handler403 = &#39;mysite.views.my_permission_denied&#39;</span>
+<div class="highlight"><pre><span></span><code>handler403 = &#39;mysite.views.my_permission_denied&#39;
 </code></pre></div>
-
 
 <table>
 <thead>
@@ -221,12 +235,11 @@
 <h3>1.9 以前的old middleware</h3>
 <p><img alt="django-middleware" src="../images/2016-09-19-15-50-25.jpg">
 定义一个middleware很容易，你只需要定义一个普通的python类，然后实现如下四个方法中的某一个或者某几个，添加到<code>setting.py MIDDLEWARE_CLASSES</code> 当中:</p>
-<div class="highlight"><pre><span></span><code><span class="k">proc</span><span class="nb">es</span><span class="nv">s_request</span><span class="p">(</span><span class="nv">request</span><span class="p">)</span>
-<span class="k">proc</span><span class="nb">es</span><span class="nv">s_view</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span> <span class="nv">view_func</span><span class="p">,</span> <span class="nv">view_args</span><span class="p">,</span> <span class="nv">view_kwargs</span><span class="p">)</span>
-<span class="k">proc</span><span class="nb">es</span><span class="nv">s_template_response</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span> <span class="nv">response</span><span class="p">)</span>
-<span class="k">proc</span><span class="nb">es</span><span class="nv">s_response</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span> <span class="nv">response</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="k">proc</span><span class="nv">ess_request</span><span class="p">(</span><span class="nv">request</span><span class="p">)</span>
+<span class="k">proc</span><span class="nv">ess_view</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="nv">view_func</span><span class="p">,</span><span class="w"> </span><span class="nv">view_args</span><span class="p">,</span><span class="w"> </span><span class="nv">view_kwargs</span><span class="p">)</span>
+<span class="k">proc</span><span class="nv">ess_template_response</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="nv">response</span><span class="p">)</span>
+<span class="k">proc</span><span class="nv">ess_response</span><span class="p">(</span><span class="nv">request</span><span class="p">,</span><span class="w"> </span><span class="nv">response</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>参考：
 https://docs.djangoproject.com/en/1.10/ref/urls/
@@ -242,8 +255,11 @@ https://docs.djangoproject.com/en/1.9/topics/http/middleware/</p>
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -261,14 +277,16 @@ https://docs.djangoproject.com/en/1.9/topics/http/middleware/</p>
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

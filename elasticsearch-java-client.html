@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Elasticsearch Java Client</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="elasticsearch-java-client">Elasticsearch Java Client</h1>
     <p>
-      Posted on 2019-08-22 10:57 in <a href="./category/java.html">Java</a>
+          Posted on 2019-08-22 10:57 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -109,84 +129,79 @@
     <h2>Java REST Client</h2>
 <h3>maven 配置</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.client<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>elasticsearch-rest-high-level-client<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>7.2.0<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.elasticsearch.client<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>elasticsearch-rest-high-level-client<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>7.2.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 
-
 <h3>spring 构建 RestHighLevelClient 对象</h3>
-<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- config elasticsearch RestHighLevelClient --&gt;</span>
-<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;httpHost&quot;</span> <span class="na">class=</span><span class="s">&quot;org.apache.http.HttpHost&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">value=</span><span class="s">&quot;${elasticsearch.host}&quot;</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;1&quot;</span> <span class="na">value=</span><span class="s">&quot;${elasticsearch.port}&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- config elasticsearch RestHighLevelClient --&gt;</span>
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;httpHost&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.apache.http.HttpHost&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">index=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${elasticsearch.host}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">index=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;${elasticsearch.port}&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/bean&gt;</span>
 
-<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;restClientBuilder&quot;</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestClientBuilder&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;list&gt;</span>
-            <span class="nt">&lt;bean</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.Node&quot;</span><span class="nt">&gt;</span>
-                <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">ref=</span><span class="s">&quot;httpHost&quot;</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;/bean&gt;</span>
-        <span class="nt">&lt;/list&gt;</span>
-    <span class="nt">&lt;/constructor-arg&gt;</span>
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;restClientBuilder&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestClientBuilder&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">index=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;list&gt;</span>
+<span class="w">            </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.Node&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">index=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;httpHost&quot;</span><span class="nt">/&gt;</span>
+<span class="w">            </span><span class="nt">&lt;/bean&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/list&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/constructor-arg&gt;</span>
 <span class="nt">&lt;/bean&gt;</span>
 
-<span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;restHighLevelClient&quot;</span> <span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestHighLevelClient&quot;</span> <span class="na">destroy-method=</span><span class="s">&quot;close&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;constructor-arg</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">ref=</span><span class="s">&quot;restClientBuilder&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;restHighLevelClient&quot;</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;org.elasticsearch.client.RestHighLevelClient&quot;</span><span class="w"> </span><span class="na">destroy-method=</span><span class="s">&quot;close&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;constructor-arg</span><span class="w"> </span><span class="na">index=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">ref=</span><span class="s">&quot;restClientBuilder&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/bean&gt;</span>
 </code></pre></div>
 
-
 <h3>使用 Demo</h3>
 <p>API 使用方法 https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html</p>
-<div class="highlight"><pre><span></span><code><span class="n">SearchRequest</span> <span class="n">searchRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchRequest</span><span class="p">(</span><span class="s">&quot;web-log-2019-01&quot;</span><span class="p">);</span>
-<span class="n">SearchSourceBuilder</span> <span class="n">searchSourceBuilder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SearchSourceBuilder</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="n">SearchRequest</span><span class="w"> </span><span class="n">searchRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SearchRequest</span><span class="p">(</span><span class="s">&quot;web-log-2019-01&quot;</span><span class="p">);</span>
+<span class="n">SearchSourceBuilder</span><span class="w"> </span><span class="n">searchSourceBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SearchSourceBuilder</span><span class="p">();</span>
 
 <span class="c1">// 设置分页</span>
 <span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">from</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 <span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">size</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
 <span class="c1">// 设置查询条件</span>
-<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">QueryBuilders</span><span class="p">.</span><span class="na">matchPhraseQuery</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="n">queryword</span><span class="p">));</span>
+<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">query</span><span class="p">(</span><span class="n">QueryBuilders</span><span class="p">.</span><span class="na">matchPhraseQuery</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">queryword</span><span class="p">));</span>
 
 <span class="c1">// 设置 exclude</span>
-<span class="n">String</span><span class="o">[]</span> <span class="n">excludeFields</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">[]</span> <span class="p">{</span><span class="s">&quot;content&quot;</span><span class="p">};</span>
-<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">fetchSource</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">excludeFields</span><span class="p">);</span>
+<span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">excludeFields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;content&quot;</span><span class="p">};</span>
+<span class="n">searchSourceBuilder</span><span class="p">.</span><span class="na">fetchSource</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="n">excludeFields</span><span class="p">);</span>
 
 <span class="n">searchRequest</span><span class="p">.</span><span class="na">source</span><span class="p">(</span><span class="n">searchSourceBuilder</span><span class="p">);</span>
 
 <span class="c1">// send request and get response</span>
-<span class="n">SearchResponse</span> <span class="n">searchResponse</span> <span class="o">=</span> <span class="n">restHighLevelClient</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="n">searchRequest</span><span class="p">,</span> <span class="n">RequestOptions</span><span class="p">.</span><span class="na">DEFAULT</span><span class="p">);</span>
-<span class="n">SearchHits</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">searchResponse</span><span class="p">.</span><span class="na">getHits</span><span class="p">();</span>
-<span class="n">SearchHit</span><span class="o">[]</span> <span class="n">searchHits</span> <span class="o">=</span> <span class="n">hits</span><span class="p">.</span><span class="na">getHits</span><span class="p">();</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">SearchHit</span> <span class="n">hit</span> <span class="p">:</span> <span class="n">searchHits</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something with the SearchHit</span>
-    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="na">getSourceAsString</span><span class="p">());</span>
+<span class="n">SearchResponse</span><span class="w"> </span><span class="n">searchResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restHighLevelClient</span><span class="p">.</span><span class="na">search</span><span class="p">(</span><span class="n">searchRequest</span><span class="p">,</span><span class="w"> </span><span class="n">RequestOptions</span><span class="p">.</span><span class="na">DEFAULT</span><span class="p">);</span>
+<span class="n">SearchHits</span><span class="w"> </span><span class="n">hits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">searchResponse</span><span class="p">.</span><span class="na">getHits</span><span class="p">();</span>
+<span class="n">SearchHit</span><span class="o">[]</span><span class="w"> </span><span class="n">searchHits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hits</span><span class="p">.</span><span class="na">getHits</span><span class="p">();</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">SearchHit</span><span class="w"> </span><span class="n">hit</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">searchHits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// do something with the SearchHit</span>
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">hit</span><span class="p">.</span><span class="na">getSourceAsString</span><span class="p">());</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <h2>Elasticsearch SQL</h2>
 <h3>maven 配置</h3>
 <p>添加 repository</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;repository&gt;</span>
-    <span class="nt">&lt;id&gt;</span>elastic.co<span class="nt">&lt;/id&gt;</span>
-    <span class="nt">&lt;name&gt;</span>Elastic Repository<span class="nt">&lt;/name&gt;</span>
-    <span class="nt">&lt;url&gt;</span>https://artifacts.elastic.co/maven<span class="nt">&lt;/url&gt;</span>
+<span class="w">    </span><span class="nt">&lt;id&gt;</span>elastic.co<span class="nt">&lt;/id&gt;</span>
+<span class="w">    </span><span class="nt">&lt;name&gt;</span>Elastic<span class="w"> </span>Repository<span class="nt">&lt;/name&gt;</span>
+<span class="w">    </span><span class="nt">&lt;url&gt;</span>https://artifacts.elastic.co/maven<span class="nt">&lt;/url&gt;</span>
 <span class="nt">&lt;/repository&gt;</span>
 </code></pre></div>
 
-
 <p>dependency</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.elasticsearch.plugin<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>x-pack-sql-jdbc<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>${es.version}<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.elasticsearch.plugin<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>x-pack-sql-jdbc<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>${es.version}<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-
 
 <h3>Elasticsearch SQL + mybatis + spring</h3>
 <p>Elasticsearch SQL 可以和 mybatis, spring 结合起来，和关系型数据库一样的开发模式</p>
@@ -202,8 +217,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -221,14 +239,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 使用 scrcpy 在电脑上镜像手机</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="scrcpy-mirror">使用 scrcpy 在电脑上镜像手机</h1>
     <p>
-      Posted on 2024-11-03 22:00 in <a href="./category/linux.html">Linux</a>
+          Posted on 2024-11-03 22:00 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -109,23 +129,20 @@
     <p>属手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具<code>scrcpy</code>可以在电脑上镜像手机，控制手机，开源而且免费的。</p>
 <p><a href="https://github.com/Genymobile/scrcpy">https://github.com/Genymobile/scrcpy</a></p>
 <p>先安装依赖</p>
-<div class="highlight"><pre><span></span><code>sudo apt install ffmpeg libsdl2-2.0-0 adb wget <span class="se">\</span>
-                 gcc git pkg-config meson ninja-build libsdl2-dev <span class="se">\</span>
-                 libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev <span class="se">\</span>
-                 libswresample-dev libusb-1.0-0 libusb-10-0-dev
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ffmpeg<span class="w"> </span>libsdl2-2.0-0<span class="w"> </span>adb<span class="w"> </span>wget<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span>gcc<span class="w"> </span>git<span class="w"> </span>pkg-config<span class="w"> </span>meson<span class="w"> </span>ninja-build<span class="w"> </span>libsdl2-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span>libavcodec-dev<span class="w"> </span>libavdevice-dev<span class="w"> </span>libavformat-dev<span class="w"> </span>libavutil-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">                 </span>libswresample-dev<span class="w"> </span>libusb-1.0-0<span class="w"> </span>libusb-10-0-dev
 </code></pre></div>
 
-
 <p>安装 scrcpy</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> scrcpy
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>scrcpy
 ./install_release.sh
 </code></pre></div>
 
-
 <p>手机需要开调试模式，用USB线连上电脑，用下面的命令就可以打开一个手机的窗口，更多选项可以参考官方文档</p>
-<div class="highlight"><pre><span></span><code>scrcpy --video-codec<span class="o">=</span>h265 --max-size<span class="o">=</span><span class="m">1920</span> --max-fps<span class="o">=</span><span class="m">60</span> --no-audio --keyboard<span class="o">=</span>uhid --turn-screen-off --stay-awake 
+<div class="highlight"><pre><span></span><code>scrcpy<span class="w"> </span>--video-codec<span class="o">=</span>h265<span class="w"> </span>--max-size<span class="o">=</span><span class="m">1920</span><span class="w"> </span>--max-fps<span class="o">=</span><span class="m">60</span><span class="w"> </span>--no-audio<span class="w"> </span>--keyboard<span class="o">=</span>uhid<span class="w"> </span>--turn-screen-off<span class="w"> </span>--stay-awake<span class="w"> </span>
 </code></pre></div>
-
 
 <p>有些情况不能镜像，比如支付的时候输入密码，国产的 android 系统都会黑屏来保护用户的输入。</p>
 <p>一些快捷键</p>
@@ -210,8 +227,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -229,14 +249,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

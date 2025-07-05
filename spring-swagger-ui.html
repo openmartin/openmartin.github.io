@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; spring 配置 swagger-ui</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="spring-swagger-ui">spring 配置 swagger-ui</h1>
     <p>
-      Posted on 2020-06-02 17:00 in <a href="./category/java.html">Java</a>
+          Posted on 2020-06-02 17:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -114,18 +134,17 @@
 <li>引入 maven dependency</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>springfox-swagger2<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>springfox-swagger2<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>springfox-swagger-ui<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.springfox<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>springfox-swagger-ui<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>2.9.2<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-
 
 <ol>
 <li>Configuration</li>
@@ -135,97 +154,94 @@
 <span class="cm"> */</span>
 <span class="nd">@Configuration</span>
 <span class="nd">@EnableSwagger2</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SwaggerConfig</span> <span class="p">{</span>
-    <span class="nd">@Bean</span>
-    <span class="kd">public</span> <span class="n">Docket</span> <span class="nf">createRestApi</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">Docket</span><span class="p">(</span><span class="n">DocumentationType</span><span class="p">.</span><span class="na">SWAGGER_2</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">apiInfo</span><span class="p">(</span><span class="n">apiInfo</span><span class="p">())</span>
-                <span class="p">.</span><span class="na">select</span><span class="p">()</span>
-                <span class="p">.</span><span class="na">apis</span><span class="p">(</span><span class="n">RequestHandlerSelectors</span><span class="p">.</span><span class="na">basePackage</span><span class="p">(</span><span class="s">&quot;com.example&quot;</span><span class="p">))</span>
-                <span class="p">.</span><span class="na">paths</span><span class="p">(</span><span class="n">PathSelectors</span><span class="p">.</span><span class="na">any</span><span class="p">())</span>
-                <span class="p">.</span><span class="na">build</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SwaggerConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nd">@Bean</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Docket</span><span class="w"> </span><span class="nf">createRestApi</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Docket</span><span class="p">(</span><span class="n">DocumentationType</span><span class="p">.</span><span class="na">SWAGGER_2</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">apiInfo</span><span class="p">(</span><span class="n">apiInfo</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">select</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">apis</span><span class="p">(</span><span class="n">RequestHandlerSelectors</span><span class="p">.</span><span class="na">basePackage</span><span class="p">(</span><span class="s">&quot;com.example&quot;</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">paths</span><span class="p">(</span><span class="n">PathSelectors</span><span class="p">.</span><span class="na">any</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
 
-    <span class="kd">private</span> <span class="n">ApiInfo</span> <span class="nf">apiInfo</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">ApiInfoBuilder</span><span class="p">()</span>
-                <span class="p">.</span><span class="na">title</span><span class="p">(</span><span class="s">&quot;基于 Swagger 构建的 Rest API文档&quot;</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;xxx&quot;</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">contact</span><span class="p">(</span><span class="k">new</span> <span class="n">Contact</span><span class="p">(</span><span class="s">&quot;xxx&quot;</span><span class="p">,</span> <span class="s">&quot;http://example.com&quot;</span><span class="p">,</span> <span class="s">&quot;xxx@example.com&quot;</span><span class="p">))</span>
-                <span class="p">.</span><span class="na">termsOfServiceUrl</span><span class="p">(</span><span class="s">&quot;http://example.com&quot;</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">version</span><span class="p">(</span><span class="s">&quot;1.0&quot;</span><span class="p">)</span>
-                <span class="p">.</span><span class="na">build</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">ApiInfo</span><span class="w"> </span><span class="nf">apiInfo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ApiInfoBuilder</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">title</span><span class="p">(</span><span class="s">&quot;基于 Swagger 构建的 Rest API文档&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">description</span><span class="p">(</span><span class="s">&quot;xxx&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">contact</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Contact</span><span class="p">(</span><span class="s">&quot;xxx&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;http://example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;xxx@example.com&quot;</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">termsOfServiceUrl</span><span class="p">(</span><span class="s">&quot;http://example.com&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">version</span><span class="p">(</span><span class="s">&quot;1.0&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <ol>
 <li>xml 配置</li>
 </ol>
 <p>如果不是 spring-boot 项目，传统的项目也可以用 xml 来配置</p>
 <p>除了上面的 SwaggerConfig 需要在 spring-mvc.xml 配置之外，还需要添加对 swagger-ui 中用到的静态文件的支持</p>
-<div class="highlight"><pre><span></span><code>        <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;swagger2Config&quot;</span>
-              <span class="na">class=</span><span class="s">&quot;com.example.config.SwaggerConfig&quot;</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;/bean&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="w">        </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;swagger2Config&quot;</span>
+<span class="w">              </span><span class="na">class=</span><span class="s">&quot;com.example.config.SwaggerConfig&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/bean&gt;</span>
 
-        <span class="nt">&lt;mvc:resources</span> <span class="na">order=</span><span class="s">&quot;1&quot;</span> <span class="na">location=</span><span class="s">&quot;/resources/&quot;</span>
-                       <span class="na">mapping=</span><span class="s">&quot;/resources/**&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;mvc:resources</span> <span class="na">mapping=</span><span class="s">&quot;swagger-ui.html&quot;</span>
-                       <span class="na">location=</span><span class="s">&quot;classpath:/META-INF/resources/&quot;</span> <span class="nt">/&gt;</span>
-        <span class="nt">&lt;mvc:resources</span> <span class="na">mapping=</span><span class="s">&quot;/webjars/**&quot;</span>
-                       <span class="na">location=</span><span class="s">&quot;classpath:/META-INF/resources/webjars/&quot;</span> <span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mvc:resources</span><span class="w"> </span><span class="na">order=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">location=</span><span class="s">&quot;/resources/&quot;</span>
+<span class="w">                       </span><span class="na">mapping=</span><span class="s">&quot;/resources/**&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mvc:resources</span><span class="w"> </span><span class="na">mapping=</span><span class="s">&quot;swagger-ui.html&quot;</span>
+<span class="w">                       </span><span class="na">location=</span><span class="s">&quot;classpath:/META-INF/resources/&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mvc:resources</span><span class="w"> </span><span class="na">mapping=</span><span class="s">&quot;/webjars/**&quot;</span>
+<span class="w">                       </span><span class="na">location=</span><span class="s">&quot;classpath:/META-INF/resources/webjars/&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 
 
-        <span class="nt">&lt;mvc:default-servlet-handler</span> <span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mvc:default-servlet-handler</span><span class="w"> </span><span class="nt">/&gt;</span>
 </code></pre></div>
 
-
 <h3>Controller 的写法</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">io.swagger.annotations.Api</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">io.swagger.annotations.ApiOperation</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">io.swagger.annotations.ApiParam</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.annotations.Api</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.annotations.ApiOperation</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.swagger.annotations.ApiParam</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.Logger</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.slf4j.LoggerFactory</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.*</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
 
 <span class="nd">@RestController</span>
 <span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;/demo&quot;</span><span class="p">)</span>
-<span class="nd">@Api</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;demo接口&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;用户相关操作&quot;</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DemoController</span> <span class="p">{</span>
+<span class="nd">@Api</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;demo接口&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;用户相关操作&quot;</span><span class="p">)</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">DemoController</span><span class="w"> </span><span class="p">{</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">DemoController</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Logger</span><span class="w"> </span><span class="n">logger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">DemoController</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="n">DemoService</span> <span class="n">demoService</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">DemoService</span><span class="w"> </span><span class="n">demoService</span><span class="p">;</span>
 
-    <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/user&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
-    <span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;用户查询服务&quot;</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;根据传过来的userId来查询用户&quot;</span><span class="p">)</span>
-    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">getUserById</span><span class="p">(</span><span class="nd">@ApiParam</span><span class="p">(</span><span class="n">required</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">&quot;用户id&quot;</span><span class="p">,</span> <span class="n">example</span> <span class="o">=</span> <span class="s">&quot;1000&quot;</span><span class="p">)</span> <span class="nd">@RequestParam</span> <span class="n">String</span> <span class="n">userId</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">result</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;code&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/user&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">GET</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;用户查询服务&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;根据传过来的userId来查询用户&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getUserById</span><span class="p">(</span><span class="nd">@ApiParam</span><span class="p">(</span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;用户id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1000&quot;</span><span class="p">)</span><span class="w"> </span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">userId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 
-        <span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;GET /demo/user userId={}&quot;</span><span class="p">,</span> <span class="n">userId</span><span class="p">);</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;GET /demo/user userId={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">userId</span><span class="p">);</span>
 
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/user/add&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="p">.</span><span class="na">POST</span><span class="p">)</span>
-    <span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;添加用户&quot;</span><span class="p">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;添加用户&quot;</span><span class="p">)</span>
-    <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">addUser</span><span class="p">(</span><span class="nd">@ApiParam</span> <span class="nd">@RequestBody</span> <span class="n">User</span> <span class="n">user</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">result</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;code&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="nd">@RequestMapping</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/user/add&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">RequestMethod</span><span class="p">.</span><span class="na">POST</span><span class="p">)</span>
+<span class="w">    </span><span class="nd">@ApiOperation</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;添加用户&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;添加用户&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">addUser</span><span class="p">(</span><span class="nd">@ApiParam</span><span class="w"> </span><span class="nd">@RequestBody</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="n">user</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">result</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;code&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 
-        <span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;POST /demo/user/add user={}&quot;</span><span class="p">,</span> <span class="n">user</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="n">logger</span><span class="p">.</span><span class="na">debug</span><span class="p">(</span><span class="s">&quot;POST /demo/user/add user={}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>配置好之后，打开 http://localhost:8080/your-app-root/swagger-ui.html 就可以看到文档</p>
 <p><img alt="swagger-ui-demo" src="../images/swagger-ui-demo.jpg"></p>
@@ -240,8 +256,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -259,14 +278,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

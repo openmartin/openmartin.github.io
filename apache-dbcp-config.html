@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -56,6 +56,13 @@
 
   <title>Martin's Blog &ndash; apache dbcp 配置</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -80,18 +87,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -100,7 +119,8 @@
       
     <h1 id="apache-dbcp-config">apache dbcp 配置</h1>
     <p>
-      Posted on 2020-08-05 14:00 in <a href="./category/java.html">Java</a>
+          Posted on 2020-08-05 14:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -112,81 +132,81 @@
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">描述</th>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">username</td>
-<td align="left"></td>
+<td style="text-align: left;">username</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">password</td>
-<td align="left"></td>
+<td style="text-align: left;">password</td>
+<td style="text-align: left;"></td>
 </tr>
 <tr>
-<td align="left">url</td>
-<td align="left">example: jdbc:oracle:thin:@192.168.100.1:1521:orcl</td>
+<td style="text-align: left;">url</td>
+<td style="text-align: left;">example: jdbc:oracle:thin:@192.168.100.1:1521:orcl</td>
 </tr>
 <tr>
-<td align="left">driverClassName</td>
-<td align="left">example: oracle.jdbc.driver.OracleDriver</td>
+<td style="text-align: left;">driverClassName</td>
+<td style="text-align: left;">example: oracle.jdbc.driver.OracleDriver</td>
 </tr>
 <tr>
-<td align="left">connectionProperties</td>
-<td align="left">连接时的属性，分号分隔  propertyName=property;</td>
+<td style="text-align: left;">connectionProperties</td>
+<td style="text-align: left;">连接时的属性，分号分隔  propertyName=property;</td>
 </tr>
 </tbody>
 </table>
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">默认值</th>
-<th align="left">描述</th>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">defaultAutoCommit</td>
-<td align="left">driver default</td>
-<td align="left">auto-commit 状态，如果没有设置，则使用 driver 的默认值</td>
+<td style="text-align: left;">defaultAutoCommit</td>
+<td style="text-align: left;">driver default</td>
+<td style="text-align: left;">auto-commit 状态，如果没有设置，则使用 driver 的默认值</td>
 </tr>
 <tr>
-<td align="left">defaultReadOnly</td>
-<td align="left">driver default</td>
-<td align="left">read-only 状态，如果没有设置，则使用 driver 的默认值</td>
+<td style="text-align: left;">defaultReadOnly</td>
+<td style="text-align: left;">driver default</td>
+<td style="text-align: left;">read-only 状态，如果没有设置，则使用 driver 的默认值</td>
 </tr>
 <tr>
-<td align="left">defaultTransactionIsolation</td>
-<td align="left">driver default</td>
-<td align="left">默认的事务隔离类型 NONE \ READ_COMMITTED \ READ_UNCOMMITTED \ REPEATABLE_READ \ SERIALIZABLE</td>
+<td style="text-align: left;">defaultTransactionIsolation</td>
+<td style="text-align: left;">driver default</td>
+<td style="text-align: left;">默认的事务隔离类型 NONE \ READ_COMMITTED \ READ_UNCOMMITTED \ REPEATABLE_READ \ SERIALIZABLE</td>
 </tr>
 <tr>
-<td align="left">defaultCatalog</td>
-<td align="left"></td>
-<td align="left">比如 mysql 和sqlserver 可以指定哪个库</td>
+<td style="text-align: left;">defaultCatalog</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">比如 mysql 和sqlserver 可以指定哪个库</td>
 </tr>
 <tr>
-<td align="left">cacheState</td>
-<td align="left">true</td>
-<td align="left">auto-commit 和    read-only 的状态在第一次读和写就缓存了，避免额外的查询和 getter 调用</td>
+<td style="text-align: left;">cacheState</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">auto-commit 和    read-only 的状态在第一次读和写就缓存了，避免额外的查询和 getter 调用</td>
 </tr>
 <tr>
-<td align="left">defaultQueryTimeout</td>
-<td align="left">null</td>
-<td align="left">null 使用 driver 的默认值，或者是一个 Integer 表示 超时时间</td>
+<td style="text-align: left;">defaultQueryTimeout</td>
+<td style="text-align: left;">null</td>
+<td style="text-align: left;">null 使用 driver 的默认值，或者是一个 Integer 表示 超时时间</td>
 </tr>
 <tr>
-<td align="left">enableAutoCommitOnReturn</td>
-<td align="left">true</td>
-<td align="left">true 当connections被归还给pool 时，设置 Connection.setAutoCommit(true)</td>
+<td style="text-align: left;">enableAutoCommitOnReturn</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">true 当connections被归还给pool 时，设置 Connection.setAutoCommit(true)</td>
 </tr>
 <tr>
-<td align="left">rollbackOnReturn</td>
-<td align="left">true</td>
-<td align="left">true 当 auto-commit 没被启用，而且不是 read-only 时，roll back  当 connection 被归还给 pool时</td>
+<td style="text-align: left;">rollbackOnReturn</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">true 当 auto-commit 没被启用，而且不是 read-only 时，roll back  当 connection 被归还给 pool时</td>
 </tr>
 </tbody>
 </table>
@@ -194,138 +214,138 @@
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">默认值</th>
-<th align="left">描述</th>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">initialSize</td>
-<td align="left">0</td>
-<td align="left">连接池初始化的时候连接数</td>
+<td style="text-align: left;">initialSize</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">连接池初始化的时候连接数</td>
 </tr>
 <tr>
-<td align="left">maxTotal</td>
-<td align="left">8</td>
-<td align="left">连接池中最大被占用的连接数，-1 是没有限制</td>
+<td style="text-align: left;">maxTotal</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">连接池中最大被占用的连接数，-1 是没有限制</td>
 </tr>
 <tr>
-<td align="left">maxIdle</td>
-<td align="left">8</td>
-<td align="left">连接池中最大空闲的连接数，-1 是没有限制</td>
+<td style="text-align: left;">maxIdle</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">连接池中最大空闲的连接数，-1 是没有限制</td>
 </tr>
 <tr>
-<td align="left">minIdle</td>
-<td align="left">0</td>
-<td align="left">连接池中最小空闲的连接数，如果有空闲的连接则不用再创建一个</td>
+<td style="text-align: left;">minIdle</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">连接池中最小空闲的连接数，如果有空闲的连接则不用再创建一个</td>
 </tr>
 <tr>
-<td align="left">maxWaitMillis</td>
-<td align="left">0</td>
-<td align="left">从连接池中获取连接的超时时间， -1 是一只等待</td>
+<td style="text-align: left;">maxWaitMillis</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">从连接池中获取连接的超时时间， -1 是一只等待</td>
 </tr>
 </tbody>
 </table>
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">默认值</th>
-<th align="left">描述</th>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">validationQuery</td>
-<td align="left">0</td>
-<td align="left">测试连接的语句，在返回给申请数据库连接的 caller 之前调用，如果不设置，调用 driver 的 isValid()</td>
+<td style="text-align: left;">validationQuery</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">测试连接的语句，在返回给申请数据库连接的 caller 之前调用，如果不设置，调用 driver 的 isValid()</td>
 </tr>
 <tr>
-<td align="left">validationQueryTimeout</td>
-<td align="left">no timeout</td>
-<td align="left">测试连接的语句的执行超时时间</td>
+<td style="text-align: left;">validationQueryTimeout</td>
+<td style="text-align: left;">no timeout</td>
+<td style="text-align: left;">测试连接的语句的执行超时时间</td>
 </tr>
 <tr>
-<td align="left">testOnCreate</td>
-<td align="left">false</td>
-<td align="left">在连接创建时是否测试有效，如果连接无效，则导致连接连接创建的 borrow 操作会失败</td>
+<td style="text-align: left;">testOnCreate</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">在连接创建时是否测试有效，如果连接无效，则导致连接连接创建的 borrow 操作会失败</td>
 </tr>
 <tr>
-<td align="left">testOnBorrow</td>
-<td align="left">true</td>
-<td align="left">从连接池中 borrow 时是否测试有效，如果无效，则从连接池中 drop 这个连接，再次尝试 borrow</td>
+<td style="text-align: left;">testOnBorrow</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">从连接池中 borrow 时是否测试有效，如果无效，则从连接池中 drop 这个连接，再次尝试 borrow</td>
 </tr>
 <tr>
-<td align="left">testOnReturn</td>
-<td align="left">false</td>
-<td align="left">归还给连接池的时候是否测试有效</td>
+<td style="text-align: left;">testOnReturn</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">归还给连接池的时候是否测试有效</td>
 </tr>
 <tr>
-<td align="left">testWhileIdle</td>
-<td align="left">false</td>
-<td align="left">是否测试空闲的数据库连接</td>
+<td style="text-align: left;">testWhileIdle</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">是否测试空闲的数据库连接</td>
 </tr>
 <tr>
-<td align="left">timeBetweenEvictionRunsMillis</td>
-<td align="left">-1</td>
-<td align="left">evictor线程检测空闲连接是否有效的间隔，-1 是不启动线程</td>
+<td style="text-align: left;">timeBetweenEvictionRunsMillis</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">evictor线程检测空闲连接是否有效的间隔，-1 是不启动线程</td>
 </tr>
 <tr>
-<td align="left">numTestsPerEvictionRun</td>
-<td align="left">3</td>
-<td align="left">设定evictor线程在进行空闲连接检测有效时，每次检查几个链接</td>
+<td style="text-align: left;">numTestsPerEvictionRun</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">设定evictor线程在进行空闲连接检测有效时，每次检查几个链接</td>
 </tr>
 <tr>
-<td align="left">minEvictableIdleTimeMillis</td>
-<td align="left">1000×60×30</td>
-<td align="left">一个连接多长时候空闲之后，被evictor线程销毁</td>
+<td style="text-align: left;">minEvictableIdleTimeMillis</td>
+<td style="text-align: left;">1000×60×30</td>
+<td style="text-align: left;">一个连接多长时候空闲之后，被evictor线程销毁</td>
 </tr>
 <tr>
-<td align="left">softMinEvictableIdleTimeMillis</td>
-<td align="left">-1</td>
-<td align="left">一个连接多长时候空闲之后，且当前连接池的空闲连接数大于最小空闲连接数 minIdle，被evictor线程销毁</td>
+<td style="text-align: left;">softMinEvictableIdleTimeMillis</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">一个连接多长时候空闲之后，且当前连接池的空闲连接数大于最小空闲连接数 minIdle，被evictor线程销毁</td>
 </tr>
 <tr>
-<td align="left">maxConnLifetimeMillis</td>
-<td align="left">-1</td>
-<td align="left">一个连接最长的生命周期，如果超过了这个时间，下一次 activation, passivation or validation test 将失败</td>
+<td style="text-align: left;">maxConnLifetimeMillis</td>
+<td style="text-align: left;">-1</td>
+<td style="text-align: left;">一个连接最长的生命周期，如果超过了这个时间，下一次 activation, passivation or validation test 将失败</td>
 </tr>
 <tr>
-<td align="left">logExpiredConnections</td>
-<td align="left">true</td>
-<td align="left">超过 maxConnLifetimeMillis 关闭连接的日志标志</td>
+<td style="text-align: left;">logExpiredConnections</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">超过 maxConnLifetimeMillis 关闭连接的日志标志</td>
 </tr>
 <tr>
-<td align="left">connectionInitSqls</td>
-<td align="left">null</td>
-<td align="left">当连接创建时设置执行的SQL</td>
+<td style="text-align: left;">connectionInitSqls</td>
+<td style="text-align: left;">null</td>
+<td style="text-align: left;">当连接创建时设置执行的SQL</td>
 </tr>
 <tr>
-<td align="left">lifo</td>
-<td align="left">true</td>
-<td align="left">获取连接时的策略，true LIFO 后进先出, false FIFO 先进先出</td>
+<td style="text-align: left;">lifo</td>
+<td style="text-align: left;">true</td>
+<td style="text-align: left;">获取连接时的策略，true LIFO 后进先出, false FIFO 先进先出</td>
 </tr>
 </tbody>
 </table>
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">默认值</th>
-<th align="left">描述</th>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">poolPreparedStatements</td>
-<td align="left">false</td>
-<td align="left">是否启用 prepared statement pooling</td>
+<td style="text-align: left;">poolPreparedStatements</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">是否启用 prepared statement pooling</td>
 </tr>
 <tr>
-<td align="left">maxOpenPreparedStatements</td>
-<td align="left">unlimited</td>
-<td align="left">最大的 open statements，跟数据库的支持也有关系，比如最大有游标数</td>
+<td style="text-align: left;">maxOpenPreparedStatements</td>
+<td style="text-align: left;">unlimited</td>
+<td style="text-align: left;">最大的 open statements，跟数据库的支持也有关系，比如最大有游标数</td>
 </tr>
 </tbody>
 </table>
@@ -334,36 +354,36 @@
 <table>
 <thead>
 <tr>
-<th align="left">属性</th>
-<th align="left">默认值</th>
-<th align="left">描述</th>
+<th style="text-align: left;">属性</th>
+<th style="text-align: left;">默认值</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="left">removeAbandonedOnMaintenance</td>
-<td align="left">false</td>
-<td align="left">设置 timeBetweenEvictionRunsMillis 之后，evictor线程主动回收</td>
+<td style="text-align: left;">removeAbandonedOnMaintenance</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">设置 timeBetweenEvictionRunsMillis 之后，evictor线程主动回收</td>
 </tr>
 <tr>
-<td align="left">removeAbandonedOnBorrow</td>
-<td align="left">false</td>
-<td align="left">getNumActive() &gt; getMaxTotal() - 3 &amp;&amp; getNumIdle() &lt; 2</td>
+<td style="text-align: left;">removeAbandonedOnBorrow</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">getNumActive() &gt; getMaxTotal() - 3 &amp;&amp; getNumIdle() &lt; 2</td>
 </tr>
 <tr>
-<td align="left">removeAbandonedTimeout</td>
-<td align="left">300</td>
-<td align="left">标记为 Abandoned 连接的超时时间</td>
+<td style="text-align: left;">removeAbandonedTimeout</td>
+<td style="text-align: left;">300</td>
+<td style="text-align: left;">标记为 Abandoned 连接的超时时间</td>
 </tr>
 <tr>
-<td align="left">logAbandoned</td>
-<td align="left">false</td>
-<td align="left">是否打印日志，true 打印 stack trace，影响性能</td>
+<td style="text-align: left;">logAbandoned</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">是否打印日志，true 打印 stack trace，影响性能</td>
 </tr>
 <tr>
-<td align="left">abandonedUsageTracking</td>
-<td align="left">false</td>
-<td align="left">true 每次调用连接池中的方法都会打印 stack trace，严重影响性能</td>
+<td style="text-align: left;">abandonedUsageTracking</td>
+<td style="text-align: left;">false</td>
+<td style="text-align: left;">true 每次调用连接池中的方法都会打印 stack trace，严重影响性能</td>
 </tr>
 </tbody>
 </table>
@@ -381,8 +401,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -400,14 +423,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

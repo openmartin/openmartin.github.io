@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Elasticsearch 安装</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="elasticsearch-install">Elasticsearch 安装</h1>
     <p>
-      Posted on 2019-07-30 14:06 in <a href="./category/java.html">Java</a>
+          Posted on 2019-07-30 14:06 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -113,65 +133,58 @@
 <h3>install</h3>
 <p>通过 rpm 安装，参考 https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html</p>
 <h3>启动和优化</h3>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">stop</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
 </code></pre></div>
-
 
 <p>/etc/elasticsearch/jvm.options</p>
-<div class="highlight"><pre><span></span><code><span class="err">-Xms32g</span>
-<span class="err">-Xms32g</span>
+<div class="highlight"><pre><span></span><code>-Xms32g
+-Xms32g
 </code></pre></div>
-
 
 <p>/etc/elasticsearch/elasticsearch.yml 单机只有一个节点</p>
-<div class="highlight"><pre><span></span><code><span class="err">network.host: 0.0.0.0</span>
-<span class="err">cluster.name: my-application  # 集群中的名称</span>
-<span class="err">node.name: master  # 该节点名称</span>
-<span class="err">cluster.initial_master_nodes: [&quot;master&quot;] </span>
+<div class="highlight"><pre><span></span><code>network.host: 0.0.0.0
+cluster.name: my-application  # 集群中的名称
+node.name: master  # 该节点名称
+cluster.initial_master_nodes: [&quot;master&quot;] 
 </code></pre></div>
-
 
 <h3>rpm 安装 ElasticSearch 之后的目录结构</h3>
-<div class="highlight"><pre><span></span><code><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">elasticsearch</span>  <span class="c1"># ES_HOME</span>
-<span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">elasticsearch</span>    <span class="c1"># log 目录</span>
-<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">elasticsearch</span>        <span class="c1"># config 目录</span>
-<span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">elasticsearch</span>    <span class="c1"># data 目录</span>
+<div class="highlight"><pre><span></span><code><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">elasticsearch</span><span class="w">  </span><span class="c1"># ES_HOME</span>
+<span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">elasticsearch</span><span class="w">    </span><span class="c1"># log 目录</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">elasticsearch</span><span class="w">        </span><span class="c1"># config 目录</span>
+<span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">elasticsearch</span><span class="w">    </span><span class="c1"># data 目录</span>
 </code></pre></div>
-
 
 <h3>plugin elasticsearch-analysis-hanlp</h3>
 <p>https://github.com/KennFalcon/elasticsearch-analysis-hanlp</p>
 <p>建议使用 Elasticsearch 命令行安装插件</p>
-<div class="highlight"><pre><span></span><code><span class="err">./elasticsearch-plugin install file:///home/demo/elasticsearch-analysis-hanlp-7.3.0.zip</span>
+<div class="highlight"><pre><span></span><code>./elasticsearch-plugin install file:///home/demo/elasticsearch-analysis-hanlp-7.3.0.zip
 </code></pre></div>
-
 
 <p>插件 在 <code>/usr/share/elasticsearch/plugins/anlysis-hanlp</code> 目录下
 配置文件在 <code>/etc/elasticsearch/analysis-hanlp</code> 目录下</p>
 <p>修改 hanlp.properties, root 修改为绝对路径 <code>root=/usr/share/elasticsearch/plugins/analysis-hanlp/</code></p>
 <p>然后把 hanlp 的 数据文件复制到 /usr/share/elasticsearch/plugins/analysis-hanlp/data</p>
-<div class="highlight"><pre><span></span><code><span class="err">chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins/</span>
+<div class="highlight"><pre><span></span><code>chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/plugins/
 </code></pre></div>
-
 
 <h2>Kibana 安装</h2>
 <h3>install</h3>
 <p>通过 rpm 安装，参考 https://www.elastic.co/guide/en/kibana/current/rpm.html</p>
 <h3>启动和配置</h3>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
-<span class="n">sudo</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span> <span class="n">enable</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">stop</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
-<span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span><span class="w"> </span><span class="n">daemon</span><span class="o">-</span><span class="n">reload</span>
+<span class="n">sudo</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">systemctl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">stop</span><span class="w"> </span><span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="n">kibana</span><span class="o">.</span><span class="n">service</span>
 </code></pre></div>
 
-
 <p>/etc/kibana/kibana.yml</p>
-<div class="highlight"><pre><span></span><code><span class="err">server.host: &quot;0.0.0.0&quot;</span>
+<div class="highlight"><pre><span></span><code>server.host: &quot;0.0.0.0&quot;
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -184,8 +197,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -203,14 +219,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; selenium 的用法</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="selenium-java">selenium 的用法</h1>
     <p>
-      Posted on 2020-09-25 11:00 in <a href="./category/java.html">Java</a>
+          Posted on 2020-09-25 11:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -113,20 +133,20 @@
 <p>selenium 提供很多种语言的 API，Python、Java、C#、Javascript、Ruby</p>
 <p>这里介绍一下 Java API</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// 打开页面</span>
-<span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;webdriver.gecko.driver&quot;</span><span class="p">,</span> <span class="s">&quot;E:\\workspace\\demo\\src\\main\\resources\\geckodriver.exe&quot;</span><span class="p">);</span>
-<span class="n">WebDriver</span> <span class="n">driver</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FirefoxDriver</span><span class="p">();</span>
+<span class="n">System</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;webdriver.gecko.driver&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;E:\\workspace\\demo\\src\\main\\resources\\geckodriver.exe&quot;</span><span class="p">);</span>
+<span class="n">WebDriver</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FirefoxDriver</span><span class="p">();</span>
 <span class="n">driver</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="s">&quot;http://www.example.com/login&quot;</span><span class="p">);</span>
 
 <span class="c1">// input</span>
-<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span> <span class="n">driver</span><span class="p">).</span><span class="na">findElementById</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">).</span><span class="na">sendKeys</span><span class="p">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="p">);</span>
-<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span> <span class="n">driver</span><span class="p">).</span><span class="na">findElementById</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">).</span><span class="na">sendKeys</span><span class="p">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="p">);</span>
+<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span><span class="w"> </span><span class="n">driver</span><span class="p">).</span><span class="na">findElementById</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">).</span><span class="na">sendKeys</span><span class="p">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="p">);</span>
+<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span><span class="w"> </span><span class="n">driver</span><span class="p">).</span><span class="na">findElementById</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">).</span><span class="na">sendKeys</span><span class="p">(</span><span class="s">&quot;ABCDEFG&quot;</span><span class="p">);</span>
 
 <span class="c1">// click</span>
-<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span> <span class="n">driver</span><span class="p">).</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">cssSelector</span><span class="p">(</span><span class="s">&quot;#login-btn&quot;</span><span class="p">)).</span><span class="na">click</span><span class="p">();</span>
+<span class="p">((</span><span class="n">FirefoxDriver</span><span class="p">)</span><span class="w"> </span><span class="n">driver</span><span class="p">).</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">cssSelector</span><span class="p">(</span><span class="s">&quot;#login-btn&quot;</span><span class="p">)).</span><span class="na">click</span><span class="p">();</span>
 
 
 <span class="c1">// 获取网页源文件</span>
-<span class="n">String</span> <span class="n">pageSource</span> <span class="o">=</span> <span class="n">driver</span><span class="p">.</span><span class="na">getPageSource</span><span class="p">();</span>
+<span class="n">String</span><span class="w"> </span><span class="n">pageSource</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">driver</span><span class="p">.</span><span class="na">getPageSource</span><span class="p">();</span>
 <span class="c1">// 后续可以用 jsoup 处理，获取部分的 html</span>
 
 <span class="c1">// findElement 返回 WebElement，如果找不到抛出 NoSuchElementException</span>
@@ -135,7 +155,6 @@
 <span class="n">element</span><span class="p">.</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">xpath</span><span class="p">(</span><span class="s">&quot;ul/li&quot;</span><span class="p">)</span>
 <span class="n">element</span><span class="p">.</span><span class="na">findElement</span><span class="p">(</span><span class="n">By</span><span class="p">.</span><span class="na">id</span><span class="p">(</span><span class="s">&quot;mainContent&quot;</span><span class="p">)</span>
 </code></pre></div>
-
 
 <p>可用浏览器的开发者工具获取 dom 节点的 xpath, cssSelector</p>
 <p>如果是 ajax 加载的最好 Thread.sleep 几秒，等待 dom 节点加载完毕</p>
@@ -150,8 +169,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -169,14 +191,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

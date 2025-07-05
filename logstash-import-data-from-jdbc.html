@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Logstash import data from jdbc</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="logstash-import-data-from-jdbc">Logstash import data from jdbc</h1>
     <p>
-      Posted on 2021-08-06 18:00 in <a href="./category/java.html">Java</a>
+          Posted on 2021-08-06 18:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -109,109 +129,107 @@
     <h2>一次性导入</h2>
 <p>logstash 是基于jruby的，也可以使用jdbc，从数据库中导入数据也很方便。</p>
 <p>下面是个例子，而且加入了IP地址到地理位置的转换：</p>
-<div class="highlight"><pre><span></span><code><span class="n">input</span> <span class="p">{</span>
- <span class="n">jdbc</span> <span class="p">{</span>
-       <span class="n">jdbc_validate_connection</span> <span class="o">=&gt;</span> <span class="nb">true</span>
-       <span class="n">jdbc_connection_string</span> <span class="o">=&gt;</span> <span class="s">&quot;jdbc:oracle:thin:@192.168.100.1:1521:orcl&quot;</span>
-       <span class="n">jdbc_user</span> <span class="o">=&gt;</span> <span class="s">&quot;read&quot;</span>
-       <span class="n">jdbc_password</span> <span class="o">=&gt;</span> <span class="s">&quot;readonly&quot;</span>
-       <span class="n">jdbc_driver_library</span> <span class="o">=&gt;</span> <span class="s">&quot;D:\ojdbc6.jar&quot;</span>
-       <span class="n">jdbc_driver_class</span> <span class="o">=&gt;</span> <span class="s">&quot;Java::oracle.jdbc.driver.OracleDriver&quot;</span>
-       <span class="n">jdbc_paging_enabled</span> <span class="o">=&gt;</span> <span class="nb">true</span>
-       <span class="n">statement</span> <span class="o">=&gt;</span> <span class="s">&quot;select t.log_id, t.log_time, t.client_ip, t.user_agent, t.browser, t.browser_type, t.browser_major_version, t.device_type, t.platform, t.platform_version from sys_log t </span>
-       <span class="n">where</span> <span class="nf">EXTRACT</span><span class="p">(</span><span class="n">year</span> <span class="n">from</span> <span class="n">t</span><span class="p">.</span><span class="n">log_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2020</span><span class="s">&quot;</span>
-       <span class="n">lowercase_column_names</span> <span class="o">=&gt;</span> <span class="nb">false</span>
-   <span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">input</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">jdbc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">jdbc_validate_connection</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">       </span><span class="n">jdbc_connection_string</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;jdbc:oracle:thin:@192.168.100.1:1521:orcl&quot;</span>
+<span class="w">       </span><span class="n">jdbc_user</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;read&quot;</span>
+<span class="w">       </span><span class="n">jdbc_password</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;readonly&quot;</span>
+<span class="w">       </span><span class="n">jdbc_driver_library</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;D:\ojdbc6.jar&quot;</span>
+<span class="w">       </span><span class="n">jdbc_driver_class</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Java::oracle.jdbc.driver.OracleDriver&quot;</span>
+<span class="w">       </span><span class="n">jdbc_paging_enabled</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">       </span><span class="n">statement</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;select t.log_id, t.log_time, t.client_ip, t.user_agent, t.browser, t.browser_type, t.browser_major_version, t.device_type, t.platform, t.platform_version from sys_log t </span>
+<span class="w">       </span><span class="n">where</span><span class="w"> </span><span class="n">EXTRACT</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">log_time</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2020</span><span class="s">&quot;</span>
+<span class="w">       </span><span class="n">lowercase_column_names</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">false</span>
+<span class="w">   </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">filter</span> <span class="p">{</span>
-  <span class="n">mutate</span> <span class="p">{</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;LOG_ID&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;logId&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;LOG_TIME&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;@timestamp&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;CLIENT_IP&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;ip&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;USER_AGENT&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;ua&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;BROWSER&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;browser&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;BROWSER_TYPE&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;browserType&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;BROWSER_MAJOR_VERSION&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;browserMajorVersion&quot;</span><span class="p">}</span>
-      <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;DEVICE_TYPE&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;deviceType&quot;</span><span class="p">}</span>
-      <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;PLATFORM&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;platform&quot;</span><span class="p">}</span>
-      <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;PLATFORM_VERSION&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;platformVersion&quot;</span><span class="p">}</span>
-  <span class="p">}</span>
-  <span class="n">geoip</span> <span class="p">{</span>
-    <span class="n">source</span> <span class="o">=&gt;</span> <span class="s">&quot;ip&quot;</span>
-    <span class="n">database</span> <span class="o">=&gt;</span> <span class="s">&quot;D:\logstash-7.3.1\GeoLite2-City_20210804\GeoLite2-City.mmdb&quot;</span>
-  <span class="p">}</span>
+<span class="n">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">mutate</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;LOG_ID&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;logId&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;LOG_TIME&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;@timestamp&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;CLIENT_IP&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ip&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;USER_AGENT&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ua&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;BROWSER&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;browser&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;BROWSER_TYPE&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;browserType&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;BROWSER_MAJOR_VERSION&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;browserMajorVersion&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;DEVICE_TYPE&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;deviceType&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;PLATFORM&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;platform&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;PLATFORM_VERSION&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;platformVersion&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">geoip</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">source</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ip&quot;</span>
+<span class="w">    </span><span class="n">database</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;D:\logstash-7.3.1\GeoLite2-City_20210804\GeoLite2-City.mmdb&quot;</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">output</span> <span class="p">{</span>
-  <span class="n">stdout</span> <span class="p">{</span> <span class="n">codec</span> <span class="o">=&gt;</span> <span class="n">rubydebug</span> <span class="p">}</span>
+<span class="n">output</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">stdout</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rubydebug</span><span class="w"> </span><span class="p">}</span>
 
-<span class="k">if</span> <span class="s">&quot;_jsonparsefailure&quot;</span> <span class="n">not</span> <span class="k">in</span> <span class="p">[</span><span class="n">tags</span><span class="p">]</span> <span class="p">{</span>
-  <span class="n">elasticsearch</span> <span class="p">{</span>
-    <span class="n">hosts</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;192.168.100.2:9200&quot;</span><span class="p">]</span>
-    <span class="n">index</span> <span class="o">=&gt;</span> <span class="s">&quot;sys-log-2021&quot;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="s">&quot;_jsonparsefailure&quot;</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="n">tags</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">elasticsearch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">hosts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;192.168.100.2:9200&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">index</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;sys-log-2021&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <h2>持续导入</h2>
 <p>如果日志是持续性导入，可以 track 上次导入的进度，下次在此基础上做增量导入。</p>
-<div class="highlight"><pre><span></span><code><span class="n">input</span> <span class="p">{</span>
- <span class="n">jdbc</span> <span class="p">{</span>
-       <span class="n">jdbc_validate_connection</span> <span class="o">=&gt;</span> <span class="nb">true</span>
-       <span class="n">jdbc_connection_string</span> <span class="o">=&gt;</span> <span class="s">&quot;jdbc:oracle:thin:@192.168.100.1:1521:orcl&quot;</span>
-       <span class="n">jdbc_user</span> <span class="o">=&gt;</span> <span class="s">&quot;read&quot;</span>
-       <span class="n">jdbc_password</span> <span class="o">=&gt;</span> <span class="s">&quot;readonly&quot;</span>
-       <span class="n">jdbc_driver_library</span> <span class="o">=&gt;</span> <span class="s">&quot;D:\ojdbc6.jar&quot;</span>
-       <span class="n">jdbc_driver_class</span> <span class="o">=&gt;</span> <span class="s">&quot;Java::oracle.jdbc.driver.OracleDriver&quot;</span>
-       <span class="n">jdbc_paging_enabled</span> <span class="o">=&gt;</span> <span class="nb">true</span>
-       <span class="n">statement</span> <span class="o">=&gt;</span> <span class="s">&quot;select t.log_id, t.log_time, t.client_ip, t.user_agent, t.browser, t.browser_type, t.browser_major_version, t.device_type, t.platform, t.platform_version from sys_log t </span>
-       <span class="n">where</span> <span class="nf">EXTRACT</span><span class="p">(</span><span class="n">year</span> <span class="n">from</span> <span class="n">t</span><span class="p">.</span><span class="n">log_time</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2020</span> <span class="n">and</span> <span class="n">t</span><span class="p">.</span><span class="n">log_id</span> <span class="o">&gt;</span> <span class="o">:</span><span class="n">sql_last_value</span> <span class="n">order</span> <span class="n">by</span> <span class="n">t</span><span class="p">.</span><span class="n">log_id</span> <span class="n">asc</span><span class="s">&quot;</span>
-       <span class="n">lowercase_column_names</span> <span class="o">=&gt;</span> <span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><span class="n">input</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="n">jdbc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">jdbc_validate_connection</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">       </span><span class="n">jdbc_connection_string</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;jdbc:oracle:thin:@192.168.100.1:1521:orcl&quot;</span>
+<span class="w">       </span><span class="n">jdbc_user</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;read&quot;</span>
+<span class="w">       </span><span class="n">jdbc_password</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;readonly&quot;</span>
+<span class="w">       </span><span class="n">jdbc_driver_library</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;D:\ojdbc6.jar&quot;</span>
+<span class="w">       </span><span class="n">jdbc_driver_class</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Java::oracle.jdbc.driver.OracleDriver&quot;</span>
+<span class="w">       </span><span class="n">jdbc_paging_enabled</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">       </span><span class="n">statement</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;select t.log_id, t.log_time, t.client_ip, t.user_agent, t.browser, t.browser_type, t.browser_major_version, t.device_type, t.platform, t.platform_version from sys_log t </span>
+<span class="w">       </span><span class="n">where</span><span class="w"> </span><span class="n">EXTRACT</span><span class="p">(</span><span class="n">year</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">log_time</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2020</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">log_id</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">:</span><span class="n">sql_last_value</span><span class="w"> </span><span class="n">order</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">log_id</span><span class="w"> </span><span class="n">asc</span><span class="s">&quot;</span>
+<span class="w">       </span><span class="n">lowercase_column_names</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">false</span>
 
-       <span class="cp"># tracking</span>
-       <span class="n">parameters</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;sql_last_value&quot;</span> <span class="o">=&gt;</span> <span class="mi">0</span> <span class="p">}</span>
-       <span class="n">use_column_value</span> <span class="o">=&gt;</span> <span class="nb">true</span>
-       <span class="n">tracking_column</span> <span class="o">=&gt;</span> <span class="s">&quot;LOG_ID&quot;</span>
-       <span class="n">tracking_column_type</span> <span class="o">=&gt;</span> <span class="s">&quot;numeric&quot;</span>
-       <span class="cp"># 每分钟执行一次</span>
-       <span class="n">schedule</span> <span class="o">=&gt;</span> <span class="s">&quot;0 * * * * *&quot;</span>
-   <span class="p">}</span>
+<span class="w">       </span><span class="cp"># tracking</span>
+<span class="w">       </span><span class="n">parameters</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;sql_last_value&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="w">       </span><span class="n">use_column_value</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">       </span><span class="n">tracking_column</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;LOG_ID&quot;</span>
+<span class="w">       </span><span class="n">tracking_column_type</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;numeric&quot;</span>
+<span class="w">       </span><span class="cp"># 每分钟执行一次</span>
+<span class="w">       </span><span class="n">schedule</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;0 * * * * *&quot;</span>
+<span class="w">   </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">filter</span> <span class="p">{</span>
-  <span class="n">mutate</span> <span class="p">{</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;LOG_ID&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;logId&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;LOG_TIME&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;@timestamp&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;CLIENT_IP&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;ip&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;USER_AGENT&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;ua&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;BROWSER&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;browser&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;BROWSER_TYPE&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;browserType&quot;</span><span class="p">}</span>
-    <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;BROWSER_MAJOR_VERSION&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;browserMajorVersion&quot;</span><span class="p">}</span>
-      <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;DEVICE_TYPE&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;deviceType&quot;</span><span class="p">}</span>
-      <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;PLATFORM&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;platform&quot;</span><span class="p">}</span>
-      <span class="n">rename</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s">&quot;PLATFORM_VERSION&quot;</span> <span class="o">=&gt;</span> <span class="s">&quot;platformVersion&quot;</span><span class="p">}</span>
-  <span class="p">}</span>
-  <span class="n">geoip</span> <span class="p">{</span>
-    <span class="n">source</span> <span class="o">=&gt;</span> <span class="s">&quot;ip&quot;</span>
-    <span class="n">database</span> <span class="o">=&gt;</span> <span class="s">&quot;D:\logstash-7.3.1\GeoLite2-City_20210804\GeoLite2-City.mmdb&quot;</span>
-  <span class="p">}</span>
+<span class="n">filter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">mutate</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;LOG_ID&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;logId&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;LOG_TIME&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;@timestamp&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;CLIENT_IP&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ip&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;USER_AGENT&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ua&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;BROWSER&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;browser&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;BROWSER_TYPE&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;browserType&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;BROWSER_MAJOR_VERSION&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;browserMajorVersion&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;DEVICE_TYPE&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;deviceType&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;PLATFORM&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;platform&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="n">rename</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;PLATFORM_VERSION&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;platformVersion&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">geoip</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">source</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;ip&quot;</span>
+<span class="w">    </span><span class="n">database</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;D:\logstash-7.3.1\GeoLite2-City_20210804\GeoLite2-City.mmdb&quot;</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">output</span> <span class="p">{</span>
-  <span class="n">stdout</span> <span class="p">{</span> <span class="n">codec</span> <span class="o">=&gt;</span> <span class="n">rubydebug</span> <span class="p">}</span>
+<span class="n">output</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">stdout</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">codec</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">rubydebug</span><span class="w"> </span><span class="p">}</span>
 
-<span class="k">if</span> <span class="s">&quot;_jsonparsefailure&quot;</span> <span class="n">not</span> <span class="k">in</span> <span class="p">[</span><span class="n">tags</span><span class="p">]</span> <span class="p">{</span>
-  <span class="n">elasticsearch</span> <span class="p">{</span>
-    <span class="n">hosts</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s">&quot;192.168.100.2:9200&quot;</span><span class="p">]</span>
-    <span class="n">index</span> <span class="o">=&gt;</span> <span class="s">&quot;sys-log-2021&quot;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="s">&quot;_jsonparsefailure&quot;</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="n">tags</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">elasticsearch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">hosts</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;192.168.100.2:9200&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">index</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;sys-log-2021&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>记录上次 sql_last_value 的临时文件是 last_run_metadata_path，默认值是 "$HOME/.logstash_jdbc_last_run"</p>
   </div>
@@ -225,8 +243,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -244,14 +265,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

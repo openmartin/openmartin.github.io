@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Elasticsearch index 添加新字段</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="elasticsearch-index-add-field">Elasticsearch index 添加新字段</h1>
     <p>
-      Posted on 2021-04-12 10:00 in <a href="./category/java.html">Java</a>
+          Posted on 2021-04-12 10:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -110,10 +130,10 @@
 <h2>新增字段</h2>
 <p>新增字段如果没有特别制定的类型，es会自动创建这个字段，如果需要指定分词工具或者特殊类型的，需要修改 mapping</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 查看 mapping</span>
-curl -XGET <span class="s1">&#39;localhost:9200/netdisk-document-v1/_mapping/?pretty&#39;</span>
+curl<span class="w"> </span>-XGET<span class="w"> </span><span class="s1">&#39;localhost:9200/netdisk-document-v1/_mapping/?pretty&#39;</span>
 
 <span class="c1"># 修改索引 可以只传增加的字段</span>
-curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v1&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;mappings&quot;: {</span>
 <span class="s1">    &quot;properties&quot;: {</span>
@@ -124,11 +144,10 @@ curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v1&quot;</spa
 <span class="s1">&#39;</span>
 </code></pre></div>
 
-
 <h2>修改字段类型需要 reindex</h2>
 <p>es 不支持修改字段类型，如果需要修改字段类型，先新建一个索引， 设置新的 mapping，然后把原数据 reindex 到新的索引上</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 新建 索引</span>
-curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v2&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v2&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;mappings&quot;: {</span>
 <span class="s1">    &quot;properties&quot;: {</span>
@@ -141,7 +160,7 @@ curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v2&quot;</spa
 <span class="s1">}</span>
 <span class="s1">&#39;</span>
 <span class="c1"># reindex</span>
-curl -X POST <span class="s2">&quot;localhost:9200/_reindex?pretty&quot;</span> -H <span class="s1">&#39;Content-Type: application/json&#39;</span> -d<span class="s1">&#39;</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;localhost:9200/_reindex?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
 <span class="s1">{</span>
 <span class="s1">  &quot;source&quot;: {</span>
 <span class="s1">    &quot;index&quot;: &quot;netdisk-document-v1&quot;</span>
@@ -152,8 +171,8 @@ curl -X POST <span class="s2">&quot;localhost:9200/_reindex?pretty&quot;</span> 
 <span class="s1">}</span>
 <span class="s1">&#39;</span>
 <span class="c1"># 修改 别名指向</span>
-curl -X DELETE <span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/netdisk-document?pretty&quot;</span>
-curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v2/_alias/netdisk-document?pretty&quot;</span>
+curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v1/_alias/netdisk-document?pretty&quot;</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;localhost:9200/netdisk-document-v2/_alias/netdisk-document?pretty&quot;</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -166,8 +185,11 @@ curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v2/_alias/net
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -185,14 +207,16 @@ curl -X PUT <span class="s2">&quot;localhost:9200/netdisk-document-v2/_alias/net
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

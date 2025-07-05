@@ -10,9 +10,9 @@
 &lt;p&gt;再加上一个小米智能插线板，作为定时开关，这个因为已经有了，不算成本。水泵，水管加起来总成本在40元左右，还行，如果在淘宝再仔细翻一翻应该能找到更便宜的。&lt;/p&gt;
 &lt;p&gt;最后组装起来，调节一下滴箭的流速，不要过快也不要过慢，每一盆的流速都差不多。&lt;/p&gt;
 &lt;p&gt;最后看一下组装起来的效果&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="../images/water-artifact-1.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="../images/water-artifact-2.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="../images/water-artifact-3.jpg"&gt;&lt;/p&gt;</content><category term="Hardware"></category><category term="watering"></category><category term="automation"></category></entry><entry><title>小米智能开关实现自动化</title><link href="https://xingzuoshe.cn/xiaomi-smart-switch-automation.html" rel="alternate"></link><published>2024-11-03T23:00:00+08:00</published><updated>2024-11-03T23:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-11-03:/xiaomi-smart-switch-automation.html</id><summary type="html">&lt;p&gt;小米的智能生态已经建立起来了&lt;/p&gt;</summary><content type="html">&lt;p&gt;冬天快到了，卧室有个开关不在床边上，需要下床去关灯，夏天还好，冬天离开被窝毕竟有点冷，所以想了想办法，最开始有两个方案，一个是把开关换成小米智能开关，另一个是用手指机器人去控制原来的老式开关。手指机器人价格贵，而且需要用到遥控器，用手机控制的话还需要单独买个网关。家里目前已经有了小爱同学作为蓝牙mesh网关，所以用小米米家智能开关算起来成本比较低。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="power strip" src="../images/water-artifact-1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="water bucket" src="../images/water-artifact-2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="balcony" src="../images/water-artifact-3.jpg"&gt;&lt;/p&gt;</content><category term="Hardware"></category><category term="watering"></category><category term="automation"></category></entry><entry><title>小米智能开关实现自动化</title><link href="https://xingzuoshe.cn/xiaomi-smart-switch-automation.html" rel="alternate"></link><published>2024-11-03T23:00:00+08:00</published><updated>2024-11-03T23:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2024-11-03:/xiaomi-smart-switch-automation.html</id><summary type="html">&lt;p&gt;小米的智能生态已经建立起来了&lt;/p&gt;</summary><content type="html">&lt;p&gt;冬天快到了，卧室有个开关不在床边上，需要下床去关灯，夏天还好，冬天离开被窝毕竟有点冷，所以想了想办法，最开始有两个方案，一个是把开关换成小米智能开关，另一个是用手指机器人去控制原来的老式开关。手指机器人价格贵，而且需要用到遥控器，用手机控制的话还需要单独买个网关。家里目前已经有了小爱同学作为蓝牙mesh网关，所以用小米米家智能开关算起来成本比较低。&lt;/p&gt;
 &lt;p&gt;小米智能开关控制面板(单开)一个50左右，如果凑到双十一活动，应该价格能更便宜一点。为了能在床边关灯，还买了一个小米无线开关蓝牙版，在米家上设置自动化，联动控制智能开关。&lt;/p&gt;
 &lt;h2&gt;蓝牙mesh网关&lt;/h2&gt;
 &lt;p&gt;蓝牙mesh网关的选择&lt;/p&gt;
@@ -55,9 +55,8 @@
 &lt;p&gt;对应了上面图中的4个点，50°C/20% 转速， 70°C/40% 转速， 80°C/80% 转速，90°C/100% 转速，这样在温度比较低的时候转速比较低，就非常静音，默认是50°C/40% 转速， 70°C/60% 转速，就比较吵，所以需要调整，但是我好像没有看网上有关于零刻 GTR5 的 BIOS 设置，后面比较新的有类似的设置，不过在 BIOS 里的菜单跟 GTR5 的差别比较大。&lt;/p&gt;
 &lt;p&gt;Temperature Hysteresis 滞后，风扇滞变温度，也就是保存导致风扇转速变化的最后一个温度，如果温度下降，但下降的温度比这里设置的温度要低，风扇转速就不会变化。&lt;/p&gt;
 &lt;p&gt;在 debian 下可以安装 psensor 来查看温度，检查风扇温度控制设置的是否合理，既保证有效散热，又保证噪音低就比较合理。可以通过多次尝试来设置最适合自己的组合。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt install lm-sensors psensor
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;lm-sensors&lt;span class="w"&gt; &lt;/span&gt;psensor
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;&lt;img alt="psensor" src="../images/debian-psensor.png"&gt;&lt;/p&gt;
 &lt;p&gt;参考 

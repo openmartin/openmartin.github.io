@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -54,6 +54,13 @@
 
   <title>Martin's Blog &ndash; CSS Grid Layout</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -78,18 +85,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -98,7 +117,8 @@
       
     <h1 id="css-grid-layout">CSS Grid Layout</h1>
     <p>
-      Posted on 2020-12-30 10:00 in <a href="./category/web.html">Web</a>
+          Posted on 2020-12-30 10:00 in <a href="./category/web.html">Web</a>
+
 
     </p>
   </header>
@@ -112,24 +132,22 @@
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Grid_Layout">MDN CSS 网格布局</a></p>
 <h2>常见用法</h2>
 <p>单元格的大小是固定的，但是容器的大小不确定。如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用auto-fill关键字表示自动填充。</p>
-<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span> <span class="p">{</span>
-  <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
-  <span class="k">grid-template-columns</span><span class="p">:</span> <span class="nf">repeat</span><span class="p">(</span><span class="kc">auto</span><span class="nv">-fill</span><span class="p">,</span> <span class="mi">100</span><span class="kt">px</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">container</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="k">grid</span><span class="p">;</span>
+<span class="w">  </span><span class="k">grid-template-columns</span><span class="p">:</span><span class="w"> </span><span class="nf">repeat</span><span class="p">(</span><span class="kc">auto</span><span class="nv">-fill</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="kt">px</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 
-
 <p>行和列的间距</p>
-<div class="highlight"><pre><span></span><code><span class="nt">grid-row-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
-<span class="nt">grid-column-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
-<span class="nt">grid-gap</span><span class="o">:</span> <span class="nt">20px</span><span class="o">;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">grid-row-gap</span><span class="o">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span>
+<span class="nt">grid-column-gap</span><span class="o">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span>
+<span class="nt">grid-gap</span><span class="o">:</span><span class="w"> </span><span class="nt">20px</span><span class="o">;</span>
 </code></pre></div>
-
 
 <h2>CSS trick</h2>
 <p>紧挨着的下一个邻节点, 加号表示</p>
-<div class="highlight"><pre><span></span><code><span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">focus</span> <span class="o">+</span><span class="nt">div</span><span class="o">,</span> <span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">hover</span> <span class="o">+</span><span class="nt">div</span> <span class="p">{</span>
-    <span class="k">color</span><span class="p">:</span> <span class="mh">#ff7c08</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">focus</span><span class="w"> </span><span class="o">+</span><span class="nt">div</span><span class="o">,</span><span class="w"> </span><span class="nt">a</span><span class="p">.</span><span class="nc">thumbnail</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="o">+</span><span class="nt">div</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ff7c08</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
   </div>
@@ -142,8 +160,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -161,14 +182,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

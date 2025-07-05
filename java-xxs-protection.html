@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; java xss 防护</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="java-xxs-protection">java xss 防护</h1>
     <p>
-      Posted on 2020-08-25 18:00 in <a href="./category/java.html">Java</a>
+          Posted on 2020-08-25 18:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -115,208 +135,198 @@
 <h3>输入过滤</h3>
 <p>https://github.com/OWASP/java-html-sanitizer</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>com.googlecode.owasp-java-html-sanitizer<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>owasp-java-html-sanitizer<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>20200713.1<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.googlecode.owasp-java-html-sanitizer<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>owasp-java-html-sanitizer<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>20200713.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 
-
-<div class="highlight"><pre><span></span><code><span class="n">PolicyFactory</span> <span class="n">policy</span> <span class="o">=</span> <span class="n">Sanitizers</span><span class="p">.</span><span class="na">FORMATTING</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">LINKS</span><span class="p">);</span>
-<span class="n">String</span> <span class="n">safeHTML</span> <span class="o">=</span> <span class="n">policy</span><span class="p">.</span><span class="na">sanitize</span><span class="p">(</span><span class="n">untrustedHTML</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">PolicyFactory</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">FORMATTING</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">LINKS</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">safeHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">policy</span><span class="p">.</span><span class="na">sanitize</span><span class="p">(</span><span class="n">untrustedHTML</span><span class="p">);</span>
 </code></pre></div>
-
 
 <h3>输出过滤</h3>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.owasp.encoder<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>encoder<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>1.2.2<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.owasp.encoder<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>encoder<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.2.2<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-
 
 <div class="highlight"><pre><span></span><code><span class="err">&lt;</span>%@ taglib prefix=&quot;e&quot; uri=&quot;https://www.owasp.org/index.php/OWASP_Java_Encoder_Project&quot; %&gt;
 <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Exception: ${e:forHtml(exception.toString())}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </code></pre></div>
 
-
 <h2>实践</h2>
 <p>在 spring 的 controller 中添加 String 的转换，在这个过程中过滤非法数据，所有继承 BaseController 的都会拥有过滤能力。(PS.如果子类已经有 @InitBinder, 需要调用 Super.initBinder(dataBinder))</p>
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseController</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BaseController</span><span class="w"> </span><span class="p">{</span>
 
-        <span class="c1">// xss protection</span>
-    <span class="nd">@InitBinder</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">initBinder</span><span class="p">(</span><span class="n">WebDataBinder</span> <span class="n">dataBinder</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">dataBinder</span><span class="p">.</span><span class="na">registerCustomEditor</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="k">new</span> <span class="n">StringAntiXssConverter</span><span class="p">());</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="c1">// xss protection</span>
+<span class="w">    </span><span class="nd">@InitBinder</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">initBinder</span><span class="p">(</span><span class="n">WebDataBinder</span><span class="w"> </span><span class="n">dataBinder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dataBinder</span><span class="p">.</span><span class="na">registerCustomEditor</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringAntiXssConverter</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="p">}</span>
 </code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringAntiXssConverter</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">PropertyEditorSupport</span><span class="w"> </span><span class="p">{</span>
 
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringAntiXssConverter</span> <span class="kd">extends</span> <span class="n">PropertyEditorSupport</span> <span class="p">{</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">PolicyFactory</span> <span class="n">policy</span> <span class="o">=</span> <span class="n">Sanitizers</span><span class="p">.</span><span class="na">BLOCKS</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">FORMATTING</span><span class="p">).</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">STYLES</span><span class="p">)</span>
-            <span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">LINKS</span><span class="p">)</span>
-            <span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="k">new</span> <span class="n">HtmlPolicyBuilder</span><span class="p">().</span><span class="na">allowElements</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">).</span><span class="na">allowAttributes</span><span class="p">(</span><span class="s">&quot;class&quot;</span><span class="p">).</span><span class="na">onElements</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">).</span><span class="na">toFactory</span><span class="p">())</span>
-            <span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="k">new</span> <span class="n">HtmlPolicyBuilder</span><span class="p">().</span><span class="na">allowElements</span><span class="p">(</span><span class="s">&quot;span&quot;</span><span class="p">).</span><span class="na">allowAttributes</span><span class="p">(</span><span class="s">&quot;lang&quot;</span><span class="p">).</span><span class="na">onElements</span><span class="p">(</span><span class="s">&quot;span&quot;</span><span class="p">).</span><span class="na">toFactory</span><span class="p">());</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">PolicyFactory</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">BLOCKS</span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">FORMATTING</span><span class="p">).</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">STYLES</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="n">Sanitizers</span><span class="p">.</span><span class="na">LINKS</span><span class="p">)</span>
+<span class="w">            </span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">HtmlPolicyBuilder</span><span class="p">().</span><span class="na">allowElements</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">).</span><span class="na">allowAttributes</span><span class="p">(</span><span class="s">&quot;class&quot;</span><span class="p">).</span><span class="na">onElements</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">).</span><span class="na">toFactory</span><span class="p">())</span>
+<span class="w">            </span><span class="p">.</span><span class="na">and</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">HtmlPolicyBuilder</span><span class="p">().</span><span class="na">allowElements</span><span class="p">(</span><span class="s">&quot;span&quot;</span><span class="p">).</span><span class="na">allowAttributes</span><span class="p">(</span><span class="s">&quot;lang&quot;</span><span class="p">).</span><span class="na">onElements</span><span class="p">(</span><span class="s">&quot;span&quot;</span><span class="p">).</span><span class="na">toFactory</span><span class="p">());</span>
 
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getAsText</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">getValue</span><span class="p">();</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">value</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span> <span class="p">:</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getAsText</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getValue</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">value</span><span class="p">.</span><span class="na">toString</span><span class="p">()</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAsText</span><span class="p">(</span><span class="n">String</span> <span class="n">text</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">text</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">setValue</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">JsonUtils</span><span class="p">.</span><span class="na">isJsonValid</span><span class="p">(</span><span class="n">text</span><span class="p">)){</span> <span class="c1">// 先判断是不是json字符串</span>
-                <span class="n">setValue</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">isHtml</span><span class="p">(</span><span class="n">text</span><span class="p">)){</span> <span class="c1">// 然后 html sanitizer</span>
-                <span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">policy</span><span class="p">.</span><span class="na">sanitize</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
-                <span class="n">setValue</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">setValue</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nd">@Override</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAsText</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">setValue</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">JsonUtils</span><span class="p">.</span><span class="na">isJsonValid</span><span class="p">(</span><span class="n">text</span><span class="p">)){</span><span class="w"> </span><span class="c1">// 先判断是不是json字符串</span>
+<span class="w">                </span><span class="n">setValue</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">StringUtils</span><span class="p">.</span><span class="na">isHtml</span><span class="p">(</span><span class="n">text</span><span class="p">)){</span><span class="w"> </span><span class="c1">// 然后 html sanitizer</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">policy</span><span class="p">.</span><span class="na">sanitize</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="w">                </span><span class="n">setValue</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">setValue</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">com.google.gson.stream.JsonReader</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.gson.stream.JsonToken</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.google.gson.stream.MalformedJsonException</span><span class="p">;</span>
 
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">com.google.gson.stream.JsonReader</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.google.gson.stream.JsonToken</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.google.gson.stream.MalformedJsonException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.IOException</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.Reader</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.io.StringReader</span><span class="p">;</span>
 
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.io.Reader</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.io.StringReader</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">JsonUtils</span><span class="w"> </span><span class="p">{</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">JsonUtils</span> <span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isJsonValid</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">isJsonValid</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">StringReader</span><span class="p">(</span><span class="n">json</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">IOException</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isJsonValid</span><span class="p">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">json</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">isJsonValid</span><span class="p">(</span><span class="k">new</span> <span class="n">StringReader</span><span class="p">(</span><span class="n">json</span><span class="p">));</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isJsonValid</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">Reader</span><span class="w"> </span><span class="n">reader</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isJsonValid</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">JsonReader</span><span class="p">(</span><span class="n">reader</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isJsonValid</span><span class="p">(</span><span class="kd">final</span> <span class="n">Reader</span> <span class="n">reader</span><span class="p">)</span>
-            <span class="kd">throws</span> <span class="n">IOException</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">isJsonValid</span><span class="p">(</span><span class="k">new</span> <span class="n">JsonReader</span><span class="p">(</span><span class="n">reader</span><span class="p">));</span>
-    <span class="p">}</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isJsonValid</span><span class="p">(</span><span class="kd">final</span> <span class="n">JsonReader</span> <span class="n">jsonReader</span><span class="p">)</span>
-            <span class="kd">throws</span> <span class="n">IOException</span> <span class="p">{</span>
-        <span class="k">try</span> <span class="p">{</span>
-            <span class="n">JsonToken</span> <span class="n">token</span><span class="p">;</span>
-            <span class="n">loop</span><span class="p">:</span>
-            <span class="k">while</span> <span class="p">((</span><span class="n">token</span> <span class="o">=</span> <span class="n">jsonReader</span><span class="p">.</span><span class="na">peek</span><span class="p">())</span> <span class="o">!=</span> <span class="n">JsonToken</span><span class="p">.</span><span class="na">END_DOCUMENT</span> <span class="o">&amp;&amp;</span> <span class="n">token</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">switch</span> <span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">case</span> <span class="n">BEGIN_ARRAY</span><span class="p">:</span>
-                        <span class="n">jsonReader</span><span class="p">.</span><span class="na">beginArray</span><span class="p">();</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="k">case</span> <span class="n">END_ARRAY</span><span class="p">:</span>
-                        <span class="n">jsonReader</span><span class="p">.</span><span class="na">endArray</span><span class="p">();</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="k">case</span> <span class="n">BEGIN_OBJECT</span><span class="p">:</span>
-                        <span class="n">jsonReader</span><span class="p">.</span><span class="na">beginObject</span><span class="p">();</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="k">case</span> <span class="n">END_OBJECT</span><span class="p">:</span>
-                        <span class="n">jsonReader</span><span class="p">.</span><span class="na">endObject</span><span class="p">();</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="k">case</span> <span class="n">NAME</span><span class="p">:</span>
-                        <span class="n">jsonReader</span><span class="p">.</span><span class="na">nextName</span><span class="p">();</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="k">case</span> <span class="n">STRING</span><span class="p">:</span>
-                    <span class="k">case</span> <span class="n">NUMBER</span><span class="p">:</span>
-                    <span class="k">case</span> <span class="n">BOOLEAN</span><span class="p">:</span>
-                    <span class="k">case</span> <span class="n">NULL</span><span class="p">:</span>
-                        <span class="n">jsonReader</span><span class="p">.</span><span class="na">skipValue</span><span class="p">();</span>
-                        <span class="k">break</span><span class="p">;</span>
-                    <span class="k">case</span> <span class="n">END_DOCUMENT</span><span class="p">:</span>
-                        <span class="k">break</span> <span class="n">loop</span><span class="p">;</span>
-                    <span class="k">default</span><span class="p">:</span>
-                        <span class="k">throw</span> <span class="k">new</span> <span class="n">AssertionError</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="kd">final</span> <span class="n">MalformedJsonException</span> <span class="n">ignored</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isJsonValid</span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">JsonReader</span><span class="w"> </span><span class="n">jsonReader</span><span class="p">)</span>
+<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">JsonToken</span><span class="w"> </span><span class="n">token</span><span class="p">;</span>
+<span class="w">            </span><span class="n">loop</span><span class="p">:</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">peek</span><span class="p">())</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">JsonToken</span><span class="p">.</span><span class="na">END_DOCUMENT</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">BEGIN_ARRAY</span><span class="p">:</span>
+<span class="w">                        </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">beginArray</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">END_ARRAY</span><span class="p">:</span>
+<span class="w">                        </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">endArray</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">BEGIN_OBJECT</span><span class="p">:</span>
+<span class="w">                        </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">beginObject</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">END_OBJECT</span><span class="p">:</span>
+<span class="w">                        </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">endObject</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">NAME</span><span class="p">:</span>
+<span class="w">                        </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">nextName</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">STRING</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">NUMBER</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">BOOLEAN</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">NULL</span><span class="p">:</span>
+<span class="w">                        </span><span class="n">jsonReader</span><span class="p">.</span><span class="na">skipValue</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">END_DOCUMENT</span><span class="p">:</span>
+<span class="w">                        </span><span class="k">break</span><span class="w"> </span><span class="n">loop</span><span class="p">;</span>
+<span class="w">                    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                        </span><span class="k">throw</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AssertionError</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="kd">final</span><span class="w"> </span><span class="n">MalformedJsonException</span><span class="w"> </span><span class="n">ignored</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.util.HtmlUtils</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringUtils</span><span class="w"> </span><span class="p">{</span>
 
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">org.springframework.web.util.HtmlUtils</span><span class="p">;</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringUtils</span> <span class="p">{</span>
-
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isHtml</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">boolean</span> <span class="n">isHtml</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">str</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">str</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">HtmlUtils</span><span class="p">.</span><span class="na">htmlEscape</span><span class="p">(</span><span class="n">str</span><span class="p">)))</span> <span class="p">{</span>
-                <span class="n">isHtml</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">isHtml</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isHtml</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isHtml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">str</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">HtmlUtils</span><span class="p">.</span><span class="na">htmlEscape</span><span class="p">(</span><span class="n">str</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">isHtml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isHtml</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <h2>更新</h2>
 <p>上面的方法存在一个问题，owasp-java-html-sanitizer 会导致很多符号被转义，以后使用 jsoup</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="c">&lt;!-- jsoup HTML parser library @ https://jsoup.org/ --&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.jsoup<span class="nt">&lt;/groupId&gt;</span>
-    <span class="nt">&lt;artifactId&gt;</span>jsoup<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>1.13.1<span class="nt">&lt;/version&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- jsoup HTML parser library @ https://jsoup.org/ --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;groupId&gt;</span>org.jsoup<span class="nt">&lt;/groupId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>jsoup<span class="nt">&lt;/artifactId&gt;</span>
+<span class="w">    </span><span class="nt">&lt;version&gt;</span>1.13.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 
-
 <p>判断是否是字符串是否是 html</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">org.springframework.web.util.HtmlUtils</span><span class="p">;</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringUtils</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.util.HtmlUtils</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">StringUtils</span><span class="w"> </span><span class="p">{</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Pattern</span> <span class="n">htmlPattern</span> <span class="o">=</span> <span class="n">Pattern</span><span class="p">.</span><span class="na">compile</span><span class="p">(</span><span class="s">&quot;.*\\&lt;[^&gt;]+&gt;.*&quot;</span><span class="p">,</span> <span class="n">Pattern</span><span class="p">.</span><span class="na">DOTALL</span><span class="p">);</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">isHtml</span><span class="p">(</span><span class="n">String</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">boolean</span> <span class="n">isHtml</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">str</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">htmlPattern</span><span class="p">.</span><span class="na">matcher</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="na">matches</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">isHtml</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Pattern</span><span class="w"> </span><span class="n">htmlPattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Pattern</span><span class="p">.</span><span class="na">compile</span><span class="p">(</span><span class="s">&quot;.*\\&lt;[^&gt;]+&gt;.*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Pattern</span><span class="p">.</span><span class="na">DOTALL</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isHtml</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isHtml</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">str</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">htmlPattern</span><span class="p">.</span><span class="na">matcher</span><span class="p">(</span><span class="n">str</span><span class="p">).</span><span class="na">matches</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isHtml</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
+<div class="highlight"><pre><span></span><code><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">JsoupUtils</span><span class="w"> </span><span class="p">{</span>
 
-<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">JsoupUtils</span> <span class="p">{</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Whitelist</span> <span class="n">whitelist</span> <span class="o">=</span> <span class="n">Whitelist</span><span class="p">.</span><span class="na">relaxed</span><span class="p">();</span>
-    <span class="cm">/*</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Whitelist</span><span class="w"> </span><span class="n">whitelist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Whitelist</span><span class="p">.</span><span class="na">relaxed</span><span class="p">();</span>
+<span class="w">    </span><span class="cm">/*</span>
 <span class="cm">     * 配置过滤化参数,不对代码进行格式化</span>
 <span class="cm">     */</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Document</span><span class="p">.</span><span class="na">OutputSettings</span> <span class="n">outputSettings</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Document</span><span class="p">.</span><span class="na">OutputSettings</span><span class="p">().</span><span class="na">prettyPrint</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-    <span class="kd">static</span> <span class="p">{</span>
-        <span class="cm">/*</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Document</span><span class="p">.</span><span class="na">OutputSettings</span><span class="w"> </span><span class="n">outputSettings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Document</span><span class="p">.</span><span class="na">OutputSettings</span><span class="p">().</span><span class="na">prettyPrint</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*</span>
 <span class="cm">         * 富文本编辑时一些样式是使用style来进行实现的 比如红色字体 style=&quot;color:red;&quot; 所以需要给所有标签添加style属性</span>
 <span class="cm">         */</span>
-        <span class="n">whitelist</span><span class="p">.</span><span class="na">addAttributes</span><span class="p">(</span><span class="s">&quot;:all&quot;</span><span class="p">,</span> <span class="s">&quot;style&quot;</span><span class="p">);</span>
-        <span class="n">whitelist</span><span class="p">.</span><span class="na">addAttributes</span><span class="p">(</span><span class="s">&quot;:all&quot;</span><span class="p">,</span> <span class="s">&quot;class&quot;</span><span class="p">);</span>
-        <span class="n">whitelist</span><span class="p">.</span><span class="na">addAttributes</span><span class="p">(</span><span class="s">&quot;:all&quot;</span><span class="p">,</span> <span class="s">&quot;lang&quot;</span><span class="p">);</span>
-        <span class="n">whitelist</span><span class="p">.</span><span class="na">removeTags</span><span class="p">(</span><span class="s">&quot;img&quot;</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="n">whitelist</span><span class="p">.</span><span class="na">addAttributes</span><span class="p">(</span><span class="s">&quot;:all&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;style&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">whitelist</span><span class="p">.</span><span class="na">addAttributes</span><span class="p">(</span><span class="s">&quot;:all&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;class&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">whitelist</span><span class="p">.</span><span class="na">addAttributes</span><span class="p">(</span><span class="s">&quot;:all&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lang&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">whitelist</span><span class="p">.</span><span class="na">removeTags</span><span class="p">(</span><span class="s">&quot;img&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">clean</span><span class="p">(</span><span class="n">String</span> <span class="n">content</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">Jsoup</span><span class="p">.</span><span class="na">clean</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">whitelist</span><span class="p">,</span> <span class="n">outputSettings</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">clean</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">content</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">Jsoup</span><span class="p">.</span><span class="na">clean</span><span class="p">(</span><span class="n">content</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">whitelist</span><span class="p">,</span><span class="w"> </span><span class="n">outputSettings</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
   </div>
@@ -330,8 +340,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -349,14 +362,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

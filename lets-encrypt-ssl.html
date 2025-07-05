@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -56,6 +56,13 @@
 
   <title>Martin's Blog &ndash; 在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -80,18 +87,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -100,7 +119,8 @@
       
     <h1 id="lets-encrypt-ssl">在 Amazon Linux 使用 Let's encrypt 免费的SSL</h1>
     <p>
-      Posted on 2017-04-03 20:20 in <a href="./category/linux.html">Linux</a>
+          Posted on 2017-04-03 20:20 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -118,28 +138,25 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 <li>ssh到Server</li>
 <li>下载certbot</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">wget https://dl.eff.org/certbot-auto</span>
-<span class="err">chmod a+x certbot-auto</span>
+<div class="highlight"><pre><span></span><code>wget https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
 </code></pre></div>
-
 
 <ul>
 <li>执行certbot</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">sudo ./certbot-auto --debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE</span>
+<div class="highlight"><pre><span></span><code>sudo ./certbot-auto --debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE
 </code></pre></div>
-
 
 <ul>
 <li>验证</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">How would you like to authenticate with the ACME CA?</span>
-<span class="err">---------------------------</span>
-<span class="c">1: Place files in webroot directory (webroot)</span>
-<span class="c">2: Spin up a temporary webserver (standalone)</span>
-<span class="err">---------------------------</span>
+<div class="highlight"><pre><span></span><code>How would you like to authenticate with the ACME CA?
+---------------------------
+1: Place files in webroot directory (webroot)
+2: Spin up a temporary webserver (standalone)
+---------------------------
 </code></pre></div>
-
 
 <p>选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
 选择2certbot会启动一个web服务，占用443端口，所以需要暂停一下nginx，一般情况下选择2比较省事。</p>
@@ -147,74 +164,68 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 <ul>
 <li>证书路径</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c">Certificate: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/cert.pem</span>
-<span class="err">Full Chain: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem</span>
-<span class="err">Private Key: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem</span>
+<div class="highlight"><pre><span></span><code>Certificate: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/cert.pem
+Full Chain: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem
+Private Key: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem
 </code></pre></div>
-
 
 <h2>nginx 启用SSL</h2>
 <p>启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子</p>
-<div class="highlight"><pre><span></span><code><span class="n">server</span> <span class="p">{</span>
-    <span class="n">listen</span>       <span class="mi">80</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">listen</span><span class="w">       </span><span class="mi">80</span><span class="p">;</span>
 
-    <span class="n">server_name</span>  <span class="n">YOUR_WEBSITE_HERE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">server_name</span><span class="w">  </span><span class="n">YOUR_WEBSITE_HERE</span><span class="p">;</span>
 
-    <span class="c1"># Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</span>
-    <span class="k">return</span> <span class="mi">301</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">$</span><span class="n">request_uri</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">301</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">$</span><span class="n">request_uri</span><span class="p">;</span>
 
 <span class="p">}</span>
 
-<span class="n">server</span> <span class="p">{</span>
-    <span class="n">listen</span> <span class="mi">443</span> <span class="n">ssl</span> <span class="n">http2</span><span class="p">;</span>
-    <span class="n">listen</span> <span class="p">[::]:</span><span class="mi">443</span> <span class="n">ssl</span> <span class="n">http2</span><span class="p">;</span>
+<span class="n">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="n">ssl</span><span class="w"> </span><span class="n">http2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="p">[::]:</span><span class="mi">443</span><span class="w"> </span><span class="n">ssl</span><span class="w"> </span><span class="n">http2</span><span class="p">;</span>
 
-    <span class="n">server_name</span> <span class="n">YOUR_WEBSITE_HERE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">server_name</span><span class="w"> </span><span class="n">YOUR_WEBSITE_HERE</span><span class="p">;</span>
 
-    <span class="c1"># certs sent to the client in SERVER HELLO are concatenated in ssl_certificate</span>
-    <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">/</span><span class="n">fullchain</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-    <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">/</span><span class="n">privkey</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-    <span class="n">ssl_session_timeout</span> <span class="mi">1</span><span class="n">d</span><span class="p">;</span>
-    <span class="n">ssl_session_cache</span> <span class="n">shared</span><span class="p">:</span><span class="n">SSL</span><span class="p">:</span><span class="mi">50</span><span class="n">m</span><span class="p">;</span>
-    <span class="n">ssl_session_tickets</span> <span class="n">off</span><span class="p">;</span>
-    <span class="n">access_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">-</span><span class="n">access</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
-    <span class="n">error_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">-</span><span class="n">error</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
-    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
-        <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8003</span><span class="p">;</span>
-        <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="o">$</span><span class="n">host</span><span class="p">;</span>
-        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="o">$</span><span class="n">remote_addr</span><span class="p">;</span>
-        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span> <span class="o">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1"># certs sent to the client in SERVER HELLO are concatenated in ssl_certificate</span>
+<span class="w">    </span><span class="n">ssl_certificate</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">/</span><span class="n">fullchain</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ssl_certificate_key</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">letsencrypt</span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">/</span><span class="n">privkey</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ssl_session_timeout</span><span class="w"> </span><span class="mi">1</span><span class="n">d</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ssl_session_cache</span><span class="w"> </span><span class="n">shared</span><span class="p">:</span><span class="n">SSL</span><span class="p">:</span><span class="mi">50</span><span class="n">m</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ssl_session_tickets</span><span class="w"> </span><span class="n">off</span><span class="p">;</span>
+<span class="w">    </span><span class="n">access_log</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">-</span><span class="n">access</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+<span class="w">    </span><span class="n">error_log</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">YOUR_WEBSITE_HERE</span><span class="o">-</span><span class="n">error</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+<span class="w">    </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">proxy_pass</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8003</span><span class="p">;</span>
+<span class="w">        </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">Host</span><span class="w"> </span><span class="o">$</span><span class="n">host</span><span class="p">;</span>
+<span class="w">        </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span><span class="w"> </span><span class="o">$</span><span class="n">remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span><span class="w"> </span><span class="o">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <h2>自动更新证书</h2>
 <ul>
 <li>使用root用户</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">sudo -i</span>
+<div class="highlight"><pre><span></span><code>sudo -i
 </code></pre></div>
-
 
 <ul>
 <li>增加定时任务</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">crontab -e</span>
+<div class="highlight"><pre><span></span><code>crontab -e
 </code></pre></div>
-
 
 <p>增加一行，每个月1号2点30分更新</p>
-<div class="highlight"><pre><span></span><code><span class="err">30 2 1 * * /path/to/certbot renew --pre-hook &quot;service nginx stop&quot; --post-hook &quot;service nginx start&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="mf">30</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="kr">to</span><span class="o">/</span><span class="n">certbot</span><span class="w"> </span><span class="n">renew</span><span class="w"> </span><span class="o">--</span><span class="n">pre</span><span class="o">-</span><span class="n">hook</span><span class="w"> </span><span class="s">&quot;service nginx stop&quot;</span><span class="w"> </span><span class="o">--</span><span class="nb">pos</span><span class="n">t</span><span class="o">-</span><span class="n">hook</span><span class="w"> </span><span class="s">&quot;service nginx start&quot;</span>
 </code></pre></div>
-
 
 <ul>
 <li>dry run</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="err">./path/to/certbot-auto renew --dry-run</span>
+<div class="highlight"><pre><span></span><code>./path/to/certbot-auto renew --dry-run
 </code></pre></div>
-
 
 <h2>chrome 变绿</h2>
 <p>在chrome下需要全站都使用https地址栏才会变绿，需要检查一下网站里面的各种URL，比如外链图片或JS文件，都需要使用https才行。</p>
@@ -236,8 +247,11 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -255,14 +269,16 @@ Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要ren
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

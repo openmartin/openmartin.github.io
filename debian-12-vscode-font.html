@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 设置 vscode 的字体</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="debian-12-vscode-font">设置 vscode 的字体</h1>
     <p>
-      Posted on 2024-09-07 22:00 in <a href="./category/linux.html">Linux</a>
+          Posted on 2024-09-07 22:00 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -111,25 +131,22 @@
 <p><img alt="JetBrainsMono-2.304" src="../images/JetBrainsMono-2.304.png"></p>
 <p>把 ttf 文件夹下的字体 复制到 /usr/share/fonts/JetBrains-Mono，然后刷新字体缓存</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 有可能要修改字体文件的权限</span>
-sudo chmod -R <span class="m">644</span> /usr/share/fonts/JetBrains-Mono/*
-fc-cache -f -v
+sudo<span class="w"> </span>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">644</span><span class="w"> </span>/usr/share/fonts/JetBrains-Mono/*
+fc-cache<span class="w"> </span>-f<span class="w"> </span>-v
 <span class="c1"># 检查字体是否安装成功</span>
-fc-list <span class="p">|</span> grep JetBrains
+fc-list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>JetBrains
 </code></pre></div>
-
 
 <p>还有一种安装方式是使用 debian 源里面的 fonts-jetbrains-mono</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt install fonts-jetbrains-mono</span>
+<div class="highlight"><pre><span></span><code>sudo apt install fonts-jetbrains-mono
 </code></pre></div>
-
 
 <p>设置 vscode -&gt; Settings -&gt; Text Editor -&gt; Font -&gt; Font Famliy ，把 'Jetbrains Mono' 加到字体的最前面该上去</p>
 <p><img alt="vscode-editor-font-jetbrains-mono" src="../images/vscode-editor-font-jetbrains-mono.png"></p>
 <p>对应 settings.json 中会设置如下</p>
-<div class="highlight"><pre><span></span><code><span class="err">&quot;editor.fontFamily&quot;: &quot;&#39;JetBrains Mono&#39;, &#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace&quot;,</span>
-<span class="err">&quot;editor.fontLigatures&quot;: false // 是否启用字体连字</span>
+<div class="highlight"><pre><span></span><code>&quot;editor.fontFamily&quot;: &quot;&#39;JetBrains Mono&#39;, &#39;Droid Sans Mono&#39;, &#39;monospace&#39;, monospace&quot;,
+&quot;editor.fontLigatures&quot;: false // 是否启用字体连字
 </code></pre></div>
-
 
 <p>参考 <a href="https://msdemt.github.io/p/ubuntu-vscode-font/">https://msdemt.github.io/p/ubuntu-vscode-font/</a></p>
   </div>
@@ -143,8 +160,11 @@ fc-list <span class="p">|</span> grep JetBrains
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -162,14 +182,16 @@ fc-list <span class="p">|</span> grep JetBrains
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

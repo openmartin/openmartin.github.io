@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Elasticsearch APM 监控</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="elasticsearch-apm-monitoring">Elasticsearch APM 监控</h1>
     <p>
-      Posted on 2021-08-11 18:00 in <a href="./category/java.html">Java</a>
+          Posted on 2021-08-11 18:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -109,35 +129,31 @@
     <h2>Elasticsearch APM</h2>
 <p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html">添加 Elasticsearch RPM Repo</a></p>
 <p>安装 APM Server</p>
-<div class="highlight"><pre><span></span><code><span class="err">yum install -y apm-server-7.10.2</span>
-<span class="err">systemctl start apm-server</span>
-<span class="err">systemctl status apm-server</span>
+<div class="highlight"><pre><span></span><code>yum install -y apm-server-7.10.2
+systemctl start apm-server
+systemctl status apm-server
 </code></pre></div>
-
 
 <p>修改配置文件 <code>/etc/apm-sever/apm-server.yml</code>，允许外部访问，如果有防火墙设置的话，设置防火墙例外。</p>
-<div class="highlight"><pre><span></span><code><span class="c">host: &quot;0.0.0.0:8200&quot;</span>
+<div class="highlight"><pre><span></span><code>host: &quot;0.0.0.0:8200&quot;
 </code></pre></div>
-
 
 <p>安装 <a href="https://www.elastic.co/guide/en/apm/agent/index.html">APM Agent</a></p>
 <p>选择对应的 Agent 安装方式，下面介绍一下 tomcat 怎么添加 agent</p>
 <p>在 setenv.bat(windows) 中添加</p>
-<div class="highlight"><pre><span></span><code><span class="err">set &quot;JAVA_OPTS=-javaagent:D:\apache-tomcat-8.5.39\lib\elastic-apm-agent-1.25.0.jar -Delastic.apm.service_name=rms-test -Delastic.apm.server_url=http://192.168.100.1:8200 -Delastic.apm.application_packages=com.example&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nx">set</span><span class="w"> </span><span class="s">&quot;JAVA_OPTS=-javaagent:D:\apache-tomcat-8.5.39\lib\elastic-apm-agent-1.25.0.jar -Delastic.apm.service_name=rms-test -Delastic.apm.server_url=http://192.168.100.1:8200 -Delastic.apm.application_packages=com.example&quot;</span>
 </code></pre></div>
-
 
 <p>在 kibana 的界面 Observability -&gt; APM 可以看到监测的结果，可以看到每个请求的响应时间，会拆分到SQL执行的时长，Java的执行时长，方便后续分析问题。</p>
 <h2>Elasticsearch User Experience Monitoring</h2>
 <p>默认没有启用这块的配置，需要先<a href="https://www.elastic.co/guide/en/apm/server/7.14/configuration-rum.html">改配置文件</a>，然后重启 apm-server</p>
-<div class="highlight"><pre><span></span><code>  <span class="nt">rum</span><span class="p">:</span>
-    <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-    <span class="nt">event_rate</span><span class="p">:</span>
-      <span class="nt">limit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">300</span>
-      <span class="nt">lru_size</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1000</span>
-    <span class="nt">allow_origins</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;*&#39;</span><span class="p p-Indicator">]</span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">rum</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">event_rate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+<span class="w">      </span><span class="nt">lru_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">allow_origins</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;*&#39;</span><span class="p p-Indicator">]</span>
 </code></pre></div>
-
 
 <p>在页面引入 js agent，参考<a href="https://www.elastic.co/guide/en/apm/agent/rum-js/current/install-the-agent.html">install RUM agent</a></p>
   </div>
@@ -151,8 +167,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -170,14 +189,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

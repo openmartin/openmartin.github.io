@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 乞丐版 nas</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="begger-nas">乞丐版 nas</h1>
     <p>
-      Posted on 2020-07-04 14:00 in <a href="./category/linux.html">Linux</a>
+          Posted on 2020-07-04 14:00 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -129,68 +149,61 @@
 <h3>修改源</h3>
 <p>修改下面的文件，连接国内的镜像源速度更快</p>
 <p>/etc/apt/sources.list</p>
-<div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
-<span class="k">deb-src</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">non-free</span> <span class="kp">contrib</span>
+<div class="highlight"><pre><span></span><code><span class="k">deb</span><span class="w"> </span><span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span><span class="w"> </span><span class="kp">buster</span><span class="w"> </span><span class="kp">main</span><span class="w"> </span><span class="kp">non-free</span><span class="w"> </span><span class="kp">contrib</span>
+<span class="k">deb-src</span><span class="w"> </span><span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</span><span class="w"> </span><span class="kp">buster</span><span class="w"> </span><span class="kp">main</span><span class="w"> </span><span class="kp">non-free</span><span class="w"> </span><span class="kp">contrib</span>
 </code></pre></div>
-
 
 <p>/etc/apt/sources.list.d/raspi.list</p>
-<div class="highlight"><pre><span></span><code><span class="k">deb</span> <span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/</span> <span class="kp">buster</span> <span class="kp">main</span> <span class="kp">ui</span>
+<div class="highlight"><pre><span></span><code><span class="k">deb</span><span class="w"> </span><span class="s">http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/</span><span class="w"> </span><span class="kp">buster</span><span class="w"> </span><span class="kp">main</span><span class="w"> </span><span class="kp">ui</span>
 </code></pre></div>
-
 
 <p>更新系统</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get update</span>
-<span class="err">sudo apt-get upgrade</span>
+<div class="highlight"><pre><span></span><code>sudo apt-get update
+sudo apt-get upgrade
 </code></pre></div>
-
 
 <h3>安装 openmediavault</h3>
 <p>openmediavault 官方有一个 <a href="https://forum.openmediavault.org/index.php?thread/28789-installing-omv5-on-raspberry-pi-s-armbian-sbc-s-i386-32-bit-platforms/">guide</a> </p>
 <p>按照官方的步骤就可以了</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get update</span>
-<span class="err">sudo apt-get upgrade -y</span>
-<span class="err">sudo rm -f /etc/systemd/network/99-default.link ## 一点要记得删除，否则后续网络会有问题</span>
-<span class="err">sudo reboot</span>
+<div class="highlight"><pre><span></span><code>sudo apt-get update
+sudo apt-get upgrade -y
+sudo rm -f /etc/systemd/network/99-default.link ## 一点要记得删除，否则后续网络会有问题
+sudo reboot
 </code></pre></div>
-
 
 <p>在国内访问 github 会有点问题，导致下载安装脚本失败。通过修改host文件可以解决这个问题, 从这个repo https://github.com/googlehosts/hosts 找到 github 的部分。 在 <code>/etc/hosts</code> 中增加：</p>
-<div class="highlight"><pre><span></span><code><span class="err"># GitHub Start</span>
-<span class="err">192.30.255.112  gist.github.com</span>
-<span class="err">192.30.255.112  github.com</span>
-<span class="err">192.30.255.112  www.github.com</span>
-<span class="err">151.101.56.133  avatars0.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars1.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars2.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars3.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars4.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars5.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars6.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars7.githubusercontent.com</span>
-<span class="err">151.101.56.133  avatars8.githubusercontent.com</span>
-<span class="err">151.101.56.133  camo.githubusercontent.com</span>
-<span class="err">151.101.56.133  cloud.githubusercontent.com</span>
-<span class="err">151.101.56.133  gist.githubusercontent.com</span>
-<span class="err">151.101.56.133  marketplace-screenshots.githubusercontent.com</span>
-<span class="err">151.101.56.133  raw.githubusercontent.com</span>
-<span class="err">151.101.56.133  repository-images.githubusercontent.com</span>
-<span class="err">151.101.56.133  user-images.githubusercontent.com</span>
-<span class="err"># GitHub End</span>
+<div class="highlight"><pre><span></span><code>#<span class="w"> </span><span class="nv">GitHub</span><span class="w"> </span><span class="nv">Start</span>
+<span class="mi">192</span>.<span class="mi">30</span>.<span class="mi">255</span>.<span class="mi">112</span><span class="w">  </span><span class="nv">gist</span>.<span class="nv">github</span>.<span class="nv">com</span>
+<span class="mi">192</span>.<span class="mi">30</span>.<span class="mi">255</span>.<span class="mi">112</span><span class="w">  </span><span class="nv">github</span>.<span class="nv">com</span>
+<span class="mi">192</span>.<span class="mi">30</span>.<span class="mi">255</span>.<span class="mi">112</span><span class="w">  </span><span class="nv">www</span>.<span class="nv">github</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars0</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars1</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars2</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars3</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars4</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars5</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars6</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars7</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">avatars8</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">camo</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">cloud</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">gist</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">marketplace</span><span class="o">-</span><span class="nv">screenshots</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">raw</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">repository</span><span class="o">-</span><span class="nv">images</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+<span class="mi">151</span>.<span class="mi">101</span>.<span class="mi">56</span>.<span class="mi">133</span><span class="w">  </span><span class="nv">user</span><span class="o">-</span><span class="nv">images</span>.<span class="nv">githubusercontent</span>.<span class="nv">com</span>
+#<span class="w"> </span><span class="nv">GitHub</span><span class="w"> </span><span class="k">End</span>
 </code></pre></div>
-
 
 <p>执行安装脚本，然后等着就可以了，时间会有点长。</p>
-<div class="highlight"><pre><span></span><code><span class="err">wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash</span>
+<div class="highlight"><pre><span></span><code>wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash
 </code></pre></div>
-
 
 <h3>硬盘底座的设备配置</h3>
 <p>使用硬盘底座，硬盘的序列号显示不正确，需要修改配置， 见 https://openmediavault.readthedocs.io/en/5.x/troubleshooting.html</p>
-<div class="highlight"><pre><span></span><code><span class="err"># JMicron drive fix</span>
-<span class="err">KERNEL==&quot;sd*&quot;, ENV{ID_VENDOR}==&quot;JMicron&quot;, SUBSYSTEMS==&quot;usb&quot;, PROGRAM=&quot;/root/serial.sh %k&quot;, ENV{ID_SERIAL}=&quot;USB-%c&quot;, ENV{ID_SERIAL_SHORT}=&quot;%c&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="o">#</span> <span class="n">JMicron</span> <span class="n">drive</span> <span class="n">fix</span>
+<span class="n">KERNEL</span><span class="o">==</span><span class="s">&quot;sd*&quot;</span><span class="p">,</span> <span class="n">ENV</span><span class="p">{</span><span class="n">ID_VENDOR</span><span class="p">}</span><span class="o">==</span><span class="s">&quot;JMicron&quot;</span><span class="p">,</span> <span class="n">SUBSYSTEMS</span><span class="o">==</span><span class="s">&quot;usb&quot;</span><span class="p">,</span> <span class="n">PROGRAM</span><span class="o">=</span><span class="s">&quot;/root/serial.sh %k&quot;</span><span class="p">,</span> <span class="n">ENV</span><span class="p">{</span><span class="n">ID_SERIAL</span><span class="p">}</span><span class="o">=</span><span class="s">&quot;USB-%c&quot;</span><span class="p">,</span> <span class="n">ENV</span><span class="p">{</span><span class="n">ID_SERIAL_SHORT</span><span class="p">}</span><span class="o">=</span><span class="s">&quot;%c&quot;</span>
 </code></pre></div>
-
 
 <h3>配置 samba</h3>
 <p>后面就可以全部通过网页来配置</p>
@@ -228,8 +241,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -247,14 +263,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

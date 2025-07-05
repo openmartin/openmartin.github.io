@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -57,6 +57,13 @@
 
   <title>Martin's Blog &ndash; 使用 Jenkins 来自动化部署 Maven 项目</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -81,18 +88,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -101,7 +120,8 @@
       
     <h1 id="jenkins-maven-deploy">使用 Jenkins 来自动化部署 Maven 项目</h1>
     <p>
-      Posted on 2019-07-08 15:06 in <a href="./category/java.html">Java</a>
+          Posted on 2019-07-08 15:06 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -110,9 +130,8 @@
   <div>
     <h2>安装 Jenkins</h2>
 <p>下载 <a href="https://jenkins.io/zh/download/">jenkin.war</a>, 可以当作一个独立的 jar 文件运行。</p>
-<div class="highlight"><pre><span></span><code><span class="err">nohup java -jar jenkins.war --httpPort=8080 &amp;</span>
+<div class="highlight"><pre><span></span><code>nohup java -jar jenkins.war --httpPort=8080 &amp;
 </code></pre></div>
-
 
 <h3>安装后设置向导</h3>
 <p>参考<a href="https://jenkins.io/zh/doc/book/installing/#setup-wizard">官方文档</a></p>
@@ -127,112 +146,107 @@
 </ul>
 <h2>配置 Maven</h2>
 <p>编辑<code>$HOME/.m2/settings.xml</code>， 如果是在内网中，需要设置代理，如果网速不够快，可以设置 aliyun 镜像</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;settings</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
-  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
-  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;settings</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;</span>
+<span class="w">  </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="w">  </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/SETTINGS/1.0.0</span>
 <span class="s">  https://maven.apache.org/xsd/settings-1.0.0.xsd&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;proxies&gt;</span>
+<span class="w">  </span><span class="nt">&lt;proxies&gt;</span>
 
-    <span class="nt">&lt;proxy&gt;</span>
-      <span class="nt">&lt;id&gt;</span>http proxy<span class="nt">&lt;/id&gt;</span>
-      <span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
-      <span class="nt">&lt;protocol&gt;</span>http<span class="nt">&lt;/protocol&gt;</span>
-      <span class="nt">&lt;host&gt;</span>192.168.8.8<span class="nt">&lt;/host&gt;</span>
-      <span class="nt">&lt;port&gt;</span>8080<span class="nt">&lt;/port&gt;</span>
-      <span class="nt">&lt;username&gt;&lt;/username&gt;</span>
-      <span class="nt">&lt;password&gt;&lt;/password&gt;</span>
-    <span class="nt">&lt;/proxy&gt;</span>
+<span class="w">    </span><span class="nt">&lt;proxy&gt;</span>
+<span class="w">      </span><span class="nt">&lt;id&gt;</span>http<span class="w"> </span>proxy<span class="nt">&lt;/id&gt;</span>
+<span class="w">      </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="w">      </span><span class="nt">&lt;protocol&gt;</span>http<span class="nt">&lt;/protocol&gt;</span>
+<span class="w">      </span><span class="nt">&lt;host&gt;</span>192.168.8.8<span class="nt">&lt;/host&gt;</span>
+<span class="w">      </span><span class="nt">&lt;port&gt;</span>8080<span class="nt">&lt;/port&gt;</span>
+<span class="w">      </span><span class="nt">&lt;username&gt;&lt;/username&gt;</span>
+<span class="w">      </span><span class="nt">&lt;password&gt;&lt;/password&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/proxy&gt;</span>
 
-    <span class="nt">&lt;proxy&gt;</span>
-      <span class="nt">&lt;id&gt;</span>https proxy<span class="nt">&lt;/id&gt;</span>
-      <span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
-      <span class="nt">&lt;protocol&gt;</span>https<span class="nt">&lt;/protocol&gt;</span>
-      <span class="nt">&lt;host&gt;</span>192.168.8.8<span class="nt">&lt;/host&gt;</span>
-      <span class="nt">&lt;port&gt;</span>8080<span class="nt">&lt;/port&gt;</span>
-      <span class="nt">&lt;username&gt;&lt;/username&gt;</span>
-      <span class="nt">&lt;password&gt;&lt;/password&gt;</span>
-    <span class="nt">&lt;/proxy&gt;</span>
-  <span class="nt">&lt;/proxies&gt;</span>
+<span class="w">    </span><span class="nt">&lt;proxy&gt;</span>
+<span class="w">      </span><span class="nt">&lt;id&gt;</span>https<span class="w"> </span>proxy<span class="nt">&lt;/id&gt;</span>
+<span class="w">      </span><span class="nt">&lt;active&gt;</span>true<span class="nt">&lt;/active&gt;</span>
+<span class="w">      </span><span class="nt">&lt;protocol&gt;</span>https<span class="nt">&lt;/protocol&gt;</span>
+<span class="w">      </span><span class="nt">&lt;host&gt;</span>192.168.8.8<span class="nt">&lt;/host&gt;</span>
+<span class="w">      </span><span class="nt">&lt;port&gt;</span>8080<span class="nt">&lt;/port&gt;</span>
+<span class="w">      </span><span class="nt">&lt;username&gt;&lt;/username&gt;</span>
+<span class="w">      </span><span class="nt">&lt;password&gt;&lt;/password&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/proxy&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/proxies&gt;</span>
 
-  <span class="nt">&lt;mirrors&gt;</span>
-    <span class="nt">&lt;mirror&gt;</span>
-      <span class="nt">&lt;id&gt;</span>aliyun<span class="nt">&lt;/id&gt;</span>
-      <span class="nt">&lt;name&gt;</span>aliyun maven<span class="nt">&lt;/name&gt;</span>
-      <span class="nt">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="nt">&lt;/url&gt;</span>
-      <span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>
-    <span class="nt">&lt;/mirror&gt;</span>
-  <span class="nt">&lt;/mirrors&gt;</span>
+<span class="w">  </span><span class="nt">&lt;mirrors&gt;</span>
+<span class="w">    </span><span class="nt">&lt;mirror&gt;</span>
+<span class="w">      </span><span class="nt">&lt;id&gt;</span>aliyun<span class="nt">&lt;/id&gt;</span>
+<span class="w">      </span><span class="nt">&lt;name&gt;</span>aliyun<span class="w"> </span>maven<span class="nt">&lt;/name&gt;</span>
+<span class="w">      </span><span class="nt">&lt;url&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="nt">&lt;/url&gt;</span>
+<span class="w">      </span><span class="nt">&lt;mirrorOf&gt;</span>central<span class="nt">&lt;/mirrorOf&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/mirror&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/mirrors&gt;</span>
 
 <span class="nt">&lt;/settings&gt;</span>
 </code></pre></div>
-
 
 <h2>配置 Jenkins 流水线</h2>
 <p>编辑 <code>Jenkinsfile</code> 文件</p>
 <p>很多例子中都是用了 docker 来准备环境，其实不是用 docker 也可以，前提条件是系统中配置了所需要的工具，比如 maven，java</p>
 <p>如果是通过 <code>java -jar jenkins.war --httpPort=8080</code> 运行的，则可以使用的命令和当前用户一样</p>
 <p>如果是通过 yum，apt 之类的工具安装的 Jenkins service，则使用的是 jenkins 用户，需要配置 jenkins 用户的 shell 环境。</p>
-<div class="highlight"><pre><span></span><code><span class="err">pipeline {</span>
-<span class="err">    agent any</span>
-<span class="err">    stages {</span>
-<span class="err">        stage(&#39;Build&#39;) {</span>
-<span class="err">            steps {</span>
-<span class="err">                sh &#39;mvn -B -DskipTests clean package&#39;</span>
-<span class="err">            }</span>
-<span class="err">        }</span>
-<span class="err">        stage(&#39;Deploy&#39;) {</span>
-<span class="err">            steps {</span>
-<span class="err">                sh &#39;./doc/deploy-test.sh&#39;</span>
-<span class="err">            }</span>
-<span class="err">        }</span>
-<span class="err">    }</span>
-<span class="err">}</span>
+<div class="highlight"><pre><span></span><code><span class="nx">pipeline</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">agent</span><span class="w"> </span><span class="nx">any</span>
+<span class="w">    </span><span class="nx">stages</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">stage</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">Build</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">steps</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">sh</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">mvn</span><span class="w"> </span><span class="o">-</span><span class="nx">B</span><span class="w"> </span><span class="o">-</span><span class="nx">DskipTests</span><span class="w"> </span><span class="nx">clean</span><span class="w"> </span><span class="kn">package</span><span class="err">&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">stage</span><span class="p">(</span><span class="err">&#39;</span><span class="nx">Deploy</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">steps</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">sh</span><span class="w"> </span><span class="err">&#39;</span><span class="p">.</span><span class="o">/</span><span class="nx">doc</span><span class="o">/</span><span class="nx">deploy</span><span class="o">-</span><span class="nx">test</span><span class="p">.</span><span class="nx">sh</span><span class="err">&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-
 
 <h2>使用 curl 通过 tomcat manager 部署 war</h2>
 <p>先配置登录 manager 的用户</p>
 <ol>
 <li>配置 webapps\manager\META-INF\context.xml，允许远程登录</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;Context</span> <span class="na">antiResourceLocking=</span><span class="s">&quot;false&quot;</span> <span class="na">privileged=</span><span class="s">&quot;true&quot;</span> <span class="nt">&gt;</span>
-  <span class="nt">&lt;Valve</span> <span class="na">className=</span><span class="s">&quot;org.apache.catalina.valves.RemoteAddrValve&quot;</span>
-         <span class="na">allow=</span><span class="s">&quot;127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|192\.168\.\d+\.\d+\.|10\.\d+\.\d+\.\d+&quot;</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;Manager</span> <span class="na">sessionAttributeValueClassNameFilter=</span><span class="s">&quot;java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Context</span><span class="w"> </span><span class="na">antiResourceLocking=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="na">privileged=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Valve</span><span class="w"> </span><span class="na">className=</span><span class="s">&quot;org.apache.catalina.valves.RemoteAddrValve&quot;</span>
+<span class="w">         </span><span class="na">allow=</span><span class="s">&quot;127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1|192\.168\.\d+\.\d+\.|10\.\d+\.\d+\.\d+&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;Manager</span><span class="w"> </span><span class="na">sessionAttributeValueClassNameFilter=</span><span class="s">&quot;java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/Context&gt;</span>
 </code></pre></div>
-
 
 <ol>
 <li>配置 conf\tomcat-user.xml</li>
 </ol>
-<div class="highlight"><pre><span></span><code>  <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-script&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;role</span> <span class="na">rolename=</span><span class="s">&quot;manager-status&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;tomcat&quot;</span> <span class="na">password=</span><span class="s">&quot;tomcat&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;user</span> <span class="na">username=</span><span class="s">&quot;jenkins&quot;</span> <span class="na">password=</span><span class="s">&quot;jenkins&quot;</span> <span class="na">roles=</span><span class="s">&quot;manager-script, manager-status&quot;</span><span class="nt">/&gt;</span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&lt;role</span><span class="w"> </span><span class="na">rolename=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;role</span><span class="w"> </span><span class="na">rolename=</span><span class="s">&quot;manager-script&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;role</span><span class="w"> </span><span class="na">rolename=</span><span class="s">&quot;manager-status&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;user</span><span class="w"> </span><span class="na">username=</span><span class="s">&quot;tomcat&quot;</span><span class="w"> </span><span class="na">password=</span><span class="s">&quot;tomcat&quot;</span><span class="w"> </span><span class="na">roles=</span><span class="s">&quot;manager-gui&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;user</span><span class="w"> </span><span class="na">username=</span><span class="s">&quot;jenkins&quot;</span><span class="w"> </span><span class="na">password=</span><span class="s">&quot;jenkins&quot;</span><span class="w"> </span><span class="na">roles=</span><span class="s">&quot;manager-script, manager-status&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
-
 
 <ol>
 <li>curl </li>
 </ol>
 <p>在 tomcat 配置完之后，就可以使用 curl 来 undeploy 和 deploy war 文件， 所有可以使用的命令参考 <a href="http://192.168.142.239:8080/docs/manager-howto.html#Supported_Manager_Commands">tomcat manager</a></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># !/bin/bash</span>
-<span class="nb">unset</span> http_proxy
-<span class="nb">unset</span> https_proxy
+<span class="nb">unset</span><span class="w"> </span>http_proxy
+<span class="nb">unset</span><span class="w"> </span>https_proxy
 
-<span class="nb">echo</span> <span class="s1">&#39;undeploy rms&#39;</span>
-<span class="nb">set</span> -x
-curl -s -u jenkins:jenkins <span class="s2">&quot;http://192.168.142.239:8080/manager/text/undeploy?path=/rms&quot;</span>
-<span class="nb">set</span> +x
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;undeploy rms&#39;</span>
+<span class="nb">set</span><span class="w"> </span>-x
+curl<span class="w"> </span>-s<span class="w"> </span>-u<span class="w"> </span>jenkins:jenkins<span class="w"> </span><span class="s2">&quot;http://192.168.142.239:8080/manager/text/undeploy?path=/rms&quot;</span>
+<span class="nb">set</span><span class="w"> </span>+x
 
-<span class="nb">echo</span> <span class="s1">&#39;deploy rms&#39;</span>
-<span class="nb">set</span> -x
-curl -s -u jenkins:jenkins -T target/rms.war <span class="s2">&quot;http://192.168.142.239:8080/manager/text/deploy?path=/rms&quot;</span>
-<span class="nb">set</span> +x
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;deploy rms&#39;</span>
+<span class="nb">set</span><span class="w"> </span>-x
+curl<span class="w"> </span>-s<span class="w"> </span>-u<span class="w"> </span>jenkins:jenkins<span class="w"> </span>-T<span class="w"> </span>target/rms.war<span class="w"> </span><span class="s2">&quot;http://192.168.142.239:8080/manager/text/deploy?path=/rms&quot;</span>
+<span class="nb">set</span><span class="w"> </span>+x
 </code></pre></div>
-
 
 <h2>Gitlab 触发 Jenkins pipline</h2>
 <p>参考 <a href="https://www.jianshu.com/p/156de44a44c2">https://www.jianshu.com/p/156de44a44c2</a></p>
@@ -254,8 +268,11 @@ curl -s -u jenkins:jenkins -T target/rms.war <span class="s2">&quot;http://192.1
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -273,14 +290,16 @@ curl -s -u jenkins:jenkins -T target/rms.war <span class="s2">&quot;http://192.1
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

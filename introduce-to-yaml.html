@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -56,6 +56,13 @@
 
   <title>Martin's Blog &ndash; YAML简介</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -80,18 +87,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -100,7 +119,8 @@
       
     <h1 id="introduce-to-yaml">YAML简介</h1>
     <p>
-      Posted on 2015-10-01 20:20 in <a href="./category/django.html">Django</a>
+          Posted on 2015-10-01 20:20 in <a href="./category/django.html">Django</a>
+
 
     </p>
   </header>
@@ -111,19 +131,18 @@
 <p>官方的定义是这样写的：YAML is a human friendly data serialization standard for all programming languages.</p>
 <h2>可读性好</h2>
 <p>YAML格式有很好的可读性，对比JSON格式，增加了换行和缩进，就像Python一样。:</p>
-<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span> <span class="n">Vorlin</span> <span class="n">Laruknuzum</span>
-<span class="n">sex</span><span class="o">:</span> <span class="n">Male</span>
-<span class="kd">class</span><span class="o">:</span> <span class="n">Priest</span>
-<span class="n">title</span><span class="o">:</span> <span class="n">Acolyte</span>
-<span class="n">hp</span><span class="o">:</span> <span class="o">[</span><span class="mi">32</span><span class="o">,</span> <span class="mi">71</span><span class="o">]</span>
-<span class="n">sp</span><span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">13</span><span class="o">]</span>
-<span class="n">gold</span><span class="o">:</span> <span class="mi">423</span>
+<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="o">:</span><span class="w"> </span><span class="n">Vorlin</span><span class="w"> </span><span class="n">Laruknuzum</span>
+<span class="n">sex</span><span class="o">:</span><span class="w"> </span><span class="n">Male</span>
+<span class="kd">class</span><span class="o">:</span><span class="w"> </span><span class="n">Priest</span>
+<span class="n">title</span><span class="o">:</span><span class="w"> </span><span class="n">Acolyte</span>
+<span class="n">hp</span><span class="o">:</span><span class="w"> </span><span class="o">[</span><span class="mi">32</span><span class="o">,</span><span class="w"> </span><span class="mi">71</span><span class="o">]</span>
+<span class="n">sp</span><span class="o">:</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">13</span><span class="o">]</span>
+<span class="n">gold</span><span class="o">:</span><span class="w"> </span><span class="mi">423</span>
 <span class="n">inventory</span><span class="o">:</span>
-<span class="o">-</span> <span class="n">a</span> <span class="n">Holy</span> <span class="n">Book</span> <span class="n">of</span> <span class="n">Prayers</span> <span class="o">(</span><span class="n">Words</span> <span class="n">of</span> <span class="n">Wisdom</span><span class="o">)</span>
-<span class="o">-</span> <span class="n">an</span> <span class="n">Azure</span> <span class="n">Potion</span> <span class="n">of</span> <span class="n">Cure</span> <span class="n">Light</span> <span class="n">Wounds</span>
-<span class="o">-</span> <span class="n">a</span> <span class="n">Silver</span> <span class="n">Wand</span> <span class="n">of</span> <span class="n">Wonder</span>
+<span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Holy</span><span class="w"> </span><span class="n">Book</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Prayers</span><span class="w"> </span><span class="o">(</span><span class="n">Words</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Wisdom</span><span class="o">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">Azure</span><span class="w"> </span><span class="n">Potion</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Cure</span><span class="w"> </span><span class="n">Light</span><span class="w"> </span><span class="n">Wounds</span>
+<span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Silver</span><span class="w"> </span><span class="n">Wand</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Wonder</span>
 </code></pre></div>
-
 
 <h2>注释和文档结构</h2>
 <p>在yaml格式中注释有两种格式单行注释以 # 开始， 多行注释跟C语言一样 /* */</p>
@@ -146,7 +165,6 @@ Hello, World!
 no line break
 </code></pre></div>
 
-
 <p>更多情况参考 <a href="http://www.yaml.org/spec/1.2/spec.html">http://www.yaml.org/spec/1.2/spec.html</a> 2.3. Scalars</p>
 <ol>
 <li>Sequence</li>
@@ -156,14 +174,13 @@ no line break
 <li>Mapping</li>
 </ol>
 <p>同样，Mapping也有两种形式，我们直接看例子吧:</p>
-<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">... main:</span>
 <span class="s2">...     game: hearthstone</span>
 <span class="s2">...     role: {name: Jaina, class: magician}</span>
 <span class="s2">... &quot;&quot;&quot;</span><span class="p">)</span>
-<span class="p">{</span><span class="s1">&#39;main&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;game&#39;</span><span class="p">:</span> <span class="s1">&#39;hearthstone&#39;</span><span class="p">,</span> <span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jaina&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;magician&#39;</span><span class="p">}}}</span>
+<span class="p">{</span><span class="s1">&#39;main&#39;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;game&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;hearthstone&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;role&#39;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Jaina&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;class&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;magician&#39;</span><span class="p">}}}</span>
 </code></pre></div>
-
 
 <h2>python 和 yaml</h2>
 <p>解析和生成yaml都可以用pyyaml库，用法参考上面的例子，主要使用两个函数 load 和 dump。</p>
@@ -186,8 +203,11 @@ no line break
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -205,14 +225,16 @@ no line break
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 如何修改 flowable 流程图重新发布后对正在运行的流程生效</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="how-to-modify-flowable-active-process-instance">如何修改 flowable 流程图重新发布后对正在运行的流程生效</h1>
     <p>
-      Posted on 2024-04-06 18:00 in <a href="./category/java.html">Java</a>
+          Posted on 2024-04-06 18:00 in <a href="./category/java.html">Java</a>
+
 
     </p>
   </header>
@@ -113,21 +133,19 @@
 <h2>修改数据库</h2>
 <p>流程引擎中是根据 act_ge_bytearray 中存储的 BPMN 二进制信息知道流程的走向的，所以，实现思路就是拿新的 BPMN 二进制文件替换旧的 BPMN 文件即可实现新的流程应用到新的流程中。</p>
 <p><img alt="flowabe-db" src="../images/flowable-modify-db.png"></p>
-<div class="highlight"><pre><span></span><code><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">act_run_task</span> <span class="k">where</span> <span class="n">ID_</span> <span class="o">=</span> <span class="o">?</span><span class="p">;</span> <span class="c1">-- 找到 proc_def_id</span>
-<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">act_re_procdf</span> <span class="k">where</span> <span class="n">PROC_DEF_ID_</span> <span class="o">=</span> <span class="o">?</span><span class="p">;</span>  <span class="c1">-- 找到 deployment_id</span>
-<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">act_ge_bytearray</span> <span class="k">where</span> <span class="n">DEPLOYMENT_ID_</span> <span class="o">=</span> <span class="o">?</span><span class="p">;</span> <span class="c1">-- 找到流程定义 bpmn.xml</span>
+<div class="highlight"><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">act_run_task</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">ID_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 找到 proc_def_id</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">act_re_procdf</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">PROC_DEF_ID_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 找到 deployment_id</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">act_ge_bytearray</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">DEPLOYMENT_ID_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 找到流程定义 bpmn.xml</span>
 </code></pre></div>
-
 
 <h2>缓存失效或者重启</h2>
 <p>因为flowable 有缓存，在数据库中替换了 xml 之后，还需要清楚缓存才能生效，旧的流程实例才能使用新的流程定义</p>
 <p>最简单的方法，<code>重启</code>即可</p>
 <p>也有用编程的方法实现清除缓存的，这个功能是需要提前做好的，而不是临时处理线上流程。</p>
-<div class="highlight"><pre><span></span><code><span class="n">DeploymentManager</span> <span class="n">deploymentManager</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">.</span><span class="na">getDeploymentManager</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="n">DeploymentManager</span><span class="w"> </span><span class="n">deploymentManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">configuration</span><span class="p">.</span><span class="na">getDeploymentManager</span><span class="p">();</span>
 <span class="n">deploymentManager</span><span class="p">.</span><span class="na">getBpmnModelCache</span><span class="p">().</span><span class="na">remove</span><span class="p">(</span><span class="n">definition</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
 <span class="n">deploymentManager</span><span class="p">.</span><span class="na">getProcessDefinitionCache</span><span class="p">().</span><span class="na">remove</span><span class="p">(</span><span class="n">definition</span><span class="p">.</span><span class="na">getId</span><span class="p">());</span>
 </code></pre></div>
-
 
 <p>参考
 1. <a href="https://dou-chi.gitee.io/actdynamicprocess/">https://dou-chi.gitee.io/actdynamicprocess/</a>
@@ -143,8 +161,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -162,14 +183,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

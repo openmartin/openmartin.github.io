@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Oracle Express on CentOS 7</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="oracle-express-editon-on-centos7">Oracle Express on CentOS 7</h1>
     <p>
-      Posted on 2016-09-19 20:20 in <a href="./category/linux.html">Linux</a>
+          Posted on 2016-09-19 20:20 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -117,19 +137,17 @@
 <p>下载下来之后是一个rpm包，<code>oracle-xe-11.2.0-1.0.x86_64.rpm</code>，上传到虚拟机当中安装，<code>sudo rmp -i oracle-xe-11.2.0-1.0.x86_64.rpm</code></p>
 <h2>CentOS</h2>
 <div class="highlight"><pre><span></span><code><span class="c1">#使用root用户来初始化数据库，默认的实例名是XE</span>
-/etc/init.d/oracle-xe configure
+/etc/init.d/oracle-xe<span class="w"> </span>configure
 </code></pre></div>
-
 
 <p><code>Usage: /etc/init.d/oracle-xe {start|stop|restart|force-reload|configure|status|enable|disable}</code></p>
 <p>Oracle Express Edition 安装好之后会有一个oracle用户，通过root切换到oracle用户，<code>source /u01/app/oracle/prduct/11.2.0/xe/bin/oracle_env.sh</code>设置Oracle 的环境变量，接下来就可以用一些Oracle的命令了。</p>
 <h3>Disable Firewall</h3>
 <p>centos 默认有一个firewall，会阻止外部的访问，所以需要停止防火墙。
 使用root用户登录</p>
-<div class="highlight"><pre><span></span><code><span class="err">systemctl disable firewalld</span>
-<span class="err">systemctl stop firewalld</span>
+<div class="highlight"><pre><span></span><code>systemctl disable firewalld
+systemctl stop firewalld
 </code></pre></div>
-
 
 <h2>Oracle SQL Developer</h2>
 <p>在macOS下没有PLSQL Developer这样方便的工具，Oracle官方出品的<a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html">Oracle SQL Developer</a>可以体验一下，一般功能都有。</p>
@@ -144,8 +162,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -163,14 +184,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

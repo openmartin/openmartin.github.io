@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 使用 Python 操作亚马逊 S3</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="python-operate-s3">使用 Python 操作亚马逊 S3</h1>
     <p>
-      Posted on 2015-08-17 20:20 in <a href="./category/python.html">Python</a>
+          Posted on 2015-08-17 20:20 in <a href="./category/python.html">Python</a>
+
 
     </p>
   </header>
@@ -111,26 +131,25 @@
 <h2>boto3 Python SDK</h2>
 <p>目前官方推荐的Python SDK 是boto3 <a href="https://github.com/boto/boto3">https://github.com/boto/boto3</a></p>
 <p>接下来进入正题,直接看代码把。:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">boto3.session</span> <span class="kn">import</span> <span class="n">Session</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">boto3.session</span><span class="w"> </span><span class="kn">import</span><span class="w"> </span><span class="n">Session</span>
 
-<span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;&lt;key&gt;&#39;</span><span class="p">,</span> \
-    <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;&lt;key&gt;&#39;</span><span class="p">,</span> \
-    <span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">)</span>
+<span class="n">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Session</span><span class="p">(</span><span class="n">aws_access_key_id</span><span class="o">=</span><span class="s1">&#39;&lt;key&gt;&#39;</span><span class="p">,</span><span class="w"> \</span>
+<span class="w">    </span><span class="n">aws_secret_access_key</span><span class="o">=</span><span class="s1">&#39;&lt;key&gt;&#39;</span><span class="p">,</span><span class="w"> \</span>
+<span class="w">    </span><span class="n">region_name</span><span class="o">=</span><span class="s1">&#39;us-east-1&#39;</span><span class="p">)</span>
 
-<span class="n">s3</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
-<span class="n">client</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
 
 <span class="c1">#上传</span>
-<span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;~/beakup.gif&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-<span class="n">file_obj</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">(</span><span class="s1">&#39;mybucket&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="s1">&#39;breakup.gif&#39;</span><span class="p">,</span> <span class="n">Body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;~/beakup.gif&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+<span class="n">file_obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s3</span><span class="o">.</span><span class="n">Bucket</span><span class="p">(</span><span class="s1">&#39;mybucket&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">put_object</span><span class="p">(</span><span class="n">Key</span><span class="o">=</span><span class="s1">&#39;breakup.gif&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Body</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 
 <span class="c1">#获取URL</span>
-<span class="n">presigned_url</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">generate_presigned_url</span><span class="p">(</span>
-    <span class="s1">&#39;get_object&#39;</span><span class="p">,</span> <span class="n">Params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Bucket&#39;</span><span class="p">:</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span> <span class="s1">&#39;Key&#39;</span><span class="p">:</span> <span class="n">file_obj</span><span class="o">.</span><span class="n">key</span><span class="p">},</span>
-    <span class="n">ExpiresIn</span><span class="o">=</span> <span class="mi">3600</span><span class="o">*</span><span class="mi">30</span><span class="o">*</span><span class="mi">12</span>
+<span class="n">presigned_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">client</span><span class="o">.</span><span class="n">generate_presigned_url</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;get_object&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">Params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Bucket&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">file_obj</span><span class="o">.</span><span class="n">bucket_name</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Key&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">file_obj</span><span class="o">.</span><span class="n">key</span><span class="p">},</span>
+<span class="w">    </span><span class="n">ExpiresIn</span><span class="o">=</span><span class="w"> </span><span class="mi">3600</span><span class="o">*</span><span class="mi">30</span><span class="o">*</span><span class="mi">12</span>
 <span class="p">)</span>
 </code></pre></div>
-
 
 <p>简单说明一下代码，S3</p>
 <ol>
@@ -154,8 +173,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -173,14 +195,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

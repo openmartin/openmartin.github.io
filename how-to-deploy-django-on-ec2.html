@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 如何在 aws ec2 上部署 django 应用</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="how-to-deploy-django-on-ec2">如何在 aws ec2 上部署 django 应用</h1>
     <p>
-      Posted on 2016-04-19 20:20 in <a href="./category/django.html">Django</a>
+          Posted on 2016-04-19 20:20 in <a href="./category/django.html">Django</a>
+
 
     </p>
   </header>
@@ -110,42 +130,37 @@
 <p>我的环境是amazon ec2，选择的操作系统是Amazon Linux AMI 2015.03 (HVM) ，选择的最常见的部署方案 nginx + gunicorn + django + mysql</p>
 <h2>mysql</h2>
 <p>首先安装mysql-sever:</p>
-<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">mysql</span><span class="o">-</span><span class="n">server</span> <span class="n">mysql</span> <span class="n">mysql</span><span class="o">-</span><span class="n">devel</span>
-<span class="o">$</span><span class="n">sudo</span> <span class="n">chown</span> <span class="n">mysql</span><span class="o">.</span><span class="n">mysql</span> <span class="o">-</span><span class="n">R</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
+<div class="highlight"><pre><span></span><code><span class="o">$</span><span class="n">sudo</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">mysql</span><span class="o">-</span><span class="n">server</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="n">mysql</span><span class="o">-</span><span class="n">devel</span>
+<span class="o">$</span><span class="n">sudo</span><span class="w"> </span><span class="n">chown</span><span class="w"> </span><span class="n">mysql</span><span class="o">.</span><span class="n">mysql</span><span class="w"> </span><span class="o">-</span><span class="n">R</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span>
 </code></pre></div>
-
 
 <p>修改配置文件/etc/my.cnf:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[mysqld]</span>
-<span class="na">datadir</span><span class="o">=</span><span class="s">/var/lib/mysql # 数据文件存放的位置,修改成适合的位置</span>
+<span class="na">datadir</span><span class="o">=</span><span class="s">/var/lib/mysql</span><span class="w"> </span><span class="c1"># 数据文件存放的位置,修改成适合的位置</span>
 
-<span class="na">character-set-server</span><span class="o">=</span><span class="s">utf8 # 设置默认编码</span>
+<span class="na">character-set-server</span><span class="o">=</span><span class="s">utf8</span><span class="w"> </span><span class="c1"># 设置默认编码</span>
 
 <span class="k">[client]</span>
-<span class="na">default-character-set</span><span class="o">=</span><span class="s">utf8 # 设置默认编码</span>
+<span class="na">default-character-set</span><span class="o">=</span><span class="s">utf8</span><span class="w"> </span><span class="c1"># 设置默认编码</span>
 </code></pre></div>
-
 
 <p>启动mysql:</p>
-<div class="highlight"><pre><span></span><code><span class="err">$sudo service mysqld start</span>
+<div class="highlight"><pre><span></span><code>$sudo service mysqld start
 </code></pre></div>
-
 
 <p>设置root密码，执行/usr/bin/mysql_secure_installation</p>
 <p>如果需要通过客户端工具管理MySQL，需要添加远程连接MySQL权限:</p>
-<div class="highlight"><pre><span></span><code><span class="n">$mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span>
+<div class="highlight"><pre><span></span><code><span class="n">$mysql</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">-</span><span class="n">p</span>
 
-<span class="n">mysql</span><span class="o">&gt;</span><span class="n">GRANT</span> <span class="n">ALL</span> <span class="n">PRIVILEGES</span> <span class="n">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="n">TO</span> <span class="n">root</span><span class="s">@&quot;%&quot;</span> <span class="n">IDENTIFIED</span> <span class="n">BY</span> <span class="err">&#39;</span><span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;</span><span class="err">&#39;</span> <span class="n">WITH</span> <span class="n">GRANT</span> <span class="n">OPTION</span><span class="p">;</span>
-<span class="n">mysql</span><span class="o">&gt;</span><span class="n">FLUSH</span> <span class="n">PRIVILEGES</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="n">GRANT</span><span class="w"> </span><span class="n">ALL</span><span class="w"> </span><span class="n">PRIVILEGES</span><span class="w"> </span><span class="n">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="n">TO</span><span class="w"> </span><span class="n">root</span><span class="s">@&quot;%&quot;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="n">BY</span><span class="w"> </span><span class="err">&#39;</span><span class="o">&lt;</span><span class="n">password</span><span class="o">&gt;</span><span class="err">&#39;</span><span class="w"> </span><span class="n">WITH</span><span class="w"> </span><span class="n">GRANT</span><span class="w"> </span><span class="n">OPTION</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="n">FLUSH</span><span class="w"> </span><span class="n">PRIVILEGES</span><span class="p">;</span>
 </code></pre></div>
-
 
 <p>一般不建议root用户连接MySQL，所以需要添加一个普通用户:</p>
-<div class="highlight"><pre><span></span><code><span class="err">create user &#39;blog&#39;@&#39;localhost&#39; identified by &#39;&lt;password&gt;&#39;;</span>
-<span class="err">flush privileges;</span>
-<span class="err">grant all privileges on blog.* to blog@localhost identified  by &#39;&lt;password&gt;&#39;;</span>
+<div class="highlight"><pre><span></span><code><span class="k">create</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="s1">&#39;blog&#39;</span><span class="err">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;&lt;password&gt;&#39;</span><span class="p">;</span>
+<span class="n">flush</span><span class="w"> </span><span class="k">privileges</span><span class="p">;</span>
+<span class="k">grant</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">blog</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">blog</span><span class="nv">@localhost</span><span class="w"> </span><span class="n">identified</span><span class="w">  </span><span class="k">by</span><span class="w"> </span><span class="s1">&#39;&lt;password&gt;&#39;</span><span class="p">;</span>
 </code></pre></div>
-
 
 <h2>配置python环境</h2>
 <p>我目前的python版本是2.7.9，所以不需要安装pip</p>
@@ -154,66 +169,60 @@
 <p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
 <h3>virtualenv</h3>
 <p>virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:</p>
-<div class="highlight"><pre><span></span><code><span class="err">pip install virtualenv</span>
-<span class="err"># 创建虚拟环境</span>
-<span class="err">virtualenv ENV</span>
-<span class="err">cd ENV</span>
-<span class="err">source ./bin/activate</span>
+<div class="highlight"><pre><span></span><code>pip install virtualenv
+# 创建虚拟环境
+virtualenv ENV
+cd ENV
+source ./bin/activate
 </code></pre></div>
-
 
 <p>磨刀不误砍柴工，接下来开始大展身手啦。</p>
 <h3>安装必须的python库</h3>
 <p>如果项目中有requirements.txt文件，可直接执行，自动安装所有依赖关系，没有的话如果有可以从开发环境导出一份:</p>
-<div class="highlight"><pre><span></span><code><span class="err">$pip freeze &gt;&gt; requirements.txt # 在开发环境中执行</span>
-<span class="err">$pip install -r requirements.txt</span>
+<div class="highlight"><pre><span></span><code>$pip freeze &gt;&gt; requirements.txt # 在开发环境中执行
+$pip install -r requirements.txt
 </code></pre></div>
-
 
 <p>我们在这里列出一些经常需要的依赖包:</p>
-<div class="highlight"><pre><span></span><code><span class="err">$pip install gunicorn # gunicorn</span>
-<span class="err">$pip install gevent   # 让gunicorn使用gevent worker，提高并发性能</span>
-<span class="err">$pip install django</span>
-<span class="err">$pip install MySQL-python # 如果要连接mysql数据库，需要安装</span>
-<span class="err">$pip install Pillow   # 代替Python Image Library</span>
+<div class="highlight"><pre><span></span><code>$pip install gunicorn # gunicorn
+$pip install gevent   # 让gunicorn使用gevent worker，提高并发性能
+$pip install django
+$pip install MySQL-python # 如果要连接mysql数据库，需要安装
+$pip install Pillow   # 代替Python Image Library
 </code></pre></div>
-
 
 <p>如果使用gunicron部署django应用，需要小小修改settings.py一下，就是在INSTALLED_APPS最后添加上gunicorn。</p>
 <p>gunicron 启动脚本:</p>
-<div class="highlight"><pre><span></span><code><span class="err">nohup gunicorn --worker-class=gevent myblog.wsgi:application --bind 127.0.0.1:8001 &gt;gunicorn.log 2&gt;&amp;1 &amp;</span>
+<div class="highlight"><pre><span></span><code>nohup gunicorn --worker-class=gevent myblog.wsgi:application --bind 127.0.0.1:8001 &gt;gunicorn.log 2&gt;&amp;1 &amp;
 </code></pre></div>
-
 
 <p>上面的步骤完成之后，我们的应用就可以启动了，但是我们一般在gunicorn之前使用ngnix做反向代理。有两个好处，一是静态文件交给nginx处理，可以减少响应时间，二是如果一个服务器上部署多个站点，仅仅用gunicorn无法达到目的，这时我们需要用apache或者nginx的虚拟服务器功能。</p>
 <h2>nginx</h2>
 <p>不同的Linux发行版上安装的方法，配置文件的位置可能不太一样，我们理解了整个配置的思路之后就可以举一反三了:</p>
-<div class="highlight"><pre><span></span><code><span class="err">$sudo yum install nginx</span>
-<span class="err">$sudo service start nginx</span>
+<div class="highlight"><pre><span></span><code>$sudo yum install nginx
+$sudo service start nginx
 </code></pre></div>
-
 
 <p>编辑 /etc/nginx/conf.d/virtual.conf:</p>
-<div class="highlight"><pre><span></span><code><span class="n">server</span> <span class="p">{</span>
-    <span class="n">listen</span>       <span class="mi">80</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">listen</span><span class="w">       </span><span class="mi">80</span><span class="p">;</span>
 
-    <span class="n">server_name</span>  <span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="p">;</span>
+<span class="w">    </span><span class="n">server_name</span><span class="w">  </span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="p">;</span>
 
-    <span class="n">access_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="o">-</span><span class="n">access</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
-    <span class="n">error_log</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="o">-</span><span class="n">error</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+<span class="w">    </span><span class="n">access_log</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="o">-</span><span class="n">access</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+<span class="w">    </span><span class="n">error_log</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">dailyastrology</span><span class="o">.</span><span class="n">info</span><span class="o">-</span><span class="n">error</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
 
-    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
-        <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8001</span><span class="p">;</span>
-        <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="o">$</span><span class="n">host</span><span class="p">;</span>
-        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="o">$</span><span class="n">remote_addr</span><span class="p">;</span>
-        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span> <span class="o">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">location</span> <span class="o">/</span><span class="k">static</span> <span class="p">{</span>
-        <span class="n">root</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">/</span><span class="n">blogenv</span><span class="o">/</span><span class="n">myblog</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">proxy_pass</span><span class="w"> </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">8001</span><span class="p">;</span>
+<span class="w">        </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">Host</span><span class="w"> </span><span class="o">$</span><span class="n">host</span><span class="p">;</span>
+<span class="w">        </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span><span class="w"> </span><span class="o">$</span><span class="n">remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span><span class="w"> </span><span class="o">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="k">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">ec2</span><span class="o">-</span><span class="n">user</span><span class="o">/</span><span class="n">blogenv</span><span class="o">/</span><span class="n">myblog</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 
 <p>如果仅仅作为个人的站点，上述的配置应该就够用的，如果是需要高级的功能就需要自己去研究每个软件的配置和运维方法。</p>
   </div>
@@ -227,8 +236,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -246,14 +258,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

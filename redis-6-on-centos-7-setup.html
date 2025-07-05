@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 在 centos 7 上安装 redis 6</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="redis-6-on-centos-7-setup">在 centos 7 上安装 redis 6</h1>
     <p>
-      Posted on 2020-05-22 17:00 in <a href="./category/linux.html">Linux</a>
+          Posted on 2020-05-22 17:00 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -108,49 +128,43 @@
   <div>
     <h2>遇到的问题</h2>
 <p>在 centos  7 的 yum 源中 redis 的版本为 3.2.12-2.el7，想要安装最新版的 redis 6，只能通过源代码安装，但是默认的环境会遇到编译问题，如下：</p>
-<div class="highlight"><pre><span></span><code><span class="err">In file included from server.c:30:0:</span>
-<span class="err">server.h:1022:5: error: expected specifier-qualifier-list before &#39;_Atomic&#39;</span>
-<span class="err">     _Atomic unsigned int lruclock; /* Clock for LRU eviction */</span>
-<span class="err">     ^</span>
+<div class="highlight"><pre><span></span><code><span class="nt">In</span><span class="w"> </span><span class="nt">file</span><span class="w"> </span><span class="nt">included</span><span class="w"> </span><span class="nt">from</span><span class="w"> </span><span class="nt">server</span><span class="p">.</span><span class="nc">c</span><span class="p">:</span><span class="nd">30</span><span class="p">:</span><span class="nd">0</span><span class="o">:</span>
+<span class="nt">server</span><span class="p">.</span><span class="nc">h</span><span class="p">:</span><span class="nd">1022</span><span class="p">:</span><span class="nd">5</span><span class="o">:</span><span class="w"> </span><span class="nt">error</span><span class="o">:</span><span class="w"> </span><span class="nt">expected</span><span class="w"> </span><span class="nt">specifier-qualifier-list</span><span class="w"> </span><span class="nt">before</span><span class="w"> </span><span class="s1">&#39;_Atomic&#39;</span>
+<span class="w">     </span><span class="nt">_Atomic</span><span class="w"> </span><span class="nt">unsigned</span><span class="w"> </span><span class="nt">int</span><span class="w"> </span><span class="nt">lruclock</span><span class="o">;</span><span class="w"> </span><span class="c">/* Clock for LRU eviction */</span>
+<span class="w">     </span><span class="o">^</span>
 </code></pre></div>
-
 
 <p>是因为默认的 gcc 版本(gcc version 4.8.5)太低导致，不支持新特性</p>
 <h2>解决办法</h2>
 <p>解决办法就是升级 gcc 版本</p>
 <p>升级到 gcc 7.3</p>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">centos</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="n">scl</span>
-<span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">install</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">gcc</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="n">c</span><span class="o">++</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">binutils</span>
-<span class="n">sudo</span> <span class="n">scl</span> <span class="n">enable</span> <span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span> <span class="n">bash</span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">centos</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="n">scl</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">yum</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">gcc</span><span class="w"> </span><span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="n">c</span><span class="o">++</span><span class="w"> </span><span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">binutils</span>
+<span class="n">sudo</span><span class="w"> </span><span class="n">scl</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">devtoolset</span><span class="o">-</span><span class="mi">7</span><span class="w"> </span><span class="n">bash</span>
 </code></pre></div>
-
 
 <p>还可以选择升级到其他版本</p>
-<div class="highlight"><pre><span></span><code><span class="n">devtoolset</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span> <span class="n">gcc</span> <span class="mf">8.3</span>
-<span class="n">devtoolset</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span> <span class="n">gcc</span> <span class="mf">9.1</span>
+<div class="highlight"><pre><span></span><code><span class="n">devtoolset</span><span class="o">-</span><span class="mi">8</span><span class="p">:</span><span class="w"> </span><span class="n">gcc</span><span class="w"> </span><span class="mf">8.3</span>
+<span class="n">devtoolset</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="w"> </span><span class="n">gcc</span><span class="w"> </span><span class="mf">9.1</span>
 </code></pre></div>
-
 
 <p>升级完成之后并不会覆盖系统默认的gcc，需要使用脚本来切换，x为要启用的版本</p>
-<div class="highlight"><pre><span></span><code>scl <span class="nb">enable</span> devtoolset-x bash 
+<div class="highlight"><pre><span></span><code>scl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>devtoolset-x<span class="w"> </span>bash<span class="w"> </span>
 </code></pre></div>
-
 
 <h2>安装和配置</h2>
 <p>后续就可以按照常规安装步骤来执行，就不再赘述了</p>
-<div class="highlight"><pre><span></span><code>$ wget http://download.redis.io/releases/redis-6.0.3.tar.gz
-$ tar xzf redis-6.0.3.tar.gz
-$ <span class="nb">cd</span> redis-6.0.3
-$ make
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>wget<span class="w"> </span>http://download.redis.io/releases/redis-6.0.3.tar.gz
+$<span class="w"> </span>tar<span class="w"> </span>xzf<span class="w"> </span>redis-6.0.3.tar.gz
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>redis-6.0.3
+$<span class="w"> </span>make
 </code></pre></div>
-
 
 <p>修改配置文件</p>
-<div class="highlight"><pre><span></span><code><span class="err">bind 192.168.1.100 127.0.0.1 ::1 </span>
-<span class="err">daemonize yes</span>
-<span class="err">appendonly yes</span>
+<div class="highlight"><pre><span></span><code>bind 192.168.1.100 127.0.0.1 ::1 
+daemonize yes
+appendonly yes
 </code></pre></div>
-
 
 <p>打开 appendonly yes 后，会启用 RDB-AOF 混合持久化</p>
   </div>
@@ -164,8 +178,11 @@ $ make
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -183,14 +200,16 @@ $ make
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

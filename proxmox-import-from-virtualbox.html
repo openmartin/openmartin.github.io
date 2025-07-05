@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; Proxmox VE 导入 VirtualBox 中的虚拟机</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="proxmox-import-from-virtualbox">Proxmox VE 导入 VirtualBox 中的虚拟机</h1>
     <p>
-      Posted on 2022-10-08 23:00 in <a href="./category/linux.html">Linux</a>
+          Posted on 2022-10-08 23:00 in <a href="./category/linux.html">Linux</a>
+
 
     </p>
   </header>
@@ -116,10 +136,9 @@
 <p><img alt="virtualbox-export-win10-2" src="../images/proxmox/virtualbox-export-win10-2.png"></p>
 <h2>Proxmox 导入</h2>
 <p>首先把文件上传到 Proxmox 主机的 /tmp 目录下</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /tmp
-tar -xvf win10.ova 
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/tmp
+tar<span class="w"> </span>-xvf<span class="w"> </span>win10.ova<span class="w"> </span>
 </code></pre></div>
-
 
 <p>解压出来有三个文件：
 - win10.mf 
@@ -134,9 +153,8 @@ tar -xvf win10.ova
 <p><img alt="proxmox-create-win10-disk-del.png" src="../images/proxmox/proxmox-create-win10-disk-del.png"></p>
 <p>导入磁盘，数字是之前新建虚拟的数字ID，后面那个<code>local-vm</code>是存储的名称，根据自己的需要修改命令</p>
 <p>需要等一会，等进度条跑到 100% 就行了</p>
-<div class="highlight"><pre><span></span><code>qm importdisk <span class="m">111</span> win10-disk001.vmdk local-vm -format qcow2
+<div class="highlight"><pre><span></span><code>qm<span class="w"> </span>importdisk<span class="w"> </span><span class="m">111</span><span class="w"> </span>win10-disk001.vmdk<span class="w"> </span>local-vm<span class="w"> </span>-format<span class="w"> </span>qcow2
 </code></pre></div>
-
 
 <p>导入之后，就可以直接启动了</p>
 <p><img alt="proxmox-import-disk.png" src="../images/proxmox/proxmox-import-disk.png"></p>
@@ -151,8 +169,11 @@ tar -xvf win10.ova
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -170,14 +191,16 @@ tar -xvf win10.ova
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 

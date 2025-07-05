@@ -30,7 +30,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="#333333">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="#333333">
@@ -55,6 +55,13 @@
 
   <title>Martin's Blog &ndash; 修复 virtualenv 环境</title>
 
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8640171181637141",
+      enable_page_level_ads: true
+    });
+  </script>
 </head>
 <body>
   <aside>
@@ -79,18 +86,30 @@
       </ul>
     </div>
 
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
+           data-ad-client="ca-pub-8640171181637141"
+           data-ad-slot="5604848266"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">Home</a>
+      <a href=".">    Home
+</a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">Atom</a>
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +118,8 @@
       
     <h1 id="fix-python-virtualenv">修复 virtualenv 环境</h1>
     <p>
-      Posted on 2020-05-25 12:00 in <a href="./category/python.html">Python</a>
+          Posted on 2020-05-25 12:00 in <a href="./category/python.html">Python</a>
+
 
     </p>
   </header>
@@ -109,22 +129,21 @@
     <h2>问题</h2>
 <p>升级 python 之后，很多时候就会发现 virtualenv 失效了，因为 virtualenv 使用软链接链接到系统的 python, 系统的 python path 变化导致 virtualenv 失效</p>
 <h3>简单的修复</h3>
-<div class="highlight"><pre><span></span><code><span class="err">find . -type l -delete</span>
-<span class="err">cd ..</span>
-<span class="err">virtualenv -p python3 v_env</span>
+<div class="highlight"><pre><span></span><code><span class="nx">find</span><span class="w"> </span><span class="p">.</span><span class="w"> </span><span class="o">-</span><span class="k">type</span><span class="w"> </span><span class="nx">l</span><span class="w"> </span><span class="o">-</span><span class="nx">delete</span>
+<span class="nx">cd</span><span class="w"> </span><span class="p">..</span>
+<span class="nx">virtualenv</span><span class="w"> </span><span class="o">-</span><span class="nx">p</span><span class="w"> </span><span class="nx">python3</span><span class="w"> </span><span class="nx">v_env</span>
 </code></pre></div>
-
 
 <p>已经安装的 package 不需要重新安装</p>
 <h3>复杂的修复</h3>
 <p>有时候如果 python 版本有比较大的变动，系统的 site-packages 有很多更新，这个时候需要重新生成 virtualenv</p>
-<div class="highlight"><pre><span></span><code><span class="err"># 保存已经安装的 package</span>
-<span class="err">pip freeze &gt; requirements.txt</span>
-<span class="err"># 根据需要看看 package 是否需要更新版本</span>
-<span class="err"># 重新生成 virtualenv</span>
-<span class="err">virtualenv -p python3 new_env</span>
-<span class="err"># 安装 package</span>
-<span class="err">pip install -r requirements.txt</span>
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="nx">保存已经安装的</span><span class="w"> </span><span class="kn">package</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">freeze</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">requirements</span><span class="p">.</span><span class="nx">txt</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">根据需要看看</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="nx">是否需要更新版本</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">重新生成</span><span class="w"> </span><span class="nx">virtualenv</span>
+<span class="nx">virtualenv</span><span class="w"> </span><span class="o">-</span><span class="nx">p</span><span class="w"> </span><span class="nx">python3</span><span class="w"> </span><span class="nx">new_env</span>
+<span class="err">#</span><span class="w"> </span><span class="nx">安装</span><span class="w"> </span><span class="kn">package</span>
+<span class="nx">pip</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="o">-</span><span class="nx">r</span><span class="w"> </span><span class="nx">requirements</span><span class="p">.</span><span class="nx">txt</span>
 </code></pre></div>
   </div>
   <div class="tag-cloud">
@@ -137,8 +156,11 @@
 
 
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
     <ins class="adsbygoogle ads-responsive"
+         style="display:block"
+         data-ad-format="auto"
+         data-full-width-responsive="true"
          data-ad-client="ca-pub-8640171181637141"
          data-ad-slot="4393383534"></ins>
     <script>
@@ -156,14 +178,16 @@
     })();
 </script>
 <noscript>
-    Please enable JavaScript to view comments.
+        Please enable JavaScript to view comments.
+
 </noscript>
 <!-- End Disqus -->
 </article>
 
     <footer>
-<p>&copy;  2020</p>
-<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a></p>    </footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
   </main>
 
 
