@@ -44,12 +44,7 @@ RELATIVE_URLS = True
 # Theme
 THEME = os.path.join(BASE_DIR, "pelican-themes", "Flex")
 
-PLUGIN_PATHS = [os.path.join(BASE_DIR, "pelican-plugins")]
-PLUGINS = ['sitemap', 'i18n_subsites', 'liquid_tags.img', 'liquid_tags.include_code', 'liquid_tags.youtube']
-
-JINJA_ENVIRONMENT = {
-    'extensions': ['jinja2.ext.i18n'],
-}
+PLUGINS = ['pelican.plugins.sitemap']
 
 # Sitemap
 SITEMAP = {
@@ -83,7 +78,7 @@ MENUITEMS = (('Archives', '/archives.html'),
              ('Tags', '/tags.html'),)
 
 
-COPYRIGHT_YEAR = '2020'
+COPYRIGHT_YEAR = '2025'
 
 # STATIC
 STATIC_PATHS = ['images', 'code', 'extra']
@@ -104,9 +99,9 @@ DISQUS_SITENAME = "astro-2"
 #GOOGLE_ANALYTICS = 'UA-1234-5678'
 GOOGLE_ADSENSE = {
     'ca_id': 'ca-pub-8640171181637141',
-    'page_level_ads': False,
+    'page_level_ads': True,
     'ads': {
-        'aside': '',
+        'aside': '5604848266',
         'main_menu': '',
         'index_top': '',
         'index_bottom': '2770021113',

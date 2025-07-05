@@ -3,8 +3,11 @@
 {% block content %}
 
 {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.index_top %}
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
   <ins class="adsbygoogle ads-responsive"
+       style="display:block"
+       data-ad-format="auto"
+       data-full-width-responsive="true"
        data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
        data-ad-slot="{{ GOOGLE_ADSENSE.ads.index_top }}"></ins>
   <script>
@@ -54,8 +57,11 @@
 {% include "partial/pagination.html" %}
 
 {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.index_bottom %}
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
   <ins class="adsbygoogle ads-responsive"
+       style="display:block"
+       data-ad-format="auto"
+       data-full-width-responsive="true"
        data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
        data-ad-slot="{{ GOOGLE_ADSENSE.ads.index_bottom }}"></ins>
   <script>

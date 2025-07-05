@@ -58,7 +58,7 @@
     <!-- Windows Phone -->
     <meta name="msapplication-navbutton-color" content="{{ BROWSER_COLOR }}">
     <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Microsoft EDGE -->
     <meta name="msapplication-TileColor" content="{{ BROWSER_COLOR }}">
@@ -127,8 +127,11 @@
     </div>
 
     {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.aside %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
       <ins class="adsbygoogle ads-aside"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
            data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
            data-ad-slot="{{ GOOGLE_ADSENSE.ads.aside }}"></ins>
       <script>
@@ -139,8 +142,11 @@
   </aside>
   <main>
     {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.main_menu %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossorigin="anonymous"></script>
       <ins class="adsbygoogle ads-responsive"
+           style="display:block"
+           data-ad-format="auto"
+           data-full-width-responsive="true"
            data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
            data-ad-slot="{{ GOOGLE_ADSENSE.ads.main_menu }}"></ins>
       <script>

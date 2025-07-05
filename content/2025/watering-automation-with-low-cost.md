@@ -30,9 +30,9 @@ Summary: 万能的淘宝啥都要卖的，自己动手组装一下就可以了
 
 最后看一下组装起来的效果
 
-![](../images/water-artifact-1.jpg)
+![power strip](../images/water-artifact-1.jpg)
 
-![](../images/water-artifact-2.jpg)
+![water bucket](../images/water-artifact-2.jpg)
 
-![](../images/water-artifact-3.jpg)
+![balcony](../images/water-artifact-3.jpg)
 
