@@ -12,7 +12,7 @@ Summary: 服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统�
 
 两张 A40 显卡，一张显卡 48G 内存，总共 96 G 内存，模型：Qwen3-Coder-30B-A3B，FP16 下模型权重约 60GB，应该足够运行。
 
-A40 显卡有点老，本身不原生支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择[Qwen/Qwen3-Coder-30B-A3B-Instruct](https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct) 。
+A40 显卡有点老，原生不支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择 [Qwen/Qwen3-Coder-30B-A3B-Instruct](https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct) 。
 
 一张显卡的显存不够加载整个模型，需要使用两张显卡，vllm 支持并行，自己用的话，不对外提供服务的话也不用比较复杂的设置来优化。
 
@@ -62,6 +62,7 @@ pip install vllm==0.8.5.post1
 ## 启动服务
 
 有两个坑：
+
 - 如果要支持 tool call 的话需要修改一下 vllm 的源码，不多，很好改
 - Qwen3-Coder 默认的上下文长度是 256K，在两张 A40 的情况下，显存不够，会启动失败，需要把上下文长度改小一点，我这里是改成 200K，可以启动
 
@@ -69,8 +70,11 @@ pip install vllm==0.8.5.post1
 
 ```text
 从 github 上 vllm 的仓库里复制 vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
+
 把 qwen3coder_tool_parser.py 放到对应的本地目录下，比如 site-packages/vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
-修改 vllm/entrypoints/openai/tool_parsers/__init__.py 增加 from .qwen3coder_tool_parser import Qwen3CoderToolParser 和 "Qwen3CoderToolParser",
+
+修改 vllm/entrypoints/openai/tool_parsers/__init__.py 
+增加 from .qwen3coder_tool_parser import Qwen3CoderToolParser 和 "Qwen3CoderToolParser",
 ```
 
 启动命令如下：
