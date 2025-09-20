@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2025-08-20T20:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>大模型开发中常用的正则表达式</title><link href="https://xingzuoshe.cn/most-used-regex-in-llm-development.html" rel="alternate"></link><published>2025-08-20T20:00:00+08:00</published><updated>2025-08-20T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-08-20:/most-used-regex-in-llm-development.html</id><summary type="html">&lt;p&gt;大模型开发中常用的正则表达式&lt;/p&gt;</summary><content type="html">&lt;h2&gt;提取 JSON&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2025-09-20T20:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>如何在 CentOS 7 上部署 Qwen3-Coder-30B-A3B</title><link href="https://xingzuoshe.cn/deploy-qwen3-coder-on-centOS-7-with-dual-A40.html" rel="alternate"></link><published>2025-09-20T20:00:00+08:00</published><updated>2025-09-20T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-20:/deploy-qwen3-coder-on-centOS-7-with-dual-A40.html</id><summary type="html">&lt;p&gt;服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？&lt;/p&gt;</summary><content type="html">&lt;p&gt;服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？&lt;/p&gt;
+&lt;p&gt;两张 A40 显卡，一张显卡 48G 内存，总共 96 G 内存，模型：Qwen3-Coder-30B-A3B，FP16 下模型权重约 60GB，应该足够运行。&lt;/p&gt;
+&lt;p&gt;A40 显卡有点老，本身不原生支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择&lt;a href="https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct"&gt;Qwen/Qwen3-Coder-30B-A3B-Instruct&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;一张显卡的显存不够加载整个模型，需要使用两张显卡，vllm 支持并行，自己用的话，不对外提供服务的话也不用比较复杂的设置来优化。&lt;/p&gt;
+&lt;p&gt;使用 vllm 来部署大模型，主要的依赖包如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;vllm==0.8.5.post1
+torch==2.6.0
+transformers==4.51.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;因为 CentOS 7 的 glibc 被锁死在 2.17 了，所以不支持 PyTorch 2.7 以上，所以 vllm 的版本也被限定在 0.8.5.post1&lt;/p&gt;
+&lt;h2&gt;创建虚拟环境和安装依赖包&lt;/h2&gt;
+&lt;p&gt;因为 CentOS 7 自带的 python 版本比较低，所以推荐使用 Anaconda，比自己从源码安装 python 要方便。&lt;/p&gt;
+&lt;p&gt;先升级 gcc 版本，有些 pip 包可能需要编译安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;yum&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;centos-release-scl&lt;span class="w"&gt; &lt;/span&gt;centos-release-scl-rh
+sudo&lt;span class="w"&gt; &lt;/span&gt;yum&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;devtoolset-11-gcc-c++&lt;span class="w"&gt; &lt;/span&gt;devtoolset-11-gcc
+
+scl&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;enable&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;devtoolset-11&lt;span class="w"&gt; &lt;/span&gt;bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;创建虚拟环境，我这里用的是 python 3.12&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda&lt;span class="w"&gt; &lt;/span&gt;create&lt;span class="w"&gt; &lt;/span&gt;-n&lt;span class="w"&gt; &lt;/span&gt;qwen3_coder_venv&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;python&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.12
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;安装依赖包&lt;/h2&gt;
+&lt;p&gt;有一个包 pip 安装不成功，可以用 conda 来安装&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;conda install pyzmq
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install vllm==0.8.5.post1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;会自动识别环境，然后安装对应包，我这里的 cuda 的版本安装的是 12.4，也是 CentOS 7 可以安装的最高版本。&lt;/p&gt;
+&lt;h2&gt;启动服务&lt;/h2&gt;
+&lt;p&gt;有两个坑：
+- 如果要支持 tool call 的话需要修改一下 vllm 的源码，不多，很好改
+- Qwen3-Coder 默认的上下文长度是 256K，在两张 A40 的情况下，显存不够，会启动失败，需要把上下文长度改小一点，我这里是改成 200K，可以启动&lt;/p&gt;
+&lt;p&gt;修改 vllm 0.8.5.post1 源代码，让支持 qwen3_coder 格式的 tool call&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;从 github 上 vllm 的仓库里复制 vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
+把 qwen3coder_tool_parser.py 放到对应的本地目录下，比如 site-packages/vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
+修改 vllm/entrypoints/openai/tool_parsers/__init__.py 增加 from .qwen3coder_tool_parser import Qwen3CoderToolParser 和 &amp;quot;Qwen3CoderToolParser&amp;quot;,
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;启动命令如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;vllm&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;serve&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="n"&gt;Qwen3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Coder&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A3B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Instruct&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;\
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;served&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Qwen3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Coder&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;A3B&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;\
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;0.0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;\
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;gpu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;memory&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;utilization&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0.95&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;\
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nb"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;len&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;204800&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;\
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;enable&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;tool&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;choice&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;\
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="k"&gt;tool&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;call&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;qwen3_coder&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;curl http://localhost:8000/v1/models 查看一下服务是否正常&lt;/p&gt;
+&lt;p&gt;然后就可以在你的电脑上配置 openai 兼容的接口 http://IP:Port/v1 方便各种软件调用了&lt;/p&gt;</content><category term="Linux"></category><category term="linux"></category><category term="llm"></category></entry><entry><title>大模型开发中常用的正则表达式</title><link href="https://xingzuoshe.cn/most-used-regex-in-llm-development.html" rel="alternate"></link><published>2025-08-20T20:00:00+08:00</published><updated>2025-08-20T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-08-20:/most-used-regex-in-llm-development.html</id><summary type="html">&lt;p&gt;大模型开发中常用的正则表达式&lt;/p&gt;</summary><content type="html">&lt;h2&gt;提取 JSON&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;match = re.search(r&amp;#39;```json\s*([\s\S]*?)\s*```&amp;#39;, text, re.MULTILINE)
 if match:
     json_code = match.group(0)

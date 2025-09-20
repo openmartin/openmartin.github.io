@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="./theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/friendly.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+    <link href="./static/custom.css" rel="stylesheet">
+
+    <link href="https://xingzuoshe.cn/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Martin's Blog Atom">
+
+
+    <link rel="shortcut icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+    <link rel="icon" href="/images/default_profile_200x200.png" type="image/x-icon">
+
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
+
+<meta name="author" content="Martin" />
+<meta name="description" content="服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？" />
+<meta name="keywords" content="linux, llm">
+
+<meta property="og:site_name" content="Martin's Blog"/>
+<meta property="og:title" content="如何在 CentOS 7 上部署 Qwen3-Coder-30B-A3B"/>
+<meta property="og:description" content="服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta property="og:url" content="./deploy-qwen3-coder-on-centOS-7-with-dual-A40.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2025-09-20 20:00:00+08:00"/>
+<meta property="article:modified_time" content="2025-09-20 20:00:00+08:00"/>
+<meta property="article:author" content="./author/martin.html">
+<meta property="article:section" content="Linux"/>
+<meta property="article:tag" content="linux"/>
+<meta property="article:tag" content="llm"/>
+<meta property="og:image" content="/images/default_profile_200x200.png">
+
+  <title>Martin's Blog &ndash; 如何在 CentOS 7 上部署 Qwen3-Coder-30B-A3B</title>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141"
+     crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="/images/default_profile_200x200.png" alt="Martin's Blog" title="Martin's Blog">
+      </a>
+      <h1><a href=".">Martin's Blog</a></h1>
+
+<p>Martin's Blog</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://astrohub.cn" target="_blank">astrohub</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-github" href="https://github.com/openmartin" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-rss" href="/blog/feeds/all.atom.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+      </ul>
+    </div>
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="https://xingzuoshe.cn/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="deploy-qwen3-coder-on-centOS-7-with-dual-A40">如何在 CentOS 7 上部署 Qwen3-Coder-30B-A3B</h1>
+    <p>
+          Posted on 2025-09-20 20:00 in <a href="./category/linux.html">Linux</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <p>服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？</p>
+<p>两张 A40 显卡，一张显卡 48G 内存，总共 96 G 内存，模型：Qwen3-Coder-30B-A3B，FP16 下模型权重约 60GB，应该足够运行。</p>
+<p>A40 显卡有点老，本身不原生支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择<a href="https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct">Qwen/Qwen3-Coder-30B-A3B-Instruct</a> 。</p>
+<p>一张显卡的显存不够加载整个模型，需要使用两张显卡，vllm 支持并行，自己用的话，不对外提供服务的话也不用比较复杂的设置来优化。</p>
+<p>使用 vllm 来部署大模型，主要的依赖包如下：</p>
+<div class="highlight"><pre><span></span><code>vllm==0.8.5.post1
+torch==2.6.0
+transformers==4.51.3
+</code></pre></div>
+
+<p>因为 CentOS 7 的 glibc 被锁死在 2.17 了，所以不支持 PyTorch 2.7 以上，所以 vllm 的版本也被限定在 0.8.5.post1</p>
+<h2>创建虚拟环境和安装依赖包</h2>
+<p>因为 CentOS 7 自带的 python 版本比较低，所以推荐使用 Anaconda，比自己从源码安装 python 要方便。</p>
+<p>先升级 gcc 版本，有些 pip 包可能需要编译安装</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>centos-release-scl<span class="w"> </span>centos-release-scl-rh
+sudo<span class="w"> </span>yum<span class="w"> </span>install<span class="w"> </span>devtoolset-11-gcc-c++<span class="w"> </span>devtoolset-11-gcc
+
+scl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>devtoolset-11<span class="w"> </span>bash
+</code></pre></div>
+
+<p>创建虚拟环境，我这里用的是 python 3.12</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>qwen3_coder_venv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.12
+</code></pre></div>
+
+<h2>安装依赖包</h2>
+<p>有一个包 pip 安装不成功，可以用 conda 来安装</p>
+<div class="highlight"><pre><span></span><code>conda install pyzmq
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip install vllm==0.8.5.post1
+</code></pre></div>
+
+<p>会自动识别环境，然后安装对应包，我这里的 cuda 的版本安装的是 12.4，也是 CentOS 7 可以安装的最高版本。</p>
+<h2>启动服务</h2>
+<p>有两个坑：
+- 如果要支持 tool call 的话需要修改一下 vllm 的源码，不多，很好改
+- Qwen3-Coder 默认的上下文长度是 256K，在两张 A40 的情况下，显存不够，会启动失败，需要把上下文长度改小一点，我这里是改成 200K，可以启动</p>
+<p>修改 vllm 0.8.5.post1 源代码，让支持 qwen3_coder 格式的 tool call</p>
+<div class="highlight"><pre><span></span><code>从 github 上 vllm 的仓库里复制 vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
+把 qwen3coder_tool_parser.py 放到对应的本地目录下，比如 site-packages/vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
+修改 vllm/entrypoints/openai/tool_parsers/__init__.py 增加 from .qwen3coder_tool_parser import Qwen3CoderToolParser 和 &quot;Qwen3CoderToolParser&quot;,
+</code></pre></div>
+
+<p>启动命令如下：</p>
+<div class="highlight"><pre><span></span><code><span class="n">vllm</span><span class="w"> </span><span class="n">serve</span><span class="w"> </span><span class="o">./</span><span class="n">Qwen3</span><span class="o">-</span><span class="n">Coder</span><span class="o">-</span><span class="mi">30</span><span class="n">B</span><span class="o">-</span><span class="n">A3B</span><span class="o">-</span><span class="n">Instruct</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="n">served</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="n">Qwen3</span><span class="o">-</span><span class="n">Coder</span><span class="o">-</span><span class="mi">30</span><span class="n">B</span><span class="o">-</span><span class="n">A3B</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="n">host</span><span class="w"> </span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="w"> </span><span class="o">--</span><span class="n">port</span><span class="w"> </span><span class="mi">8000</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="n">gpu</span><span class="o">-</span><span class="n">memory</span><span class="o">-</span><span class="n">utilization</span><span class="w"> </span><span class="mf">0.95</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">len</span><span class="w"> </span><span class="mi">204800</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">auto</span><span class="o">-</span><span class="k">tool</span><span class="o">-</span><span class="n">choice</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">--</span><span class="k">tool</span><span class="o">-</span><span class="n">call</span><span class="o">-</span><span class="n">parser</span><span class="w"> </span><span class="n">qwen3_coder</span>
+</code></pre></div>
+
+<p>curl http://localhost:8000/v1/models 查看一下服务是否正常</p>
+<p>然后就可以在你的电脑上配置 openai 兼容的接口 http://IP:Port/v1 方便各种软件调用了</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/linux.html">linux</a>
+      <a href="./tag/llm.html">llm</a>
+    </p>
+  </div>
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'astro-2';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+        Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>&copy;  2025</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Martin's Blog ",
+  "url" : ".",
+  "image": "/images/default_profile_200x200.png",
+  "description": "Martin's Thoughts and Writings"
+}
+</script>
+
+</body>
+</html>
