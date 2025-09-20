@@ -112,7 +112,7 @@
   <div>
     <p>服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？</p>
 <p>两张 A40 显卡，一张显卡 48G 内存，总共 96 G 内存，模型：Qwen3-Coder-30B-A3B，FP16 下模型权重约 60GB，应该足够运行。</p>
-<p>A40 显卡有点老，本身不原生支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择<a href="https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct">Qwen/Qwen3-Coder-30B-A3B-Instruct</a> 。</p>
+<p>A40 显卡有点老，原生不支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择 <a href="https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct">Qwen/Qwen3-Coder-30B-A3B-Instruct</a> 。</p>
 <p>一张显卡的显存不够加载整个模型，需要使用两张显卡，vllm 支持并行，自己用的话，不对外提供服务的话也不用比较复杂的设置来优化。</p>
 <p>使用 vllm 来部署大模型，主要的依赖包如下：</p>
 <div class="highlight"><pre><span></span><code>vllm==0.8.5.post1
@@ -144,13 +144,18 @@ scl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span
 
 <p>会自动识别环境，然后安装对应包，我这里的 cuda 的版本安装的是 12.4，也是 CentOS 7 可以安装的最高版本。</p>
 <h2>启动服务</h2>
-<p>有两个坑：
-- 如果要支持 tool call 的话需要修改一下 vllm 的源码，不多，很好改
-- Qwen3-Coder 默认的上下文长度是 256K，在两张 A40 的情况下，显存不够，会启动失败，需要把上下文长度改小一点，我这里是改成 200K，可以启动</p>
+<p>有两个坑：</p>
+<ul>
+<li>如果要支持 tool call 的话需要修改一下 vllm 的源码，不多，很好改</li>
+<li>Qwen3-Coder 默认的上下文长度是 256K，在两张 A40 的情况下，显存不够，会启动失败，需要把上下文长度改小一点，我这里是改成 200K，可以启动</li>
+</ul>
 <p>修改 vllm 0.8.5.post1 源代码，让支持 qwen3_coder 格式的 tool call</p>
 <div class="highlight"><pre><span></span><code>从 github 上 vllm 的仓库里复制 vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
+
 把 qwen3coder_tool_parser.py 放到对应的本地目录下，比如 site-packages/vllm/entrypoints/openai/tool_parsers/qwen3coder_tool_parser.py
-修改 vllm/entrypoints/openai/tool_parsers/__init__.py 增加 from .qwen3coder_tool_parser import Qwen3CoderToolParser 和 &quot;Qwen3CoderToolParser&quot;,
+
+修改 vllm/entrypoints/openai/tool_parsers/__init__.py 
+增加 from .qwen3coder_tool_parser import Qwen3CoderToolParser 和 &quot;Qwen3CoderToolParser&quot;,
 </code></pre></div>
 
 <p>启动命令如下：</p>
