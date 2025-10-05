@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2025-09-27T20:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在现代社会一个人如何既健康又高效的生活——长期目标</title><link href="https://xingzuoshe.cn/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html" rel="alternate"></link><published>2025-09-27T20:00:00+08:00</published><updated>2025-09-27T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-27:/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html</id><summary type="html">&lt;p&gt;在现代社会一个人如何既健康又高效的生活——长期目标&lt;/p&gt;</summary><content type="html">&lt;p&gt;2025年了，短视频和社交网络让信息的传播速度快得惊人，我们能够更快更多地看到别人的生活，虽然那不一定是真的，引发人们羡慕的同时也引发了焦虑。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/all.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2025-10-05T20:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>paddle OCR 的文字识别过程</title><link href="https://xingzuoshe.cn/paddle-ocr-process.html" rel="alternate"></link><published>2025-10-05T20:00:00+08:00</published><updated>2025-10-05T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-10-05:/paddle-ocr-process.html</id><summary type="html">&lt;p&gt;paddle OCR 的文字识别过程&lt;/p&gt;</summary><content type="html">&lt;p&gt;PaddleOCR 是百度开源的一个非常优秀的 OCR 模型 + pipeline，基于百度自己的 paddlepaddle 框架，虽然文档写得让人非常难以上手，而且都是基于百度自己的框架实现的。&lt;/p&gt;
+&lt;p&gt;下面以最常见的一个普通的 OCR 过程为例子，参考 RapidOCR 的代码，解读一下 OCR 的过程，虽然跟现在流行的大模型差别比较大，但是基本原理应该是一样的。&lt;/p&gt;
+&lt;p&gt;下面使用 &lt;a href="https://www.paddleocr.ai/main/version3.x/algorithm/PP-OCRv5/PP-OCRv5_multi_languages.html"&gt;PP-OCRv5&lt;/a&gt; 的模型。&lt;/p&gt;
+&lt;p&gt;paddlepaddle 的模型可以转换成 onnx 模型，然后通过 onnxruntime 来运行，虽然用的 lib 不一样，但是原理是一样的&lt;/p&gt;
+&lt;p&gt;&lt;img alt="algorithm_ppocrv5.png" src="../images/algorithm_ppocrv5.png"&gt;&lt;/p&gt;
+&lt;p&gt;如图，有两个可选的逻辑
+1. 文档方向分类模型，含有四个类别，即0度，90度，180度，270度
+2. 文本图像校正模型，针对倾斜的图像，把文本旋转到正确的角度&lt;/p&gt;
+&lt;h2&gt;文本检测模块&lt;/h2&gt;
+&lt;p&gt;输入是一个图片，需要向量化&lt;/p&gt;
+&lt;p&gt;输出的也是向量，可以转换成 BBOX 四个点&lt;/p&gt;
+&lt;h2&gt;文本识别模块&lt;/h2&gt;
+&lt;p&gt;先用上面的 BBOX，把图片切分成一小块一小块，然后再针对每张或者一个批次，进行识别&lt;/p&gt;
+&lt;p&gt;输出是向量，能对应到词表的某个词&lt;/p&gt;
+&lt;p&gt;(未完，待续)&lt;/p&gt;</content><category term="AI"></category><category term="ai"></category><category term="ocr"></category></entry><entry><title>在现代社会一个人如何既健康又高效的生活——长期目标</title><link href="https://xingzuoshe.cn/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html" rel="alternate"></link><published>2025-09-27T20:00:00+08:00</published><updated>2025-09-27T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-27:/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html</id><summary type="html">&lt;p&gt;在现代社会一个人如何既健康又高效的生活——长期目标&lt;/p&gt;</summary><content type="html">&lt;p&gt;2025年了，短视频和社交网络让信息的传播速度快得惊人，我们能够更快更多地看到别人的生活，虽然那不一定是真的，引发人们羡慕的同时也引发了焦虑。&lt;/p&gt;
 &lt;p&gt;短视频只告诉了我们什么样的生活是幸福美好的生活(各种 show off)，但是我们该如何得到这样的生活呢，或者这样的生活适合我吗，这些都没有人告诉我们？&lt;/p&gt;
 &lt;p&gt;导致了两种现象，怨恨原生家庭，还有躺平，这两种可能存在同一个身上。特别是经济下行的阶段，努力已经换不来回报了，我们还要继续努力吗？&lt;/p&gt;
 &lt;p&gt;所以我们需要一个长期的目标，稳定的价值观。&lt;/p&gt;
