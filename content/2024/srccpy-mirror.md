@@ -8,7 +8,7 @@ Slug: scrcpy-mirror
 Authors: Martin
 Summary: scrcpy 的用法
 
-属手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具`scrcpy`可以在电脑上镜像手机，控制手机，开源而且免费的。
+刷手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具`scrcpy`可以在电脑上镜像手机，控制手机，开源而且免费的。
 
 [https://github.com/Genymobile/scrcpy](https://github.com/Genymobile/scrcpy)
 
