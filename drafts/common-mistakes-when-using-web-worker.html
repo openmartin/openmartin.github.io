@@ -45,8 +45,8 @@
 <meta property="og:locale" content="zh_CN"/>
 <meta property="og:url" content="../drafts/common-mistakes-when-using-web-worker.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2025-10-08 20:00:00+08:00"/>
-<meta property="article:modified_time" content="2025-10-08 20:00:00+08:00"/>
+<meta property="article:published_time" content="2025-10-09 20:00:00+08:00"/>
+<meta property="article:modified_time" content="2025-10-09 20:00:00+08:00"/>
 <meta property="article:author" content="../author/martin.html">
 <meta property="article:section" content="Web, Javascript"/>
 <meta property="article:tag" content="web"/>
@@ -105,16 +105,53 @@
       
     <h1 id="common-mistakes-when-using-web-worker">使用 web worker 容易犯错的地方</h1>
     <p>
-          Posted on 2025-10-08 20:00 in <a href="../category/web-javascript.html">Web, Javascript</a>
+          Posted on 2025-10-09 20:00 in <a href="../category/web-javascript.html">Web, Javascript</a>
 
 
     </p>
   </header>
 
   <div>
-    <h2>web worker 的加载方式</h2>
-<h2>web worker 中的 base url</h2>
+    <p>在浏览器中如果想把大量计算的任务放到一下新的线程中，可以使用 web worker，不影响用户交互的体验</p>
+<h2>web worker 的加载方式</h2>
+<p>如果不使用打包工具，在代码里可以这么写</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">worker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Worker</span><span class="p">(</span><span class="s1">&#39;/workers/worker.js&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>主线程和 web worker 之间用 postMessage 来交互</p>
+<div class="highlight"><pre><span></span><code><span class="nx">worker</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">监听</span><span class="w"> </span><span class="nx">work</span><span class="w"> </span><span class="nx">发出的消息</span>
+<span class="nx">worker</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handleMessage</span><span class="p">);</span>
+
+<span class="err">#</span><span class="w"> </span><span class="nx">在</span><span class="w"> </span><span class="nx">worker</span><span class="w"> </span><span class="nx">里面</span>
+<span class="nx">self</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">out</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>web worker 中的 base url</h3>
+<p>在 worker 里如果想要 fetch 一个网络资源，跟在网页上的行为差别很大，路径是相对于 worker 这个文件本身的。</p>
+<div class="highlight"><pre><span></span><code><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/static/dict.txt&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>worker 的路径是 <code>/workers/worker.js</code>，上面 fetch 实际上的路径是 <code>/workers/static/dict.txt</code> 而不是像一般网页上的 <code>/static/dict.txt</code>。</p>
+<p>如果对应的路径下有文件，是可以正常加载的。</p>
+<h3>以 Blob URL 方式加载 worker</h3>
+<p>还有一个坑是，如果使用了打包工具，比如在 Next.js 项目中，下面的加载方式实际上是使用 Blob URL 加载的</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">worker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Worker</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="s2">&quot;../workers/ocrWorker.ts&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">),</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;module&quot;</span><span class="w"> </span><span class="p">});</span>
+</code></pre></div>
+
+<p>如果在 worker 中有 fetch 代码，比如上面的 <code>fetch('/static/dict.txt')</code>，最后实际获取的是 <code>blob:/workers/static/dict.txt</code>，会出现 "Failed to parse URL" 错误。</p>
+<p>这个时候需要写完整的 https 路径，不能只写一个 <code>/static/dict.txt</code>，比如 <code>https://example.com/static/dict.txt</code></p>
+<p>可以读取环境变量，让打包的时候自动拼一下</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. 优先使用环境变量（构建时注入）</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">process</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s1">&#39;undefined&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="o">?</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_SITE_URL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_SITE_URL</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">baseUrl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h2>web worker 中使用 Cache Storage</h2>
+<p>在 web worker 中也可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage/open">Cache Storage</a>，不过不在 window 对象下，要用 <code>self.caches</code>，也可以直接使用 <code>caches</code></p>
   </div>
   <div class="tag-cloud">
     <p>
