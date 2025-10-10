@@ -8,7 +8,7 @@ Slug: common-mistakes-when-using-web-worker
 Authors: Martin
 Summary: 使用 web worker 容易犯错的地方
 
-在浏览器中如果想把大量计算的任务放到一下新的线程中，可以使用 web worker，不影响用户交互的体验
+在浏览器中如果想把大量计算的任务放到新的线程中，可以使用 web worker，不影响用户交互的体验。
 
 ## web worker 的加载方式
 
@@ -54,7 +54,7 @@ const worker = new Worker(new URL("../workers/ocrWorker.ts", import.meta.url), {
 
 这个时候需要写完整的 https 路径，不能只写一个 `/static/dict.txt`，比如 `https://example.com/static/dict.txt`
 
-可以读取环境变量，让打包的时候自动拼一下
+解决办法：可以读取环境变量，让打包的时候自动拼一下
 
 ```javascript
 // 1. 优先使用环境变量（构建时注入）
