@@ -112,7 +112,7 @@
   </header>
 
   <div>
-    <p>在浏览器中如果想把大量计算的任务放到一下新的线程中，可以使用 web worker，不影响用户交互的体验</p>
+    <p>在浏览器中如果想把大量计算的任务放到新的线程中，可以使用 web worker，不影响用户交互的体验。</p>
 <h2>web worker 的加载方式</h2>
 <p>如果不使用打包工具，在代码里可以这么写</p>
 <div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">worker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">Worker</span><span class="p">(</span><span class="s1">&#39;/workers/worker.js&#39;</span><span class="p">);</span>
@@ -142,7 +142,7 @@
 
 <p>如果在 worker 中有 fetch 代码，比如上面的 <code>fetch('/static/dict.txt')</code>，最后实际获取的是 <code>blob:/workers/static/dict.txt</code>，会出现 "Failed to parse URL" 错误。</p>
 <p>这个时候需要写完整的 https 路径，不能只写一个 <code>/static/dict.txt</code>，比如 <code>https://example.com/static/dict.txt</code></p>
-<p>可以读取环境变量，让打包的时候自动拼一下</p>
+<p>解决办法：可以读取环境变量，让打包的时候自动拼一下</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// 1. 优先使用环境变量（构建时注入）</span>
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">process</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s1">&#39;undefined&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="o">?</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_SITE_URL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">baseUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NEXT_PUBLIC_SITE_URL</span><span class="p">;</span>
