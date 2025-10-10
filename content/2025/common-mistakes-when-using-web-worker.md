@@ -1,5 +1,5 @@
 Title: 使用 web worker 容易犯错的地方
-Status: draft
+Status: published
 Date: 2025-10-09 20:00
 Modified: 2025-10-09 20:00
 Category: Web, Javascript
