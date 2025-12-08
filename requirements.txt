@@ -23,3 +23,4 @@ soupsieve==2.7
 typing_extensions==4.14.1
 Unidecode==1.4.0
 watchfiles==1.1.0
+markdown-mermaidjs==2.0.0

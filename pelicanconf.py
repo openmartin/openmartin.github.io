@@ -65,6 +65,16 @@ OG_LOCALE = 'zh_CN'
 LOCALE = 'zh_CN'
 
 
+MARKDOWN = {
+    "extension_configs": {
+        "markdown.extensions.codehilite": {"css_class": "highlight"},
+        "markdown.extensions.extra": {},
+        "markdown.extensions.meta": {},
+        "markdown_mermaidjs": {},
+    },
+    "output_format": "html5",
+}
+
 
 
 # MENU 

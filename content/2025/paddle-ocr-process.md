@@ -28,11 +28,60 @@ paddlepaddle 的模型可以转换成 onnx 模型，然后通过 onnxruntime 来
 
 输出的也是向量，可以转换成 BBOX 四个点
 
+```mermaid
+flowchart TD
+    A["图片"] --> B["HWC<br>Height<br>Width<br>Color(RGB)"]
+    B --> C["resize<br>最长边960<br>边长是32的倍数"]
+    C --> D["Normalize<br>归一化/255<br>减去均值<br>除以标准差"]
+    D --> E["向量NCHW<br>NCHW"]
+    E --> F["模型<br>PP-OCRv5_mobile_det"]
+    F --> G["输出向量<br>N,1,H,W"]
+    G --> H["二值化<br>使用thresh阈值(默认0.3)<br>将概率图转换为二值掩码"]
+    H --> I["轮廓提取<br>使用OpenCV的cv2.findContours<br>提取文本区域轮廓"]
+    I --> J["最小外接矩形计算<br>对每个轮廓使用minAreaRect<br>计算最小外接矩形"]
+    J --> K["过滤<br>计算矩形区域平均分数<br>过滤低置信度/小尺寸框"]
+    K --> L["扩展<br>检测框进行扩展<br>确保包含完整文本"]
+    L --> M["坐标映射<br>映射回原始图像尺寸<br>并裁剪边界"]
+```
+
 ## 文本识别模块
 
 先用上面的 BBOX，把图片切分成一小块一小块，然后再针对每张或者一个批次，进行识别
 
 输出是向量，能对应到词表的某个词
 
-(未完，待续)
+```mermaid
+flowchart TD
+    A[图片] --> B[按照矩形坐标裁剪图片]
+    B --> C[几个图片做一批次 NCHW]
+    C --> D[模型 PP-OCRv5_mobile_rec]
+    D --> E[向量 N, 文本长度, 字符集长度]
+    E --> F[取概率最高的字符]
+    F --> G[文本]
+
+    subgraph 批次处理说明
+        C -.-> H[注释:计算批次内的最大宽高比，用于统一 resize, <br>然后 padding，归一化]
+    end
+    style H fill:#fff3cd,stroke:#856404,stroke-dasharray: 5 5
+```
+
+## 表格识别模块
+
+SLANet_plus 表格识别模型，识别出单元格，然后跟 OCR 识别的坐标信息结合起来就可以实现表格识别，最后结果为 html 表格
+
+```mermaid
+graph TD
+    Image[图片] --> Preprocess["图片预处理<br>1. resize 最长边 488<br>2. 归一化/255<br>减去均值<br>除以标准差<br>3. 填充到 488x488"]
+    Preprocess --> Model[模型 SLANet_plus]
+    Model --> Output1[输出 单元格矩形框序列]
+    Model --> Output2[输出 html标签序列]
+    Output1 --> OCR[跟 OCR 的矩形框<br>计算最大交集]
+    OCR --> Content[每个单元格里的<br>文字内容]
+    Content --> HTML[html 表格]
+    Output2 --> HTML
+```
+
+
+
+
 
