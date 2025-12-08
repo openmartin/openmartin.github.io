@@ -49,10 +49,58 @@
 &lt;h2&gt;文本检测模块&lt;/h2&gt;
 &lt;p&gt;输入是一个图片，需要向量化&lt;/p&gt;
 &lt;p&gt;输出的也是向量，可以转换成 BBOX 四个点&lt;/p&gt;
+&lt;pre class="mermaid"&gt;
+flowchart TD
+    A["图片"] --&gt; B["HWC&lt;br&gt;Height&lt;br&gt;Width&lt;br&gt;Color(RGB)"]
+    B --&gt; C["resize&lt;br&gt;最长边960&lt;br&gt;边长是32的倍数"]
+    C --&gt; D["Normalize&lt;br&gt;归一化/255&lt;br&gt;减去均值&lt;br&gt;除以标准差"]
+    D --&gt; E["向量NCHW&lt;br&gt;NCHW"]
+    E --&gt; F["模型&lt;br&gt;PP-OCRv5_mobile_det"]
+    F --&gt; G["输出向量&lt;br&gt;N,1,H,W"]
+    G --&gt; H["二值化&lt;br&gt;使用thresh阈值(默认0.3)&lt;br&gt;将概率图转换为二值掩码"]
+    H --&gt; I["轮廓提取&lt;br&gt;使用OpenCV的cv2.findContours&lt;br&gt;提取文本区域轮廓"]
+    I --&gt; J["最小外接矩形计算&lt;br&gt;对每个轮廓使用minAreaRect&lt;br&gt;计算最小外接矩形"]
+    J --&gt; K["过滤&lt;br&gt;计算矩形区域平均分数&lt;br&gt;过滤低置信度/小尺寸框"]
+    K --&gt; L["扩展&lt;br&gt;检测框进行扩展&lt;br&gt;确保包含完整文本"]
+    L --&gt; M["坐标映射&lt;br&gt;映射回原始图像尺寸&lt;br&gt;并裁剪边界"]
+&lt;/pre&gt;
+
 &lt;h2&gt;文本识别模块&lt;/h2&gt;
 &lt;p&gt;先用上面的 BBOX，把图片切分成一小块一小块，然后再针对每张或者一个批次，进行识别&lt;/p&gt;
 &lt;p&gt;输出是向量，能对应到词表的某个词&lt;/p&gt;
-&lt;p&gt;(未完，待续)&lt;/p&gt;</content><category term="AI"></category><category term="ai"></category><category term="ocr"></category></entry><entry><title>在现代社会一个人如何既健康又高效的生活——长期目标</title><link href="https://xingzuoshe.cn/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html" rel="alternate"></link><published>2025-09-27T20:00:00+08:00</published><updated>2025-09-27T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-27:/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html</id><summary type="html">&lt;p&gt;在现代社会一个人如何既健康又高效的生活——长期目标&lt;/p&gt;</summary><content type="html">&lt;p&gt;2025年了，短视频和社交网络让信息的传播速度快得惊人，我们能够更快更多地看到别人的生活，虽然那不一定是真的，引发人们羡慕的同时也引发了焦虑。&lt;/p&gt;
+&lt;pre class="mermaid"&gt;
+flowchart TD
+    A[图片] --&gt; B[按照矩形坐标裁剪图片]
+    B --&gt; C[几个图片做一批次 NCHW]
+    C --&gt; D[模型 PP-OCRv5_mobile_rec]
+    D --&gt; E[向量 N, 文本长度, 字符集长度]
+    E --&gt; F[取概率最高的字符]
+    F --&gt; G[文本]
+
+    subgraph 批次处理说明
+        C -.-&gt; H[注释:计算批次内的最大宽高比，用于统一 resize, &lt;br&gt;然后 padding，归一化]
+    end
+    style H fill:#fff3cd,stroke:#856404,stroke-dasharray: 5 5
+&lt;/pre&gt;
+
+&lt;h2&gt;表格识别模块&lt;/h2&gt;
+&lt;p&gt;SLANet_plus 表格识别模型，识别出单元格，然后跟 OCR 识别的坐标信息结合起来就可以实现表格识别，最后结果为 html 表格&lt;/p&gt;
+&lt;pre class="mermaid"&gt;
+graph TD
+    Image[图片] --&gt; Preprocess["图片预处理&lt;br&gt;1. resize 最长边 488&lt;br&gt;2. 归一化/255&lt;br&gt;减去均值&lt;br&gt;除以标准差&lt;br&gt;3. 填充到 488x488"]
+    Preprocess --&gt; Model[模型 SLANet_plus]
+    Model --&gt; Output1[输出 单元格矩形框序列]
+    Model --&gt; Output2[输出 html标签序列]
+    Output1 --&gt; OCR[跟 OCR 的矩形框&lt;br&gt;计算最大交集]
+    OCR --&gt; Content[每个单元格里的&lt;br&gt;文字内容]
+    Content --&gt; HTML[html 表格]
+    Output2 --&gt; HTML
+&lt;/pre&gt;
+
+&lt;script type="module"&gt;
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+&lt;/script&gt;</content><category term="AI"></category><category term="ai"></category><category term="ocr"></category></entry><entry><title>在现代社会一个人如何既健康又高效的生活——长期目标</title><link href="https://xingzuoshe.cn/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html" rel="alternate"></link><published>2025-09-27T20:00:00+08:00</published><updated>2025-09-27T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-27:/independent-life-and-keep-healthy-in-modern-society-2-long-term-goal.html</id><summary type="html">&lt;p&gt;在现代社会一个人如何既健康又高效的生活——长期目标&lt;/p&gt;</summary><content type="html">&lt;p&gt;2025年了，短视频和社交网络让信息的传播速度快得惊人，我们能够更快更多地看到别人的生活，虽然那不一定是真的，引发人们羡慕的同时也引发了焦虑。&lt;/p&gt;
 &lt;p&gt;短视频只告诉了我们什么样的生活是幸福美好的生活(各种 show off)，但是我们该如何得到这样的生活呢，或者这样的生活适合我吗，这些都没有人告诉我们？&lt;/p&gt;
 &lt;p&gt;导致了两种现象，怨恨原生家庭，还有躺平，这两种可能存在同一个身上。特别是经济下行的阶段，努力已经换不来回报了，我们还要继续努力吗？&lt;/p&gt;
 &lt;p&gt;所以我们需要一个长期的目标，稳定的价值观。&lt;/p&gt;
