@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2025-09-20T20:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>如何在 CentOS 7 上部署 Qwen3-Coder-30B-A3B</title><link href="https://xingzuoshe.cn/deploy-qwen3-coder-on-centOS-7-with-dual-A40.html" rel="alternate"></link><published>2025-09-20T20:00:00+08:00</published><updated>2025-09-20T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-20:/deploy-qwen3-coder-on-centOS-7-with-dual-A40.html</id><summary type="html">&lt;p&gt;服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？&lt;/p&gt;</summary><content type="html">&lt;p&gt;服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Martin's Blog - Linux</title><link href="https://xingzuoshe.cn/" rel="alternate"></link><link href="https://xingzuoshe.cn/feeds/linux.atom.xml" rel="self"></link><id>https://xingzuoshe.cn/</id><updated>2026-08-08T20:00:00+08:00</updated><subtitle>Martin's Blog</subtitle><entry><title>在本地电脑和消费级显卡上运行 HunyuanOCR 1.5</title><link href="https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html" rel="alternate"></link><published>2026-08-08T20:00:00+08:00</published><updated>2026-08-08T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2026-08-08:/vllm-serve-hunyuanocr-model.html</id><summary type="html">&lt;p&gt;在本地电脑和消费级显卡上运行 HunyuanOCR 1.5&lt;/p&gt;</summary><content type="html">&lt;p&gt;参考官方文档，同时也有一些自己实际碰到的问题，踩得坑，花了一下午时间。&lt;/p&gt;
+&lt;h2&gt;环境&lt;/h2&gt;
+&lt;p&gt;操作系统： Debian 12.15&lt;/p&gt;
+&lt;p&gt;显卡： RTX 4060 Ti 16G&lt;/p&gt;
+&lt;h2&gt;安装依赖&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 安装 uv&lt;/span&gt;
+curl&lt;span class="w"&gt; &lt;/span&gt;-LsSf&lt;span class="w"&gt; &lt;/span&gt;https://astral.sh/uv/install.sh&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sh
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;~/.bashrc
+&lt;span class="c1"&gt;# 虚拟环境&lt;/span&gt;
+uv&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;--python&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;.12&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.venv/bin/activate
+&lt;span class="c1"&gt;# 依赖包&lt;/span&gt;
+uv&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;vllm&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.25.1
+uv&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://github.com/adithyaxx/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu13torch2.11cxx11abiTRUE-cp312-cp312-linux_x86_64.whl&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;如果是按照官方文档里的 &lt;code&gt;uv pip install --no-build-isolation --no-cache-dir "flash-attn==2.8.3"&lt;/code&gt; 非常容易编译失败，而且 flash-attn 官方没有跟目前环境一致而且编译好的 wheel 包下载，不过有其他人提供了目前需要的环境对应的 flash-attn 包，直接下载就行，否则编译的问题太难解决了。&lt;/p&gt;
+&lt;h2&gt;下载模型&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;hf
+hf&lt;span class="w"&gt; &lt;/span&gt;download&lt;span class="w"&gt; &lt;/span&gt;tencent/HunyuanOCR&lt;span class="w"&gt; &lt;/span&gt;--local-dir&lt;span class="w"&gt; &lt;/span&gt;./HunyuanOCR&lt;span class="w"&gt; &lt;/span&gt;--exclude&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;v1.0/*&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;vllm&lt;/h2&gt;
+&lt;p&gt;直接使用官方的脚本就可以启动&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# —— vLLM AR ——&lt;/span&gt;
+&lt;span class="nv"&gt;MODEL_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;./HunyuanOCR&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;GPU&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;8000&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bash&lt;span class="w"&gt; &lt;/span&gt;inference/vLLM/serve.sh
+
+&lt;span class="c1"&gt;# —— vLLM + DFlash（草稿路径默认为 ${MODEL_PATH}/dflash） ——&lt;/span&gt;
+&lt;span class="nv"&gt;MODEL_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;./HunyuanOCR&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;GPU&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;PORT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;8000&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;bash&lt;span class="w"&gt; &lt;/span&gt;inference/DFlash/serve_DFlash.sh
+
+&lt;span class="c1"&gt;# 就绪检查&lt;/span&gt;
+curl&lt;span class="w"&gt; &lt;/span&gt;-sf&lt;span class="w"&gt; &lt;/span&gt;http://127.0.0.1:8000/v1/models
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;DFlash&lt;/h2&gt;
+&lt;p&gt;官方说用了 DFlash 速度会块很多，的确是快了，第一次请求会慢，但是后续的请求速度就加快了。&lt;/p&gt;
+&lt;p&gt;简单用了一个小图片对比用了 DFlash 和 没用 DFlash 的速度，还是有明显提升的，第一次请求往往包含一些初始化操作。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;vllm&lt;/th&gt;
+&lt;th&gt;vllm + DFlash&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;图片第一次&lt;/td&gt;
+&lt;td&gt;0.97s&lt;/td&gt;
+&lt;td&gt;2.34s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;同样图片第二次&lt;/td&gt;
+&lt;td&gt;0.71s&lt;/td&gt;
+&lt;td&gt;0.47s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;其他说明&lt;/h2&gt;
+&lt;p&gt;下载模型的时候需要设置代理，huggingface.co 没办法直接连上。&lt;/p&gt;
+&lt;p&gt;安装 python 包的时候最好也设置一下，否者会很慢。&lt;/p&gt;
+&lt;p&gt;参考资料
+1. &lt;a href="https://github.com/Tencent-Hunyuan/HunyuanOCR/blob/main/docs/inference/inference_zh.md"&gt;HunyuanOCR github&lt;/a&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="llm"></category></entry><entry><title>如何在 CentOS 7 上部署 Qwen3-Coder-30B-A3B</title><link href="https://xingzuoshe.cn/deploy-qwen3-coder-on-centOS-7-with-dual-A40.html" rel="alternate"></link><published>2025-09-20T20:00:00+08:00</published><updated>2025-09-20T20:00:00+08:00</updated><author><name>Martin</name></author><id>tag:xingzuoshe.cn,2025-09-20:/deploy-qwen3-coder-on-centOS-7-with-dual-A40.html</id><summary type="html">&lt;p&gt;服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？&lt;/p&gt;</summary><content type="html">&lt;p&gt;服务器上有两张 A40 显卡，安装的是祖传 CentOS 7 系统，如何部署 Qwen3-Coder-30B-A3B？&lt;/p&gt;
 &lt;p&gt;两张 A40 显卡，一张显卡 48G 内存，总共 96 G 内存，模型：Qwen3-Coder-30B-A3B，FP16 下模型权重约 60GB，应该足够运行。&lt;/p&gt;
 &lt;p&gt;A40 显卡有点老，原生不支持 FP8 数据格式，所以下载模型文件的时候不能用 Qwen/Qwen3-Coder-30B-A3B-Instruct-FP8 的文件，应该选择 &lt;a href="https://www.modelscope.cn/models/Qwen/Qwen3-Coder-30B-A3B-Instruct"&gt;Qwen/Qwen3-Coder-30B-A3B-Instruct&lt;/a&gt; 。&lt;/p&gt;
 &lt;p&gt;一张显卡的显存不够加载整个模型，需要使用两张显卡，vllm 支持并行，自己用的话，不对外提供服务的话也不用比较复杂的设置来优化。&lt;/p&gt;
