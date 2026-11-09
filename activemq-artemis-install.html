@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ActiveMQ Artemis 的安装和使用 · 星作社</title><meta name="description" content="ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等"><link rel="canonical" href="https://xingzuoshe.cn/activemq-artemis-install.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="ActiveMQ Artemis 的安装和使用 · 星作社"><meta property="og:description" content="ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等"><meta property="og:url" content="https://xingzuoshe.cn/activemq-artemis-install.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="ActiveMQ Artemis 的安装和使用 · 星作社"><meta name="twitter:description" content="ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等"><meta name="author" content="Martin"><meta property="article:published_time" content="2019-07-02"><meta property="article:modified_time" content="2019-07-02"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/activemq-artemis-install.html#webpage","url":"https://xingzuoshe.cn/activemq-artemis-install.html","name":"ActiveMQ Artemis 的安装和使用","description":"ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/activemq-artemis-install.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/activemq-artemis-install.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/activemq-artemis-install.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"ActiveMQ Artemis 的安装和使用","item":"https://xingzuoshe.cn/activemq-artemis-install.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/activemq-artemis-install.html#article","headline":"ActiveMQ Artemis 的安装和使用","description":"ActiveMQ Artemis 是 ActiveMQ 5 的继任者，在 JBoss 捐赠的 HornetQ 基础上继续开发而来，支持大量的新特性，支持 JMS 2.0， MQTT， STOMP 等等","url":"https://xingzuoshe.cn/activemq-artemis-install.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/activemq-artemis-install.html#webpage"},"datePublished":"2019-07-02","dateModified":"2019-07-02","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>ActiveMQ Artemis 的安装和使用</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Java</p><h1>ActiveMQ Artemis 的安装和使用</h1><div class="article-meta"><time datetime="2019-07-02">2019-07-02</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>java</li><li>activemq</li><li>artemis</li><li>spring</li><li>jms</li></ul></div><div class="prose"><h2 id="activemq-artemis-的安装">ActiveMQ Artemis 的安装</h2>
+<p>下载 <a href="http://activemq.apache.org/components/artemis/download/">安装包</a> ，然后解压</p>
+<pre><code class="language-bash">export ARTEMIS_HOME=${HOME}/apache-artemis-2.9.0
+${ARTEMIS_HOME}/bin/artemis create eventbroker --http-host 10.80.28.27
+</code></pre>
+<p>创建 Broker Instance</p>
+<pre><code>[demo@localhost ~]$ ${ARTEMIS_HOME}/bin/artemis create eventbroker --http-host 10.80.28.27
+Creating ActiveMQ Artemis instance at: /home/demo/eventbroker
+
+--user: is a mandatory property!
+Please provide the default username:
+admin
+
+--password: is mandatory with this configuration:
+Please provide the default password:
+
+
+--allow-anonymous | --require-login: is a mandatory property!
+Allow anonymous access?, valid values are Y,N,True,False
+Y
+
+Auto tuning journal ...
+done! Your system can make 7.58 writes per millisecond, your journal-buffer-timeout will be 132000
+
+You can now start the broker by executing:  
+
+   "/home/demo/eventbroker/bin/artemis" run
+
+Or you can run the broker in the background using:
+
+   "/home/demo/eventbroker/bin/artemis-service" start
+</code></pre>
+<h2 id="启动和停止">启动和停止</h2>
+<p>ActiveMQ Artemis 只支持 Java 7 及以上</p>
+<pre><code class="language-bash"># service
+"/home/demo/eventbroker/bin/artemis-service" start
+"/home/demo/eventbroker/bin/artemis-service" stop
+
+# run in shell
+"/home/demo/eventbroker/bin/artemis" run
+</code></pre>
+<h2 id="修改-jvm-参数">修改 JVM 参数</h2>
+<p>在<code>/home/demo/eventbroker/bin/artemis</code>文件的最后有 Java 启动的时候的参数，如果需要修改 JVM 参数可以在这里修改</p>
+<pre><code>    -Xms2048M \
+    -Xmx2048M \
+    -XX:MaxMetaspaceSize=512M \
+    -XX:MetaspaceSize=512M \
+</code></pre>
+<h2 id="web-console">Web Console</h2>
+<p>启动 ActiveMQ Artemis 之后，访问 <code>http://localhost:8161/console</code>，使用之前创建 Broker Instance 里设置的用户名密码登录</p>
+<p><img src="/images/ActiveMQ_Artemis_Dashboard.png" alt="ActiveMQ Artemis Dashboard"></p>
+<h2 id="配置-brokerxml">配置 broker.xml</h2>
+<p>编辑<code>/home/demo/eventbroker/etc/broker.xml</code></p>
+<ol>
+<li>禁用掉自动创建 address</li>
+</ol>
+<pre><code class="language-xml">            &lt;!-- 在 address-setting 部分 --&gt;
+            &lt;auto-create-queues&gt;false&lt;/auto-create-queues&gt;
+            &lt;auto-create-addresses&gt;true&lt;/auto-create-addresses&gt;
+            &lt;!-- &lt;auto-create-jms-queues&gt;true&lt;/auto-create-jms-queues&gt; --&gt;
+            &lt;!-- &lt;auto-create-jms-topics&gt;true&lt;/auto-create-jms-topics&gt; --&gt;
+</code></pre>
+<ol start="2">
+<li>配置 topic</li>
+</ol>
+<p>自动创建的 queue 默认是 durable 的</p>
+<pre><code class="language-xml">&lt;addresses&gt;
+   &lt;address name="pubsub.foo"&gt;
+      &lt;multicast&gt;
+      &lt;/multicast&gt;
+   &lt;/address&gt;
+&lt;/addresses&gt;
+</code></pre>
+<h2 id="spring-jms-的设置">Spring JMS 的设置</h2>
+<p>Spring 的 JMS 配置和其他的一样，并没有什么不同</p>
+<pre><code class="language-xml">    &lt;bean id="connectionFactory" class="org.apache.activemq.artemis.jms.client.ActiveMQJMSConnectionFactory"&gt;
+        &lt;constructor-arg value="tcp://10.80.28.27:61616"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="exampleQueue" class="org.apache.activemq.artemis.jms.client.ActiveMQQueue"&gt;
+        &lt;constructor-arg index="0" value="exampleQueue"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="exampleTopic" class="org.apache.activemq.artemis.jms.client.ActiveMQTopic"&gt;
+        &lt;constructor-arg index="0" value="exampleTopic"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate"&gt;
+        &lt;property name="connectionFactory" ref="connectionFactory" /&gt;
+    &lt;/bean&gt;
+    
+    &lt;bean id="sampleJmsMessageSender" class="com.example.SampleJmsMessageSender"&gt;
+        &lt;property name="jmsTemplate" ref="jmsTemplate"/&gt;
+        &lt;property name="queue" ref="exampleQueue"/&gt;
+        &lt;property name="topic" ref="exampleTopic"/&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="messageListener" class="com.example.SampleListener"&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"&gt;
+        &lt;property name="connectionFactory" ref="connectionFactory"/&gt;
+        &lt;property name="destination" ref="exampleTopic"/&gt;
+        &lt;property name="messageListener" ref="messageListener"/&gt;
+    &lt;/bean&gt;
+</code></pre>
+<pre><code class="language-java">package com.example;
+
+import org.springframework.jms.core.JmsTemplate;
+
+import javax.jms.Queue;
+import javax.jms.Topic;
+
+public class SampleJmsMessageSender {
+
+    private JmsTemplate jmsTemplate;
+    private Queue queue;
+    private Topic topic;
+
+    public void simpleQueueSend() {
+        jmsTemplate.send(queue, s -&gt; s.createTextMessage("hello queue world"));
+    }
+
+    public void simpleTopicSend() {
+        jmsTemplate.send(topic, s -&gt; s.createTextMessage("hello topic world"));
+    }
+
+
+    public JmsTemplate getJmsTemplate() {
+        return jmsTemplate;
+    }
+
+    public void setJmsTemplate(JmsTemplate jmsTemplate) {
+        this.jmsTemplate = jmsTemplate;
+    }
+
+    public Queue getQueue() {
+        return queue;
+    }
+
+    public void setQueue(Queue queue) {
+        this.queue = queue;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+}
+</code></pre>
+<pre><code class="language-java">package com.example;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+public class SampleListener implements MessageListener {
+    @Override
+    public void onMessage(Message message) {
+        if (message instanceof TextMessage) {
+            try {
+                String msg = ((TextMessage) message).getText();
+                System.out.println("Message has been consumed : " + msg);
+            } catch (JMSException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+            throw new IllegalArgumentException("Message Error");
+        }
+    }
+}
+</code></pre>
+<h2 id="jms-中设置持久化订阅">JMS 中设置持久化订阅</h2>
+<p>持久化订阅需要设置 ClientID 和 SubscriptionName 来唯一标识一个 Consumer，也就说如果有两个 Connection 这两项一致，ActiveMQ 就认为这两个 Consumer 是同一个</p>
+<pre><code class="language-xml">    &lt;!-- 这里用 ActiveMQ Classic 的例子 --&gt;
+    &lt;bean id="consumerAmqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory"&gt;
+        &lt;constructor-arg index="0" value="tcp://10.80.28.27:61616" /&gt;
+        &lt;property name="clientID" value="HOST-Consumer"/&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- ConnectionFactory Definition --&gt;
+    &lt;bean id="consumerConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory"&gt;
+        &lt;constructor-arg ref="consumerAmqConnectionFactory" /&gt;
+    &lt;/bean&gt;
+
+    &lt;bean id="consumerExampleTopic" class="org.apache.activemq.command.ActiveMQTopic"&gt;
+        &lt;constructor-arg index="0" value="exampleTopic"/&gt;
+    &lt;/bean&gt;
+
+
+    &lt;bean id="messageListener" class="com.example.SampleListener"&gt;
+    &lt;/bean&gt;
+
+
+    &lt;!-- durable subscription need set  SubscriptionName and ClientID  to identify unique Consumer --&gt;
+    &lt;!-- 持久化订阅 需要设置 SubscriptionName 和 ClientID 来唯一标识一个 Consumer --&gt;
+    &lt;bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer"&gt;
+        &lt;property name="connectionFactory" ref="consumerConnectionFactory"/&gt;
+        &lt;property name="destination" ref="consumerExampleTopic"/&gt;
+        &lt;property name="messageListener" ref="messageListener"/&gt;
+        &lt;property name="subscriptionDurable" value="true"/&gt;
+        &lt;property name="durableSubscriptionName" value="Subscriber-B"/&gt;
+    &lt;/bean&gt;
+</code></pre>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

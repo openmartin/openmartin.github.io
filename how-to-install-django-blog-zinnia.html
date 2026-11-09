@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>如何使用 django-zinnia-blog 建立个人博客 · 星作社</title><meta name="description" content="使用 django-zinnia-blog 建立个人博客，一步一步"><link rel="canonical" href="https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="如何使用 django-zinnia-blog 建立个人博客 · 星作社"><meta property="og:description" content="使用 django-zinnia-blog 建立个人博客，一步一步"><meta property="og:url" content="https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="如何使用 django-zinnia-blog 建立个人博客 · 星作社"><meta name="twitter:description" content="使用 django-zinnia-blog 建立个人博客，一步一步"><meta name="author" content="Martin"><meta property="article:published_time" content="2016-04-19"><meta property="article:modified_time" content="2016-04-19"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html#webpage","url":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html","name":"如何使用 django-zinnia-blog 建立个人博客","description":"使用 django-zinnia-blog 建立个人博客，一步一步","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"如何使用 django-zinnia-blog 建立个人博客","item":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html#article","headline":"如何使用 django-zinnia-blog 建立个人博客","description":"使用 django-zinnia-blog 建立个人博客，一步一步","url":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/how-to-install-django-blog-zinnia.html#webpage"},"datePublished":"2016-04-19","dateModified":"2016-04-19","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>如何使用 django-zinnia-blog 建立个人博客</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Django</p><h1>如何使用 django-zinnia-blog 建立个人博客</h1><div class="article-meta"><time datetime="2016-04-19">2016-04-19</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>django</li><li>aws</li><li>zinnia</li></ul></div><div class="prose"><p><a href="http://django-blog-zinnia.com/">django-zinnia-blog</a> 顾名思义就是一套用Django开发的个人博客程序，虽然比大名鼎鼎的wordpress略显简陋，不过在以Python作为开发语言的博客系统中算是很不错的。</p>
+<h2 id="pip">pip</h2>
+<p>如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中</p>
+<p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
+<h2 id="virtualenv">virtualenv</h2>
+<p>virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:</p>
+<pre><code>pip install virtualenv
+# 创建虚拟环境
+virtualenv ENV
+cd ENV
+source ./bin/activate
+</code></pre>
+<p>磨刀不误砍柴工，接下来开始大展身手啦。</p>
+<h2 id="django-zinnia-blog">django-zinnia-blog</h2>
+<p>直接使用pip安装:</p>
+<pre><code>pip install Pillow
+pip install django-zinnia-blog
+#如果数据库使用MySQL
+pip install python-mysql
+</code></pre>
+<p>然后按照 <a href="http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html">http://docs.django-blog-zinnia.com/en/develop/getting-started/install.html</a> 建立一个django-project</p>
+<p>Django1.7的命令和以前有些不一样，记录一下:</p>
+<pre><code>manage.py migrate
+mamage.py createsuperuser
+</code></pre>
+<h2 id="安装theme">安装theme</h2>
+<p>使用zinnia不像wordpress那样有丰富多样的主题可以选择，需要我们手动修改一番，我们可以选择zinnia-theme-bootstrap，然后在这个基础上修修改改:</p>
+<pre><code>pip install django-app-namespace-template-loader
+
+下载zinnia-theme-bootstrap，解压到你的项目文件夹下
+https://github.com/django-blog-zinnia/zinnia-theme-bootstrap
+
+zinnia_bootstrap\templates\zinnia
+base.html
+skeleton.html
+</code></pre>
+<p>上面是两个最关键的模板，可以按照自己的想法修改</p>
+<h2 id="使用restructuredtext写博客">使用reStructuredText写博客</h2>
+<p>如果你喜欢用reStructuredText写文档的话，zinnia也支持，不过需要我们配置一下。:</p>
+<pre><code>pip install docutils
+pip install zinnia-wysiwyg-markitup
+
+#settings.py 中需要添加一行
+ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
+</code></pre>
+<h2 id="settingspy和urlspy">settings.py和urls.py</h2>
+<p>在配置文件中有很多坑，我被坑了好长时间才爬出来，希望后来人不要接着被坑了。</p>
+<p>settings.py中需要注意的片段:</p>
+<pre><code># 如果DEBUG=False 这个地方需要配置，否则会有HTTP 400的错误
+ALLOWED_HOSTS = ['*']
+
+# Email backend
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+INSTALLED_APPS = (
+'django.contrib.auth',
+'django.contrib.admin',
+'django.contrib.sites',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+'django.contrib.contenttypes',
+'django_comments',
+'django.contrib.sitemaps',
+'mptt',
+'tagging',
+'zinnia_bootstrap',
+'zinnia',
+'zinnia_markitup',
+)
+
+# Template
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+'app_namespace.Loader',
+'django.template.loaders.filesystem.Loader',
+'django.template.loaders.app_directories.Loader',
+'django.template.loaders.eggs.Loader',
+)
+
+# 语言代码是zh-hans 对应 zh_Hans
+LANGUAGE_CODE = 'zh-hans'
+
+# zinnia config
+ZINNIA_MARKUP_LANGUAGE = 'restructuredtext'
+</code></pre>
+<p>urls.py可以按照以下来配置:</p>
+<pre><code>from django.conf.urls import patterns, include, url
+from django.contrib import admin
+from django.views.generic.base import RedirectView
+
+from zinnia.sitemaps import TagSitemap
+from zinnia.sitemaps import EntrySitemap
+from zinnia.sitemaps import CategorySitemap
+from zinnia.sitemaps import AuthorSitemap
+
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'myblog.views.home', name='home'),
+    # url(r'^blog/', include('blog.urls')),
+    url(r'^$', RedirectView.as_view(url='/weblog/')),  
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
+    url(r'^comments/', include('django_comments.urls')),
+)
+
+
+
+sitemaps = {'tags': TagSitemap,
+            'blog': EntrySitemap,
+            'authors': AuthorSitemap,
+            'categories': CategorySitemap,}
+
+urlpatterns += patterns(
+    'django.contrib.sitemaps.views',
+    url(r'^sitemap.xml$', 'index',
+        {'sitemaps': sitemaps}),
+    url(r'^sitemap-(?P&lt;section&gt;.+)\.xml$', 'sitemap',
+        {'sitemaps': sitemaps}),)
+</code></pre>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

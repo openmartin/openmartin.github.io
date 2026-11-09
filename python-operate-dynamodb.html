@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>使用 Python 操作亚马逊 DynamoDB · 星作社</title><meta name="description" content="使用 Python 操作亚马逊 DynamoDB"><link rel="canonical" href="https://xingzuoshe.cn/python-operate-dynamodb.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="使用 Python 操作亚马逊 DynamoDB · 星作社"><meta property="og:description" content="使用 Python 操作亚马逊 DynamoDB"><meta property="og:url" content="https://xingzuoshe.cn/python-operate-dynamodb.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="使用 Python 操作亚马逊 DynamoDB · 星作社"><meta name="twitter:description" content="使用 Python 操作亚马逊 DynamoDB"><meta name="author" content="Martin"><meta property="article:published_time" content="2015-08-20"><meta property="article:modified_time" content="2015-08-21"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/python-operate-dynamodb.html#webpage","url":"https://xingzuoshe.cn/python-operate-dynamodb.html","name":"使用 Python 操作亚马逊 DynamoDB","description":"使用 Python 操作亚马逊 DynamoDB","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/python-operate-dynamodb.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/python-operate-dynamodb.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/python-operate-dynamodb.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"使用 Python 操作亚马逊 DynamoDB","item":"https://xingzuoshe.cn/python-operate-dynamodb.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/python-operate-dynamodb.html#article","headline":"使用 Python 操作亚马逊 DynamoDB","description":"使用 Python 操作亚马逊 DynamoDB","url":"https://xingzuoshe.cn/python-operate-dynamodb.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/python-operate-dynamodb.html#webpage"},"datePublished":"2015-08-20","dateModified":"2015-08-21","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>使用 Python 操作亚马逊 DynamoDB</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Python</p><h1>使用 Python 操作亚马逊 DynamoDB</h1><div class="article-meta"><time datetime="2015-08-20">2015-08-20</time><span>Martin</span><span>更新于 2015-08-21</span></div><ul class="article-tags" aria-label="文章标签"><li>dynamodb</li><li>aws</li></ul></div><div class="prose"><p>DynamoDB 是亚马逊AWS提供的一种完全托管的NoSQL数据库，省去部署/监控/维护数据库环节，给开发者节约了大量时间。 而且亚马逊提供了一个本地模拟环境用于测试和开发，我们可以使用本地的DynamoDB.local来学习和熟悉DynamoDB的API。</p>
+<h2 id="下载dynamodblocal">下载DynamoDB.local</h2>
+<p>从亚马逊的官方文档可以找到<a href="http://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html">下载地址</a></p>
+<p>解压之后:</p>
+<pre><code>dynamodb_local_2015-07-16_1.0$java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+Initializing DynamoDB Local with the following configuration:
+Port:   8000
+InMemory:   false
+DbPath: null
+SharedDb:   true
+shouldDelayTransientStatuses:   false
+CorsParams: *
+</code></pre>
+<p>在浏览器中打开<a href="http://localhost:8000/shell/%EF%BC%8C%E4%BD%A0%E4%BC%9A%E7%9C%8B%E5%88%B0DynamoDB">http://localhost:8000/shell/，你会看到DynamoDB</a> javascript shell，在网页上你可以试试javascript API的用法。</p>
+<p><img src="/images/DynamoDB_JavaScript_Shell.png" alt="DynamoDB_JavaScript_Shell"></p>
+<h2 id="boto3">Boto3</h2>
+<p>在试用之后javascript API之后，你是不是很想念我们简洁的Python呢，接下来我们就来介绍Python的用法。</p>
+<p>官方推荐的Pyhton SDK为Boto3，我们直接进入正题:</p>
+<pre><code>from boto3.session import Session
+
+session = Session(aws_access_key_id='anything',
+                  aws_secret_access_key='anything',
+                  region_name='us-east-1')
+
+# 指定本地的endpoint就可以使用DynamoDB.local
+client = session.client('dynamodb', endpoint_url='http://localhost:8000')
+dynamodb = session.resource('dynamodb', endpoint_url='http://localhost:8000')
+
+# 创建表
+user = dynamodb.create_table(
+    TableName='users',
+    KeySchema=[
+        {'AttributeName': 'username',
+        'KeyType': 'HASH'},
+        {'AttributeName': 'last_name',
+        'KeyType': 'RANGE'}],
+    AttributeDefinitions=[
+        {'AttributeName': 'username',
+        'AttributeType': 'S'},
+        {'AttributeName': 'last_name',
+        'AttributeType': 'S'},],
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 5,
+        'WriteCapacityUnits': 5}
+)
+
+# 使用已经存在的表
+user = dynamodb.Table('users')
+
+# 增加一条记录
+user.put_item(Item={'username':'janedoe', 'first_name': 'Jane', 'last_name':'Doe', 'age':25})
+# 通过Key查询
+item = user.get_item(Key={'username':'janedoe', 'last_name': 'Doe'}).get('Item')
+# update 一条记录
+item['age'] = 30
+user.put_item(Item=item)
+# 删除一条记录
+user.delete_item(Key={'username':'janedoe', 'last_name': 'Doe'})
+
+
+# query
+from boto3.dynamodb.conditions import Key, Attr
+user.query(KeyConditionExpression=Key('username').eq('janedoe'))
+
+# scan
+user.scan(FilterExpression=Attr('age').gt(20))
+# query和scan的区别就是，query的查询条件必须要有Key的条件，scan不用。
+
+# 列出有哪些表
+client.list_tables()
+</code></pre>
+<p>我们有两种操作Dynamodb的方法，一种是使用Resource，另一种是使用client。</p>
+<ol>
+<li>Resources: a high level, object oriented interface</li>
+<li>Clients: low level service connections</li>
+</ol>
+<p>使用Resource更加方便一些，给出的代码中就是Resource的用法。</p>
+<h2 id="其他资源">其他资源</h2>
+<p>boto3 <a href="https://boto3.readthedocs.org/en/latest/index.html">https://boto3.readthedocs.org/en/latest/index.html</a></p>
+<p>DynamoDB <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html">http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html</a></p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

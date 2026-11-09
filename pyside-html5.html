@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>如何使用 pyside + HTML5 开发桌面应用 · 星作社</title><meta name="description" content="使用 pyside + HTML5 开发桌面应用"><link rel="canonical" href="https://xingzuoshe.cn/pyside-html5.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="如何使用 pyside + HTML5 开发桌面应用 · 星作社"><meta property="og:description" content="使用 pyside + HTML5 开发桌面应用"><meta property="og:url" content="https://xingzuoshe.cn/pyside-html5.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="如何使用 pyside + HTML5 开发桌面应用 · 星作社"><meta name="twitter:description" content="使用 pyside + HTML5 开发桌面应用"><meta name="author" content="Martin"><meta property="article:published_time" content="2015-08-04"><meta property="article:modified_time" content="2015-08-04"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/pyside-html5.html#webpage","url":"https://xingzuoshe.cn/pyside-html5.html","name":"如何使用 pyside + HTML5 开发桌面应用","description":"使用 pyside + HTML5 开发桌面应用","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/pyside-html5.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/pyside-html5.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/pyside-html5.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"如何使用 pyside + HTML5 开发桌面应用","item":"https://xingzuoshe.cn/pyside-html5.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/pyside-html5.html#article","headline":"如何使用 pyside + HTML5 开发桌面应用","description":"使用 pyside + HTML5 开发桌面应用","url":"https://xingzuoshe.cn/pyside-html5.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/pyside-html5.html#webpage"},"datePublished":"2015-08-04","dateModified":"2015-08-04","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>如何使用 pyside + HTML5 开发桌面应用</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Python</p><h1>如何使用 pyside + HTML5 开发桌面应用</h1><div class="article-meta"><time datetime="2015-08-04">2015-08-04</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>pyside</li></ul></div><div class="prose"><p><a href="http://pyside.org">pyside</a> 是 <a href="http://www.qt.io/">Qt</a> 的Python绑定，使用没有任何限制，而且配合python丰富的类库和简洁的语法，开发起来非常方便</p>
+<h2 id="pip">pip</h2>
+<p>如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中</p>
+<p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
+<h2 id="安装pyside">安装pyside</h2>
+<p>在Ubuntu 和　DeepinLinux　下安装非常方便:</p>
+<pre><code>sudo apt-get install python-pyside
+</code></pre>
+<p>或者使用pip安装:</p>
+<pre><code>sudo pip install pyside
+</code></pre>
+<h2 id="创建窗口">创建窗口</h2>
+<p>学习所有的GUI程序，第一步都是创建一个窗口，下面的程序创建了一个无边框的窗口。:</p>
+<pre><code>class MainWindow(QtGui.QWidget):
+    def __init__(self):
+        QtGui.QWidget.__init__(self)
+
+        #初始化position
+        self.m_DragPosition=self.pos()
+
+        ＃设置窗口大小
+        self.resize(1024,600)
+        ＃窗口特征:没有边框
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowSystemMenuHint)
+        self.setMouseTracking(True)
+        #self.setStyleSheet("background-color:#f8f8f8;")
+
+        ＃窗口居中
+        desktop =QtGui.QApplication.desktop()
+        width = desktop.width()
+        height = desktop.height()
+        self.move((width - self.width())/2, (height - self.height())/2)
+
+        #支持窗口拖动,重写两个方法
+        def mousePressEvent(self, event):
+            if event.button()==Qt.LeftButton:
+                self.m_drag=True
+                self.m_DragPosition=event.globalPos()-self.pos()
+                event.accept()
+
+
+        def mouseMoveEvent(self, QMouseEvent):
+            if QMouseEvent.buttons() and Qt.LeftButton:
+                self.move(QMouseEvent.globalPos()-self.m_DragPosition)
+                QMouseEvent.accept()
+
+
+        def mouseReleaseEvent(self, QMouseEvent):
+            self.m_drag=False
+
+if __name__=="__main__":
+
+    mapp=QtGui.QApplication(sys.argv)
+    mw=MainWindow()
+    mw.show()
+    sys.exit(mapp.exec_())
+</code></pre>
+<h2 id="设计ui">设计UI</h2>
+<p>pyside有三种设计UI的方式</p>
+<ul>
+<li>手工编码,编码layout+widget</li>
+<li>xml定义(使用Qt Designer)</li>
+<li>QtQuick/QML定义(使用Qt Creator)，在QT5下更好用,QT4还不完善</li>
+</ul>
+<h2 id="查找帮助">查找帮助</h2>
+<p>网上pyside的资料不多，我们该怎么查找资料呢？ QT Creator是QT的官方IDE，里面有官方的帮助文档，C++，不过pyside的函数名是一模一样的，功能也保持一致。</p>
+<p>pyside的API文档也是很好的参考资料　<a href="http://pyside.github.io/docs/pyside/">http://pyside.github.io/docs/pyside/</a></p>
+<h2 id="webkit">webkit</h2>
+<p>WebKit是一个排版引擎，主要设计是用来让网页浏览器绘制网页。WebKit目前作为Apple Safari及Google Chrome（直到版本27）等浏览器的主要引擎。</p>
+<p><a href="http://qt-project.org/wiki/QtWebKit">http://qt-project.org/wiki/QtWebKit</a></p>
+<p>Qt WebKit is the port of WebKit on top of Qt. QtWebKit relies on the public APIs of Qt and can theoretically be used on any platform supported by Qt (theoretically because WebKit also requires a recent/good compiler).</p>
+<h2 id="qt-webkit-bridge">Qt Webkit Bridge</h2>
+<p>在Web环境中，web和后端的交互是通过http协议,但是在qtwebkit中怎么样才能和webkit中的网页交互。 Qt　提供了一个机制　Qt Webkit Bridge来实现这个功能。</p>
+<p>有两个特别的函数,实现这个功能</p>
+<p>让javascript调用python方法　QtWebKit.QWebView().page().mainFrame().addToJavaScriptWindowObject("pyObj", pyObj)</p>
+<p>python中调用javascript函数　QtWebKit.QWebView().page().mainFrame().evaluateJavaScript("alert('Hello World!');")</p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

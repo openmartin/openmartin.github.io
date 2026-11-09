@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>在本地电脑和消费级显卡上运行 HunyuanOCR 1.5 · 星作社</title><meta name="description" content="在本地电脑和消费级显卡上运行 HunyuanOCR 1.5"><link rel="canonical" href="https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="在本地电脑和消费级显卡上运行 HunyuanOCR 1.5 · 星作社"><meta property="og:description" content="在本地电脑和消费级显卡上运行 HunyuanOCR 1.5"><meta property="og:url" content="https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="在本地电脑和消费级显卡上运行 HunyuanOCR 1.5 · 星作社"><meta name="twitter:description" content="在本地电脑和消费级显卡上运行 HunyuanOCR 1.5"><meta property="article:published_time" content="2026-08-08"><meta property="article:modified_time" content="2026-08-08"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html#webpage","url":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html","name":"在本地电脑和消费级显卡上运行 HunyuanOCR 1.5","description":"在本地电脑和消费级显卡上运行 HunyuanOCR 1.5","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"在本地电脑和消费级显卡上运行 HunyuanOCR 1.5","item":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html#article","headline":"在本地电脑和消费级显卡上运行 HunyuanOCR 1.5","description":"在本地电脑和消费级显卡上运行 HunyuanOCR 1.5","url":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/vllm-serve-hunyuanocr-model.html#webpage"},"datePublished":"2026-08-08","dateModified":"2026-08-08"}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>在本地电脑和消费级显卡上运行 HunyuanOCR 1.5</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Linux</p><h1>在本地电脑和消费级显卡上运行 HunyuanOCR 1.5</h1><div class="article-meta"><time datetime="2026-08-08">2026-08-08</time></div><ul class="article-tags" aria-label="文章标签"><li>llm</li></ul></div><div class="prose"><p>参考官方文档，同时也有一些自己实际碰到的问题，踩得坑，花了一下午时间。</p>
+<h2 id="环境">环境</h2>
+<p>操作系统： Debian 12.15</p>
+<p>显卡： RTX 4060 Ti 16G</p>
+<h2 id="安装依赖">安装依赖</h2>
+<pre><code class="language-bash"># 安装 uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source ~/.bashrc
+# 虚拟环境
+uv venv --python 3.12 &amp;&amp; source .venv/bin/activate
+# 依赖包
+uv pip install vllm==0.25.1
+uv pip install "https://github.com/adithyaxx/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu13torch2.11cxx11abiTRUE-cp312-cp312-linux_x86_64.whl"
+</code></pre>
+<p>如果是按照官方文档里的 <code>uv pip install --no-build-isolation --no-cache-dir "flash-attn==2.8.3"</code> 非常容易编译失败，而且 flash-attn 官方没有跟目前环境一致而且编译好的 wheel 包下载，不过有其他人提供了目前需要的环境对应的 flash-attn 包，直接下载就行，否则编译的问题太难解决了。</p>
+<h2 id="下载模型">下载模型</h2>
+<pre><code class="language-bash">uv pip install hf
+hf download tencent/HunyuanOCR --local-dir ./HunyuanOCR --exclude "v1.0/*"
+</code></pre>
+<h2 id="vllm">vllm</h2>
+<p>直接使用官方的脚本就可以启动</p>
+<pre><code class="language-bash"># —— vLLM AR ——
+MODEL_PATH=./HunyuanOCR GPU=0 PORT=8000 bash inference/vLLM/serve.sh
+
+# —— vLLM + DFlash（草稿路径默认为 ${MODEL_PATH}/dflash） ——
+MODEL_PATH=./HunyuanOCR GPU=0 PORT=8000 bash inference/DFlash/serve_DFlash.sh
+
+# 就绪检查
+curl -sf http://127.0.0.1:8000/v1/models
+</code></pre>
+<h2 id="dflash">DFlash</h2>
+<p>官方说用了 DFlash 速度会块很多，的确是快了，第一次请求会慢，但是后续的请求速度就加快了。</p>
+<p>简单用了一个小图片对比用了 DFlash 和 没用 DFlash 的速度，还是有明显提升的，第一次请求往往包含一些初始化操作。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>vllm</th>
+<th>vllm + DFlash</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>图片第一次</td>
+<td>0.97s</td>
+<td>2.34s</td>
+</tr>
+<tr>
+<td>同样图片第二次</td>
+<td>0.71s</td>
+<td>0.47s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他说明">其他说明</h2>
+<p>下载模型的时候需要设置代理，huggingface.co 没办法直接连上。</p>
+<p>安装 python 包的时候最好也设置一下，否者会很慢。</p>
+<p>参考资料</p>
+<ol>
+<li><a href="https://github.com/Tencent-Hunyuan/HunyuanOCR/blob/main/docs/inference/inference_zh.md">HunyuanOCR github</a></li>
+</ol>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

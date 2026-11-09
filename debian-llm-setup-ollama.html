@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>在 debian 12 体验大模型, Ollama 和 open-webui 安装 · 星作社</title><meta name="description" content="安装 Ollama 和 open-webui 的步骤"><link rel="canonical" href="https://xingzuoshe.cn/debian-llm-setup-ollama.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="在 debian 12 体验大模型, Ollama 和 open-webui 安装 · 星作社"><meta property="og:description" content="安装 Ollama 和 open-webui 的步骤"><meta property="og:url" content="https://xingzuoshe.cn/debian-llm-setup-ollama.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="在 debian 12 体验大模型, Ollama 和 open-webui 安装 · 星作社"><meta name="twitter:description" content="安装 Ollama 和 open-webui 的步骤"><meta name="author" content="Martin"><meta property="article:published_time" content="2024-08-15"><meta property="article:modified_time" content="2024-08-15"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/debian-llm-setup-ollama.html#webpage","url":"https://xingzuoshe.cn/debian-llm-setup-ollama.html","name":"在 debian 12 体验大模型, Ollama 和 open-webui 安装","description":"安装 Ollama 和 open-webui 的步骤","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/debian-llm-setup-ollama.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/debian-llm-setup-ollama.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/debian-llm-setup-ollama.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"在 debian 12 体验大模型, Ollama 和 open-webui 安装","item":"https://xingzuoshe.cn/debian-llm-setup-ollama.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/debian-llm-setup-ollama.html#article","headline":"在 debian 12 体验大模型, Ollama 和 open-webui 安装","description":"安装 Ollama 和 open-webui 的步骤","url":"https://xingzuoshe.cn/debian-llm-setup-ollama.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/debian-llm-setup-ollama.html#webpage"},"datePublished":"2024-08-15","dateModified":"2024-08-15","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>在 debian 12 体验大模型, Ollama 和 open-webui 安装</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Linux</p><h1>在 debian 12 体验大模型, Ollama 和 open-webui 安装</h1><div class="article-meta"><time datetime="2024-08-15">2024-08-15</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>debian</li><li>nvidia</li></ul></div><div class="prose"><h3 id="系统设置">系统设置</h3>
+<p>在安装的时候选设置了 root 账号，但是需要把常用的账号加到sudoer列表里，使用起来更方便一点。root 作为特权账号，不适合日常使用。系统操作系统时的注意事项可以参考<a href="/debian-12-with-4060ti.html">上一篇</a></p>
+<pre><code>su - root
+visudo
+</code></pre>
+<p>在 <code>root ALL=(ALL:ALL) ALL</code> 下面加一行 <code>xxx ALL=(ALL:ALL) ALL</code></p>
+<p>一般第一步就是更换镜像源，让下载包的速度更快一点，这里选择腾讯云的镜像，虽然不在官方的镜像列表里，貌似速度快一点</p>
+<pre><code>deb https://mirrors.cloud.tencent.com/debian/ bookworm main contrib non-free non-free-firmware
+deb-src https://mirrors.cloud.tencent.com/debian/ bookworm main contrib non-free non-free-firmware
+
+deb https://mirrors.cloud.tencent.com/debian/ bookworm-updates main contrib non-free non-free-firmware
+deb-src https://mirrors.cloud.tencent.com/debian/ bookworm-updates main contrib non-free non-free-firmware
+
+deb https://mirrors.cloud.tencent.com/debian/ bookworm-backports main contrib non-free non-free-firmware
+deb-src https://mirrors.cloud.tencent.com/debian/ bookworm-backports main contrib non-free non-free-firmware
+
+deb https://mirrors.cloud.tencent.com/debian-security bookworm-security main contrib non-free non-free-firmware
+deb-src mirrors.cloud.tencent.com/debian-security bookworm-security main contrib non-free non-free-firmware
+</code></pre>
+<h3 id="安装-cuda-和-nvidia-驱动">安装 cuda 和 nvidia 驱动</h3>
+<p>下载 cuda toolkit, <a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></p>
+<p>这里使用 runfile 安装</p>
+<pre><code># 先安装 gcc make linux-headers
+sudo apt-get install gcc make linux-headers-$(uname -r)
+wget https://developer.download.nvidia.com/compute/cuda/12.6.0/local_installers/cuda_12.6.0_560.28.03_linux.run
+sudo sh cuda_12.6.0_560.28.03_linux.run
+</code></pre>
+<p>安装失败了，查看日志发现出现下面的错误</p>
+<pre><code>-&gt; The file '/tmp/.X0-lock' exists and appears to contain the process ID '1680' of a running X server.
+-&gt; You appear to be running an X server.  Installing the NVIDIA driver while X is running is not recommended, as doing so may prevent the installer from detecting some potential installation problems, and it may not be possible to start new graphics applications after a new driver is installed.  If you choose to continue installation, it is highly recommended that you reboot your computer after installation to use the newly installed driver. (Answer: Abort installation)
+</code></pre>
+<p>停止 xorg 进程之后再重新安装 cuda 试试</p>
+<pre><code>ps -ef | grep xorg
+# 看使用的是什么图形管理器，常见的有 gdm3/kdm/lightdm/sddm
+sudo /etc/init.d/lightdm stop
+</code></pre>
+<p>出现了下面的输出说明安装成功了</p>
+<pre><code>===========
+= Summary =
+===========
+
+Driver:   Installed
+Toolkit:  Installed in /usr/local/cuda-12.6/
+
+Please make sure that
+ -   PATH includes /usr/local/cuda-12.6/bin
+ -   LD_LIBRARY_PATH includes /usr/local/cuda-12.6/lib64, or, add /usr/local/cuda-12.6/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-12.6/bin
+To uninstall the NVIDIA Driver, run nvidia-uninstall
+Logfile is /var/log/cuda-installer.log
+</code></pre>
+<p><code>nvidia-smi</code> 输出下面的界面，说明找到了显卡</p>
+<pre><code>+-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 560.28.03              Driver Version: 560.28.03      CUDA Version: 12.6     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4060 Ti     Off |   00000000:26:00.0 Off |                  N/A |
+| 30%   39C    P0             21W /  165W |       1MiB /  16380MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+</code></pre>
+<h3 id="安装-docker">安装 docker</h3>
+<p><a href="https://docs.docker.com/engine/install/debian/">https://docs.docker.com/engine/install/debian/</a> 参考官方的安装办法，这里使用 deb 包手动安装。</p>
+<p>因为被墙了，所以需要一些上网魔法，<code>export https_proxy=http://example.com:8080</code></p>
+<pre><code>wget https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/containerd.io_1.7.20-1_amd64.deb
+wget https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-ce_27.1.2-1~debian.12~bookworm_amd64.deb
+wget https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-ce-cli_27.1.2-1~debian.12~bookworm_amd64.deb
+wget https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-buildx-plugin_0.16.2-1~debian.12~bookworm_amd64.deb
+wget https://download.docker.com/linux/debian/dists/bookworm/pool/stable/amd64/docker-compose-plugin_2.29.1-1~debian.12~bookworm_amd64.deb
+</code></pre>
+<p>安装下载的 deb 包</p>
+<pre><code>sudo dpkg -i *.deb
+</code></pre>
+<p>可能会出现缺少依赖的问题</p>
+<pre><code>Setting up docker-buildx-plugin (0.16.2-1~debian.12~bookworm) ...
+dpkg: dependency problems prevent configuration of docker-ce:
+ docker-ce depends on iptables; however:
+  Package iptables is not installed.
+
+dpkg: error processing package docker-ce (--install):
+</code></pre>
+<p>执行下面的方法修复，会安装 iptables libip6tc2，然后再 dpkg 重新安装一下</p>
+<pre><code>sudo apt --fix-broken
+</code></pre>
+<p>验证一下，需要配置一下 docker 镜像来加速，可以用赛博菩萨 cloudflare.com 的服务免费搭一个 docker 镜像，网上有很多教程</p>
+<pre><code>sudo vi /etc/docker/daemon.json
+</code></pre>
+<pre><code>{
+    "registry-mirrors": [
+        "http://docker.自己去搭.cn"
+    ]
+
+}
+</code></pre>
+<p>拉取 hello-world 镜像验证一下是否成功</p>
+<pre><code>$ sudo docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete
+Digest: sha256:53cc4d415d839c98be39331c948609b659ed725170ad2ca8eb36951288f81b75
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+</code></pre>
+<p>下面的命令让用户不使用 sudo 也可以操作 docker，使用起来更方便</p>
+<pre><code>sudo usermod -aG docker $USER
+newgrp docker
+</code></pre>
+<h4 id="安装-nvidia-container-toolkit">安装 NVIDIA Container Toolkit</h4>
+<p><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">NVIDIA Container Toolkit</a></p>
+<p>下载 deb 的地址 <a href="https://github.com/NVIDIA/nvidia-container-toolkit/releases">https://github.com/NVIDIA/nvidia-container-toolkit/releases</a></p>
+<pre><code>tar -zxvf nvidia-container-toolkit_1.16.1_deb_amd64.tar.gz
+cd release-v1.16.1-stable/packages/ubuntu18.04 
+sudo dpkg -i *.deb
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+</code></pre>
+<p>安装完成之后，在 docker 中运行的程序也可以使用 GPU</p>
+<h3 id="installing-ollama">Installing Ollama</h3>
+<p>去官网下载 <a href="https://ollama.com/">https://ollama.com/</a></p>
+<pre><code>curl -fsSL https://ollama.com/install.sh | sh
+</code></pre>
+<p>推荐试试这几个模型，这也是 continue.dev 这个 AI 编程插件推荐的</p>
+<pre><code>ollama run llama3.1:8b
+ollama run deepseek-coder-v2:16b
+ollama pull nomic-embed-text
+</code></pre>
+<h3 id="install-open-webui">Install open-webui</h3>
+<p>可以使用docker</p>
+<pre><code>sudo docker pull ghcr.io/open-webui/open-webui:cuda
+</code></pre>
+<p>也可以直接安装 <code>pip install open-webui</code>，后者的可控性更强一点</p>
+<pre><code>python3 -m venv open_webui_venv
+pip install open-webui
+</code></pre>
+<p>依赖的包很多，等待下载完需要一段时间</p>
+<p>一个人可以不开启用户管理，直接是一个对话界面，下面是启动脚本</p>
+<pre><code># start.sh
+source ~/open_webui_venv/bin/activate
+export WEBUI_AUTH=False
+export HF_ENDPOINT=https://hf-mirror.com
+nohup open-webui serve &amp;
+</code></pre>
+<p>最后打开的界面如下，非常简洁</p>
+<p><img src="/images/open-webui.png" alt="open-webui"></p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>fscrawler for Elasticsearch 文件系统索引 · 星作社</title><meta name="description" content="fscrawler for Elasticsearch文件系统索引"><link rel="canonical" href="https://xingzuoshe.cn/fscrawler-for-elasticsearch.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="fscrawler for Elasticsearch 文件系统索引 · 星作社"><meta property="og:description" content="fscrawler for Elasticsearch文件系统索引"><meta property="og:url" content="https://xingzuoshe.cn/fscrawler-for-elasticsearch.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="fscrawler for Elasticsearch 文件系统索引 · 星作社"><meta name="twitter:description" content="fscrawler for Elasticsearch文件系统索引"><meta name="author" content="Martin"><meta property="article:published_time" content="2020-09-20"><meta property="article:modified_time" content="2020-09-20"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html#webpage","url":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html","name":"fscrawler for Elasticsearch 文件系统索引","description":"fscrawler for Elasticsearch文件系统索引","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"fscrawler for Elasticsearch 文件系统索引","item":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html#article","headline":"fscrawler for Elasticsearch 文件系统索引","description":"fscrawler for Elasticsearch文件系统索引","url":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/fscrawler-for-elasticsearch.html#webpage"},"datePublished":"2020-09-20","dateModified":"2020-09-20","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>fscrawler for Elasticsearch 文件系统索引</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Java</p><h1>fscrawler for Elasticsearch 文件系统索引</h1><div class="article-meta"><time datetime="2020-09-20">2020-09-20</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>java</li><li>elasticsearch</li></ul></div><div class="prose"><h2 id="fscrawler-for-elasticsearch">fscrawler for Elasticsearch</h2>
+<p>如果需要搜索本地文件，索引数据放到 Elasticsearch 可以试试
+<a href="https://github.com/dadoonet/fscrawler">https://github.com/dadoonet/fscrawler</a></p>
+<p>程序可以定时索引本地文件系统，增加新文件，更新已经索引的文件，移除已删除的文件</p>
+<p>解析文件的过程调用 <a href="https://tika.apache.org/">apache tika</a>，把各种格式的文件转换成文本，导入到 Elasticsearch</p>
+<h3 id="config">config</h3>
+<blockquote>
+<p>需要 Java 1.8 及以上</p>
+</blockquote>
+<p>新建配置目录</p>
+<pre><code class="language-sh"># 在当前目录下新建配置目录 config\job_name
+$ bin/fscrawler --config_dir config job_name
+18:28:58,174 WARN  [f.p.e.c.f.FsCrawler] job [job_name] does not exist
+18:28:58,177 INFO  [f.p.e.c.f.FsCrawler] Do you want to create it (Y/N)?
+y
+</code></pre>
+<p>建立配置目录如下</p>
+<pre><code>config
+│
+├─job_name
+│      _settings.yaml
+│
+└─_default
+    ├─6
+    │      _settings.json
+    │      _settings_folder.json
+    │
+    └─7
+            _settings.json
+            _settings_folder.json
+</code></pre>
+<p>最重要的配置文件是 <code>job_name\_settings.yaml</code>，配置参考 <a href="https://fscrawler.readthedocs.io/en/latest/admin/fs/index.html">Job file specification</a></p>
+<p><code>_default\6\_settings.json</code> 对应 es 6.x 版本，<code>_default\7\_settings.json</code> 对应 es 7.x 版本，只有一个地方可能需要修改，就是 content 的分词方法，我这里用的是 hanlp_index</p>
+<pre><code class="language-json">"content": {
+        "type": "text", "analyzer": "hanlp_index", "search_analyzer": "hanlp_index", "index_options":  "offsets"
+      },
+</code></pre>
+<h3 id="run">run</h3>
+<pre><code>fscrawler-es7-2.7-SNAPSHOT\bin\fscrawler.bat --config_dir config job_name
+</code></pre>
+<h3 id="其他">其他</h3>
+<p>记录日志：可以指定一个log4j2.xml</p>
+<pre><code>set FS_JAVA_OPTS="-Dlog4j.configurationFile=file:///D:/fscrawler/config/log4j2.xml"
+</code></pre>
+<p>开启 <a href="https://fscrawler.readthedocs.io/en/latest/admin/fs/rest.html">REST service</a></p>
+<pre><code>fscrawler-es7-2.7-SNAPSHOT\bin\fscrawler.bat --rest --config_dir config job_name
+</code></pre>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

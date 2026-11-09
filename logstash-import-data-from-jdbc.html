@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Logstash import data from jdbc · 星作社</title><meta name="description" content="logstash 从数据库导入数据"><link rel="canonical" href="https://xingzuoshe.cn/logstash-import-data-from-jdbc.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="Logstash import data from jdbc · 星作社"><meta property="og:description" content="logstash 从数据库导入数据"><meta property="og:url" content="https://xingzuoshe.cn/logstash-import-data-from-jdbc.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Logstash import data from jdbc · 星作社"><meta name="twitter:description" content="logstash 从数据库导入数据"><meta name="author" content="Martin"><meta property="article:published_time" content="2021-08-06"><meta property="article:modified_time" content="2021-08-06"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html#webpage","url":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html","name":"Logstash import data from jdbc","description":"logstash 从数据库导入数据","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"Logstash import data from jdbc","item":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html#article","headline":"Logstash import data from jdbc","description":"logstash 从数据库导入数据","url":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/logstash-import-data-from-jdbc.html#webpage"},"datePublished":"2021-08-06","dateModified":"2021-08-06","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>Logstash import data from jdbc</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Java</p><h1>Logstash import data from jdbc</h1><div class="article-meta"><time datetime="2021-08-06">2021-08-06</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>java</li><li>elasticsearch</li></ul></div><div class="prose"><h2 id="一次性导入">一次性导入</h2>
+<p>logstash 是基于jruby的，也可以使用jdbc，从数据库中导入数据也很方便。</p>
+<p>下面是个例子，而且加入了IP地址到地理位置的转换：</p>
+<pre><code class="language-logstash">input {
+ jdbc {
+       jdbc_validate_connection =&gt; true
+       jdbc_connection_string =&gt; "jdbc:oracle:thin:@192.168.100.1:1521:orcl"
+       jdbc_user =&gt; "read"
+       jdbc_password =&gt; "readonly"
+       jdbc_driver_library =&gt; "D:\ojdbc6.jar"
+       jdbc_driver_class =&gt; "Java::oracle.jdbc.driver.OracleDriver"
+       jdbc_paging_enabled =&gt; true
+       statement =&gt; "select t.log_id, t.log_time, t.client_ip, t.user_agent, t.browser, t.browser_type, t.browser_major_version, t.device_type, t.platform, t.platform_version from sys_log t 
+       where EXTRACT(year from t.log_time) &gt; 2020"
+       lowercase_column_names =&gt; false
+   }
+}
+
+filter {
+  mutate {
+    rename =&gt; { "LOG_ID" =&gt; "logId"}
+    rename =&gt; { "LOG_TIME" =&gt; "@timestamp"}
+    rename =&gt; { "CLIENT_IP" =&gt; "ip"}
+    rename =&gt; { "USER_AGENT" =&gt; "ua"}
+    rename =&gt; { "BROWSER" =&gt; "browser"}
+    rename =&gt; { "BROWSER_TYPE" =&gt; "browserType"}
+    rename =&gt; { "BROWSER_MAJOR_VERSION" =&gt; "browserMajorVersion"}
+	  rename =&gt; { "DEVICE_TYPE" =&gt; "deviceType"}
+	  rename =&gt; { "PLATFORM" =&gt; "platform"}
+	  rename =&gt; { "PLATFORM_VERSION" =&gt; "platformVersion"}
+  }
+  geoip {
+    source =&gt; "ip"
+    database =&gt; "D:\logstash-7.3.1\GeoLite2-City_20210804\GeoLite2-City.mmdb"
+  }
+}
+
+output {
+  stdout { codec =&gt; rubydebug }
+
+if "_jsonparsefailure" not in [tags] {
+  elasticsearch {
+    hosts =&gt; ["192.168.100.2:9200"]
+    index =&gt; "sys-log-2021"
+    }
+  }
+}
+</code></pre>
+<h2 id="持续导入">持续导入</h2>
+<p>如果日志是持续性导入，可以 track 上次导入的进度，下次在此基础上做增量导入。</p>
+<pre><code class="language-logstash">input {
+ jdbc {
+       jdbc_validate_connection =&gt; true
+       jdbc_connection_string =&gt; "jdbc:oracle:thin:@192.168.100.1:1521:orcl"
+       jdbc_user =&gt; "read"
+       jdbc_password =&gt; "readonly"
+       jdbc_driver_library =&gt; "D:\ojdbc6.jar"
+       jdbc_driver_class =&gt; "Java::oracle.jdbc.driver.OracleDriver"
+       jdbc_paging_enabled =&gt; true
+       statement =&gt; "select t.log_id, t.log_time, t.client_ip, t.user_agent, t.browser, t.browser_type, t.browser_major_version, t.device_type, t.platform, t.platform_version from sys_log t 
+       where EXTRACT(year from t.log_time) &gt; 2020 and t.log_id &gt; :sql_last_value order by t.log_id asc"
+       lowercase_column_names =&gt; false
+
+       # tracking
+       parameters =&gt; { "sql_last_value" =&gt; 0 }
+       use_column_value =&gt; true
+       tracking_column =&gt; "LOG_ID"
+       tracking_column_type =&gt; "numeric"
+       # 每分钟执行一次
+       schedule =&gt; "0 * * * * *"
+   }
+}
+
+filter {
+  mutate {
+    rename =&gt; { "LOG_ID" =&gt; "logId"}
+    rename =&gt; { "LOG_TIME" =&gt; "@timestamp"}
+    rename =&gt; { "CLIENT_IP" =&gt; "ip"}
+    rename =&gt; { "USER_AGENT" =&gt; "ua"}
+    rename =&gt; { "BROWSER" =&gt; "browser"}
+    rename =&gt; { "BROWSER_TYPE" =&gt; "browserType"}
+    rename =&gt; { "BROWSER_MAJOR_VERSION" =&gt; "browserMajorVersion"}
+	  rename =&gt; { "DEVICE_TYPE" =&gt; "deviceType"}
+	  rename =&gt; { "PLATFORM" =&gt; "platform"}
+	  rename =&gt; { "PLATFORM_VERSION" =&gt; "platformVersion"}
+  }
+  geoip {
+    source =&gt; "ip"
+    database =&gt; "D:\logstash-7.3.1\GeoLite2-City_20210804\GeoLite2-City.mmdb"
+  }
+}
+
+output {
+  stdout { codec =&gt; rubydebug }
+
+if "_jsonparsefailure" not in [tags] {
+  elasticsearch {
+    hosts =&gt; ["192.168.100.2:9200"]
+    index =&gt; "sys-log-2021"
+    }
+  }
+}
+</code></pre>
+<p>记录上次 sql_last_value 的临时文件是 last_run_metadata_path，默认值是 "$HOME/.logstash_jdbc_last_run"</p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

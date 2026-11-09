@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>如何在 aws ec2 上部署 django 应用 · 星作社</title><meta name="description" content="如何在 aws ec2 上部署 django 应用"><link rel="canonical" href="https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="如何在 aws ec2 上部署 django 应用 · 星作社"><meta property="og:description" content="如何在 aws ec2 上部署 django 应用"><meta property="og:url" content="https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="如何在 aws ec2 上部署 django 应用 · 星作社"><meta name="twitter:description" content="如何在 aws ec2 上部署 django 应用"><meta name="author" content="Martin"><meta property="article:published_time" content="2016-04-19"><meta property="article:modified_time" content="2016-04-19"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html#webpage","url":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html","name":"如何在 aws ec2 上部署 django 应用","description":"如何在 aws ec2 上部署 django 应用","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"如何在 aws ec2 上部署 django 应用","item":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html#article","headline":"如何在 aws ec2 上部署 django 应用","description":"如何在 aws ec2 上部署 django 应用","url":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/how-to-deploy-django-on-ec2.html#webpage"},"datePublished":"2016-04-19","dateModified":"2016-04-19","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>如何在 aws ec2 上部署 django 应用</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Django</p><h1>如何在 aws ec2 上部署 django 应用</h1><div class="article-meta"><time datetime="2016-04-19">2016-04-19</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>django</li><li>aws</li></ul></div><div class="prose"><p>很多时候我们会在环境配置上花大量的时间，这里我记录了一下我配置的过程，希望能节省大家一些的时间。</p>
+<p>我的环境是amazon ec2，选择的操作系统是Amazon Linux AMI 2015.03 (HVM) ，选择的最常见的部署方案 nginx + gunicorn + django + mysql</p>
+<h2 id="mysql">mysql</h2>
+<p>首先安装mysql-sever:</p>
+<pre><code>$sudo yum install mysql-server mysql mysql-devel
+$sudo chown mysql.mysql -R /var/lib/mysql
+</code></pre>
+<p>修改配置文件/etc/my.cnf:</p>
+<pre><code>[mysqld]
+datadir=/var/lib/mysql # 数据文件存放的位置,修改成适合的位置
+
+character-set-server=utf8 # 设置默认编码
+
+[client]
+default-character-set=utf8 # 设置默认编码
+</code></pre>
+<p>启动mysql:</p>
+<pre><code>$sudo service mysqld start
+</code></pre>
+<p>设置root密码，执行/usr/bin/mysql_secure_installation</p>
+<p>如果需要通过客户端工具管理MySQL，需要添加远程连接MySQL权限:</p>
+<pre><code>$mysql -u root -p
+
+mysql&gt;GRANT ALL PRIVILEGES ON *.* TO root@"%" IDENTIFIED BY '&lt;password&gt;' WITH GRANT OPTION;
+mysql&gt;FLUSH PRIVILEGES;
+</code></pre>
+<p>一般不建议root用户连接MySQL，所以需要添加一个普通用户:</p>
+<pre><code>create user 'blog'@'localhost' identified by '&lt;password&gt;';
+flush privileges;
+grant all privileges on blog.* to blog@localhost identified  by '&lt;password&gt;';
+</code></pre>
+<h2 id="配置python环境">配置python环境</h2>
+<p>我目前的python版本是2.7.9，所以不需要安装pip</p>
+<h3 id="pip">pip</h3>
+<p>如果Python版本是2.7.9或者是3.4 以上，pip默认包含于Python的安装包中</p>
+<p>怎么安装pip，参考这里 <a href="https://pip.pypa.io/en/latest/installing.html">https://pip.pypa.io/en/latest/installing.html</a></p>
+<h3 id="virtualenv">virtualenv</h3>
+<p>virtualenv 用于创建独立的Python环境，可以不受全局的site-packages当中安装的包的影响。:</p>
+<pre><code>pip install virtualenv
+# 创建虚拟环境
+virtualenv ENV
+cd ENV
+source ./bin/activate
+</code></pre>
+<p>磨刀不误砍柴工，接下来开始大展身手啦。</p>
+<h3 id="安装必须的python库">安装必须的python库</h3>
+<p>如果项目中有requirements.txt文件，可直接执行，自动安装所有依赖关系，没有的话如果有可以从开发环境导出一份:</p>
+<pre><code>$pip freeze &gt;&gt; requirements.txt # 在开发环境中执行
+$pip install -r requirements.txt
+</code></pre>
+<p>我们在这里列出一些经常需要的依赖包:</p>
+<pre><code>$pip install gunicorn # gunicorn
+$pip install gevent   # 让gunicorn使用gevent worker，提高并发性能
+$pip install django
+$pip install MySQL-python # 如果要连接mysql数据库，需要安装
+$pip install Pillow   # 代替Python Image Library
+</code></pre>
+<p>如果使用gunicron部署django应用，需要小小修改settings.py一下，就是在INSTALLED_APPS最后添加上gunicorn。</p>
+<p>gunicron 启动脚本:</p>
+<pre><code>nohup gunicorn --worker-class=gevent myblog.wsgi:application --bind 127.0.0.1:8001 &gt;gunicorn.log 2&gt;&amp;1 &amp;
+</code></pre>
+<p>上面的步骤完成之后，我们的应用就可以启动了，但是我们一般在gunicorn之前使用ngnix做反向代理。有两个好处，一是静态文件交给nginx处理，可以减少响应时间，二是如果一个服务器上部署多个站点，仅仅用gunicorn无法达到目的，这时我们需要用apache或者nginx的虚拟服务器功能。</p>
+<h2 id="nginx">nginx</h2>
+<p>不同的Linux发行版上安装的方法，配置文件的位置可能不太一样，我们理解了整个配置的思路之后就可以举一反三了:</p>
+<pre><code>$sudo yum install nginx
+$sudo service start nginx
+</code></pre>
+<p>编辑 /etc/nginx/conf.d/virtual.conf:</p>
+<pre><code>server {
+    listen       80;
+
+    server_name  blog.dailyastrology.info;
+
+    access_log /var/log/nginx/blog.dailyastrology.info-access.log;
+    error_log /var/log/nginx/blog.dailyastrology.info-error.log;
+
+    location / {
+        proxy_pass http://127.0.0.1:8001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    location /static {
+        root /home/ec2-user/blogenv/myblog;
+    }
+}
+</code></pre>
+<p>如果仅仅作为个人的站点，上述的配置应该就够用的，如果是需要高级的功能就需要自己去研究每个软件的配置和运维方法。</p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

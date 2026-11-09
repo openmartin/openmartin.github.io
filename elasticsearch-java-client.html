@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Elasticsearch Java Client · 星作社</title><meta name="description" content="Elasticsearch Java Client 配置和使用"><link rel="canonical" href="https://xingzuoshe.cn/elasticsearch-java-client.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="Elasticsearch Java Client · 星作社"><meta property="og:description" content="Elasticsearch Java Client 配置和使用"><meta property="og:url" content="https://xingzuoshe.cn/elasticsearch-java-client.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Elasticsearch Java Client · 星作社"><meta name="twitter:description" content="Elasticsearch Java Client 配置和使用"><meta name="author" content="Martin"><meta property="article:published_time" content="2019-08-22"><meta property="article:modified_time" content="2019-08-22"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/elasticsearch-java-client.html#webpage","url":"https://xingzuoshe.cn/elasticsearch-java-client.html","name":"Elasticsearch Java Client","description":"Elasticsearch Java Client 配置和使用","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/elasticsearch-java-client.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/elasticsearch-java-client.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/elasticsearch-java-client.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"Elasticsearch Java Client","item":"https://xingzuoshe.cn/elasticsearch-java-client.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/elasticsearch-java-client.html#article","headline":"Elasticsearch Java Client","description":"Elasticsearch Java Client 配置和使用","url":"https://xingzuoshe.cn/elasticsearch-java-client.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/elasticsearch-java-client.html#webpage"},"datePublished":"2019-08-22","dateModified":"2019-08-22","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>Elasticsearch Java Client</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Java</p><h1>Elasticsearch Java Client</h1><div class="article-meta"><time datetime="2019-08-22">2019-08-22</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>java</li><li>elasticsearch</li></ul></div><div class="prose"><h2 id="java-rest-client">Java REST Client</h2>
+<h3 id="maven-配置">maven 配置</h3>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
+    &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;
+    &lt;version&gt;7.2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>###　spring 构建 RestHighLevelClient 对象</p>
+<pre><code class="language-xml">&lt;!-- config elasticsearch RestHighLevelClient --&gt;
+&lt;bean id="httpHost" class="org.apache.http.HttpHost"&gt;
+    &lt;constructor-arg index="0" value="${elasticsearch.host}"/&gt;
+    &lt;constructor-arg index="1" value="${elasticsearch.port}"/&gt;
+&lt;/bean&gt;
+
+&lt;bean id="restClientBuilder" class="org.elasticsearch.client.RestClientBuilder"&gt;
+    &lt;constructor-arg index="0"&gt;
+        &lt;list&gt;
+            &lt;bean class="org.elasticsearch.client.Node"&gt;
+                &lt;constructor-arg index="0" ref="httpHost"/&gt;
+            &lt;/bean&gt;
+        &lt;/list&gt;
+    &lt;/constructor-arg&gt;
+&lt;/bean&gt;
+
+&lt;bean id="restHighLevelClient" class="org.elasticsearch.client.RestHighLevelClient" destroy-method="close"&gt;
+    &lt;constructor-arg index="0" ref="restClientBuilder"/&gt;
+&lt;/bean&gt;
+</code></pre>
+<h3 id="使用-demo">使用 Demo</h3>
+<p>API 使用方法 <a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html">https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html</a></p>
+<pre><code class="language-java">SearchRequest searchRequest = new SearchRequest("web-log-2019-01");
+SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+// 设置分页
+searchSourceBuilder.from(0);
+searchSourceBuilder.size(10);
+
+// 设置查询条件
+searchSourceBuilder.query(QueryBuilders.matchPhraseQuery("title", queryword));
+
+// 设置 exclude
+String[] excludeFields = new String[] {"content"};
+searchSourceBuilder.fetchSource(null, excludeFields);
+
+searchRequest.source(searchSourceBuilder);
+
+// send request and get response
+SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+SearchHits hits = searchResponse.getHits();
+SearchHit[] searchHits = hits.getHits();
+for (SearchHit hit : searchHits) {
+    // do something with the SearchHit
+    System.out.println(hit.getSourceAsString());
+}
+</code></pre>
+<h2 id="elasticsearch-sql">Elasticsearch SQL</h2>
+<h3 id="maven-配置-1">maven 配置</h3>
+<p>添加 repository</p>
+<pre><code class="language-xml">&lt;repository&gt;
+    &lt;id&gt;elastic.co&lt;/id&gt;
+    &lt;name&gt;Elastic Repository&lt;/name&gt;
+    &lt;url&gt;https://artifacts.elastic.co/maven&lt;/url&gt;
+&lt;/repository&gt;
+</code></pre>
+<p>dependency</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.elasticsearch.plugin&lt;/groupId&gt;
+    &lt;artifactId&gt;x-pack-sql-jdbc&lt;/artifactId&gt;
+    &lt;version&gt;${es.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="elasticsearch-sql--mybatis--spring">Elasticsearch SQL + mybatis + spring</h3>
+<p>Elasticsearch SQL 可以和 mybatis, spring 结合起来，和关系型数据库一样的开发模式</p>
+<p>因为 SQL 和 Elasticsearch DSL 不能完全对应，适合比较简单的场景</p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

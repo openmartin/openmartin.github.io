@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>使用 scrcpy 在电脑上镜像手机 · 星作社</title><meta name="description" content="scrcpy 的用法"><link rel="canonical" href="https://xingzuoshe.cn/scrcpy-mirror.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="使用 scrcpy 在电脑上镜像手机 · 星作社"><meta property="og:description" content="scrcpy 的用法"><meta property="og:url" content="https://xingzuoshe.cn/scrcpy-mirror.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="使用 scrcpy 在电脑上镜像手机 · 星作社"><meta name="twitter:description" content="scrcpy 的用法"><meta name="author" content="Martin"><meta property="article:published_time" content="2024-11-03"><meta property="article:modified_time" content="2024-11-03"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/scrcpy-mirror.html#webpage","url":"https://xingzuoshe.cn/scrcpy-mirror.html","name":"使用 scrcpy 在电脑上镜像手机","description":"scrcpy 的用法","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/scrcpy-mirror.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/scrcpy-mirror.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/scrcpy-mirror.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"使用 scrcpy 在电脑上镜像手机","item":"https://xingzuoshe.cn/scrcpy-mirror.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/scrcpy-mirror.html#article","headline":"使用 scrcpy 在电脑上镜像手机","description":"scrcpy 的用法","url":"https://xingzuoshe.cn/scrcpy-mirror.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/scrcpy-mirror.html#webpage"},"datePublished":"2024-11-03","dateModified":"2024-11-03","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>使用 scrcpy 在电脑上镜像手机</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Linux</p><h1>使用 scrcpy 在电脑上镜像手机</h1><div class="article-meta"><time datetime="2024-11-03">2024-11-03</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>linux</li><li>android</li></ul></div><div class="prose"><p>刷手机是一个巨大的消耗时间的黑洞，为了避免这种情况，所以尽量用电脑来操作和获取信息。但是手机又不能不用，有很多东西电脑上无法替代。有一个很好的工具<code>scrcpy</code>可以在电脑上镜像手机，控制手机，开源而且免费的。</p>
+<p><a href="https://github.com/Genymobile/scrcpy">https://github.com/Genymobile/scrcpy</a></p>
+<p>先安装依赖</p>
+<pre><code class="language-bash">sudo apt install ffmpeg libsdl2-2.0-0 adb wget \
+                 gcc git pkg-config meson ninja-build libsdl2-dev \
+                 libavcodec-dev libavdevice-dev libavformat-dev libavutil-dev \
+                 libswresample-dev libusb-1.0-0 libusb-10-0-dev
+</code></pre>
+<p>安装 scrcpy</p>
+<pre><code class="language-bash">cd scrcpy
+./install_release.sh
+</code></pre>
+<p>手机需要开调试模式，用USB线连上电脑，用下面的命令就可以打开一个手机的窗口，更多选项可以参考官方文档</p>
+<pre><code class="language-bash">scrcpy --video-codec=h265 --max-size=1920 --max-fps=60 --no-audio --keyboard=uhid --turn-screen-off --stay-awake 
+</code></pre>
+<p>有些情况不能镜像，比如支付的时候输入密码，国产的 android 系统都会黑屏来保护用户的输入。</p>
+<p>一些快捷键</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home 键</td>
+<td>Alt + h</td>
+</tr>
+<tr>
+<td>返回键</td>
+<td>Alt + b 或者鼠标右键单击</td>
+</tr>
+<tr>
+<td>近期任务</td>
+<td>Alt + s</td>
+</tr>
+<tr>
+<td>展开通知栏</td>
+<td>Alt + n</td>
+</tr>
+<tr>
+<td>收起通知栏</td>
+<td>Alt + Shitf + n</td>
+</tr>
+<tr>
+<td>菜单键</td>
+<td>Alt + m</td>
+</tr>
+<tr>
+<td>音量键 +</td>
+<td>Alt + ↑</td>
+</tr>
+<tr>
+<td>音量键 -</td>
+<td>Alt + ↓</td>
+</tr>
+<tr>
+<td>电源键</td>
+<td>Alt + p</td>
+</tr>
+<tr>
+<td>熄屏但是继续投屏</td>
+<td>Alt + o</td>
+</tr>
+<tr>
+<td>点亮屏幕</td>
+<td>鼠标右键单击</td>
+</tr>
+<tr>
+<td>传文件到手机</td>
+<td>将文件拖入显示窗口</td>
+</tr>
+<tr>
+<td>粘贴电脑上的文字</td>
+<td>Ctrl + v</td>
+</tr>
+</tbody>
+</table>
+<h2 id="小米手机打开调试模式">小米手机打开调试模式</h2>
+<p>小米手机打开调试模式稍微有点困难</p>
+<p>设置 -&gt; 我的设备 -&gt; 全部参数与信息</p>
+<p><img src="/images/scrcpy_1.png" alt="scrcpy"></p>
+<p>多次点击【MIUI版本】（大概是6次左右），就会在【更多设置】中打开开发者选项</p>
+<p><img src="/images/scrcpy_2.png" alt="scrcpy"></p>
+<p>在开发者选项中，打开调试模式，有两个地方要打开</p>
+<p><img src="/images/scrcpy_3.png" alt="scrcpy"></p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

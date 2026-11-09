@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>python small tips · 星作社</title><meta name="description" content="一些Python小技巧"><link rel="canonical" href="https://xingzuoshe.cn/python-small-tips.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="python small tips · 星作社"><meta property="og:description" content="一些Python小技巧"><meta property="og:url" content="https://xingzuoshe.cn/python-small-tips.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="python small tips · 星作社"><meta name="twitter:description" content="一些Python小技巧"><meta name="author" content="Martin"><meta property="article:published_time" content="2016-04-19"><meta property="article:modified_time" content="2016-04-19"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/python-small-tips.html#webpage","url":"https://xingzuoshe.cn/python-small-tips.html","name":"python small tips","description":"一些Python小技巧","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/python-small-tips.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/python-small-tips.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/python-small-tips.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"python small tips","item":"https://xingzuoshe.cn/python-small-tips.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/python-small-tips.html#article","headline":"python small tips","description":"一些Python小技巧","url":"https://xingzuoshe.cn/python-small-tips.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/python-small-tips.html#webpage"},"datePublished":"2016-04-19","dateModified":"2016-04-19","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>python small tips</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Python</p><h1>python small tips</h1><div class="article-meta"><time datetime="2016-04-19">2016-04-19</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>python</li></ul></div><div class="prose"><p>最近的工作中遇到一些问题，记录了下来，希望后来的人不要再踩坑了。</p>
+<h2 id="all">all()</h2>
+<p>all()是python的一个内置函数，官方文档里面说如果所有的元素都为True，all()才返回True。:</p>
+<pre><code>def all(iterable):
+    for element in iterable:
+        if not element:
+            return False
+    return True
+</code></pre>
+<p>有一些情况需要注意，当list为空时，返回True；空字符串，None，0 的结果都是False。:</p>
+<pre><code>&gt;&gt;&gt; all([])
+True
+&gt;&gt;&gt; all(['a', 'b', 'c'])
+True
+&gt;&gt;&gt; all(['a', 'b', ''])
+False
+&gt;&gt;&gt; all(['a', 'b', None])
+False
+&gt;&gt;&gt; all(['a', 'b', 0])
+False
+</code></pre>
+<h2 id="注册表中有中文的问题">注册表中有中文的问题</h2>
+<p>在windows上安装python package，有时候会碰到： UnicodeDecodeError错误:</p>
+<pre><code>mimetypes.init() # try to read system mime.types
+File "C:\Python27\lib\mimetypes.py", line 358, in init
+db.read_windows_registry()
+File "C:\Python27\lib\mimetypes.py", line 258, in read_windows_registry
+for subkeyname in enum_types(hkcr):
+File "C:\Python27\lib\mimetypes.py", line 249, in enum_types
+ctype = ctype.encode(default_encoding) # omit in 3.x!
+UnicodeDecodeError: 'ascii' codec can't decode byte 0x88 in position 1: ordinal not in range(128)
+</code></pre>
+<p>这是因为python从注册表中HKEY_CLASSES_ROOT读取mimetype时，有包含中文的文件名后缀，一般都是阿里旺旺的。:</p>
+<pre><code>HKEY_CLASSES_ROOT\.阿里旺旺接收的可疑文件
+</code></pre>
+<p>删除这项就不会再出现UnicodeDecodeError错误。</p>
+<p>我的版本是Python 2.7.6，会出现这个问题，Python 2.7.7及以后的版本修复了这个问题。</p>
+<h2 id="python-setuppy-develop">python setup.py develop</h2>
+<p>develop模式并不会真正的install这个包，而是在site-packages文件夹中建立一个.egg-link文件，类似于操作系统的软链接。 这样你就可以随意编辑你的代码，并不需要每次测试的时候都reinstall一遍。当然你的程序要以python包的形似来组织才行。</p>
+<p>更多信息考参考文档 <a href="http://pythonhosted.org//setuptools/setuptools.html#development-mode">http://pythonhosted.org//setuptools/setuptools.html#development-mode</a></p>
+<h2 id="json-格式中单引号是不合法的">json 格式中单引号是不合法的</h2>
+<p>在json格式中单引号是不合法的字符，可以用replace(''', '"')替换掉。:</p>
+<pre><code>&gt;&gt;&gt; json.loads("['a', 'b', 'c']")
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "D:\Python27\lib\json\__init__.py", line 338, in loads
+    return _default_decoder.decode(s)
+  File "D:\Python27\lib\json\decoder.py", line 365, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "D:\Python27\lib\json\decoder.py", line 383, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ ValueError: No JSON object could be decoded
+</code></pre>
+<h2 id="redisredis-和-redisstrictredis-zadd的参数顺序不一样的">redis.Redis 和 redis.StrictRedis zadd的参数顺序不一样的</h2>
+<p>redis.Redis.zadd(name, <em>args,</em>*kwargs) value在前，分数在后</p>
+<p><em>args, 如: name1, score1, name2, score2, ... 或者是</em>*kwargs, 如: name1=score1, name2=score2</p>
+<p>redis.StrictRedis.zadd(name, <em>args,</em>*kwargs) 分数在前，value在后</p>
+<p><em>args, 如: score1, name1, score2, name2, ... 或者是</em>*kwargs, 如: name1=score1, name2=score2,</p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

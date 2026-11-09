@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>echarts 初级教程 · 星作社</title><meta name="description" content="echarts 基本概念，初级教程"><link rel="canonical" href="https://xingzuoshe.cn/echarts-preliminary-guide.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="echarts 初级教程 · 星作社"><meta property="og:description" content="echarts 基本概念，初级教程"><meta property="og:url" content="https://xingzuoshe.cn/echarts-preliminary-guide.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="echarts 初级教程 · 星作社"><meta name="twitter:description" content="echarts 基本概念，初级教程"><meta name="author" content="Martin"><meta property="article:published_time" content="2020-05-25"><meta property="article:modified_time" content="2020-05-25"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/echarts-preliminary-guide.html#webpage","url":"https://xingzuoshe.cn/echarts-preliminary-guide.html","name":"echarts 初级教程","description":"echarts 基本概念，初级教程","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/echarts-preliminary-guide.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/echarts-preliminary-guide.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/echarts-preliminary-guide.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"echarts 初级教程","item":"https://xingzuoshe.cn/echarts-preliminary-guide.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/echarts-preliminary-guide.html#article","headline":"echarts 初级教程","description":"echarts 基本概念，初级教程","url":"https://xingzuoshe.cn/echarts-preliminary-guide.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/echarts-preliminary-guide.html#webpage"},"datePublished":"2020-05-25","dateModified":"2020-05-25","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>echarts 初级教程</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Javascript</p><h1>echarts 初级教程</h1><div class="article-meta"><time datetime="2020-05-25">2020-05-25</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>echarts</li><li>javascript</li></ul></div><div class="prose"><h2 id="echarts-初级教程">echarts 初级教程</h2>
+<p>柱状图的例子</p>
+<pre><code class="language-javascript">option = {
+    title: {
+        text: 'ECharts 入门示例'
+    },
+    tooltip: {},
+    legend: {
+        data:['销量']
+    },
+    xAxis: {
+        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    },
+    yAxis: {},
+    series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+    }]
+};
+
+// 设置 echarts option
+var myChart = echarts.init(document.getElementById('echartsContainer'));
+myChart.setOption(option);
+</code></pre>
+<h2 id="核心概念">核心概念</h2>
+<p>xAxis.type</p>
+<pre><code>'value' 数值轴，适用于连续数据。
+'category' 类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 series.data 或 dataset.source 中取，或者可通过 xAxis.data 设置类目数据。
+'time' 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+'log' 对数轴。适用于对数数据。
+</code></pre>
+<p>yAxis.type</p>
+<pre><code>'value' 数值轴，适用于连续数据。
+'category' 类目轴，适用于离散的类目数据。为该类型时类目数据可自动从 series.data 或 dataset.source 中取，或者可通过 xAxis.data 设置类目数据。
+'time' 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+'log' 对数轴。适用于对数数据。
+</code></pre>
+<p>series.type</p>
+<pre><code>'line' 折线图
+'bar' 柱状图
+'pie'  饼图
+'scatter' 散点（气泡）图
+'effectScatter' 带有涟漪特效动画的散点（气泡）图
+'radar' 雷达图
+'tree' 树图
+'treemap'
+'sunburst' 旭日图
+'boxplot'  中文可以称为『箱形图』、『盒须图』、『盒式图』、『盒状图』、『箱线图』
+'candlestick' K线图
+'heatmap' 热力图主要通过颜色去表现数值的大小
+'map' 地图
+'parallel' 平行坐标系
+'lines' 用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
+'graph' 关系图 用于展现节点以及节点之间的关系数据。
+'sankey' 桑基图 是一种特殊的流图（可以看作是有向无环图）。 它主要用来表示原材料、能量等如何从最初形式经过中间过程的加工或转化达到最终状态。
+'funnel' 漏斗图
+'gauge' 仪表盘
+'pictorialBar' 象形柱图 象形柱图是可以设置各种具象图形元素（如图片、SVG PathData 等）的柱状图。往往用在信息图中。用于有至少一个类目轴或时间轴的直角坐标系上。
+'themeRiver' 主题河流 是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
+'custom' 自定义系列
+</code></pre>
+<h2 id="如何学习">如何学习</h2>
+<p>echarts 有非常多的 option，建议先找一个最接近的官方实例，然后在此上修改，比自己去看 API 更快更方便。</p>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>

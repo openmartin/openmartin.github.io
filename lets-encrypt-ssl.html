@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL · 星作社</title><meta name="description" content="在 Amazon Linux 使用 Let's encrypt 免费的SSL"><link rel="canonical" href="https://xingzuoshe.cn/lets-encrypt-ssl.html"><meta name="robots" content="index, follow"><meta property="og:site_name" content="星作社"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="og:title" content="在 Amazon Linux 使用 Let's encrypt 免费的SSL · 星作社"><meta property="og:description" content="在 Amazon Linux 使用 Let's encrypt 免费的SSL"><meta property="og:url" content="https://xingzuoshe.cn/lets-encrypt-ssl.html"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="在 Amazon Linux 使用 Let's encrypt 免费的SSL · 星作社"><meta name="twitter:description" content="在 Amazon Linux 使用 Let's encrypt 免费的SSL"><meta name="author" content="Martin"><meta property="article:published_time" content="2017-04-03"><meta property="article:modified_time" content="2017-04-03"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://xingzuoshe.cn/#website","url":"https://xingzuoshe.cn/","name":"星作社","inLanguage":"zh-CN"},{"@type":"WebPage","@id":"https://xingzuoshe.cn/lets-encrypt-ssl.html#webpage","url":"https://xingzuoshe.cn/lets-encrypt-ssl.html","name":"在 Amazon Linux 使用 Let's encrypt 免费的SSL","description":"在 Amazon Linux 使用 Let's encrypt 免费的SSL","inLanguage":"zh-CN","isPartOf":{"@id":"https://xingzuoshe.cn/#website"},"breadcrumb":{"@id":"https://xingzuoshe.cn/lets-encrypt-ssl.html#breadcrumb"},"mainEntity":{"@id":"https://xingzuoshe.cn/lets-encrypt-ssl.html#article"}},{"@type":"BreadcrumbList","@id":"https://xingzuoshe.cn/lets-encrypt-ssl.html#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://xingzuoshe.cn/"},{"@type":"ListItem","position":2,"name":"博客","item":"https://xingzuoshe.cn/blog/"},{"@type":"ListItem","position":3,"name":"在 Amazon Linux 使用 Let's encrypt 免费的SSL","item":"https://xingzuoshe.cn/lets-encrypt-ssl.html"}]},{"@type":"Article","@id":"https://xingzuoshe.cn/lets-encrypt-ssl.html#article","headline":"在 Amazon Linux 使用 Let's encrypt 免费的SSL","description":"在 Amazon Linux 使用 Let's encrypt 免费的SSL","url":"https://xingzuoshe.cn/lets-encrypt-ssl.html","inLanguage":"zh-CN","mainEntityOfPage":{"@id":"https://xingzuoshe.cn/lets-encrypt-ssl.html#webpage"},"datePublished":"2017-04-03","dateModified":"2017-04-03","author":{"@type":"Person","name":"Martin"}}]}</script><meta name="google-adsense-account" content="ca-pub-8640171181637141"><!-- AdSense uses Google's classic async script rather than an ESM module. --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8640171181637141" crossorigin="anonymous"></script><link rel="icon" href="/favicon.ico?v=spring-dipper-1" sizes="16x16 32x32 48x48"><link rel="icon" type="image/svg+xml" sizes="any" href="/brand/spring/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/brand/spring/icon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="/brand/spring/icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="/brand/spring/apple-touch-icon.png"><meta name="theme-color" content="#f8faf2"><link rel="stylesheet" href="/_astro/global.D8UwEfoz.css"></head><body><a class="skip" href="#main">跳到内容</a><header><a class="brand" href="/"><img class="brand-icon" src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong><span>实用在线小工具</span></a><nav class="category-nav" aria-label="工具分类"><a href="/images/">图片</a><a href="/pdf/">PDF</a><a href="/audio/">音频</a><a href="/video/">视频</a><a href="/development/">开发工具</a></nav></header><main id="main"><nav class="breadcrumbs" aria-label="面包屑导航" data-astro-cid-vx4iavld><ol data-astro-cid-vx4iavld><li data-astro-cid-vx4iavld><a href="/" data-astro-cid-vx4iavld>首页</a></li><li data-astro-cid-vx4iavld><a href="/blog/" data-astro-cid-vx4iavld>博客</a></li><li data-astro-cid-vx4iavld><span aria-current="page" data-astro-cid-vx4iavld>在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL</span></li></ol></nav><div class="blog-article"><a class="back-link" href="/blog/">← 博客列表</a><article><div class="article-heading"><p class="eyebrow">Linux</p><h1>在 Amazon Linux 使用 Let&#39;s encrypt 免费的SSL</h1><div class="article-meta"><time datetime="2017-04-03">2017-04-03</time><span>Martin</span></div><ul class="article-tags" aria-label="文章标签"><li>aws</li><li>linux</li><li>ssl</li></ul></div><div class="prose"><p>如果你使用ELB来做负载均衡，在AWS上可以很方便的使用SSL。如果不使用ELB就需要自己来配置SSL。
+Let's encrypt 提供期限为三个月的免费SSL证书，到期之后需要renew，官方还提供自动renew的工具certbot</p>
+<h2 id="certbot">certbot</h2>
+<p>certbot 是一个自动申请和续期SSL证书的工具。在<a href="https://certbot.eff.org/">官网certbot.eff.org</a>可以找到各种OS和Web服务器下的安装方法。常见的Ubuntu和CentOS安装起来十分方便。</p>
+<h2 id="amazon-linux">Amazon Linux</h2>
+<p>在AWS EC2上，官方推荐的是OS是Amazon Linux，基于RHEL 6源码重新编译的，提供了Amazon自己的工具和源。certbot的安装方式类似于RHEL 6/CentOS 6</p>
+<h2 id="申请ssl证书步骤">申请SSL证书步骤</h2>
+<ul>
+<li>ssh到Server</li>
+<li>下载certbot</li>
+</ul>
+<pre><code>wget https://dl.eff.org/certbot-auto
+chmod a+x certbot-auto
+</code></pre>
+<ul>
+<li>执行certbot</li>
+</ul>
+<pre><code>sudo ./certbot-auto --debug -v --server https://acme-v01.api.letsencrypt.org/directory certonly -d YOUR_WEBSITE_HERE
+</code></pre>
+<ul>
+<li>验证</li>
+</ul>
+<pre><code>How would you like to authenticate with the ACME CA?
+---------------------------
+1: Place files in webroot directory (webroot)
+2: Spin up a temporary webserver (standalone)
+---------------------------
+</code></pre>
+<p>选择1certbot会把一个验证文件放到webroot下，所以需要配置一下nginx的默认静态目录
+选择2certbot会启动一个web服务，占用443端口，所以需要暂停一下nginx，一般情况下选择2比较省事。</p>
+<p><code>记得在AWS EC2的安全组中放开443端口</code></p>
+<ul>
+<li>证书路径</li>
+</ul>
+<pre><code>Certificate: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/cert.pem
+Full Chain: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem
+Private Key: /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem
+</code></pre>
+<h2 id="nginx-启用ssl">nginx 启用SSL</h2>
+<p>启用SSL之后，http需要默认跳转到https，还有SSL证书的配置，下面是个配置的例子</p>
+<pre><code>server {
+    listen       80;
+
+    server_name  YOUR_WEBSITE_HERE;
+    
+	# Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+    return 301 https://YOUR_WEBSITE_HERE$request_uri;
+
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+	server_name YOUR_WEBSITE_HERE;
+    
+    # certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
+    ssl_certificate /etc/letsencrypt/live/YOUR_WEBSITE_HERE/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/YOUR_WEBSITE_HERE/privkey.pem;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:50m;
+    ssl_session_tickets off;
+    access_log /var/log/nginx/YOUR_WEBSITE_HERE-access.log;
+    error_log /var/log/nginx/YOUR_WEBSITE_HERE-error.log;
+    location / {
+        proxy_pass http://127.0.0.1:8003;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre>
+<h2 id="自动更新证书">自动更新证书</h2>
+<ul>
+<li>使用root用户</li>
+</ul>
+<pre><code>sudo -i
+</code></pre>
+<ul>
+<li>增加定时任务</li>
+</ul>
+<pre><code>crontab -e
+</code></pre>
+<p>增加一行，每个月1号2点30分更新</p>
+<pre><code>30 2 1 * * /path/to/certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"
+</code></pre>
+<ul>
+<li>dry run</li>
+</ul>
+<pre><code>./path/to/certbot-auto renew --dry-run
+</code></pre>
+<h2 id="chrome-变绿">chrome 变绿</h2>
+<p>在chrome下需要全站都使用https地址栏才会变绿，需要检查一下网站里面的各种URL，比如外链图片或JS文件，都需要使用https才行。</p>
+<p>参考资料:</p>
+<ul>
+<li><a href="http://frontenddev.org/article/using-certbot-deployment-let-s-encrypt-free-ssl-certificate-implementation-https.html">http://frontenddev.org/article/using-certbot-deployment-let-s-encrypt-free-ssl-certificate-implementation-https.html</a></li>
+<li><a href="https://segmentfault.com/a/1190000005797776">https://segmentfault.com/a/1190000005797776</a></li>
+<li><a href="https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/">https://nouveauframework.org/blog/installing-letsencrypts-free-ssl-amazon-linux/</a></li>
+<li><a href="https://ksmx.me/letsencrypt-ssl-https/">https://ksmx.me/letsencrypt-ssl-https/</a></li>
+<li><a href="https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657">https://diamondfsd.com/article/e221b455-b0e7-40b7-a6c7-9bb7e3e35657</a></li>
+</ul>
+</div></article><a class="back-link" href="/blog/">← 返回博客列表</a></div></main><footer class="site-footer"><div class="footer-container footer-grid"><div class="footer-intro"><a class="footer-brand" href="/" aria-label="星作社首页"><img src="/brand/spring/logo.svg" width="44" height="36" alt=""><strong>星作社</strong></a><p>实用在线小工具，<br>轻松处理日常数据。</p><span class="footer-local"><span aria-hidden="true"></span>打开浏览器，即刻开始。</span></div><nav class="footer-column" aria-labelledby="footer-tools-heading"><h2 id="footer-tools-heading">探索工具</h2><a href="/#tools-heading">全部工具</a><a href="/development/json/">JSON 格式化</a></nav><nav class="footer-column" aria-labelledby="footer-about-heading"><h2 id="footer-about-heading">关于</h2><a href="/about/">关于星作社</a><a href="/privacy/">隐私条款</a><a href="/blog/">博客</a></nav></div><div class="footer-container"><div class="footer-bottom"><span>© 2026 星作社</span><span>在浏览器中处理，让工作简单一点。</span></div></div></footer><!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;25b9a8992db947b3a9ba578e7a0cd7f9&quot;}"></script><!-- End Cloudflare Web Analytics --></body></html>
